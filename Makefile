@@ -75,6 +75,10 @@ secrets-init: ## Initialise le baseline detect-secrets (à faire une fois)
 	detect-secrets scan > .secrets.baseline
 
 hooks-install: ## Installe les hooks pre-commit (à faire après git clone)
-	pip install pre-commit
+	@if [ "$$(uname)" = "Darwin" ]; then \
+		brew install pre-commit; \
+	else \
+		pip install pre-commit --break-system-packages; \
+	fi
 	pre-commit install
 	pre-commit install --hook-type commit-msg
