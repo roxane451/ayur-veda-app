@@ -149,7 +149,7 @@ jobs:
       # On build une seule fois avec push:true — le cache GHA évite de
       # retélécharger les layers si rien n'a changé
       - name: Build + push backend
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           context: ./backend
           push: true
@@ -176,7 +176,7 @@ jobs:
 
       # ── Frontend ─────────────────────────────────────────────────────────
       - name: Build + push frontend
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           context: ./frontend
           push: true
