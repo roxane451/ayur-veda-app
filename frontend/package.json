@@ -9,7 +9,8 @@
     "build:dev": "vite build --mode development",
     "lint": "eslint . --config eslint.config.cjs",
     "test": "node -e \"console.log('No frontend tests configured yet')\"",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "clean": "rm -rf node_modules package-lock.json && npm install"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
