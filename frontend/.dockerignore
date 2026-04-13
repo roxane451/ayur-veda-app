@@ -1,0 +1,45 @@
+# Dépendances
+node_modules
+npm-debug.log
+.eslintcache
+
+# Sources — l'image runtime ne sert que le dist/ compilé (Nginx)
+src
+public
+index.html
+vite.config.*
+tsconfig*.json
+*.ts
+*.tsx
+!dist/**
+
+# Artefacts de build (compilés dans le stage builder)
+dist
+
+# Environnement local
+.env
+.env.*
+
+# Git et outils dev
+.git
+.gitignore
+.DS_Store
+.pre-commit-config.yaml
+.eslintrc*
+.prettierrc*
+
+# Docker
+Dockerfile*
+docker-compose*.yml
+.dockerignore
+
+# Tests
+coverage
+**/*.test.ts
+**/*.test.tsx
+**/*.spec.ts
+**/*.spec.tsx
+
+# Documentation
+README.md
+*.md

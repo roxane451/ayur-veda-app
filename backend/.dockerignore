@@ -1,0 +1,41 @@
+# Docker lui-même
+Dockerfile*
+docker-compose*.yml
+.dockerignore
+
+# pre-commit et qualité
+.pre-commit-config.yaml
+.eslintrc*
+.prettierrc*
+
+# Dépendances et cache
+node_modules
+npm-debug.log
+.eslintcache
+
+# Sources TypeScript — l'image runtime n'a besoin que de dist/
+src
+tsconfig*.json
+*.ts
+!dist/**/*.d.ts
+
+# Artefacts de build (copiés depuis le stage builder, pas depuis le contexte)
+dist
+
+# Environnement local
+.env
+.env.*
+
+# Git et outils dev
+.git
+.gitignore
+.DS_Store
+
+# Tests et couverture
+coverage
+**/*.test.ts
+**/*.spec.ts
+
+# Documentation
+README.md
+*.md
