@@ -31,7 +31,7 @@ RUN npm run build
 # Stage 2 — runtime Nginx
 # On part d'une image nginx propre, on y met juste le build
 # =============================================================================
-FROM nginx:1.27.4-alpine
+FROM nginx:1.29.8-alpine
 
 ARG APP_VERSION=unknown
 LABEL maintainer="roxane451" \
