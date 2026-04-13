@@ -1,3 +1,5 @@
+fix-lock-backend: ## Met à jour le package-lock.json du backend
+	cd backend && npm install
 .DEFAULT_GOAL := help
 SHELL := /bin/bash
 
@@ -5,9 +7,9 @@ APP_NAME     := ayur-veda
 NAMESPACE_ST := ayur-staging
 NAMESPACE_PP := ayur-preprod
 NAMESPACE_PR := ayur
-CHART_DIR    := ../helm-ayur-veda   # chemin vers ton repo helm chart
+CHART_DIR    := ../ayur-veda-helm
 
-.PHONY: help dev down logs lint test build deploy-staging deploy-preprod deploy-prod secrets-init
+.PHONY: help dev down logs lint test build deploy-staging deploy-preprod deploy-prod secrets-init hooks-install
 
 # ---------------------------------------------------------------------------
 help: ## Affiche cette aide
@@ -15,16 +17,26 @@ help: ## Affiche cette aide
 		| awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-22s\033[0m %s\n", $$1, $$2}'
 
 # ---------------------------------------------------------------------------
+# INSTALL
+# ---------------------------------------------------------------------------
+install: ## Installe les dépendances backend et frontend
+	cd backend && npm ci
+	cd frontend && npm ci
+
+# ---------------------------------------------------------------------------
 # DEV LOCAL
 # ---------------------------------------------------------------------------
 dev: ## Démarre l'environnement de développement (docker-compose)
-	docker compose -f docker-compose.dev.yml up --build
+	docker compose -f docker-compose.yml up --build
 
 down: ## Arrête l'environnement local
-	docker compose -f docker-compose.dev.yml down -v
+	docker compose -f docker-compose.yml down -v
 
 logs: ## Affiche les logs en temps réel
-	docker compose -f docker-compose.dev.yml logs -f
+	docker compose -f docker-compose.yml logs -f
+
+ps: ## Affiche l'état des services
+	docker compose -f docker-compose.yml ps
 
 # ---------------------------------------------------------------------------
 # QUALITE
@@ -33,8 +45,8 @@ lint: ## Lance tous les linters (pre-commit sur tous les fichiers)
 	pre-commit run --all-files
 
 test: ## Lance les tests (backend + frontend)
-	docker compose -f docker-compose.dev.yml run --rm backend npm test
-	docker compose -f docker-compose.dev.yml run --rm frontend npm test
+	docker compose -f docker-compose.yml run --rm backend npm test
+	docker compose -f docker-compose.yml run --rm frontend npm test
 
 # ---------------------------------------------------------------------------
 # BUILD

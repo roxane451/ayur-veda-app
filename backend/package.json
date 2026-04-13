@@ -1,0 +1,46 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/app.js",
+  "scripts": {
+    "dev": "ts-node src/app.ts",
+    "lint": "tsc --noEmit",
+    "build": "tsc",
+    "build:seeds": "tsc --project tsconfig.seeds.json",
+    "test": "node -e \"console.log('No backend tests configured yet')\"",
+    "start": "node dist/app.js",
+    "seed:spices": "node dist/seeds/spices.js",
+    "seed:doshas": "node dist/seeds/doshas.js",
+    "seed:ritucharya": "node dist/seeds/ritucharya.js",
+    "seed:all": "node dist/seeds/index.js",
+    "seed": "npm run seed:all"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.6",
+    "dotenv": "^17.2.4",
+    "express": "^5.2.1",
+    "express-rate-limit": "^7.5.0",
+    "helmet": "^7.1.0",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.2.0",
+    "pino": "^9.5.0",
+    "pino-http": "^10.3.0",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/mongoose": "^5.11.97",
+    "@types/node": "^20.11.30",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
+  }
+}

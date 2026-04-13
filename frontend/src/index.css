@@ -1,0 +1,259 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Ayuressence Natural Palette */
+    --background: 42 33% 97%;
+    --foreground: 30 10% 20%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 30 10% 20%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 30 10% 20%;
+
+    /* Sage Green Primary */
+    --primary: 145 25% 45%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Terracotta Secondary */
+    --secondary: 18 45% 55%;
+    --secondary-foreground: 0 0% 100%;
+
+    /* Warm Beige Muted */
+    --muted: 40 30% 92%;
+    --muted-foreground: 30 10% 45%;
+
+    /* Soft Cream Accent */
+    --accent: 45 40% 95%;
+    --accent-foreground: 30 10% 20%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 40 20% 85%;
+    --input: 40 20% 85%;
+    --ring: 145 25% 45%;
+
+    --radius: 0.75rem;
+
+    /* Dosha Colors - Natural tones */
+    --vata: 200 35% 55%;
+    --vata-foreground: 0 0% 100%;
+    --vata-muted: 200 40% 95%;
+
+    --pitta: 20 60% 55%;
+    --pitta-foreground: 0 0% 100%;
+    --pitta-muted: 20 50% 95%;
+
+    --kapha: 145 30% 45%;
+    --kapha-foreground: 0 0% 100%;
+    --kapha-muted: 145 35% 95%;
+
+    /* Element Colors */
+    --ether: 260 30% 60%;
+    --air: 200 40% 60%;
+    --fire: 25 70% 55%;
+    --water: 195 50% 50%;
+    --earth: 35 40% 45%;
+
+    /* Forest Theme Colors */
+    --forest: 145 35% 22%;
+    --forest-light: 145 30% 35%;
+    --forest-dark: 145 40% 15%;
+    --gold: 45 70% 55%;
+    --gold-light: 45 60% 75%;
+    --cream: 45 30% 95%;
+
+    /* Custom gradients */
+    --gradient-natural: linear-gradient(
+      135deg,
+      hsl(42 33% 97%) 0%,
+      hsl(45 40% 95%) 50%,
+      hsl(40 30% 92%) 100%
+    );
+    --gradient-primary: linear-gradient(
+      135deg,
+      hsl(145 25% 45%) 0%,
+      hsl(145 30% 55%) 100%
+    );
+    --gradient-hero: linear-gradient(
+      180deg,
+      hsl(45 40% 97%) 0%,
+      hsl(42 33% 95%) 100%
+    );
+    --gradient-forest: linear-gradient(
+      180deg,
+      hsl(145 35% 22%) 0%,
+      hsl(145 40% 15%) 100%
+    );
+
+    /* Shadows */
+    --shadow-soft: 0 4px 20px -4px hsl(30 10% 20% / 0.08);
+    --shadow-card: 0 10px 40px -10px hsl(30 10% 20% / 0.12);
+    --shadow-hover: 0 20px 50px -15px hsl(30 10% 20% / 0.15);
+
+    /* Sidebar */
+    --sidebar-background: 42 33% 97%;
+    --sidebar-foreground: 30 10% 20%;
+    --sidebar-primary: 145 25% 45%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 45 40% 95%;
+    --sidebar-accent-foreground: 30 10% 20%;
+    --sidebar-border: 40 20% 85%;
+    --sidebar-ring: 145 25% 45%;
+  }
+
+  .dark {
+    --background: 30 10% 10%;
+    --foreground: 42 30% 92%;
+
+    --card: 30 10% 14%;
+    --card-foreground: 42 30% 92%;
+
+    --popover: 30 10% 14%;
+    --popover-foreground: 42 30% 92%;
+
+    --primary: 145 30% 50%;
+    --primary-foreground: 30 10% 10%;
+
+    --secondary: 18 50% 60%;
+    --secondary-foreground: 30 10% 10%;
+
+    --muted: 30 10% 20%;
+    --muted-foreground: 42 20% 60%;
+
+    --accent: 30 10% 18%;
+    --accent-foreground: 42 30% 92%;
+
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 30 10% 22%;
+    --input: 30 10% 22%;
+    --ring: 145 30% 50%;
+
+    --vata-muted: 200 25% 18%;
+    --pitta-muted: 20 30% 18%;
+    --kapha-muted: 145 25% 18%;
+
+    --sidebar-background: 30 10% 12%;
+    --sidebar-foreground: 42 30% 92%;
+    --sidebar-primary: 145 30% 50%;
+    --sidebar-primary-foreground: 30 10% 10%;
+    --sidebar-accent: 30 10% 16%;
+    --sidebar-accent-foreground: 42 30% 92%;
+    --sidebar-border: 30 10% 22%;
+    --sidebar-ring: 145 30% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family:
+      "Poppins",
+      system-ui,
+      -apple-system,
+      sans-serif;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-weight: 500;
+  }
+}
+
+@layer components {
+  .gradient-natural {
+    background: var(--gradient-natural);
+  }
+
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
+  }
+
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+
+  .shadow-hover {
+    box-shadow: var(--shadow-hover);
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-primary);
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-fade-up {
+    animation: fadeUp 0.6s ease-out forwards;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.5s ease-out forwards;
+  }
+
+  .font-display {
+    font-family: "Cormorant Garamond", Georgia, serif;
+  }
+
+  .font-body {
+    font-family: "Poppins", system-ui, sans-serif;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

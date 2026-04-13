@@ -1,26 +1,40 @@
-version: '3.8'
-
+# Stack locale Ayur-Veda
+# Pour démarrer :
+#   cp .env.example .env   >  renseigner les variables
+#   docker compose up -d
+#
+# Ce fichier sert au dev local et aux tests.
+# En prod on passe par le chart Helm sur K3s.
 services:
-  # MongoDB Database
+  # --- MongoDB ---
   mongodb:
     image: mongo:7.0
     container_name: ayur-mongodb
     restart: unless-stopped
-    # FIX 1 : MongoDB tourne désormais en user non-root (uid/gid 999 = user mongodb dans l'image officielle)
+
+    # On tourne pas en root
     user: "999:999"
-    # FIX 2 : Port MongoDB plus exposé à l'extérieur — le backend l'atteint
-    #          via le réseau Docker interne ayur-network, pas besoin de binding host.
+
+    # Le port 27017 n'est pas exposé à l'extérieur — le backend
+    # passe par le réseau Docker interne, pas besoin de l'ouvrir
     # ports:
-    #   - "27017:27017"   ← supprimé intentionnellement
+    #   - "27017:27017"
+
     environment:
       MONGO_INITDB_DATABASE: ayur
       MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME:-admin}
-      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}   # pas de fallback en clair
+      # Pas de valeur par défaut ici  si MONGO_INITDB_ROOT_PASSWORD
+      # n'est pas dans le .env, Docker va se plaindre, c'est voulu
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+
     volumes:
       - mongodb_data:/data/db
       - mongodb_config:/data/configdb
+
     networks:
       - ayur-network
+
+    # Le backend attend que ce healthcheck passe avant de démarrer
     healthcheck:
       test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/ayur --quiet
       interval: 10s
@@ -28,64 +42,78 @@ services:
       retries: 5
       start_period: 10s
 
-  # Backend API
+  # --- Backend ---
   backend:
-    image: ghcr.io/roxane451/ayur-veda/backend:latest
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: ayur-veda-backend:local
     container_name: ayur-backend
     restart: unless-stopped
-    # FIX 3 : Backend lié uniquement à localhost — le reverse proxy (Nginx/Traefik)
-    #          est le seul point d'entrée public.
+
+    # Lié à localhost uniquement — l'API n'est pas accessible
+    # directement depuis l'extérieur, ça passe par le reverse proxy
     ports:
       - "127.0.0.1:5000:5000"
+
     environment:
       NODE_ENV: production
       PORT: 5000
-      # FIX 4 : URI MongoDB avec authentification — utilise le root user créé par MONGO_INITDB_*
+      # L'URI utilise le nom du service Docker (mongodb) comme hostname,
+      # Docker se charge de la résolution DNS interne
       MONGODB_URI: mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@mongodb:27017/ayur?authSource=admin
       JWT_SECRET: ${JWT_SECRET}
       JWT_EXPIRY: 7d
       CORS_ORIGIN: https://ayur-veda.fr
+
+    # On attend que Mongo réponde vraiment, pas juste qu'il soit démarré
     depends_on:
       mongodb:
         condition: service_healthy
+
     networks:
       - ayur-network
+
     healthcheck:
       test: wget --no-verbose --tries=1 --spider http://localhost:5000/api/health || exit 1
       interval: 30s
       timeout: 10s
       retries: 3
       start_period: 10s
-    deploy:
-      restart_policy:
-        condition: on-failure
 
-  # Frontend Web App
+  # --- Frontend ---
   frontend:
-    image: ghcr.io/roxane451/ayur-veda/frontend:latest
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    image: ayur-veda-frontend:local
     container_name: ayur-frontend
     restart: unless-stopped
-    # FIX 5 : Frontend lié uniquement à localhost — idem, seul le reverse proxy expose :80/:443
+
+    # Idem backend — localhost uniquement, le reverse proxy fait le reste
     ports:
-      - "127.0.0.1:3000:3000"
+      - "127.0.0.1:8888:80"
+
     depends_on:
       - backend
+
     networks:
       - ayur-network
+
     healthcheck:
-      test: wget --quiet --tries=1 --spider http://localhost:3000/index.html || exit 1
+      test: wget --quiet --tries=1 --spider http://localhost:80/index.html || exit 1
       interval: 30s
       timeout: 10s
       retries: 3
       start_period: 10s
-    deploy:
-      restart_policy:
-        condition: on-failure
 
+# Réseau interne — les services se parlent par leur nom
+# (le backend fait juste mongodb:27017, Docker gère le reste)
 networks:
   ayur-network:
     driver: bridge
 
+# Les données MongoDB survivent aux redémarrages
 volumes:
   mongodb_data:
     driver: local

@@ -1,22 +1,12 @@
-# Dépendances
+# Dépendances — réinstallées dans le stage builder
 node_modules
 npm-debug.log
 .eslintcache
 
-# Sources — l'image runtime ne sert que le dist/ compilé (Nginx)
-src
-public
-index.html
-vite.config.*
-tsconfig*.json
-*.ts
-*.tsx
-!dist/**
-
-# Artefacts de build (compilés dans le stage builder)
+# Le dist/ local — c'est le stage builder qui le génère
 dist
 
-# Environnement local
+# Secrets
 .env
 .env.*
 
@@ -40,6 +30,6 @@ coverage
 **/*.spec.ts
 **/*.spec.tsx
 
-# Documentation
+# Docs
 README.md
 *.md

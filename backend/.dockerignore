@@ -1,28 +1,22 @@
-# Docker lui-même
+# Docker et config locale
 Dockerfile*
 docker-compose*.yml
 .dockerignore
 
-# pre-commit et qualité
+# Qualité de code — pas utile dans l'image
 .pre-commit-config.yaml
 .eslintrc*
 .prettierrc*
 
-# Dépendances et cache
+# Dépendances — réinstallées proprement dans l'image
 node_modules
 npm-debug.log
 .eslintcache
 
-# Sources TypeScript — l'image runtime n'a besoin que de dist/
-src
-tsconfig*.json
-*.ts
-!dist/**/*.d.ts
-
-# Artefacts de build (copiés depuis le stage builder, pas depuis le contexte)
+# Le dist/ local — c'est le builder qui le génère
 dist
 
-# Environnement local
+# Secrets — ne jamais envoyer dans le contexte Docker
 .env
 .env.*
 
@@ -31,11 +25,11 @@ dist
 .gitignore
 .DS_Store
 
-# Tests et couverture
+# Tests
 coverage
 **/*.test.ts
 **/*.spec.ts
 
-# Documentation
+# Docs
 README.md
 *.md
