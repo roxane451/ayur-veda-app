@@ -11,7 +11,7 @@
 # On copie d'abord les package.json pour profiter du cache Docker :
 # si le code change mais pas les deps, npm ci n'est pas relancé
 # =============================================================================
-FROM node:20-alpine3.19 AS builder
+FROM node:23-alpine3.19 AS builder
 
 WORKDIR /app
 
@@ -31,7 +31,7 @@ RUN npm run build
 # Stage 2 — runtime Nginx
 # On part d'une image nginx propre, on y met juste le build
 # =============================================================================
-FROM nginx:1.27.4-alpine
+FROM nginx:1.29.8-alpine
 
 ARG APP_VERSION=unknown
 LABEL maintainer="roxane451" \

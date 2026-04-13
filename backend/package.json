@@ -25,22 +25,22 @@
     "cors": "^2.8.6",
     "dotenv": "^17.2.4",
     "express": "^5.2.1",
-    "express-rate-limit": "^8.3.2",
-    "helmet": "^7.1.0",
+    "express-rate-limit": "^7.5.0",
+    "helmet": "^8.1.0",
     "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.2.0",
-    "pino": "^9.5.0",
+    "pino": "^10.3.1",
     "pino-http": "^10.3.0",
     "zod": "^4.3.6"
   },
   "devDependencies": {
-    "@types/bcryptjs": "^2.4.6",
+    "@types/bcryptjs": "^3.0.0",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/mongoose": "^5.11.97",
-    "@types/node": "^20.11.30",
+    "@types/node": "^25.6.0",
     "ts-node": "^10.9.2",
-    "typescript": "^5.4.5"
+    "typescript": "^6.0.2"
   }
 }
