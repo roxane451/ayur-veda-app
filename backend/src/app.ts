@@ -1,6 +1,8 @@
 import express, { Express, Request, Response } from "express";
 import cors from "cors";
 import helmet from "helmet";
+import mongoose from "mongoose";
+import { up } from "migrate-mongo";
 import { connectDB } from "./config/database";
 import { config } from "./config/env";
 import { globalLimiter } from "./middleware/rateLimiter";
@@ -11,6 +13,7 @@ import quizRoutes from "./routes/quiz";
 import spicesRoutes from "./routes/spices";
 import doshasRoutes from "./routes/doshas";
 import ritucharyaRoutes from "./routes/ritucharya";
+import { swaggerRouter } from "./config/swagger";
 
 // ────────────────────────────────────────────────
 // Démarrage — log structuré (pas de secrets, jamais de valeurs brutes)
@@ -81,6 +84,9 @@ app.get("/", (_req: Request, res: Response) => {
   res.send("Backend Ayur-Veda is running!");
 });
 
+// Swagger UI — docs interactives (désactivé en production, voir src/config/swagger.ts)
+app.use("/api/docs", swaggerRouter);
+
 app.use("/api/auth", authRoutes);
 app.use("/api/quiz", quizRoutes);
 app.use("/api/spices", spicesRoutes);
@@ -89,19 +95,39 @@ app.use("/api/ritucharya", ritucharyaRoutes);
 
 // ────────────────────────────────────────────────
 // Health check
-// Vérifie que le serveur ET la base de données sont opérationnels.
-// Utilisé par le HEALTHCHECK Docker et les probes Kubernetes.
-import mongoose from "mongoose";
 
-app.get("/api/health", (_req: Request, res: Response) => {
+app.get("/api/health", async (_req: Request, res: Response) => {
   const dbState = mongoose.connection.readyState;
-  // 1 = connected, 2 = connecting
-  if (dbState === 1) {
-    res.json({ status: "OK", db: "connected" });
-  } else {
-    // Retourne 503 — le conteneur sera marqué unhealthy et redémarré
-    res.status(503).json({ status: "ERROR", db: "disconnected" });
+  // 1 = connected, 2 = connecting, 0 = disconnected
+  const isDbHealthy = dbState === 1;
+  
+  const health = {
+    status: isDbHealthy ? "OK" : "ERROR",
+    timestamp: new Date().toISOString(),
+    uptime: process.uptime(),
+    environment: process.env.NODE_ENV || "unknown",
+    database: {
+      connected: isDbHealthy,
+      connectionState: ["disconnected", "connected", "connecting", "disconnecting"][dbState] || "unknown"
+    },
+    memory: {
+      heapUsed: Math.round(process.memoryUsage().heapUsed / 1024 / 1024),
+      heapTotal: Math.round(process.memoryUsage().heapTotal / 1024 / 1024)
+    }
+  };
+
+  // Si la base de données n'est pas connectée, retourner 503
+  if (!isDbHealthy) {
+    logger.warn("Health check failed: database disconnected");
+    return res.status(503).json(health);
   }
+
+  res.status(200).json(health);
+});
+
+// Alias pour compatibilité
+app.get("/health", (_req: Request, res: Response) => {
+  res.json({ status: "OK" });
 });
 
 // ────────────────────────────────────────────────
@@ -125,6 +151,18 @@ const startServer = async () => {
       );
       await connectDB();
       logger.info("MongoDB connected");
+
+      // Applique les migrations en attente avant d'ouvrir le port HTTP.
+      // Garantit que le schéma est à jour à chaque déploiement.
+      const db = mongoose.connection.db!;
+      const client = mongoose.connection.getClient();
+      const migrated = await up(db, client);
+      if (migrated.length > 0) {
+        logger.info({ migrations: migrated }, "Migrations applied");
+      } else {
+        logger.info("No pending migrations");
+      }
+
       break;
     } catch (err) {
       logger.warn(

@@ -1,0 +1,137 @@
+{
+  "name": "Ayur-Veda Dev Container",
+
+  // Image de base Microsoft Node 20 LTS — Debian Bookworm slim.
+  // Bookworm-slim : suffisant pour Node + CLI, sans environnement graphique.
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:22-bookworm",
+
+  // ── Features ────────────────────────────────────────────────────────────
+  "features": {
+    // Docker-in-Docker : permet de lancer `docker compose up` depuis le container.
+    // Nécessaire pour tester les images Docker sans quitter le devcontainer.
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {
+      "version": "latest",
+      "moby": true,
+      "dockerDashComposeVersion": "v2"
+    }
+  },
+
+  // ── Dossier de travail ───────────────────────────────────────────────────
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+
+  // ── Lifecycle hooks ──────────────────────────────────────────────────────
+  // Exécuté une seule fois à la création du container.
+  // npm ci installe toutes les dépendances (backend + frontend) via workspaces.
+  "postCreateCommand": "npm ci",
+
+  // Exécuté à chaque démarrage du container (après création ou rebuild).
+  "postStartCommand": "docker compose up -d mongodb && echo '✅ Ayur-Veda devcontainer prêt — MongoDB démarré sur :27017'",
+
+  // ── Ports forwarded automatiquement ─────────────────────────────────────
+  "forwardPorts": [5000, 5173, 27017],
+  "portsAttributes": {
+    "5000": {
+      "label": "Backend API (Express)",
+      "onAutoForward": "notify"
+    },
+    "5173": {
+      "label": "Frontend (Vite)",
+      "onAutoForward": "openBrowser"
+    },
+    "27017": {
+      "label": "MongoDB",
+      "onAutoForward": "silent"
+    }
+  },
+
+  // ── Variables d'environnement ────────────────────────────────────────────
+  "remoteEnv": {
+    "NODE_ENV": "development"
+  },
+
+  // ── Customisations VS Code ───────────────────────────────────────────────
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        // TypeScript & qualité
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "ms-vscode.vscode-typescript-next",
+        "usernamehw.errorlens",
+
+        // Tests
+        "vitest.explorer",
+        "hbenl.vscode-test-explorer",
+
+        // MongoDB
+        "mongodb.mongodb-vscode",
+
+        // REST / OpenAPI (Swagger)
+        "humao.rest-client",
+        "42crunch.vscode-openapi",
+
+        // Git & GitHub
+        "eamodio.gitlens",
+        "github.vscode-github-actions",
+
+        // Frontend
+        "bradlc.vscode-tailwindcss",
+        "formulahendry.auto-rename-tag",
+
+        // Utilitaires
+        "mikestead.dotenv",
+        "editorconfig.editorconfig"
+      ],
+
+      "settings": {
+        // ── TypeScript ──────────────────────────────────────────────────
+        "typescript.preferences.importModuleSpecifier": "relative",
+        "typescript.updateImportsOnFileMove.enabled": "always",
+        "typescript.tsdk": "node_modules/typescript/lib",
+
+        // ── ESLint ──────────────────────────────────────────────────────
+        "editor.codeActionsOnSave": {
+          "source.fixAll.eslint": "explicit"
+        },
+        "eslint.validate": ["typescript", "typescriptreact"],
+
+        // ── Prettier ────────────────────────────────────────────────────
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "[typescript]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "[typescriptreact]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+
+        // ── Vitest Explorer ─────────────────────────────────────────────
+        // Pointe sur le workspace frontend où vitest est configuré
+        "vitest.workspaceConfig": "${workspaceFolder}/frontend/vitest.config.ts",
+
+        // ── MongoDB ─────────────────────────────────────────────────────
+        // Connexion via docker-compose (service mongodb sur le réseau host)
+        "mongodb.connectionString": "mongodb://localhost:27017",
+
+        // ── Explorateur de fichiers ──────────────────────────────────────
+        "files.exclude": {
+          "**/node_modules": true,
+          "**/dist": true,
+          "**/.DS_Store": true
+        },
+        "search.exclude": {
+          "**/node_modules": true,
+          "**/dist": true,
+          "**/coverage": true
+        },
+
+        // ── Terminal ─────────────────────────────────────────────────────
+        "terminal.integrated.defaultProfile.linux": "bash"
+      }
+    }
+  },
+
+  // L'utilisateur `node` (non-root) est fourni par l'image de base Microsoft.
+  // Permet d'éviter les problèmes de permissions sur les fichiers montés.
+  "remoteUser": "node"
+}

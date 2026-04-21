@@ -1,5 +1,5 @@
 {
-  "name": "backend",
+  "name": "@ayur-veda/backend",
   "version": "1.0.0",
   "description": "",
   "main": "dist/app.js",
@@ -8,13 +8,19 @@
     "lint": "tsc --noEmit",
     "build": "tsc",
     "build:seeds": "tsc --project tsconfig.seeds.json",
-    "test": "node -e \"console.log('No backend tests configured yet')\"",
+    "test": "jest --runInBand",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage --runInBand",
     "start": "node dist/app.js",
     "seed:spices": "node dist/seeds/spices.js",
     "seed:doshas": "node dist/seeds/doshas.js",
     "seed:ritucharya": "node dist/seeds/ritucharya.js",
     "seed:all": "node dist/seeds/index.js",
-    "seed": "npm run seed:all"
+    "seed": "npm run seed:all",
+    "migrate": "migrate-mongo up",
+    "migrate:down": "migrate-mongo down",
+    "migrate:status": "migrate-mongo status",
+    "migrate:create": "migrate-mongo create"
   },
   "keywords": [],
   "author": "",
@@ -31,7 +37,10 @@
     "mongoose": "^9.2.0",
     "pino": "^10.3.1",
     "pino-http": "^11.0.0",
-    "zod": "^4.3.6"
+    "zod": "^4.3.6",
+    "migrate-mongo": "^10.0.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
     "@types/bcryptjs": "^3.0.0",
@@ -41,6 +50,14 @@
     "@types/mongoose": "^5.11.97",
     "@types/node": "^25.6.0",
     "ts-node": "^10.9.2",
-    "typescript": "^6.0.2"
+    "typescript": "^5.6.2",
+    "@types/jest": "^29.5.14",
+    "@types/supertest": "^6.0.3",
+    "jest": "^29.7.0",
+    "supertest": "^7.1.0",
+    "ts-jest": "^29.3.4",
+    "mongodb-memory-server": "^10.1.4",
+    "@types/swagger-jsdoc": "^6.0.4",
+    "@types/swagger-ui-express": "^4.1.7"
   }
 }
