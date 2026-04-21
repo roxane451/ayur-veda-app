@@ -1,205 +1,101 @@
-name: CI/CD
+name: CI/CD — Ayur-Veda
 
 on:
   push:
-    branches: [main]
-    tags: ["v*"]
-    paths:
-      - "backend/**"
-      - "frontend/**"
-      - ".github/workflows/**"
-  pull_request:
-    branches: [main]
-    paths:
-      - "backend/**"
-      - "frontend/**"
+    branches:
+      - "feature/**"
+      - develop
+      - main
+    tags:
+      - "v[0-9]+.[0-9]+.[0-9]+-rc"
+      - "v[0-9]+.[0-9]+.[0-9]+"
 
-env:
-  REGISTRY: ghcr.io
-  IMAGE_BACKEND: ghcr.io/${{ github.repository_owner }}/ayur-veda/backend
-  IMAGE_FRONTEND: ghcr.io/${{ github.repository_owner }}/ayur-veda/frontend
+# ── FEATURE/* et DEVELOP ──────────────────────────────────────────────────────
+# secret-scan + lint + test uniquement, pas de build ni de déploiement
 
-# =============================================================================
-# JOB 1 — Secret scan
-# Bloque si un secret est détecté dans le code ou l'historique Git
-# =============================================================================
 jobs:
+
   secret-scan:
-    name: Secret scan (Gitleaks)
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v6
-        with:
-          fetch-depth: 0  # historique complet pour scanner tous les commits
+    if: |
+      startsWith(github.ref, 'refs/heads/feature/') ||
+      github.ref == 'refs/heads/develop' ||
+      github.ref == 'refs/heads/main' ||
+      startsWith(github.ref, 'refs/tags/')
+    uses: roxane451/ci-cd-mern-stack/.github/workflows/reusable-secret-scan.yml@main
+    secrets: inherit
 
-      - name: Run Gitleaks
-        uses: gitleaks/gitleaks-action@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  lint-test:
+    if: |
+      startsWith(github.ref, 'refs/heads/feature/') ||
+      github.ref == 'refs/heads/develop' ||
+      github.ref == 'refs/heads/main' ||
+      startsWith(github.ref, 'refs/tags/')
+    uses: roxane451/ci-cd-mern-stack/.github/workflows/reusable-lint-test.yml@main
+    secrets: inherit
 
-# =============================================================================
-# JOB 2 — Tests backend
-# =============================================================================
-  test-backend:
-    name: Backend — lint + build + test
-    runs-on: ubuntu-latest
-    needs: secret-scan
-    steps:
-      - uses: actions/checkout@v6
+# ── MAIN et TAGS : build + push ───────────────────────────────────────────────
+# FIX: les builds s'exécutent aussi sur les tags pour que les images
+#      existent au moment du déploiement preprod/prod.
 
-      - uses: actions/setup-node@v6
-        with:
-          node-version: "20"
-          cache: "npm"
-          cache-dependency-path: backend/package-lock.json
+  build-backend:
+    if: |
+      github.ref == 'refs/heads/main' ||
+      startsWith(github.ref, 'refs/tags/')
+    needs: [secret-scan, lint-test]
+    uses: roxane451/ci-cd-mern-stack/.github/workflows/reusable-build-push.yml@main
+    with:
+      # FIX: 'backend' (pas 'ayurveda-backend') → image produite:
+      # ghcr.io/roxane451/ayur-veda/backend — chemin attendu par values.yaml
+      image-name: backend
+      context: ./backend
+    secrets: inherit
 
-      - run: npm ci
-        working-directory: backend
+  build-frontend:
+    if: |
+      github.ref == 'refs/heads/main' ||
+      startsWith(github.ref, 'refs/tags/')
+    needs: [secret-scan, lint-test]
+    uses: roxane451/ci-cd-mern-stack/.github/workflows/reusable-build-push.yml@main
+    with:
+      # FIX: 'frontend' (pas 'ayurveda-frontend')
+      image-name: frontend
+      context: ./frontend
+    secrets: inherit
 
-      - run: npm run lint
-        working-directory: backend
+# ── MAIN uniquement : smoke test ──────────────────────────────────────────────
 
-      - run: npm run build
-        working-directory: backend
+  smoke-test:
+    if: github.ref == 'refs/heads/main'
+    needs: [build-backend, build-frontend]
+    uses: roxane451/ci-cd-mern-stack/.github/workflows/reusable-smoke-test-k3d.yml@main
+    with:
+      image-tag: ${{ needs.build-backend.outputs.image-tag }}
+    secrets: inherit
 
-      - run: npm test
-        working-directory: backend
+# ── TAG vX.Y.Z-rc : deploy preprod ───────────────────────────────────────────
 
-# =============================================================================
-# JOB 3 — Tests frontend
-# =============================================================================
-  test-frontend:
-    name: Frontend — lint + build + test
-    runs-on: ubuntu-latest
-    needs: secret-scan
-    steps:
-      - uses: actions/checkout@v6
+  deploy-preprod:
+    if: startsWith(github.ref, 'refs/tags/') && contains(github.ref, '-rc')
+    needs: [build-backend, build-frontend]
+    # FIX: suppression du préfixe underscore (_reusable → reusable)
+    uses: roxane451/ci-cd-mern-stack/.github/workflows/reusable-helm-deploy.yml@main
+    with:
+      environment: preprod
+      image-tag: ${{ github.ref_name }}
+      helm-values-file: helm/values-preprod.yaml
+    secrets: inherit
 
-      - uses: actions/setup-node@v6
-        with:
-          node-version: "20"
-          cache: "npm"
-          cache-dependency-path: frontend/package-lock.json
+# ── TAG vX.Y.Z : deploy prod (approbation GitHub Environment) ─────────────────
 
-      - run: npm ci
-        working-directory: frontend
-
-      - run: npm run clean 
-        working-directory: frontend
-
-      - run: npm run lint
-        working-directory: frontend
-
-      - run: npm run build
-        working-directory: frontend
-
-      - run: npm test
-        working-directory: frontend
-
-# =============================================================================
-# JOB 4 — Build + scan Trivy + push GHCR
-# Uniquement sur push (pas sur PR) — après que les tests passent
-# =============================================================================
-  build-and-push:
-    name: Build + Trivy scan + push
-    runs-on: ubuntu-latest
-    needs: [test-backend, test-frontend]
-    if: github.event_name == 'push'
-    permissions:
-      contents: read
-      packages: write
-      security-events: write  # pour upload SARIF vers GitHub Security
-
-    steps:
-      - uses: actions/checkout@v6
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v4
-
-      - name: Log in to GHCR
-        uses: docker/login-action@v4
-        with:
-          registry: ${{ env.REGISTRY }}
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      # Calcul des tags selon la ref :
-      #   main          → staging + staging-<sha>
-      #   tag v*.*.*-rc → preprod + preprod-<sha>
-      #   tag v*.*.*    → <tag> + stable + prod-<sha>
-      - name: Compute image tags
-        id: tags
-        run: |
-          SHA="${{ github.sha }}"
-          SHORT_SHA="${SHA:0:7}"
-          REF="${{ github.ref }}"
-
-          if [[ "${REF}" == "refs/heads/main" ]]; then
-            echo "backend_tags=${{ env.IMAGE_BACKEND }}:staging,${{ env.IMAGE_BACKEND }}:staging-${SHORT_SHA}" >> $GITHUB_OUTPUT
-            echo "frontend_tags=${{ env.IMAGE_FRONTEND }}:staging,${{ env.IMAGE_FRONTEND }}:staging-${SHORT_SHA}" >> $GITHUB_OUTPUT
-
-          elif [[ "${REF}" =~ ^refs/tags/v[0-9]+\.[0-9]+\.[0-9]+-(rc|beta|alpha) ]]; then
-            echo "backend_tags=${{ env.IMAGE_BACKEND }}:preprod,${{ env.IMAGE_BACKEND }}:preprod-${SHORT_SHA}" >> $GITHUB_OUTPUT
-            echo "frontend_tags=${{ env.IMAGE_FRONTEND }}:preprod,${{ env.IMAGE_FRONTEND }}:preprod-${SHORT_SHA}" >> $GITHUB_OUTPUT
-
-          elif [[ "${REF}" =~ ^refs/tags/v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-            TAG="${REF#refs/tags/}"
-            echo "backend_tags=${{ env.IMAGE_BACKEND }}:${TAG},${{ env.IMAGE_BACKEND }}:stable,${{ env.IMAGE_BACKEND }}:prod-${SHORT_SHA}" >> $GITHUB_OUTPUT
-            echo "frontend_tags=${{ env.IMAGE_FRONTEND }}:${TAG},${{ env.IMAGE_FRONTEND }}:stable,${{ env.IMAGE_FRONTEND }}:prod-${SHORT_SHA}" >> $GITHUB_OUTPUT
-          fi
-
-      # ── Backend ──────────────────────────────────────────────────────────
-      # On build une seule fois avec push:true — le cache GHA évite de
-      # retélécharger les layers si rien n'a changé
-      - name: Build + push backend
-        uses: docker/build-push-action@v7
-        with:
-          context: ./backend
-          push: true
-          tags: ${{ steps.tags.outputs.backend_tags }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
-
-      - name: Trivy scan — backend
-        uses: aquasecurity/trivy-action@master
-        with:
-          image-ref: ${{ env.IMAGE_BACKEND }}:staging
-          format: sarif
-          output: trivy-backend.sarif
-          severity: CRITICAL,HIGH
-          exit-code: "1"
-          ignore-unfixed: true
-
-      - name: Upload Trivy backend SARIF
-        if: always()
-        uses: github/codeql-action/upload-sarif@v3
-        with:
-          sarif_file: trivy-backend.sarif
-          category: trivy-backend
-
-      # ── Frontend ─────────────────────────────────────────────────────────
-      - name: Build + push frontend
-        uses: docker/build-push-action@v7
-        with:
-          context: ./frontend
-          push: true
-          tags: ${{ steps.tags.outputs.frontend_tags }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
-
-      - name: Trivy scan — frontend
-        uses: aquasecurity/trivy-action@master
-        with:
-          image-ref: ${{ env.IMAGE_FRONTEND }}:staging
-          format: sarif
-          output: trivy-frontend.sarif
-          severity: CRITICAL,HIGH
-          exit-code: "1"
-          ignore-unfixed: true
-
-      - name: Upload Trivy frontend SARIF
-        if: always()
-        uses: github/codeql-action/upload-sarif@v3
-        with:
-          sarif_file: trivy-frontend.sarif
-          category: trivy-frontend
+  deploy-prod:
+    if: |
+      startsWith(github.ref, 'refs/tags/') &&
+      !contains(github.ref, '-rc')
+    needs: [build-backend, build-frontend]
+    # FIX: suppression du préfixe underscore (_reusable → reusable)
+    uses: roxane451/ci-cd-mern-stack/.github/workflows/reusable-helm-deploy.yml@main
+    with:
+      environment: prod
+      image-tag: ${{ github.ref_name }}
+      helm-values-file: helm/values-production.yaml
+    secrets: inherit
