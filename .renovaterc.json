@@ -19,6 +19,7 @@
   "packageRules": [
 
     {
+      "baseBranches": ["develop"],
       "description": "Grouper tous les @radix-ui/* en une seule PR",
       "matchPackagePatterns": ["^@radix-ui/"],
       "groupName": "Radix UI",
