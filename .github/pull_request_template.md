@@ -1,6 +1,6 @@
 ## Description
 
-<!-- Décris brièvement ce que fait cette PR -->
+
 
 ## Type de changement
 
@@ -9,6 +9,7 @@
 - [ ] `refactor` — refactoring sans changement de comportement
 - [ ] `chore` — maintenance, dépendances
 - [ ] `docs` — documentation uniquement
+- [ ] `ci` — modifications liées à la CI
 
 ## Checklist
 

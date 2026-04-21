@@ -1,0 +1,51 @@
+name: Dependency Update
+
+on:
+  schedule:
+    - cron: '0 2 * * 1'  # Tous les lundis à 2h du matin UTC
+  workflow_dispatch:
+
+jobs:
+  update-deps:
+    name: Update dependencies
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      # FIX: @v6 n'existe pas — version stable = @v4
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # FIX: @v6 n'existe pas — version stable = @v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Run update script
+        run: chmod +x ./scripts/update-deps.sh && ./scripts/update-deps.sh
+
+      - name: Create Pull Request
+        if: ${{ always() }}
+        uses: peter-evans/create-pull-request@v5
+        with:
+          commit-message: "chore: update dependencies"
+          title: "chore: update dependencies"
+          body: |
+            ## Mise à jour des dépendances
+
+            Cette PR met à jour toutes les dépendances du projet (racine, backend, frontend).
+
+            ### Points de vérification
+            - [ ] Lint passe
+            - [ ] Tests passent
+            - [ ] Application démarre sans erreur
+            - [ ] Pas de breaking changes identifiés
+
+            ---
+            _Généré automatiquement par le workflow `Dependency Update`_
+          branch: chore/update-dependencies
+          delete-branch: true
