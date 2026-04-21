@@ -11,7 +11,7 @@
 # On copie d'abord les package.json pour profiter du cache Docker :
 # si le code change mais pas les deps, npm ci n'est pas relancé
 # =============================================================================
-FROM node:23-alpine3.19 AS builder
+FROM node:22-alpine AS builder
 
 WORKDIR /app
 
