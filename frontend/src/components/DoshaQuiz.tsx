@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ChevronLeft, Sparkles, Flame, Wind, Droplets } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { calculateResults, type QuizOption } from "@/lib/doshaLogic";
 
 const QuizData = {
   categories: [
@@ -281,13 +282,6 @@ const QuizData = {
   ],
 };
 
-interface QuizOption {
-  text: string;
-  vata?: number;
-  pitta?: number;
-  kapha?: number;
-}
-
 const DoshaQuiz = () => {
   const [currentCategoryIndex, setCurrentCategoryIndex] = useState(0);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -332,68 +326,8 @@ const DoshaQuiz = () => {
     }
   };
 
-  const calculateResults = () => {
-    const scores = { vata: 0, pitta: 0, kapha: 0 };
-
-    answers.forEach((answer) => {
-      if (answer.vata) scores.vata += answer.vata;
-      if (answer.pitta) scores.pitta += answer.pitta;
-      if (answer.kapha) scores.kapha += answer.kapha;
-    });
-
-    const total = scores.vata + scores.pitta + scores.kapha;
-    const percentages = {
-      vata: ((scores.vata / total) * 100).toFixed(1),
-      pitta: ((scores.pitta / total) * 100).toFixed(1),
-      kapha: ((scores.kapha / total) * 100).toFixed(1),
-    };
-
-    const sorted = Object.entries(percentages).sort(
-      (a, b) => parseFloat(b[1]) - parseFloat(a[1]),
-    );
-    const dominant = sorted[0];
-    const secondary = sorted[1];
-
-    let profile: {
-      type: string;
-      primary?: string;
-      secondary?: string;
-      label: string;
-    };
-
-    if (parseFloat(dominant[1]) >= 60) {
-      profile = {
-        type: "mono",
-        primary: dominant[0],
-        label: `${dominant[0].toUpperCase()} Dominant`,
-      };
-    } else if (parseFloat(dominant[1]) - parseFloat(secondary[1]) <= 15) {
-      profile = {
-        type: "bi",
-        primary: dominant[0],
-        secondary: secondary[0],
-        label: `${dominant[0].toUpperCase()}-${secondary[0].toUpperCase()}`,
-      };
-    } else if (
-      Math.max(...Object.values(percentages).map(Number)) -
-        Math.min(...Object.values(percentages).map(Number)) <=
-      20
-    ) {
-      profile = {
-        type: "tri",
-        label: "TRI-DOSHA (Équilibré)",
-      };
-    } else {
-      profile = {
-        type: "dominant",
-        primary: dominant[0],
-        secondary: secondary[0],
-        label: `${dominant[0].toUpperCase()} avec tendance ${secondary[0].toUpperCase()}`,
-      };
-    }
-
-    return { scores, percentages, profile };
-  };
+  // Délègue le calcul au module doshaLogic — logique pure, testée indépendamment
+  const runCalculateResults = () => calculateResults(answers);
 
   const doshaInfo = {
     vata: {
@@ -519,7 +453,7 @@ const DoshaQuiz = () => {
   }
 
   if (showResults) {
-    const { percentages, profile } = calculateResults();
+    const { percentages, profile } = runCalculateResults();
 
     return (
       <div className="max-w-4xl mx-auto">

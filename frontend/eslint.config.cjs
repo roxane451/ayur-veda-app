@@ -4,6 +4,8 @@ const reactHooks = require("eslint-plugin-react-hooks");
 const reactRefresh = require("eslint-plugin-react-refresh");
 const tseslint = require("typescript-eslint");
 
+const reactRefreshPlugin = reactRefresh.default ?? reactRefresh;
+
 module.exports = tseslint.config(
   {
     ignores: [
@@ -21,7 +23,7 @@ module.exports = tseslint.config(
     },
     plugins: {
       "react-hooks": reactHooks,
-      "react-refresh": reactRefresh,
+      "react-refresh": reactRefreshPlugin,
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
