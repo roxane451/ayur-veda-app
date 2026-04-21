@@ -9,89 +9,56 @@ on:
     tags:
       - "v[0-9]+.[0-9]+.[0-9]+-rc"
       - "v[0-9]+.[0-9]+.[0-9]+"
-
-# ── FEATURE/* et DEVELOP ──────────────────────────────────────────────────────
-# secret-scan + lint + test uniquement, pas de build ni de déploiement
-
+ 
 jobs:
-
   secret-scan:
-    if: |
-      startsWith(github.ref, 'refs/heads/feature/') ||
-      github.ref == 'refs/heads/develop' ||
-      github.ref == 'refs/heads/main' ||
-      startsWith(github.ref, 'refs/tags/')
-    uses: roxane451/ci-cd-mern-stack/reusable-secret-scan.yml@main
+    uses: roxane451/ci-cd-mern-stack/.github/workflows/reusable-secret-scan.yml@main
     secrets: inherit
-
+ 
   lint-test:
-    if: |
-      startsWith(github.ref, 'refs/heads/feature/') ||
-      github.ref == 'refs/heads/develop' ||
-      github.ref == 'refs/heads/main' ||
-      startsWith(github.ref, 'refs/tags/')
-    uses: roxane451/ci-cd-mern-stack/reusable-lint-test.yml@main
+    uses: roxane451/ci-cd-mern-stack/.github/workflows/reusable-lint-test.yml@main
     secrets: inherit
-
-# ── MAIN et TAGS : build + push ───────────────────────────────────────────────
-# FIX: les builds s'exécutent aussi sur les tags pour que les images
-#      existent au moment du déploiement preprod/prod.
-
+ 
   build-backend:
-    if: |
-      github.ref == 'refs/heads/main' ||
-      startsWith(github.ref, 'refs/tags/')
+    if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/')
     needs: [secret-scan, lint-test]
-    uses: roxane451/ci-cd-mern-stack/reusable-build-push.yml@main
+    uses: roxane451/ci-cd-mern-stack/.github/workflows/reusable-build-push.yml@main
     with:
-      # FIX: 'backend' (pas 'ayurveda-backend') → image produite:
-      # ghcr.io/roxane451/ayur-veda/backend — chemin attendu par values.yaml
       image-name: backend
       context: ./backend
     secrets: inherit
-
+ 
   build-frontend:
-    if: |
-      github.ref == 'refs/heads/main' ||
-      startsWith(github.ref, 'refs/tags/')
+    if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/')
     needs: [secret-scan, lint-test]
-    uses: roxane451/ci-cd-mern-stack/reusable-build-push.yml@main
+    uses: roxane451/ci-cd-mern-stack/.github/workflows/reusable-build-push.yml@main
     with:
-      # FIX: 'frontend' (pas 'ayurveda-frontend')
       image-name: frontend
       context: ./frontend
     secrets: inherit
-
-# ── MAIN uniquement : smoke test ──────────────────────────────────────────────
-
+ 
   smoke-test:
     if: github.ref == 'refs/heads/main'
     needs: [build-backend, build-frontend]
-    uses: roxane451/ci-cd-mern-stack/reusable-smoke-test-k3d.yml@main
+    uses: roxane451/ci-cd-mern-stack/.github/workflows/reusable-smoke-test-k3d.yml@main
     with:
       image-tag: ${{ needs.build-backend.outputs.image-tag }}
     secrets: inherit
-
-# ── TAG vX.Y.Z-rc : deploy preprod ───────────────────────────────────────────
-
+ 
   deploy-preprod:
     if: startsWith(github.ref, 'refs/tags/') && contains(github.ref, '-rc')
     needs: [build-backend, build-frontend]
-    uses: roxane451/ci-cd-mern-stack/reusable-helm-deploy.yml@main
+    uses: roxane451/ci-cd-mern-stack/.github/workflows/reusable-helm-deploy.yml@main
     with:
       environment: preprod
       image-tag: ${{ github.ref_name }}
       helm-values-file: helm/values-preprod.yaml
     secrets: inherit
-
-# ── TAG vX.Y.Z : deploy prod (approbation GitHub Environment) ─────────────────
-
+ 
   deploy-prod:
-    if: |
-      startsWith(github.ref, 'refs/tags/') &&
-      !contains(github.ref, '-rc')
+    if: startsWith(github.ref, 'refs/tags/') && !contains(github.ref, '-rc')
     needs: [build-backend, build-frontend]
-    uses: roxane451/ci-cd-mern-stack/reusable-helm-deploy.yml@main
+    uses: roxane451/ci-cd-mern-stack/.github/workflows/reusable-helm-deploy.yml@main
     with:
       environment: prod
       image-tag: ${{ github.ref_name }}
