@@ -63,7 +63,7 @@ services:
       # Docker se charge de la résolution DNS interne
       MONGODB_URI: mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@mongodb:27017/ayur?authSource=admin
       JWT_SECRET: ${JWT_SECRET}
-      JWT_EXPIRY: 7d
+      JWT_EXPIRY: 24h
       CORS_ORIGIN: https://ayur-veda.fr
 
     # On attend que Mongo réponde vraiment, pas juste qu'il soit démarré
