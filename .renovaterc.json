@@ -1,0 +1,103 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended"
+  ],
+
+  "timezone": "Europe/Paris",
+  "schedule": ["every weekend"],
+
+  "labels": ["dependencies"],
+  "assignees": ["roxane451"],
+
+  "vulnerabilityAlerts": {
+    "enabled": true,
+    "schedule": ["at any time"],
+    "labels": ["dependencies", "security"]
+  },
+
+  "packageRules": [
+
+    {
+      "description": "Grouper tous les @radix-ui/* en une seule PR",
+      "matchPackagePatterns": ["^@radix-ui/"],
+      "groupName": "Radix UI",
+      "automerge": false
+    },
+
+    {
+      "description": "Grouper les outils de test",
+      "matchPackageNames": [
+        "jest", "ts-jest", "supertest", "vitest",
+        "@vitest/coverage-v8",
+        "@testing-library/react", "@testing-library/jest-dom", "@testing-library/user-event",
+        "@types/jest", "@types/supertest",
+        "mongodb-memory-server", "jsdom"
+      ],
+      "groupName": "Testing",
+      "automerge": false
+    },
+
+    {
+      "description": "Grouper les types TypeScript (@types/*)",
+      "matchPackagePatterns": ["^@types/"],
+      "groupName": "TypeScript types",
+      "automerge": true,
+      "automergeType": "pr",
+      "platformAutomerge": true
+    },
+
+    {
+      "description": "Grouper les outils de build (vite, typescript, eslint, postcss, tailwind)",
+      "matchPackageNames": [
+        "vite", "@vitejs/plugin-react-swc",
+        "typescript", "typescript-eslint",
+        "eslint", "eslint-plugin-react-hooks", "eslint-plugin-react-refresh", "@eslint/js", "globals",
+        "tailwindcss", "@tailwindcss/typography", "tailwind-merge", "tailwindcss-animate",
+        "postcss", "autoprefixer"
+      ],
+      "groupName": "Build tools",
+      "automerge": false
+    },
+
+    {
+      "description": "Auto-merge les patches de dépendances non-critiques",
+      "matchUpdateTypes": ["patch"],
+      "matchPackagePatterns": ["^(?!express|mongoose|jsonwebtoken|helmet|bcryptjs).*"],
+      "automerge": true,
+      "automergeType": "pr",
+      "platformAutomerge": true
+    },
+
+    {
+      "description": "Ne jamais auto-merger express, mongoose, jsonwebtoken, helmet, bcryptjs — review manuelle obligatoire",
+      "matchPackageNames": [
+        "express", "@types/express",
+        "mongoose", "@types/mongoose",
+        "jsonwebtoken", "@types/jsonwebtoken",
+        "helmet",
+        "bcryptjs", "@types/bcryptjs"
+      ],
+      "automerge": false,
+      "labels": ["dependencies", "security-sensitive"]
+    },
+
+    {
+      "description": "Major updates : jamais auto-merge, toujours review manuelle",
+      "matchUpdateTypes": ["major"],
+      "automerge": false,
+      "labels": ["dependencies", "major-update"]
+    }
+  ],
+
+  "npm": {
+    "lockFileMaintenance": {
+      "enabled": true,
+      "schedule": ["on the first day of the month"]
+    }
+  },
+
+  "ignoreDeps": [
+    "lovable-tagger"
+  ]
+}
