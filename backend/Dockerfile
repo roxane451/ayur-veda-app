@@ -32,7 +32,7 @@ COPY backend/package.json ./backend/
 RUN npm ci --omit=dev
 
 # Copy compiled code from builder
-COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/backend/dist ./dist
 
 # Optionnel : Pour lancer des seeds dans le pod (ts-node)
 # RUN npm install --omit=dev ts-node typescript
