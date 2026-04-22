@@ -43,7 +43,7 @@ LABEL maintainer="roxane451" \
 COPY frontend/nginx.conf /etc/nginx/nginx.conf
 
 # Le build depuis le stage précédent — pas le code source
-COPY --from=builder --chown=nginx:nginx /app/dist /usr/share/nginx/html
+COPY --from=builder --chown=nginx:nginx /app/frontend/dist /usr/share/nginx/html
 
 RUN rm -f /etc/nginx/conf.d/default.conf
 # On prépare les dossiers dont Nginx a besoin pour tourner en non-root
