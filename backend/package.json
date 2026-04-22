@@ -5,7 +5,7 @@
   "main": "dist/app.js",
   "scripts": {
     "dev": "ts-node src/app.ts",
-    "lint": "tsc --noEmit",
+    "lint": "tsc --noEmit --project tsconfig.build.json",
     "build": "tsc",
     "build:seeds": "tsc --project tsconfig.seeds.json",
     "test": "jest --runInBand",
