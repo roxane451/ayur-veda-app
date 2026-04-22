@@ -30,7 +30,7 @@ jobs:
     uses: roxane451/ci-cd-helm/.github/workflows/reusable-build-push.yml@main
     with:
       image-name: backend
-      context: .                        
+      context: .
       dockerfile: ./backend/Dockerfile 
     secrets: inherit
 
@@ -40,7 +40,7 @@ jobs:
     uses: roxane451/ci-cd-helm/.github/workflows/reusable-build-push.yml@main
     with:
       image-name: frontend
-      context: .                         
+      context: .                        
       dockerfile: ./frontend/Dockerfile  
     secrets: inherit
 
