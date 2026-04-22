@@ -5,6 +5,7 @@ WORKDIR /app
 
 # Copy package files first for better caching
 COPY package*.json ./
+COPY backend/package.json ./backend/
 
 # Install ALL dependencies (dev + prod) for build
 RUN npm ci
@@ -25,6 +26,7 @@ RUN apk add --no-cache dumb-init
 
 # Copy package files
 COPY package*.json ./
+COPY backend/package.json ./backend/
 
 # Install ONLY production dependencies
 RUN npm ci --omit=dev
