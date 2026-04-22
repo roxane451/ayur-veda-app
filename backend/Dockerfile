@@ -14,7 +14,7 @@ RUN npm ci
 COPY . .
 
 # Build TypeScript (compile tout, y compris les seeds si besoin)
-RUN npm run build
+RUN npm run build --workspace=backend
 
 # Runtime stage
 FROM node:22-alpine
