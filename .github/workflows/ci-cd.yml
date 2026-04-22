@@ -27,19 +27,27 @@ jobs:
   build-backend:
     if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/')
     needs: [secret-scan, lint-test]
+    permissions:
+      contents: read
+      packages: write
+      security-events: write
     uses: roxane451/ci-cd-helm/.github/workflows/reusable-build-push.yml@main
     with:
-      image-name: backend            
-      dockerfile: ./backend/Dockerfile 
+      image-name: backend
+      dockerfile: ./backend/Dockerfile
     secrets: inherit
 
   build-frontend:
     if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/')
     needs: [secret-scan, lint-test]
+    permissions:
+      contents: read
+      packages: write
+      security-events: write
     uses: roxane451/ci-cd-helm/.github/workflows/reusable-build-push.yml@main
     with:
-      image-name: frontend                     
-      dockerfile: ./frontend/Dockerfile  
+      image-name: frontend
+      dockerfile: ./frontend/Dockerfile
     secrets: inherit
 
   smoke-test:

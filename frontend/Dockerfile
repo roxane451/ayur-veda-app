@@ -40,7 +40,7 @@ LABEL maintainer="roxane451" \
       description="Ayur-Veda Frontend"
 
 # Config Nginx custom (gzip, SPA fallback, headers sécurité, etc.)
-COPY nginx.conf /etc/nginx/nginx.conf
+COPY frontend/nginx.conf /etc/nginx/nginx.conf
 
 # Le build depuis le stage précédent — pas le code source
 COPY --from=builder --chown=nginx:nginx /app/dist /usr/share/nginx/html
