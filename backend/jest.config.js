@@ -1,9 +1,15 @@
 /** @type {import('jest').Config} */
 module.exports = {
   preset: 'ts-jest',
+  rootDir: '.',
   testEnvironment: 'node',
   roots: ['<rootDir>/src'],
   testMatch: ['**/__tests__/**/*.test.ts'],
+  globals: {
+    'ts-jest': {
+      tsconfig: '<rootDir>/tsconfig.json',
+    },
+  },
   collectCoverageFrom: [
     'src/**/*.ts',
     '!src/seeds/**',
@@ -22,6 +28,6 @@ module.exports = {
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
   },
-  setupFilesAfterEnv: ['<rootDir>/src/__tests__/setup.ts'],
+  setupFilesAfterEnach: ['<rootDir>/src/__tests__/setup.ts'],
   testTimeout: 10000,
 };
