@@ -112,21 +112,21 @@ export function computeProfile(percentages: DoshaPercentages): DoshaProfile {
     };
   }
 
-  if (domVal - secVal <= 15) {
-    return {
-      type: "bi",
-      primary: dominant[0],
-      secondary: secondary[0],
-      label: `${dominant[0].toUpperCase()}-${secondary[0].toUpperCase()}`,
-    };
-  }
+if (spread <= 20) {
+  return {
+    type: "tri",
+    label: "TRI-DOSHA (Équilibré)",
+  };
+}
 
-  if (spread <= 20) {
-    return {
-      type: "tri",
-      label: "TRI-DOSHA (Équilibré)",
-    };
-  }
+if (domVal - secVal <= 15) {
+  return {
+    type: "bi",
+    primary: dominant[0],
+    secondary: secondary[0],
+    label: `${dominant[0].toUpperCase()}-${secondary[0].toUpperCase()}`,
+  };
+}
 
   return {
     type: "dominant",
