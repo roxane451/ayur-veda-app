@@ -29,8 +29,7 @@ jobs:
     needs: [secret-scan, lint-test]
     uses: roxane451/ci-cd-helm/.github/workflows/reusable-build-push.yml@main
     with:
-      image-name: backend
-      context: .                        
+      image-name: backend            
       dockerfile: ./backend/Dockerfile 
     secrets: inherit
 
@@ -39,8 +38,7 @@ jobs:
     needs: [secret-scan, lint-test]
     uses: roxane451/ci-cd-helm/.github/workflows/reusable-build-push.yml@main
     with:
-      image-name: frontend
-      context: .                         
+      image-name: frontend                     
       dockerfile: ./frontend/Dockerfile  
     secrets: inherit
 
