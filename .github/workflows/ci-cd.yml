@@ -10,17 +10,21 @@ on:
       - "v[0-9]+.[0-9]+.[0-9]+-rc"
       - "v[0-9]+.[0-9]+.[0-9]+"
 
-permissions:
-  contents: read
-  packages: write
-  security-events: write
-
 jobs:
+
   secret-scan:
+    if: |
+      startsWith(github.ref, 'refs/heads/feature/') ||
+      github.ref == 'refs/heads/develop' ||
+      github.ref == 'refs/heads/main'
     uses: roxane451/ci-cd-helm/.github/workflows/reusable-secret-scan.yml@main
     secrets: inherit
 
   lint-test:
+    if: |
+      startsWith(github.ref, 'refs/heads/feature/') ||
+      github.ref == 'refs/heads/develop' ||
+      github.ref == 'refs/heads/main'
     uses: roxane451/ci-cd-helm/.github/workflows/reusable-lint-test.yml@main
     secrets: inherit
 
@@ -30,8 +34,7 @@ jobs:
     uses: roxane451/ci-cd-helm/.github/workflows/reusable-build-push.yml@main
     with:
       image-name: backend
-      context: .
-      dockerfile: ./backend/Dockerfile 
+      dockerfile: ./backend/Dockerfile
     secrets: inherit
 
   build-frontend:
@@ -40,8 +43,7 @@ jobs:
     uses: roxane451/ci-cd-helm/.github/workflows/reusable-build-push.yml@main
     with:
       image-name: frontend
-      context: .                        
-      dockerfile: ./frontend/Dockerfile  
+      dockerfile: ./frontend/Dockerfile
     secrets: inherit
 
   smoke-test:
