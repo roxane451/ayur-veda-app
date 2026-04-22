@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "ts-node src/app.ts",
     "lint": "tsc --noEmit --project tsconfig.build.json",
-    "build": "tsc",
+    "build": "tsc --project tsconfig.build.json",
     "build:seeds": "tsc --project tsconfig.seeds.json",
     "test": "jest --runInBand",
     "test:watch": "jest --watch",

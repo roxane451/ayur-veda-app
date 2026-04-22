@@ -26,7 +26,7 @@ COPY . .
 ARG VITE_API_URL=/api
 ENV VITE_API_URL=$VITE_API_URL
 
-RUN npm run build
+RUN npm --workspace=frontend run build
 
 # =============================================================================
 # Stage 2 — runtime Nginx
