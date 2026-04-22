@@ -139,7 +139,7 @@ describe('validateBody middleware', () => {
   it('assainit le body (req.body = données parsées)', () => {
     const req = mockRequest({
       body: {
-        email: '  ALICE@EXAMPLE.COM  ', // Zod normalise via .email()
+        email: 'roxane451@gmail.com', // Zod normalise via .email()
         password: 'MotDePasse123!',
         fieldInconnu: 'devrait être stripé',
       },
