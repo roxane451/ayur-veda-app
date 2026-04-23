@@ -84,6 +84,7 @@ jobs:
     uses: roxane451/ci-cd-helm/.github/workflows/reusable-smoke-test-k3d.yml@main
     with:
       image-tag: ${{ needs.build-backend.outputs.image-tag }}
+      namespace: ayur-smoke
     secrets: inherit
 
   deploy-preprod:
