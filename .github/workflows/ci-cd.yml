@@ -1,6 +1,7 @@
 name: CI/CD — Ayur-Veda
 
 on:
+  workflow_dispatch:  
   push:
     branches:
       - "feature/**"
@@ -42,8 +43,8 @@ jobs:
     uses: roxane451/ci-cd-helm/.github/workflows/reusable-build-push.yml@main
     with:
       image-name: backend
-      context: ./backend        # fix bug 2 : input requis manquant
-      # dockerfile supprimé     # fix bug 3 : input non déclaré dans le workflow réutilisable
+      context: ./backend
+
     secrets: inherit
 
   build-frontend:
@@ -59,8 +60,8 @@ jobs:
     uses: roxane451/ci-cd-helm/.github/workflows/reusable-build-push.yml@main
     with:
       image-name: frontend
-      context: ./frontend       # fix bug 2 : input requis manquant
-      # dockerfile supprimé     # fix bug 3 : input non déclaré dans le workflow réutilisable
+      context: ./frontend 
+
     secrets: inherit
 
   # upload-sarif-backend:
@@ -97,7 +98,7 @@ jobs:
     uses: roxane451/ci-cd-helm/.github/workflows/reusable-smoke-test-k3d.yml@main
     with:
       image-tag: ${{ needs.build-backend.outputs.image-tag }}
-      namespace: ayur-smoke     # fix bug 1 : input désormais déclaré dans le workflow réutilisable
+      namespace: ayur-smoke     # input déclaré dans le workflow réutilisable
     secrets: inherit
 
   deploy-preprod:
