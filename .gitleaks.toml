@@ -1,0 +1,35 @@
+# Configuration Gitleaks — Ayur-Veda App
+# Doc : https://github.com/gitleaks/gitleaks?tab=readme-ov-file#configuration
+
+title = "Ayur-Veda Gitleaks Config"
+
+[extend]
+# Hérite des règles officielles par défaut
+useDefault = true
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Allowlist globale
+# Les entrées ci-dessous correspondent à des faux positifs confirmés :
+#   - mots de passe FICTIFS dans les tests unitaires
+#   - fichiers .secrets.baseline (hachages, pas de vrais secrets)
+# ──────────────────────────────────────────────────────────────────────────────
+
+[[rules.allowlist]]
+description = "Mots de passe fictifs dans les tests unitaires"
+regexes = [
+  # Valeurs littérales utilisées comme données de test
+  '''motdepasse123A''',
+  '''motdepasse12345''',
+  '''Motdepasse123!''',
+  '''MotDePasse123!''',
+  '''hashed_password''',
+]
+paths = [
+  '''backend/src/__tests__/.*\.ts$''',
+]
+
+[[rules.allowlist]]
+description = "Fichier .secrets.baseline (hachages SHA1, pas de vrais secrets)"
+paths = [
+  '''\.secrets\.baseline$''',
+]
