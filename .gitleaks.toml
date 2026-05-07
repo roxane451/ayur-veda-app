@@ -1,35 +1,34 @@
-# Configuration Gitleaks — Ayur-Veda App
-# Doc : https://github.com/gitleaks/gitleaks?tab=readme-ov-file#configuration
+# Configuration Gitleaks v8 — Ayur-Veda App
+# Doc : https://github.com/gitleaks/gitleaks/blob/master/config/gitleaks.toml
 
 title = "Ayur-Veda Gitleaks Config"
 
 [extend]
-# Hérite des règles officielles par défaut
+# Hérite de toutes les règles officielles
 useDefault = true
 
 # ──────────────────────────────────────────────────────────────────────────────
-# Allowlist globale
-# Les entrées ci-dessous correspondent à des faux positifs confirmés :
+# Allowlist GLOBALE (syntaxe v8 : [allowlist] = map unique, pas [[]] tableau)
+#
+# Faux positifs confirmés :
 #   - mots de passe FICTIFS dans les tests unitaires
-#   - fichiers .secrets.baseline (hachages, pas de vrais secrets)
+#   - .secrets.baseline : contient des hachages SHA1, pas de vrais secrets
 # ──────────────────────────────────────────────────────────────────────────────
 
-[[rules.allowlist]]
-description = "Mots de passe fictifs dans les tests unitaires"
+[allowlist]
+description = "Faux positifs dans les tests et fichiers baseline"
+
+# Paths exclus entièrement (regex sur le chemin du fichier)
+paths = [
+  '''backend/src/__tests__/.*\.ts$''',
+  '''\.secrets\.baseline$''',
+]
+
+# Valeurs littérales exclues (regex sur le contenu détecté)
 regexes = [
-  # Valeurs littérales utilisées comme données de test
   '''motdepasse123A''',
   '''motdepasse12345''',
   '''Motdepasse123!''',
   '''MotDePasse123!''',
   '''hashed_password''',
-]
-paths = [
-  '''backend/src/__tests__/.*\.ts$''',
-]
-
-[[rules.allowlist]]
-description = "Fichier .secrets.baseline (hachages SHA1, pas de vrais secrets)"
-paths = [
-  '''\.secrets\.baseline$''',
 ]
