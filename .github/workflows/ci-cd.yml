@@ -42,7 +42,8 @@ jobs:
     uses: roxane451/ci-cd-helm/.github/workflows/reusable-build-push.yml@main
     with:
       image-name: backend
-      dockerfile: ./backend/Dockerfile
+      context: ./backend        # fix bug 2 : input requis manquant
+      # dockerfile supprimé     # fix bug 3 : input non déclaré dans le workflow réutilisable
     secrets: inherit
 
   build-frontend:
@@ -58,7 +59,8 @@ jobs:
     uses: roxane451/ci-cd-helm/.github/workflows/reusable-build-push.yml@main
     with:
       image-name: frontend
-      dockerfile: ./frontend/Dockerfile
+      context: ./frontend       # fix bug 2 : input requis manquant
+      # dockerfile supprimé     # fix bug 3 : input non déclaré dans le workflow réutilisable
     secrets: inherit
 
   # upload-sarif-backend:
@@ -95,12 +97,12 @@ jobs:
     uses: roxane451/ci-cd-helm/.github/workflows/reusable-smoke-test-k3d.yml@main
     with:
       image-tag: ${{ needs.build-backend.outputs.image-tag }}
-      namespace: ayur-smoke
+      namespace: ayur-smoke     # fix bug 1 : input désormais déclaré dans le workflow réutilisable
     secrets: inherit
 
   deploy-preprod:
     if: startsWith(github.ref, 'refs/tags/') && contains(github.ref, '-rc')
-    needs: [build-backend, build-frontend]
+    needs: [build-backend, build-frontend]  # smoke-test ne tourne pas sur les tags → dépendance volontairement omise
     uses: roxane451/ci-cd-helm/.github/workflows/reusable-helm-deploy.yml@main
     with:
       environment: preprod
@@ -110,7 +112,7 @@ jobs:
 
   deploy-prod:
     if: startsWith(github.ref, 'refs/tags/') && !contains(github.ref, '-rc')
-    needs: [build-backend, build-frontend]
+    needs: [build-backend, build-frontend]  # smoke-test ne tourne pas sur les tags → dépendance volontairement omise
     uses: roxane451/ci-cd-helm/.github/workflows/reusable-helm-deploy.yml@main
     with:
       environment: prod
