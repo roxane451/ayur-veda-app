@@ -1,51 +1,46 @@
-# Build stage
+# ─── Stage 1 : installer UNIQUEMENT les deps du backend ───────────────────────
+# Sans le monorepo racine.
+# Pas de npm workspaces ici >>> npm ci installe tout dans /app/node_modules.
+FROM node:22-alpine AS deps
+WORKDIR /app
+COPY backend/package*.json ./
+# --ignore-scripts évite les postinstall qui pourraient dépendre du monorepo
+RUN npm ci --ignore-scripts
+
+# ─── Stage 2 : build TypeScript ───────────────────────────────────────────────
 FROM node:22-alpine AS builder
 WORKDIR /app
 
-# Copy package files first for better caching
-COPY package*.json ./
-COPY backend/package.json ./backend/
+# Copier les deps installées proprement (dev + prod) pour le build TS
+COPY --from=deps /app/node_modules ./node_modules
+COPY backend/ .
 
-# Install ALL dependencies (dev + prod) for build
-RUN npm ci
+RUN npm run build
 
-# Copy source code
-COPY . .
+# Supprimer les devDependencies APRÈS le build
+RUN npm prune --omit=dev
 
-# Build TypeScript
-RUN npm run build --workspace=backend
-
-# Supprimer les devDependencies du node_modules workspace backend
-RUN npm prune --omit=dev --workspace=backend
-
-# Runtime stage
+# ─── Stage 3 : image finale ───────────────────────────────────────────────────
 FROM node:22-alpine
 WORKDIR /app
 
-# Install dumb-init for proper signal handling (PID 1)
 RUN apk add --no-cache dumb-init
 
-# FIX : copier le node_modules du workspace backend, pas celui de la racine.
-# En mode npm workspaces, les deps du backend sont hoistées dans /app/node_modules
-# MAIS les packages non-hoistés (ou en conflit de version) restent dans
-# /app/backend/node_modules. Pour être exhaustif on copie les deux.
+# node_modules prunés (prod only) — issus du stage builder isolé
+# migrate-mongo EST dans dependencies → il sera présent ici
 COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/backend/node_modules ./backend/node_modules
 
-# Copy compiled code from builder
-# dist/app.js est dans /app/backend/dist → on le place dans /app/dist
-# pour que require('migrate-mongo') remonte dans /app/node_modules
-COPY --from=builder /app/backend/dist ./dist
+# Binaires compilés
+COPY --from=builder /app/dist ./dist
 
-# Fichiers requis par migrate-mongo au runtime (résolution depuis CWD=/app)
+# Fichiers requis par migrate-mongo au runtime
 COPY backend/migrate-mongo-config.js ./migrate-mongo-config.js
 COPY backend/migrations ./migrations
 
-# Create non-root user & group
 RUN addgroup -g 1001 nodejs && \
-    adduser -S nodejs -u 1001 -G nodejs
+    adduser -S nodejs -u 1001 -G nodejs && \
+    chown -R nodejs:nodejs /app
 
-RUN chown -R nodejs:nodejs /app
 USER nodejs
 
 EXPOSE 5000
