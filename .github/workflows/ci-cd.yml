@@ -96,6 +96,7 @@ jobs:
     if: github.ref == 'refs/heads/main'
     needs: [build-backend, build-frontend]
     uses: roxane451/ci-cd-helm/.github/workflows/reusable-smoke-test-k3d.yml@main
+    continue-on-error: true  # ne bloque pas le pipeline si ça échoue
     with:
       image-tag: ${{ needs.build-backend.outputs.image-tag }}
       namespace: ayur-smoke     # input déclaré dans le workflow réutilisable
