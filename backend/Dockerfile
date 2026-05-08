@@ -37,6 +37,10 @@ COPY --from=builder /app/backend/dist ./dist
 # Optionnel : Pour lancer des seeds dans le pod (ts-node)
 # RUN npm install --omit=dev ts-node typescript
 
+# Fichiers requis par migrate-mongo au runtime (résolution depuis CWD=/app)
+COPY backend/migrate-mongo-config.js ./migrate-mongo-config.js
+COPY backend/migrations ./migrations
+
 # Create non-root user & group (bonne pratique)
 RUN addgroup -g 1001 nodejs && \
     adduser -S nodejs -u 1001 -G nodejs
