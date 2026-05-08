@@ -1,6 +1,5 @@
 # Build stage
 FROM node:22-alpine AS builder
-
 WORKDIR /app
 
 # Copy package files first for better caching
@@ -16,27 +15,24 @@ COPY . .
 # Build TypeScript (compile tout, y compris les seeds si besoin)
 RUN npm run build --workspace=backend
 
+# Supprimer les devDependencies du node_modules
+RUN npm prune --omit=dev
+
 # Runtime stage
 FROM node:22-alpine
-
 WORKDIR /app
 
 # Install dumb-init for proper signal handling (PID 1)
 RUN apk add --no-cache dumb-init
 
-# Copy package files
-COPY package*.json ./
-COPY backend/package.json ./backend/
-
-# Install ONLY production dependencies
-RUN npm ci --omit=dev
+# Copier les node_modules déjà prunés depuis le builder
+COPY --from=builder /app/node_modules ./node_modules
 
 # Copy compiled code from builder
 COPY --from=builder /app/backend/dist ./dist
 
 # Optionnel : Pour lancer des seeds dans le pod (ts-node)
 # RUN npm install --omit=dev ts-node typescript
-
 # Fichiers requis par migrate-mongo au runtime (résolution depuis CWD=/app)
 COPY backend/migrate-mongo-config.js ./migrate-mongo-config.js
 COPY backend/migrations ./migrations
@@ -47,7 +43,6 @@ RUN addgroup -g 1001 nodejs && \
 
 # Change ownership of /app to non-root user
 RUN chown -R nodejs:nodejs /app
-
 USER nodejs
 
 # Expose port
