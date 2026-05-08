@@ -1,11 +1,9 @@
 # ─── Stage 1 : installer UNIQUEMENT les deps du backend ───────────────────────
-# Sans le monorepo racine.
-# Pas de npm workspaces ici >>> npm ci installe tout dans /app/node_modules.
 FROM node:22-alpine AS deps
 WORKDIR /app
 COPY backend/package*.json ./
-# --ignore-scripts évite les postinstall qui pourraient dépendre du monorepo
-RUN npm ci --ignore-scripts
+# --ignore-scripts supprimé : migrate-mongo a des postinstall scripts nécessaires
+RUN npm ci
 
 # ─── Stage 2 : build TypeScript ───────────────────────────────────────────────
 FROM node:22-alpine AS builder
