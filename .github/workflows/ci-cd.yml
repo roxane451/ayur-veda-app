@@ -107,6 +107,7 @@ jobs:
     uses: roxane451/ci-cd-helm/.github/workflows/reusable-helm-deploy.yml@main
     with:
       environment: preprod
+      namespace: ayur-preprod
       image-tag: ${{ github.ref_name }}
       helm-values-file: helm/values-preprod.yaml
     secrets: inherit
@@ -117,6 +118,7 @@ jobs:
     uses: roxane451/ci-cd-helm/.github/workflows/reusable-helm-deploy.yml@main
     with:
       environment: prod
+      namespace: ayur
       image-tag: ${{ github.ref_name }}
       helm-values-file: helm/values-production.yaml
     secrets: inherit
