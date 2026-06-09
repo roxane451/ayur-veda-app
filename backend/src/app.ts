@@ -15,6 +15,12 @@ import doshasRoutes from "./routes/doshas";
 import ritucharyaRoutes from "./routes/ritucharya";
 import { swaggerRouter } from "./config/swagger";
 
+import { register, collectDefaultMetrics } from 'prom-client';
+
+// ────────────────────────────────────────────────
+// Métriques Prometheus
+collectDefaultMetrics();
+
 // ────────────────────────────────────────────────
 // Démarrage — log structuré (pas de secrets, jamais de valeurs brutes)
 logger.info(
@@ -123,6 +129,13 @@ app.get("/api/health", async (_req: Request, res: Response) => {
   }
 
   res.status(200).json(health);
+});
+
+// ────────────────────────────────────────────────
+// Scrap métriques Prometheus (expose /metrics pour que Prometheus puisse les collecter)
+app.get("/metrics", async (_req: Request, res: Response) => {
+  res.set("Content-Type", register.contentType);
+  res.end(await register.metrics());
 });
 
 // Alias pour compatibilité
