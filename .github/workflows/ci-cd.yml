@@ -1,7 +1,7 @@
 name: CI/CD — Ayur-Veda
 
 on:
-  workflow_dispatch:  
+  workflow_dispatch:
   push:
     branches:
       - "feature/**"
@@ -10,7 +10,6 @@ on:
     tags:
       - "v[0-9]+.[0-9]+.[0-9]+-rc"
       - "v[0-9]+.[0-9]+.[0-9]+"
-
   pull_request:
     branches:
       - develop
@@ -22,14 +21,24 @@ permissions:
   security-events: write
 
 jobs:
+
+  # ─────────────────────────────────────────────────────────────
+  # Job 1 : Scan des secrets
+  # ─────────────────────────────────────────────────────────────
   secret-scan:
     uses: roxane451/ci-cd-helm/.github/workflows/reusable-secret-scan.yml@main
     secrets: inherit
 
+  # ─────────────────────────────────────────────────────────────
+  # Job 2 : Lint et tests unitaires
+  # ─────────────────────────────────────────────────────────────
   lint-test:
     uses: roxane451/ci-cd-helm/.github/workflows/reusable-lint-test.yml@main
     secrets: inherit
 
+  # ─────────────────────────────────────────────────────────────
+  # Job 3 : Build + Push backend
+  # ─────────────────────────────────────────────────────────────
   build-backend:
     if: |
       github.ref == 'refs/heads/main' ||
@@ -44,9 +53,12 @@ jobs:
     with:
       image-name: backend
       context: ./backend
-
+      # image-tag: ${{ github.sha }}
     secrets: inherit
 
+  # ─────────────────────────────────────────────────────────────
+  # Job 4 : Build + Push frontend
+  # ─────────────────────────────────────────────────────────────
   build-frontend:
     if: |
       github.ref == 'refs/heads/main' ||
@@ -60,38 +72,13 @@ jobs:
     uses: roxane451/ci-cd-helm/.github/workflows/reusable-build-push.yml@main
     with:
       image-name: frontend
-      context: ./frontend 
-
+      context: ./frontend
+      # image-tag: ${{ github.sha }}
     secrets: inherit
 
-  # upload-sarif-backend:
-  #   if: always() && (github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/'))
-  #   needs: [build-backend]
-  #   runs-on: ubuntu-latest
-  #   permissions:
-  #     security-events: write
-  #   steps:
-  #     - uses: actions/download-artifact@v4
-  #       with:
-  #         name: trivy-backend-sarif
-  #     - uses: github/codeql-action/upload-sarif@v3
-  #       with:
-  #         sarif_file: trivy-backend.sarif
-
-  # upload-sarif-frontend:
-  #   if: always() && (github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/'))
-  #   needs: [build-frontend]
-  #   runs-on: ubuntu-latest
-  #   permissions:
-  #     security-events: write
-  #   steps:
-  #     - uses: actions/download-artifact@v4
-  #       with:
-  #         name: trivy-frontend-sarif
-  #     - uses: github/codeql-action/upload-sarif@v3
-  #       with:
-  #         sarif_file: trivy-frontend.sarif
-
+  # ─────────────────────────────────────────────────────────────
+  # Job 5 : Smoke test K3D (main uniquement)
+  # ─────────────────────────────────────────────────────────────
   smoke-test:
     if: github.ref == 'refs/heads/main'
     needs: [build-backend, build-frontend]
@@ -101,24 +88,29 @@ jobs:
       namespace: ayur-smoke
     secrets: inherit
 
+  # ─────────────────────────────────────────────────────────────
+  # Job 6 : Déploiement preprod via ArgoCD (main uniquement)
+  # ArgoCD sync automatique après mise à jour du tag dans ayur-veda-helm
+  # ─────────────────────────────────────────────────────────────
   deploy-preprod:
-    if: startsWith(github.ref, 'refs/tags/') && contains(github.ref, '-rc')
-    needs: [build-backend, build-frontend]  # smoke-test ne tourne pas sur les tags → dépendance volontairement omise
-    uses: roxane451/ci-cd-helm/.github/workflows/reusable-helm-deploy.yml@main
+    if: github.ref == 'refs/heads/main'
+    needs: [smoke-test]
+    uses: roxane451/ci-cd-helm/.github/workflows/reusable-argocd-sync.yml@main
     with:
       environment: preprod
-      namespace: ayur-preprod
-      image-tag: ${{ github.ref_name }}
-      helm-values-file: helm/values-preprod.yaml
+      image-tag: ${{ needs.build-backend.outputs.image-tag }}
+      values-file: values-preprod.yaml
     secrets: inherit
 
+  # ─────────────────────────────────────────────────────────────
+  # Job 7 : Déploiement prod via ArgoCD (tags stables uniquement)
+  # ─────────────────────────────────────────────────────────────
   deploy-prod:
     if: startsWith(github.ref, 'refs/tags/') && !contains(github.ref, '-rc')
-    needs: [build-backend, build-frontend]  # smoke-test ne tourne pas sur les tags → dépendance volontairement omise
-    uses: roxane451/ci-cd-helm/.github/workflows/reusable-helm-deploy.yml@main
+    needs: [build-backend, build-frontend]
+    uses: roxane451/ci-cd-helm/.github/workflows/reusable-argocd-sync.yml@main
     with:
       environment: prod
-      namespace: ayur
       image-tag: ${{ github.ref_name }}
-      helm-values-file: helm/values-production.yaml
+      values-file: values-production.yaml
     secrets: inherit
