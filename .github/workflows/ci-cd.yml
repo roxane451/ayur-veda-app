@@ -82,11 +82,88 @@ jobs:
   smoke-test:
     if: github.ref == 'refs/heads/main'
     needs: [build-backend, build-frontend]
-    uses: roxane451/ci-cd-helm/.github/workflows/reusable-smoke-test-k3d.yml@main
-    with:
-      image-tag: ${{ needs.build-backend.outputs.image-tag }}
-      namespace: ayur-smoke
+    runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     secrets: inherit
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Checkout ayur-veda-helm
+        uses: actions/checkout@v5
+        with:
+          repository: ${{ github.repository_owner }}/ayur-veda-helm
+          path: helm-values
+          token: ${{ secrets.PAT_HELM_REPO }}
+
+      - name: Install k3d
+        run: curl -s https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | bash
+
+      - name: Install Helm
+        uses: azure/setup-helm@v4
+
+      - name: Create cluster k3d
+        run: |
+          k3d cluster delete ayur-smoke 2>/dev/null || true
+          k3d cluster create ayur-smoke --wait --timeout 60s
+
+      - name: Configure kubeconfig
+        run: k3d kubeconfig merge ayur-smoke --kubeconfig-switch-context
+
+      - name: Create namespace + GHCR secret
+        run: |
+          kubectl create namespace ayur-smoke --dry-run=client -o yaml | kubectl apply -f -
+          kubectl label namespace ayur-smoke app.kubernetes.io/managed-by=Helm --overwrite
+          kubectl annotate namespace ayur-smoke meta.helm.sh/release-name=ayurveda meta.helm.sh/release-namespace=ayur-smoke --overwrite
+          kubectl create secret docker-registry ghcr-secret \
+            --docker-server=ghcr.io \
+            --docker-username=${{ github.actor }} \
+            --docker-password=${{ secrets.PAT_HELM_REPO }} \
+            --namespace=ayur-smoke \
+            --dry-run=client -o yaml | kubectl apply -f -
+
+      - name: Login Helm GHCR
+        run: |
+          echo "${{ secrets.PAT_HELM_REPO }}" | helm registry login ghcr.io \
+            --username "${{ github.actor }}" \
+            --password-stdin
+
+      - name: Deploy via Helm (values k3d)
+        run: |
+          helm upgrade --install ayurveda \
+            oci://ghcr.io/${{ github.repository_owner }}/multi-service \
+            --version 1.5.1 \
+            -f helm-values/helm/values-k3d.yaml \
+            --namespace ayur-smoke \
+            --wait --timeout 300s \
+            --set backend.image.tag=${{ needs.build-backend.outputs.image-tag }} \
+            --set frontend.image.tag=${{ needs.build-frontend.outputs.image-tag }}
+
+      - name: Wait for backend pods
+        run: |
+          kubectl wait --for=condition=ready pod -l app=backend --namespace ayur-smoke --timeout=120s
+          kubectl wait --for=condition=ready pod -l app=frontend --namespace ayur-smoke --timeout=120s
+
+      - name: Smoke test HTTP
+        run: |
+          kubectl port-forward svc/backend 3001:5000 --namespace ayur-smoke &
+          sleep 5
+          curl -f http://localhost:3001/api/health
+          kill %1
+
+      - name: Debug pods if failure
+        if: failure()
+        run: |
+          kubectl get pods --all-namespaces
+          kubectl get pods -n ayur-smoke || true
+          kubectl describe pods -n ayur-smoke || true
+          kubectl logs -l app=backend -n ayur-smoke --tail=50 || true
+          kubectl logs -l app=frontend -n ayur-smoke --tail=50 || true
+          kubectl logs -l app=mongodb -n ayur-smoke --tail=50 || true
+
+      - name: Cleanup cluster
+        if: always()
+        run: k3d cluster delete ayur-smoke
 
   # ─────────────────────────────────────────────────────────────
   # Job 6 : Déploiement preprod via ArgoCD (main uniquement)
