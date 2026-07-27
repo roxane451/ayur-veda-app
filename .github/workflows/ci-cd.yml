@@ -88,13 +88,6 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
-      - name: Checkout ayur-veda-helm
-        uses: actions/checkout@v5
-        with:
-          repository: ${{ github.repository_owner }}/ayur-veda-helm
-          path: helm-values
-          token: ${{ secrets.PAT_HELM_REPO }}
-
       - name: Install k3d
         run: curl -s https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | bash
 
@@ -132,11 +125,15 @@ jobs:
           helm upgrade --install ayurveda \
             oci://ghcr.io/${{ github.repository_owner }}/multi-service \
             --version 1.5.1 \
-            -f helm-values/helm/values-k3d.yaml \
             --namespace ayur-smoke \
             --wait --timeout 300s \
+            --set namespace.name=ayur-smoke \
+            --set backend.image.repository=ghcr.io/${{ github.repository_owner }}/backend \
+            --set frontend.image.repository=ghcr.io/${{ github.repository_owner }}/frontend \
             --set backend.image.tag=${{ needs.build-backend.outputs.image-tag }} \
-            --set frontend.image.tag=${{ needs.build-frontend.outputs.image-tag }}
+            --set frontend.image.tag=${{ needs.build-frontend.outputs.image-tag }} \
+            --set backend.imagePullSecrets[0].name=ghcr-secret \
+            --set frontend.imagePullSecrets[0].name=ghcr-secret
 
       - name: Wait for backend pods
         run: |
