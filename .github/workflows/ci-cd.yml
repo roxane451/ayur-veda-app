@@ -120,13 +120,15 @@ jobs:
             --username "${{ github.actor }}" \
             --password-stdin
 
-      - name: Deploy via Helm (values k3d)
+      - name: Deploy via Helm
         run: |
           helm upgrade --install ayurveda \
             oci://ghcr.io/${{ github.repository_owner }}/multi-service \
             --version 1.5.1 \
             --namespace ayur-smoke \
             --wait --timeout 300s \
+            --set global.environment=development \
+            --set ingress.enabled=false \
             --set namespace.name=ayur-smoke \
             --set backend.image.repository=ghcr.io/${{ github.repository_owner }}/backend \
             --set frontend.image.repository=ghcr.io/${{ github.repository_owner }}/frontend \
