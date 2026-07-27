@@ -85,7 +85,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-    secrets: inherit
     steps:
       - uses: actions/checkout@v5
 
