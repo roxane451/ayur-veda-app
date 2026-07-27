@@ -12,14 +12,13 @@ FROM node:22-alpine AS builder
 WORKDIR /app
 
 COPY --from=deps /app/node_modules ./node_modules
-COPY --from=deps /app/package.json ./package.json
-COPY --from=deps /app/package-lock.json ./package-lock.json
 COPY backend/ ./backend/
 
-RUN npm --workspace=backend run build
+WORKDIR /app/backend
+RUN npm run build
 
 # Supprimer les devDependencies après le build
-RUN npm prune --omit=dev --workspace=backend
+RUN npm prune --omit=dev
 
 # ─── Stage 3 : image finale ───────────────────────────────────────────────────
 FROM node:22-alpine
