@@ -13,5 +13,10 @@
     "lint": "npm --workspace=backend run lint && npm --workspace=frontend run lint",
     "test": "npm --workspace=backend run test && npm --workspace=frontend run test",
     "clean": "rm -rf node_modules package-lock.json backend/dist frontend/dist"
+  },
+  "overrides": {
+    "brace-expansion": "5.0.8",
+    "test-exclude": "8.0.0",
+    "babel-plugin-istanbul": "8.0.0"
   }
 }
