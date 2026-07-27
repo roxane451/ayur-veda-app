@@ -13,11 +13,5 @@
     "lint": "npm --workspace=backend run lint && npm --workspace=frontend run lint",
     "test": "npm --workspace=backend run test && npm --workspace=frontend run test",
     "clean": "rm -rf node_modules package-lock.json backend/dist frontend/dist"
-  },
-  "devDependencies": {
-    "vitest": "^3.2.4"
-  },
-  "dependencies": {
-    "prom-client": "^15.1.3"
   }
 }
