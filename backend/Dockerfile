@@ -7,23 +7,17 @@ COPY backend/package.json ./backend/package.json
 
 RUN npm ci --workspace=backend
 
-# Ajouter prom-client manuellement si nécessaire
-RUN cd /app/backend && npm install prom-client
-
 # ─── Stage 2 : build TypeScript ───────────────────────────────────────────────
 FROM node:22-alpine AS builder
 WORKDIR /app
 
 COPY --from=deps /app/node_modules ./node_modules
-COPY --from=deps /app/backend/node_modules ./backend/node_modules
-
 COPY backend/ ./backend/
 
-WORKDIR /app/backend
-RUN npm run build
+RUN npm --workspace=backend run build
 
 # Supprimer les devDependencies après le build
-RUN npm prune --omit=dev
+RUN npm prune --omit=dev --workspace=backend
 
 # ─── Stage 3 : image finale ───────────────────────────────────────────────────
 FROM node:22-alpine
@@ -32,7 +26,7 @@ WORKDIR /app
 RUN apk add --no-cache dumb-init
 
 # node_modules prunés (prod only)
-COPY --from=builder /app/backend/node_modules ./node_modules
+COPY --from=builder /app/node_modules ./node_modules
 
 # Binaires compilés
 COPY --from=builder /app/backend/dist ./dist
