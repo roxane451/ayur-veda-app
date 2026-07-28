@@ -14,10 +14,11 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY backend/ ./backend/
 
-RUN npm --workspace=backend run build
+WORKDIR /app/backend
+RUN npm run build
 
 # Supprimer les devDependencies après le build
-RUN npm prune --omit=dev --workspace=backend
+RUN npm prune --omit=dev
 
 # ─── Stage 3 : image finale ───────────────────────────────────────────────────
 FROM node:22-alpine
