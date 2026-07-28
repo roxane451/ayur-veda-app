@@ -131,6 +131,23 @@ jobs:
 
       - name: Create smoke-test secret overrides
         run: |
+          # Write values file (use printf so indentation from YAML doesn't leak into the file)
+          printf '%s\n' \
+            "namespace:" \
+            "  name: ayur-smoke" \
+            "global:" \
+            "  environment: development" \
+            "externalSecrets:" \
+            "  enabled: false" \
+            "database:" \
+            "  secrets:" \
+            "    username: mongoUser" \
+            "    password: staging-local-only-password" \
+            "backend:" \
+            "  secrets:" \
+            "    mongodbUri: \"mongodb://mongoUser:staging-local-only-password@mongodb.ayur-smoke.svc.cluster.local:27017/my-app?authSource=admin&retryWrites=true&w=majority\"" \
+            "    jwtSecret: \"my-super-secret-jwt-key-very-long-and-secure-for-staging-use-at-least-32-bytes\"" \
+            > smoke-test-values.yaml
           cat > smoke-test-values.yaml <<'EOF'
           database:
             secrets:
@@ -148,7 +165,7 @@ jobs:
             --username ${{ github.actor }} \
             --password-stdin
 
-      - name: Deploy via Helm (values k3d)
+      - name: Install DB-only via Helm (values k3d)
         run: |
           helm upgrade --install ayurveda \
             oci://ghcr.io/${{ github.repository_owner }}/multi-service \
@@ -156,27 +173,49 @@ jobs:
             -f helm-values/helm/values-k3d.yaml \
             -f smoke-test-values.yaml \
             --namespace ayur-smoke \
+            --set backend.enabled=false \
+            --set frontend.enabled=false \
+            --set backend.image.pullPolicy=Always \
+            --wait --timeout 300s
+
+      - name: Wait for MongoDB
+        run: |
+          kubectl wait --for=condition=ready pod \
+            -l app=mongodb \
+            --namespace ayur-smoke \
+            --timeout=300s
+
+      - name: Enable backend & frontend via Helm
+        run: |
+          helm upgrade ayurveda \
+            oci://ghcr.io/${{ github.repository_owner }}/multi-service \
+            --version 1.5.1 \
+            -f helm-values/helm/values-k3d.yaml \
+            -f smoke-test-values.yaml \
+            --namespace ayur-smoke \
+            --set backend.enabled=true \
+            --set frontend.enabled=true \
             --set backend.image.tag=${{ needs.build-backend.outputs.image-tag }} \
             --set backend.image.pullPolicy=Always \
             --set frontend.image.tag=${{ needs.build-frontend.outputs.image-tag }} \
             --set frontend.image.pullPolicy=Always \
             --set ingress.enabled=false \
-            --wait --timeout 300s
+            --wait --timeout 600s
 
       - name: Attendre les pods
         run: |
           kubectl wait --for=condition=ready pod \
             -l app=mongodb \
             --namespace ayur-smoke \
-            --timeout=180s
+            --timeout=300s
           kubectl wait --for=condition=ready pod \
             -l app=backend \
             --namespace ayur-smoke \
-            --timeout=180s
+            --timeout=600s
           kubectl wait --for=condition=ready pod \
             -l app=frontend \
             --namespace ayur-smoke \
-            --timeout=180s
+            --timeout=600s
 
       - name: Smoke test HTTP
         run: |
