@@ -176,6 +176,7 @@ jobs:
             --set backend.enabled=false \
             --set frontend.enabled=false \
             --set backend.image.pullPolicy=Always \
+            --set ingress.enabled=false \
             --wait --timeout 300s
 
       - name: Wait for MongoDB
