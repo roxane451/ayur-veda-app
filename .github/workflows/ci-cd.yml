@@ -169,7 +169,7 @@ jobs:
         run: |
           helm upgrade --install ayurveda \
             oci://ghcr.io/${{ github.repository_owner }}/multi-service \
-            --version 1.5.1 \
+            --version 1.6.0 \
             -f helm-values/helm/values-k3d.yaml \
             -f smoke-test-values.yaml \
             --namespace ayur-smoke \
@@ -190,7 +190,7 @@ jobs:
         run: |
           helm upgrade ayurveda \
             oci://ghcr.io/${{ github.repository_owner }}/multi-service \
-            --version 1.5.1 \
+            --version 1.6.0 \
             -f helm-values/helm/values-k3d.yaml \
             -f smoke-test-values.yaml \
             --namespace ayur-smoke \
