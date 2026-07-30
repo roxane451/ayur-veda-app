@@ -15,11 +15,25 @@ import doshasRoutes from "./routes/doshas";
 import ritucharyaRoutes from "./routes/ritucharya";
 import { swaggerRouter } from "./config/swagger";
 
-import { register, collectDefaultMetrics } from 'prom-client';
+import { register, collectDefaultMetrics, Counter, Histogram } from 'prom-client';
+
+collectDefaultMetrics();
 
 // ────────────────────────────────────────────────
-// Métriques Prometheus
-collectDefaultMetrics();
+// Métriques HTTP custom
+const httpRequestsTotal = new Counter({
+  name: 'http_requests_total',
+  help: 'Nombre total de requêtes HTTP',
+  labelNames: ['method', 'route', 'status_code'],
+});
+
+const httpRequestDuration = new Histogram({
+  name: 'http_request_duration_seconds',
+  help: 'Durée des requêtes HTTP en secondes',
+  labelNames: ['method', 'route', 'status_code'],
+  buckets: [0.01, 0.05, 0.1, 0.3, 0.5, 1, 2, 5],
+});
+
 
 // ────────────────────────────────────────────────
 // Démarrage — log structuré (pas de secrets, jamais de valeurs brutes)
@@ -60,6 +74,24 @@ if (
 // ────────────────────────────────────────────────
 // Express app
 const app: Express = express();
+
+// Middleware de métriques HTTP — doit être en tout premier pour capter toutes les requêtes
+app.use((req: Request, res: Response, next) => {
+  const end = httpRequestDuration.startTimer();
+  res.on('finish', () => {
+    const route = req.route?.path
+      ? `${req.baseUrl}${req.route.path}`
+      : req.path;
+    const labels = {
+      method: req.method,
+      route,
+      status_code: String(res.statusCode),
+    };
+    httpRequestsTotal.inc(labels);
+    end(labels);
+  });
+  next();
+});
 
 // Middlewares globaux
 app.use(
