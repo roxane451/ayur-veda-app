@@ -148,16 +148,6 @@ jobs:
             "    mongodbUri: \"mongodb://mongoUser:staging-local-only-password@mongodb.ayur-smoke.svc.cluster.local:27017/my-app?authSource=admin&retryWrites=true&w=majority\"" \
             "    jwtSecret: \"my-super-secret-jwt-key-very-long-and-secure-for-staging-use-at-least-32-bytes\"" \
             > smoke-test-values.yaml
-          cat > smoke-test-values.yaml <<'EOF'
-          database:
-            secrets:
-              username: mongoUser
-              password: staging-local-only-password
-          backend:
-            secrets:
-              mongodbUri: "mongodb://mongoUser:staging-local-only-password@mongodb.ayur-smoke.svc.cluster.local:27017/my-app?authSource=admin&retryWrites=true&w=majority"
-              jwtSecret: "my-super-secret-jwt-key-very-long-and-secure-for-staging-use-at-least-32-bytes"
-          EOF
 
       - name: Login Helm GHCR
         run: |
