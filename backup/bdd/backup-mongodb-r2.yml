@@ -1,46 +1,48 @@
-name: MongoDB Backup → Cloudflare R2 (déclenchement manuel)
-
-# Ce workflow ne réimplémente plus la logique de backup : il déclenche le
-# CronJob K8s "mongodb-backup" (seule source de vérité pour le dump + upload
-# R2) et attend sa complétion. Utile pour la soutenance ou un backup à la
-# demande, sans dupliquer le script du CronJob.
+name: MongoDB Backup > Cloudflare R2
 
 on:
-  workflow_dispatch:
+  schedule:
+    - cron: "0 3 * * *" # Tous les jours à 3h UTC
+  workflow_dispatch: # Déclenchement manuel (soutenance, test)
     inputs:
       confirm:
         description: 'Taper "backup" pour confirmer'
         required: true
 
 jobs:
-  trigger-backup:
+  backup:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
-    if: ${{ github.event.inputs.confirm == 'backup' }}
+    timeout-minutes: 15
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install AWS CLI
+        run: |
+          curl -s "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o awscliv2.zip
+          unzip -q awscliv2.zip
+          sudo ./aws/install --update
+
       - name: Configure kubectl
         run: |
           mkdir -p ~/.kube
           echo "${{ secrets.KUBECONFIG_B64 }}" | base64 -d > ~/.kube/config
           chmod 600 ~/.kube/config
 
-      - name: Trigger CronJob mongodb-backup
-        id: trigger
-        run: |
-          JOB_NAME="manual-backup-$(date +%s)"
-          echo "job_name=${JOB_NAME}" >> "$GITHUB_OUTPUT"
-          kubectl create job --from=cronjob/mongodb-backup "${JOB_NAME}" -n ayur
-
-      - name: Attendre la complétion du job
-        run: |
-          kubectl wait --for=condition=complete \
-            job/${{ steps.trigger.outputs.job_name }} \
-            -n ayur --timeout=180s
-
-      - name: Vérifier le backup sur R2
+      - name: Run backup
         env:
-          CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+          CF_ACCOUNT_ID: ${{ secrets.R2_CF_ACCOUNT_ID }} 
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }} 
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          R2_BUCKET: ayur-veda-backups
+          NAMESPACE: ayur
+          DB_NAME: ayurveda
+        run: bash scripts/mongodb-backup-r2.sh
+
+      - name: Verify backup on R2
+        env:
+          CF_ACCOUNT_ID: ${{ secrets.R2_CF_ACCOUNT_ID }}
           R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
           R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
         run: |
@@ -48,13 +50,13 @@ jobs:
                    AWS_SECRET_ACCESS_KEY="${R2_SECRET_ACCESS_KEY}" \
                    aws s3 cp \
                      s3://ayur-veda-backups/mongodb/latest.txt - \
-                     --endpoint-url "https://${CF_ACCOUNT_ID}.r2.cloudflarestorage.com")
-          echo "✅ Dernier backup R2 : ${LATEST}"
+                     --endpoint-url "https://${R2_CF_ACCOUNT_ID}.r2.cloudflarestorage.com")
+          echo "Dernier backup R2 vérifié : ${LATEST}"
 
       - name: Notify failure
         if: failure()
         run: |
-          echo "Backup MongoDB échoué — alerter équipe"
+          echo "Backup MongoDB échoué, alerter roxane"
           # curl -X POST "${{ secrets.SLACK_WEBHOOK }}" \
           #   -H 'Content-type: application/json' \
           #   -d '{"text":"Backup MongoDB ayur-veda échoué !"}'
