@@ -1,8 +1,16 @@
-import express, { Express, Request, Response } from "express";
+import express, { Express, Request, Response, NextFunction } from "express";
 import cors from "cors";
 import helmet from "helmet";
 import mongoose from "mongoose";
 import { up } from "migrate-mongo";
+import pinoHttp from "pino-http";
+import {
+  register,
+  collectDefaultMetrics,
+  Counter,
+  Histogram,
+} from "prom-client";
+
 import { connectDB } from "./config/database";
 import { config } from "./config/env";
 import { globalLimiter } from "./middleware/rateLimiter";
@@ -15,28 +23,29 @@ import doshasRoutes from "./routes/doshas";
 import ritucharyaRoutes from "./routes/ritucharya";
 import { swaggerRouter } from "./config/swagger";
 
-import { register, collectDefaultMetrics, Counter, Histogram } from 'prom-client';
-
+// ────────────────────────────────────────────────
+// Métriques Prometheus
+// Collecte les métriques Node.js standards : mémoire, CPU, event loop, etc.
 collectDefaultMetrics();
 
-// ────────────────────────────────────────────────
-// Métriques HTTP custom
+// Compteur du nombre de requêtes HTTP traitées par le backend.
 const httpRequestsTotal = new Counter({
-  name: 'http_requests_total',
-  help: 'Nombre total de requêtes HTTP',
-  labelNames: ['method', 'route', 'status_code'],
+  name: "http_requests_total",
+  help: "Nombre total de requêtes HTTP",
+  labelNames: ["method", "route", "status_code"],
 });
 
+// Histogramme utilisé pour mesurer la durée des requêtes HTTP.
 const httpRequestDuration = new Histogram({
-  name: 'http_request_duration_seconds',
-  help: 'Durée des requêtes HTTP en secondes',
-  labelNames: ['method', 'route', 'status_code'],
+  name: "http_request_duration_seconds",
+  help: "Durée des requêtes HTTP en secondes",
+  labelNames: ["method", "route", "status_code"],
   buckets: [0.01, 0.05, 0.1, 0.3, 0.5, 1, 2, 5],
 });
 
-
 // ────────────────────────────────────────────────
-// Démarrage — log structuré (pas de secrets, jamais de valeurs brutes)
+// Log de démarrage
+// Vérifie uniquement la présence des variables sensibles sans exposer leur valeur.
 logger.info(
   {
     nodeEnv: process.env.NODE_ENV || "undefined",
@@ -48,11 +57,14 @@ logger.info(
 );
 
 // ────────────────────────────────────────────────
-// Gestion globale des erreurs non capturées
-if (
+// Gestion des erreurs Node.js non capturées
+// En production/preprod, une erreur non maîtrisée provoque un arrêt propre du
+// processus afin que Kubernetes puisse redémarrer le conteneur dans un état sain.
+const isProductionEnvironment =
   process.env.NODE_ENV === "production" ||
-  process.env.NODE_ENV === "preprod"
-) {
+  process.env.NODE_ENV === "preprod";
+
+if (isProductionEnvironment) {
   process.on("uncaughtException", (err) => {
     logger.fatal({ err }, "Uncaught exception");
     process.exit(1);
@@ -66,34 +78,96 @@ if (
   process.on("uncaughtException", (err) => {
     logger.error({ err }, "Uncaught exception");
   });
+
   process.on("unhandledRejection", (reason) => {
     logger.error({ reason }, "Unhandled rejection");
   });
 }
 
 // ────────────────────────────────────────────────
-// Express app
+// Application Express
 const app: Express = express();
 
-// Middleware de métriques HTTP — doit être en tout premier pour capter toutes les requêtes
-app.use((req: Request, res: Response, next) => {
+// ────────────────────────────────────────────────
+// Journalisation HTTP avec Pino
+//
+// Les logs sont écrits sur stdout par Pino.
+// Kubernetes les expose via `kubectl logs`, puis Promtail les collecte
+// depuis /var/log/pods avant de les transmettre à Loki.
+//
+// Les endpoints techniques sont exclus pour éviter de remplir Loki avec
+// les probes Kubernetes et les scrapes Prometheus.
+app.use(
+  pinoHttp({
+    logger,
+
+    autoLogging: {
+      ignore: (req) =>
+        req.url === "/health" ||
+        req.url === "/api/health" ||
+        req.url === "/metrics",
+    },
+
+    // 2xx / 3xx -> info
+    // 4xx       -> warn
+    // 5xx       -> error
+    customLogLevel: (_req, res, err) => {
+      if (err || res.statusCode >= 500) {
+        return "error";
+      }
+
+      if (res.statusCode >= 400) {
+        return "warn";
+      }
+
+      return "info";
+    },
+
+    customSuccessMessage: (req, res) =>
+      `${req.method} ${req.url} ${res.statusCode}`,
+
+    customErrorMessage: (req, res) =>
+      `${req.method} ${req.url} ${res.statusCode}`,
+  }),
+);
+
+// ────────────────────────────────────────────────
+// Métriques HTTP applicatives
+//
+// Prometheus et Loki ont ici deux rôles différents :
+// - Prometheus mesure les volumes et les temps de réponse ;
+// - Loki conserve les événements et logs détaillés.
+//
+// Le timer démarre avant les autres middlewares afin de mesurer le temps total
+// de traitement de la requête.
+app.use((req: Request, res: Response, next: NextFunction) => {
   const end = httpRequestDuration.startTimer();
-  res.on('finish', () => {
+
+  res.on("finish", () => {
+    // Lorsque Express a identifié une route, on privilégie son pattern
+    // plutôt que l'URL brute pour limiter la cardinalité Prometheus.
     const route = req.route?.path
       ? `${req.baseUrl}${req.route.path}`
       : req.path;
+
     const labels = {
       method: req.method,
       route,
       status_code: String(res.statusCode),
     };
+
     httpRequestsTotal.inc(labels);
     end(labels);
   });
+
   next();
 });
 
-// Middlewares globaux
+// ────────────────────────────────────────────────
+// Middlewares de sécurité
+
+// Helmet ajoute plusieurs en-têtes HTTP de protection.
+// La CSP limite les sources de contenu autorisées.
 app.use(
   helmet({
     contentSecurityPolicy: {
@@ -110,19 +184,31 @@ app.use(
     },
   }),
 );
-app.use(cors({ origin: config.corsOrigin }));
-// Limite la taille du body pour éviter les attaques par saturation mémoire
+
+// Autorise uniquement l'origine frontend définie dans la configuration.
+app.use(
+  cors({
+    origin: config.corsOrigin,
+  }),
+);
+
+// Limite la taille des payloads JSON afin de réduire le risque
+// de saturation mémoire par des requêtes excessivement volumineuses.
 app.use(express.json({ limit: "100kb" }));
-// Rate limiter global — filet de sécurité, les limites fines sont dans les routes auth
+
+// Limitation globale du nombre de requêtes.
+// Des règles plus restrictives peuvent être appliquées sur certaines routes.
 app.use(globalLimiter);
 
 // ────────────────────────────────────────────────
-// Routes
+// Routes applicatives
+
 app.get("/", (_req: Request, res: Response) => {
   res.send("Backend Ayur-Veda is running!");
 });
 
-// Swagger UI — docs interactives (désactivé en production, voir src/config/swagger.ts)
+// Documentation Swagger.
+// Son exposition en production est gérée dans src/config/swagger.ts.
 app.use("/api/docs", swaggerRouter);
 
 app.use("/api/auth", authRoutes);
@@ -132,78 +218,131 @@ app.use("/api/doshas", doshasRoutes);
 app.use("/api/ritucharya", ritucharyaRoutes);
 
 // ────────────────────────────────────────────────
-// Health check
-
+// Health check complet
+//
+// Vérifie notamment l'état réel de la connexion MongoDB.
+// Kubernetes ou un outil de supervision peut ainsi distinguer un processus
+// Node.js actif d'un backend réellement capable d'accéder à sa base.
 app.get("/api/health", async (_req: Request, res: Response) => {
   const dbState = mongoose.connection.readyState;
-  // 1 = connected, 2 = connecting, 0 = disconnected
+
+  // États Mongoose :
+  // 0 = disconnected
+  // 1 = connected
+  // 2 = connecting
+  // 3 = disconnecting
   const isDbHealthy = dbState === 1;
-  
+
+  const connectionStates = [
+    "disconnected",
+    "connected",
+    "connecting",
+    "disconnecting",
+  ];
+
   const health = {
     status: isDbHealthy ? "OK" : "ERROR",
     timestamp: new Date().toISOString(),
     uptime: process.uptime(),
     environment: process.env.NODE_ENV || "unknown",
+
     database: {
       connected: isDbHealthy,
-      connectionState: ["disconnected", "connected", "connecting", "disconnecting"][dbState] || "unknown"
+      connectionState: connectionStates[dbState] || "unknown",
     },
+
     memory: {
-      heapUsed: Math.round(process.memoryUsage().heapUsed / 1024 / 1024),
-      heapTotal: Math.round(process.memoryUsage().heapTotal / 1024 / 1024)
-    }
+      heapUsed: Math.round(
+        process.memoryUsage().heapUsed / 1024 / 1024,
+      ),
+      heapTotal: Math.round(
+        process.memoryUsage().heapTotal / 1024 / 1024,
+      ),
+    },
   };
 
-  // Si la base de données n'est pas connectée, retourner 503
+  // Une API sans accès à sa base n'est pas considérée comme saine.
   if (!isDbHealthy) {
     logger.warn("Health check failed: database disconnected");
     return res.status(503).json(health);
   }
 
-  res.status(200).json(health);
+  return res.status(200).json(health);
 });
 
 // ────────────────────────────────────────────────
-// Scrap métriques Prometheus (expose /metrics pour que Prometheus puisse les collecter)
+// Endpoint Prometheus
+//
+// Expose les métriques Node.js et les métriques HTTP personnalisées.
+// Cet endpoint est destiné au scraping Prometheus.
 app.get("/metrics", async (_req: Request, res: Response) => {
   res.set("Content-Type", register.contentType);
   res.end(await register.metrics());
 });
 
-// Alias pour compatibilité
+// Endpoint léger conservé pour compatibilité avec les probes existantes.
 app.get("/health", (_req: Request, res: Response) => {
   res.json({ status: "OK" });
 });
 
 // ────────────────────────────────────────────────
-// Error handling middleware (doit être le dernier middleware)
-app.use((err: any, _req: Request, res: Response, _next: any) => {
-  logger.error({ err }, "Unhandled express error");
-  res.status(500).json({ error: "Internal server error" });
-});
+// Gestion centralisée des erreurs Express
+//
+// Doit rester après toutes les routes et tous les autres middlewares.
+// Les erreurs sont journalisées avec Pino puis une réponse générique est
+// retournée afin de ne pas exposer de détails internes au client.
+app.use(
+  (
+    err: unknown,
+    _req: Request,
+    res: Response,
+    _next: NextFunction,
+  ) => {
+    logger.error({ err }, "Unhandled express error");
+
+    res.status(500).json({
+      error: "Internal server error",
+    });
+  },
+);
 
 // ────────────────────────────────────────────────
-// Démarrage serveur avec retry MongoDB
+// Connexion MongoDB et démarrage du serveur
+
 const MAX_RETRIES = 10;
 const RETRY_DELAY_MS = 5000;
 
 const startServer = async () => {
+  // MongoDB peut ne pas être immédiatement disponible lors du démarrage
+  // simultané des workloads Kubernetes. Le backend effectue donc plusieurs
+  // tentatives avant de considérer la dépendance comme indisponible.
   for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
     try {
       logger.info(
-        { attempt, maxRetries: MAX_RETRIES },
+        {
+          attempt,
+          maxRetries: MAX_RETRIES,
+        },
         "Connecting to MongoDB",
       );
+
       await connectDB();
+
       logger.info("MongoDB connected");
 
-      // Applique les migrations en attente avant d'ouvrir le port HTTP.
-      // Garantit que le schéma est à jour à chaque déploiement.
+      // Les migrations sont appliquées avant l'ouverture du port HTTP.
+      // Le backend ne commence donc à servir du trafic qu'une fois
+      // la base connectée et son schéma à jour.
       const db = mongoose.connection.db!;
       const client = mongoose.connection.getClient();
+
       const migrated = await up(db, client);
+
       if (migrated.length > 0) {
-        logger.info({ migrations: migrated }, "Migrations applied");
+        logger.info(
+          { migrations: migrated },
+          "Migrations applied",
+        );
       } else {
         logger.info("No pending migrations");
       }
@@ -211,24 +350,43 @@ const startServer = async () => {
       break;
     } catch (err) {
       logger.warn(
-        { attempt, maxRetries: MAX_RETRIES, err },
+        {
+          attempt,
+          maxRetries: MAX_RETRIES,
+          err,
+        },
         "MongoDB not ready, retrying...",
       );
+
       if (attempt === MAX_RETRIES) {
-        logger.fatal("MongoDB unreachable after max retries, exiting");
+        logger.fatal(
+          "MongoDB unreachable after max retries, exiting",
+        );
         process.exit(1);
       }
-      await new Promise((res) => setTimeout(res, RETRY_DELAY_MS));
+
+      await new Promise((resolve) =>
+        setTimeout(resolve, RETRY_DELAY_MS),
+      );
     }
   }
 
+  // Le port HTTP n'est ouvert qu'après connexion et migration MongoDB.
   const server = app.listen(config.port, () => {
-    logger.info({ port: config.port }, "Server listening");
+    logger.info(
+      { port: config.port },
+      "Server listening",
+    );
   });
 
-  // Graceful shutdown — attend que les requêtes en cours se terminent
+  // Kubernetes envoie SIGTERM avant l'arrêt d'un pod.
+  // On arrête donc d'accepter de nouvelles connexions et on laisse
+  // les requêtes déjà en cours se terminer avant de quitter.
   process.on("SIGTERM", () => {
-    logger.info("SIGTERM received, shutting down gracefully");
+    logger.info(
+      "SIGTERM received, shutting down gracefully",
+    );
+
     server.close(() => {
       logger.info("HTTP server closed");
       process.exit(0);
@@ -236,12 +394,17 @@ const startServer = async () => {
   });
 };
 
-// Lancement
+// ────────────────────────────────────────────────
+// Lancement de l'application
 (async () => {
   try {
     await startServer();
   } catch (err) {
-    logger.fatal({ err }, "Fatal startup error");
+    logger.fatal(
+      { err },
+      "Fatal startup error",
+    );
+
     process.exit(1);
   }
 })();
