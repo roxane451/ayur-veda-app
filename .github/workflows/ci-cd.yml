@@ -136,7 +136,7 @@ jobs:
       gitops-repository: roxane451/ayur-veda-helm
       values-file: helm/values-preprod.yaml
       # Si les values sont imbriquées sous le nom du chart dépendance :
-      # image-keys: "multi-service.backend multi-service.frontend"
+      image-keys: "multi-service.backend multi-service.frontend"
     secrets:
       gitops-token: ${{ secrets.PAT_HELM_REPO }}
 
@@ -153,6 +153,6 @@ jobs:
       image-tag: ${{ needs.build-backend.outputs.image-tag }}
       gitops-repository: roxane451/ayur-veda-helm
       values-file: helm/values-production.yaml
-      # image-keys: "multi-service.backend multi-service.frontend"
+      image-keys: "multi-service.backend multi-service.frontend"
     secrets:
       gitops-token: ${{ secrets.PAT_HELM_REPO }}
