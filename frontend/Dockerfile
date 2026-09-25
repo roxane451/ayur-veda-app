@@ -12,7 +12,6 @@
 # si le code change mais pas les deps, npm ci n'est pas relancé
 # =============================================================================
 FROM node:22-alpine AS builder
-RUN apk upgrade --no-cache
 
 WORKDIR /app
 
@@ -33,7 +32,8 @@ RUN npm --workspace=frontend run build
 # Stage 2 — runtime Nginx
 # On part d'une image nginx propre, on y met juste le build
 # =============================================================================
-FROM nginx:1.29.8-alpine
+FROM nginx:stable-alpine
+RUN apk upgrade --no-cache
 
 ARG APP_VERSION=unknown
 LABEL maintainer="roxane451" \

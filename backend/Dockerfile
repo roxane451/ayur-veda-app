@@ -1,4 +1,4 @@
-# ─── Stage 1 : installer les deps du workspace backend ────────────────────────
+# ─── Stage 1 : toutes les deps du workspace backend (pour compiler) ──────────
 FROM node:22-alpine AS deps
 WORKDIR /app
 
@@ -17,17 +17,34 @@ COPY backend/ ./backend/
 WORKDIR /app/backend
 RUN npm run build
 
-# Supprimer les devDependencies après le build
-RUN npm prune --omit=dev
+# ─── Stage 3 : deps de production uniquement ─────────────────────────────────
+# Installation propre avec --omit=dev plutôt que npm prune : avec les npm
+# workspaces (node_modules hissés à la racine), prune ne retire pas toutes
+# les devDependencies, qui finissaient dans l'image finale.
+FROM node:22-alpine AS prod-deps
+WORKDIR /app
 
-# ─── Stage 3 : image finale ───────────────────────────────────────────────────
+COPY package.json package-lock.json ./
+COPY backend/package.json ./backend/package.json
+
+RUN npm ci --workspace=backend --omit=dev
+
+# ─── Stage 4 : image finale ───────────────────────────────────────────────────
 FROM node:22-alpine
 WORKDIR /app
 
-RUN apk add --no-cache dumb-init
+# Correctifs de sécurité Alpine + init minimal pour la gestion des signaux.
+# npm, npx, corepack et yarn sont retirés : l'application tourne avec
+# "node" seul, et ces outils embarquent leurs propres dépendances
+# (souvent vulnérables) sans aucune utilité en production.
+RUN apk upgrade --no-cache \
+    && apk add --no-cache dumb-init \
+    && rm -rf /usr/local/lib/node_modules/npm /usr/local/lib/node_modules/corepack \
+              /usr/local/bin/npm /usr/local/bin/npx /usr/local/bin/corepack \
+              /usr/local/bin/yarn /usr/local/bin/yarnpkg /opt/yarn-*
 
-# node_modules prunés (prod only)
-COPY --from=builder /app/node_modules ./node_modules
+# node_modules de production uniquement
+COPY --from=prod-deps /app/node_modules ./node_modules
 
 # Binaires compilés
 COPY --from=builder /app/backend/dist ./dist
