@@ -47,6 +47,7 @@ jobs:
       )
     needs: [secret-scan, lint-test]
     permissions:
+      actions: read
       contents: read
       packages: write
       security-events: write
@@ -68,6 +69,7 @@ jobs:
       )
     needs: [secret-scan, lint-test]
     permissions:
+      actions: read
       contents: read
       packages: write
       security-events: write

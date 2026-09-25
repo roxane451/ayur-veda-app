@@ -12,6 +12,7 @@
 # si le code change mais pas les deps, npm ci n'est pas relancé
 # =============================================================================
 FROM node:22-alpine AS builder
+RUN apk upgrade --no-cache
 
 WORKDIR /app
 
