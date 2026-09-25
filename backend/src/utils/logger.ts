@@ -1,6 +1,7 @@
 import pino from "pino";
 
-const isDev = process.env.NODE_ENV === "development";
+const isDev = process.env.NODE_ENV === "development" 
+  && process.env.PRETTY_LOGS !== "false";
 const isProd = ["production", "preprod"].includes(process.env.NODE_ENV || "");
 
 // En développement : logs lisibles (pretty-print, niveau debug)

@@ -1,60 +1,51 @@
-# Build stage
+# ─── Stage 1 : installer les deps du workspace backend ────────────────────────
+FROM node:22-alpine AS deps
+WORKDIR /app
+
+COPY package.json package-lock.json ./
+COPY backend/package.json ./backend/package.json
+
+RUN npm ci --workspace=backend
+
+# ─── Stage 2 : build TypeScript ───────────────────────────────────────────────
 FROM node:22-alpine AS builder
-
 WORKDIR /app
 
-# Copy package files first for better caching
-COPY package*.json ./
-COPY backend/package.json ./backend/
+COPY --from=deps /app/node_modules ./node_modules
+COPY backend/ ./backend/
 
-# Install ALL dependencies (dev + prod) for build
-RUN npm ci
+WORKDIR /app/backend
+RUN npm run build
 
-# Copy source code
-COPY . .
+# Supprimer les devDependencies après le build
+RUN npm prune --omit=dev
 
-# Build TypeScript (compile tout, y compris les seeds si besoin)
-RUN npm run build --workspace=backend
-
-# Runtime stage
+# ─── Stage 3 : image finale ───────────────────────────────────────────────────
 FROM node:22-alpine
-
 WORKDIR /app
 
-# Install dumb-init for proper signal handling (PID 1)
 RUN apk add --no-cache dumb-init
 
-# Copy package files
-COPY package*.json ./
-COPY backend/package.json ./backend/
+# node_modules prunés (prod only)
+COPY --from=builder /app/node_modules ./node_modules
 
-# Install ONLY production dependencies
-RUN npm ci --omit=dev
-
-# Copy compiled code from builder
+# Binaires compilés
 COPY --from=builder /app/backend/dist ./dist
 
-# Optionnel : Pour lancer des seeds dans le pod (ts-node)
-# RUN npm install --omit=dev ts-node typescript
+# Fichiers requis par migrate-mongo au runtime
+COPY backend/migrate-mongo-config.js ./migrate-mongo-config.js
+COPY backend/migrations ./migrations
 
-# Create non-root user & group (bonne pratique)
 RUN addgroup -g 1001 nodejs && \
-    adduser -S nodejs -u 1001 -G nodejs
-
-# Change ownership of /app to non-root user
-RUN chown -R nodejs:nodejs /app
+    adduser -S nodejs -u 1001 -G nodejs && \
+    chown -R nodejs:nodejs /app
 
 USER nodejs
 
-# Expose port
 EXPOSE 5000
 
-# Health check (plus fiable avec curl ou wget si installé)
 HEALTHCHECK --interval=30s --timeout=3s --start-period=10s --retries=3 \
   CMD wget --no-verbose --tries=1 --spider http://localhost:5000/api/health || exit 1
 
-# Use dumb-init to handle signals properly (SIGTERM, etc.)
 ENTRYPOINT ["dumb-init", "--"]
-
-# Start the application
 CMD ["node", "dist/app.js"]
