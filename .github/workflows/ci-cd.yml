@@ -55,7 +55,7 @@ jobs:
     with:
       image-name: backend
       dockerfile: backend/Dockerfile
-      # trivy-severity: CRITICAL   # à décommenter si Trivy bloque pendant la migration
+      trivy-severity: CRITICAL   # à décommenter si Trivy bloque pendant la migration
 
   # ─────────────────────────────────────────────────────────────
   # Job 4 : Build + scan Trivy + push frontend
@@ -77,7 +77,7 @@ jobs:
     with:
       image-name: frontend
       dockerfile: frontend/Dockerfile
-      # trivy-severity: CRITICAL
+      trivy-severity: CRITICAL
 
   # ─────────────────────────────────────────────────────────────
   # Job 5 : Smoke test dans un k3d éphémère (main uniquement)
