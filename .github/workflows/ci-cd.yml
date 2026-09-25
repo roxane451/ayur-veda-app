@@ -1,6 +1,7 @@
 name: CI/CD — Ayur-Veda
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - "feature/**"
@@ -9,99 +10,149 @@ on:
     tags:
       - "v[0-9]+.[0-9]+.[0-9]+-rc"
       - "v[0-9]+.[0-9]+.[0-9]+"
+  pull_request:
+    branches:
+      - develop
+      - main
 
+# Minimum par défaut ; chaque job qui en a besoin élargit ses propres droits.
 permissions:
   contents: read
-  packages: write
-  security-events: write
 
 jobs:
+
+  # ─────────────────────────────────────────────────────────────
+  # Job 1 : Scan des secrets (.gitleaks.toml utilisé s'il existe)
+  # ─────────────────────────────────────────────────────────────
   secret-scan:
-    uses: roxane451/ci-cd-helm/.github/workflows/reusable-secret-scan.yml@main
-    secrets: inherit
+    uses: roxane451/ci-cd-templates/.github/workflows/reusable-secret-scan.yml@v1
 
+  # ─────────────────────────────────────────────────────────────
+  # Job 2 : Lint, tests et audit (workspaces backend + frontend)
+  # ─────────────────────────────────────────────────────────────
   lint-test:
-    uses: roxane451/ci-cd-helm/.github/workflows/reusable-lint-test.yml@main
-    secrets: inherit
+    uses: roxane451/ci-cd-templates/.github/workflows/reusable-lint-test.yml@v1
+    # with:
+    #   audit-level: critical   # à décommenter si npm audit bloque pendant la migration
 
+  # ─────────────────────────────────────────────────────────────
+  # Job 3 : Build + scan Trivy + push backend
+  # ─────────────────────────────────────────────────────────────
   build-backend:
-    if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/')
+    if: |
+      github.event_name != 'pull_request' && (
+        github.ref == 'refs/heads/main' ||
+        github.ref == 'refs/heads/develop' ||
+        startsWith(github.ref, 'refs/tags/')
+      )
     needs: [secret-scan, lint-test]
     permissions:
       contents: read
       packages: write
       security-events: write
-    uses: roxane451/ci-cd-helm/.github/workflows/reusable-build-push.yml@main
+    uses: roxane451/ci-cd-templates/.github/workflows/reusable-build-push.yml@v1
     with:
       image-name: backend
-      dockerfile: ./backend/Dockerfile
-    secrets: inherit
+      dockerfile: backend/Dockerfile
+      # trivy-severity: CRITICAL   # à décommenter si Trivy bloque pendant la migration
 
+  # ─────────────────────────────────────────────────────────────
+  # Job 4 : Build + scan Trivy + push frontend
+  # ─────────────────────────────────────────────────────────────
   build-frontend:
-    if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/')
+    if: |
+      github.event_name != 'pull_request' && (
+        github.ref == 'refs/heads/main' ||
+        github.ref == 'refs/heads/develop' ||
+        startsWith(github.ref, 'refs/tags/')
+      )
     needs: [secret-scan, lint-test]
     permissions:
       contents: read
       packages: write
       security-events: write
-    uses: roxane451/ci-cd-helm/.github/workflows/reusable-build-push.yml@main
+    uses: roxane451/ci-cd-templates/.github/workflows/reusable-build-push.yml@v1
     with:
       image-name: frontend
-      dockerfile: ./frontend/Dockerfile
-    secrets: inherit
+      dockerfile: frontend/Dockerfile
+      # trivy-severity: CRITICAL
 
-  # upload-sarif-backend:
-  #   if: always() && (github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/'))
-  #   needs: [build-backend]
-  #   runs-on: ubuntu-latest
-  #   permissions:
-  #     security-events: write
-  #   steps:
-  #     - uses: actions/download-artifact@v4
-  #       with:
-  #         name: trivy-backend-sarif
-  #     - uses: github/codeql-action/upload-sarif@v3
-  #       with:
-  #         sarif_file: trivy-backend.sarif
-
-  # upload-sarif-frontend:
-  #   if: always() && (github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/'))
-  #   needs: [build-frontend]
-  #   runs-on: ubuntu-latest
-  #   permissions:
-  #     security-events: write
-  #   steps:
-  #     - uses: actions/download-artifact@v4
-  #       with:
-  #         name: trivy-frontend-sarif
-  #     - uses: github/codeql-action/upload-sarif@v3
-  #       with:
-  #         sarif_file: trivy-frontend.sarif
-
+  # ─────────────────────────────────────────────────────────────
+  # Job 5 : Smoke test dans un k3d éphémère (main uniquement)
+  # Base de données d'abord, puis backend + frontend.
+  # ─────────────────────────────────────────────────────────────
   smoke-test:
     if: github.ref == 'refs/heads/main'
     needs: [build-backend, build-frontend]
-    uses: roxane451/ci-cd-helm/.github/workflows/reusable-smoke-test-k3d.yml@main
+    permissions:
+      contents: read
+      packages: read
+    uses: roxane451/ci-cd-templates/.github/workflows/reusable-smoke-test-k3d.yml@v1
     with:
+      chart-ref: oci://ghcr.io/roxane451/multi-service
+      chart-version: "1.16.0"
       image-tag: ${{ needs.build-backend.outputs.image-tag }}
-    secrets: inherit
+      values-repository: roxane451/ayur-veda-helm
+      values-file: helm/values-k3d.yaml
+      namespace: ayur-smoke
+      staged-deploy: true
+      # Valeurs de test uniquement (cluster jetable, jamais exposé)
+      extra-values: |
+        namespace:
+          name: ayur-smoke
+        global:
+          environment: development
+        externalSecrets:
+          enabled: false
+        ingress:
+          enabled: false
+        database:
+          secrets:
+            username: mongoUser
+            password: staging-local-only-password
+        backend:
+          image:
+            pullPolicy: Always
+          secrets:
+            mongodbUri: "mongodb://mongoUser:staging-local-only-password@mongodb.ayur-smoke.svc.cluster.local:27017/my-app?authSource=admin&retryWrites=true&w=majority"
+            jwtSecret: "my-super-secret-jwt-key-very-long-and-secure-for-staging-use-at-least-32-bytes"
+        frontend:
+          image:
+            pullPolicy: Always
+    secrets:
+      repo-token: ${{ secrets.PAT_HELM_REPO }}
 
+  # ─────────────────────────────────────────────────────────────
+  # Job 6 : Promotion GitOps en préprod (main, après smoke test)
+  # ArgoCD synchronise après la mise à jour du tag dans ayur-veda-helm
+  # ─────────────────────────────────────────────────────────────
   deploy-preprod:
-    if: startsWith(github.ref, 'refs/tags/') && contains(github.ref, '-rc')
-    needs: [build-backend, build-frontend]
-    uses: roxane451/ci-cd-helm/.github/workflows/reusable-helm-deploy.yml@main
+    if: github.ref == 'refs/heads/main'
+    needs: [smoke-test, build-backend, build-frontend]
+    uses: roxane451/ci-cd-templates/.github/workflows/reusable-gitops-promote.yml@v1
     with:
       environment: preprod
-      image-tag: ${{ github.ref_name }}
-      helm-values-file: helm/values-preprod.yaml
-    secrets: inherit
+      image-tag: ${{ needs.build-backend.outputs.image-tag }}
+      gitops-repository: roxane451/ayur-veda-helm
+      values-file: helm/values-preprod.yaml
+      # Si les values sont imbriquées sous le nom du chart dépendance :
+      # image-keys: "multi-service.backend multi-service.frontend"
+    secrets:
+      gitops-token: ${{ secrets.PAT_HELM_REPO }}
 
+  # ─────────────────────────────────────────────────────────────
+  # Job 7 : Promotion GitOps en production (tags stables uniquement)
+  # Approbation : Settings > Environments > prod > Required reviewers
+  # ─────────────────────────────────────────────────────────────
   deploy-prod:
     if: startsWith(github.ref, 'refs/tags/') && !contains(github.ref, '-rc')
     needs: [build-backend, build-frontend]
-    uses: roxane451/ci-cd-helm/.github/workflows/reusable-helm-deploy.yml@main
+    uses: roxane451/ci-cd-templates/.github/workflows/reusable-gitops-promote.yml@v1
     with:
       environment: prod
-      image-tag: ${{ github.ref_name }}
-      helm-values-file: helm/values-production.yaml
-    secrets: inherit
+      image-tag: ${{ needs.build-backend.outputs.image-tag }}
+      gitops-repository: roxane451/ayur-veda-helm
+      values-file: helm/values-production.yaml
+      # image-keys: "multi-service.backend multi-service.frontend"
+    secrets:
+      gitops-token: ${{ secrets.PAT_HELM_REPO }}
