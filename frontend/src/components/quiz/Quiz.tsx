@@ -2,9 +2,8 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, Check } from "lucide-react";
 import Logo from "@/components/brand/Logo";
-import Sceau from "@/components/brand/Sceau";
 import { Motif } from "@/components/brand/BrandDefs";
-import { SoleilLune } from "@/components/brand/Illustrations";
+import { Lotus, SoleilLune } from "@/components/brand/Illustrations";
 import { ECHELLE, PRAKRITI, VIKRITI } from "@/data/quiz";
 import {
   DOSHAS,
@@ -212,46 +211,63 @@ export default Quiz;
 /* ─────────────────────────── Accueil ─────────────────────────── */
 
 const Accueil = ({ onNature, onEtat }: { onNature: () => void; onEtat: () => void }) => (
-  <section className="mx-auto flex max-w-[1220px] flex-col gap-10 px-4 pb-24 pt-8 sm:px-10">
-    <div className="flex max-w-[680px] flex-col gap-4">
-      <Sceau size={84} />
-      <h1 className="m-0 text-[clamp(2.1rem,6vw,3.1rem)]">
+  <section className="mx-auto flex max-w-[1220px] flex-col gap-12 px-4 pb-24 pt-8 sm:px-10 md:pt-10">
+    <div className="flex max-w-[760px] flex-col gap-4">
+      <h1 className="m-0 text-[clamp(2.1rem,6vw,3.6rem)] leading-[1.02]">
         Deux questionnaires, <em>deux questions</em> différentes.
       </h1>
       <p className="m-0 text-xl text-doux">
-        Votre nature ne change pas au cours de la vie. Votre état, lui, change avec les saisons. C'est l'écart entre
-        les deux qui dit quoi rééquilibrer.
+        {fr(
+          "Votre nature ne change pas au cours de la vie. Votre état, lui, change avec les saisons, le stress, l'alimentation. L'Ayurveda les distingue, et c'est l'écart entre les deux qui dit quoi rééquilibrer.",
+        )}
       </p>
     </div>
-    <div className="grid gap-6 md:grid-cols-2">
-      <div className="flex flex-col gap-3.5 rounded-[18px] bg-paon px-8 py-9 text-pistache">
-        <span className="text-[15px] font-bold text-citron">Commencez par ici</span>
-        <h2 className="m-0 text-[1.9rem]">
+    {/* Deux arches en décalé : la nature d'abord, l'état du moment un peu plus bas */}
+    <div className="grid items-start gap-6 md:grid-cols-2">
+      <div className="flex flex-col gap-3.5 rounded-b-md rounded-t-[999px] bg-paon px-8 pb-10 pt-24 text-pistache sm:px-10 md:pt-28">
+        <div className="mb-3 flex justify-center">
+          <Lotus size={96} stroke="#F3F5E6" decorative />
+        </div>
+        <span className="text-[15px] font-bold uppercase tracking-[0.12em] text-citron">Commencez par ici</span>
+        <h2 className="m-0 text-[clamp(1.7rem,3vw,2.1rem)]">
           Ma nature <em className="!text-citron">prakriti</em>
         </h2>
-        <p className="m-0">Qui êtes-vous depuis toujours, quand tout va bien&nbsp;?</p>
-        <p className="m-0 text-[15px] text-[#D3E3DE]">20 questions · environ 5 minutes · une fois pour toutes</p>
+        <p className="m-0 font-display text-[1.2rem] leading-snug">{fr("Qui êtes-vous depuis toujours, quand tout va bien ?")}</p>
+        <p className="m-0 text-[#D3E3DE]">
+          {fr(
+            "Votre corps, votre digestion, votre caractère, vos rythmes : ce qui vous ressemble depuis l'enfance, pas ce qui vous arrive cette semaine.",
+          )}
+        </p>
+        <p className="m-0 text-[15px] font-bold text-[#D3E3DE]">20 questions · environ 5 minutes · une fois pour toutes</p>
         <button
           type="button"
           onClick={onNature}
-          className="mt-1 inline-flex min-h-[54px] self-start items-center rounded-buta bg-citron px-7 font-bold text-encre hover:opacity-90"
+          className="mt-2 inline-flex min-h-[54px] self-start items-center gap-2.5 rounded-buta bg-aubergine px-7 font-bold text-pistache hover:opacity-90"
         >
-          Découvrir ma nature
+          Découvrir ma nature <ArrowRight className="h-5 w-5" aria-hidden="true" />
         </button>
       </div>
-      <div className="flex flex-col gap-3.5 rounded-[18px] bg-carte px-8 py-9 shadow-[inset_0_0_0_2px_hsl(var(--encre))]">
-        <span className="text-[15px] font-bold text-aubergine">Puis à chaque saison</span>
-        <h2 className="m-0 text-[1.9rem]">
+      <div className="flex flex-col gap-3.5 rounded-b-md rounded-t-[999px] bg-carte px-8 pb-10 pt-24 shadow-[inset_0_0_0_2px_hsl(var(--encre))] sm:px-10 md:mt-[72px] md:pt-28">
+        <div className="mb-3 flex justify-center">
+          <SoleilLune size={96} decorative />
+        </div>
+        <span className="text-[15px] font-bold uppercase tracking-[0.12em] text-aubergine">Puis à chaque saison</span>
+        <h2 className="m-0 text-[clamp(1.7rem,3vw,2.1rem)]">
           Mon état du moment <em>vikriti</em>
         </h2>
-        <p className="m-0">Comment allez-vous ces dernières semaines&nbsp;?</p>
-        <p className="m-0 text-[15px] text-doux">15 questions · environ 3 minutes · à refaire à chaque saison</p>
+        <p className="m-0 font-display text-[1.2rem] leading-snug">{fr("Comment allez-vous ces dernières semaines ?")}</p>
+        <p className="m-0 text-doux">
+          {fr(
+            "Sommeil, digestion, peau, humeur, énergie : ce qui s'est dérangé récemment. On le compare à votre nature pour voir quel dosha est en excès.",
+          )}
+        </p>
+        <p className="m-0 text-[15px] font-bold text-doux">15 questions · environ 3 minutes · à refaire à chaque saison</p>
         <button
           type="button"
           onClick={onEtat}
-          className="mt-1 inline-flex min-h-[54px] self-start items-center rounded-buta border-2 border-encre px-7 font-bold hover:bg-encre hover:text-pistache"
+          className="mt-2 inline-flex min-h-[54px] self-start items-center gap-2.5 rounded-buta border-2 border-encre px-7 font-bold hover:bg-encre hover:text-pistache"
         >
-          Faire le point
+          Faire le point <ArrowRight className="h-5 w-5" aria-hidden="true" />
         </button>
       </div>
     </div>
