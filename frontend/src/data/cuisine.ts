@@ -45,7 +45,7 @@ export const EPICES: Epice[] = [
     latin: "Curcuma longa",
     nature: "Réchauffant",
     gout: "Amer, piquant",
-    effets: { vata: "diminue", pitta: "equilibre", kapha: "diminue" },
+    effets: { vata: "equilibre", pitta: "diminue", kapha: "diminue" },
     enCuisine: "Dans les currys, les soupes, le riz, le lait doré.",
     avec: "Poivre noir et un peu de gras, pour qu'il se révèle.",
     seGarde: "En poudre, à l'abri de la lumière : six mois.",
