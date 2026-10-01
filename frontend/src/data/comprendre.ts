@@ -7,11 +7,11 @@ import type { DoshaKey } from "@/lib/doshaLogic";
 export type Effet = "+" | "-";
 
 export const ELEMENTS = [
-  { nom: "Éther", translit: "Ākāśa", deva: "आकाश", texte: "L'espace, le vide qui permet tout le reste." },
-  { nom: "Air", translit: "Vāyu", deva: "वायु", texte: "Le mouvement : la respiration, la circulation." },
-  { nom: "Feu", translit: "Agni", deva: "अग्नि", texte: "La transformation : la digestion, la chaleur." },
-  { nom: "Eau", translit: "Jala", deva: "जल", texte: "La cohésion : les liquides du corps." },
-  { nom: "Terre", translit: "Pṛthvī", deva: "पृथ्वी", texte: "La structure : les os, les muscles." },
+  { nom: "Éther", translit: "Ākāśa", deva: "आकाश", texte: "L'espace dans lequel tout le reste prend place." },
+  { nom: "Air", translit: "Vāyu", deva: "वायु", texte: "Il fait circuler le souffle et le sang." },
+  { nom: "Feu", translit: "Agni", deva: "अग्नि", texte: "Il digère et il réchauffe." },
+  { nom: "Eau", translit: "Jala", deva: "जल", texte: "Elle forme les liquides du corps." },
+  { nom: "Terre", translit: "Pṛthvī", deva: "पृथ्वी", texte: "Elle donne les os et les muscles." },
 ];
 
 /* ───────── Les doshas ───────── */
@@ -39,7 +39,7 @@ export const DOSHAS_DETAIL: DoshaDetail[] = [
     elements: "l'air et l'éther",
     essence: "Le mouvement",
     presentation:
-      "Vata gouverne tout ce qui bouge en nous : la respiration, la circulation, les nerfs, les idées. Quand il est équilibré, il donne la créativité et l'élan ; en excès, il disperse et dessèche.",
+      "Vata gouverne ce qui bouge en nous, de la respiration à la circulation des idées. Équilibré, il donne de l'élan et de l'imagination. En excès, il disperse et dessèche.",
     qualites: ["Léger", "Froid", "Sec", "Mobile", "Subtil"],
     corps: [
       ["Morphologie", "Mince, prend difficilement du poids"],
@@ -72,7 +72,7 @@ export const DOSHAS_DETAIL: DoshaDetail[] = [
     elements: "le feu et l'eau",
     essence: "La transformation",
     presentation:
-      "Pitta gouverne tout ce qui transforme : la digestion, la chaleur du corps, la vue, l'intelligence. Équilibré, il donne la clarté et la détermination ; en excès, il irrite et échauffe.",
+      "Pitta gouverne ce qui transforme, à commencer par la digestion et la chaleur du corps. Équilibré, il rend l'esprit clair et décidé. En excès, il irrite et échauffe.",
     qualites: ["Chaud", "Léger", "Intense", "Fluide", "Acide"],
     corps: [
       ["Morphologie", "Moyenne, musclée"],
@@ -105,7 +105,7 @@ export const DOSHAS_DETAIL: DoshaDetail[] = [
     elements: "l'eau et la terre",
     essence: "La structure",
     presentation:
-      "Kapha gouverne tout ce qui tient ensemble : les os, les muscles, les articulations, l'immunité. Équilibré, il donne la force, le calme et la fidélité ; en excès, il alourdit et ralentit.",
+      "Kapha donne au corps sa structure, des os aux articulations, et soutient l'immunité. Équilibré, il apporte la force et le calme. En excès, il alourdit et ralentit.",
     qualites: ["Lourd", "Froid", "Huileux", "Lent", "Doux"],
     corps: [
       ["Morphologie", "Robuste, prend du poids facilement"],
@@ -156,12 +156,12 @@ export interface Saveur {
 }
 
 export const SAVEURS: Saveur[] = [
-  { nom: "Sucré", translit: "madhura", deva: "मधुर", elements: "terre + eau", effets: ["-", "-", "+"], role: "Nourrit, apaise, donne de la force. En excès : lourdeur.", exemples: "Riz, blé, lait, ghee, dattes, patate douce", couleur: "#B98AA8" },
-  { nom: "Acide", translit: "amla", deva: "अम्ल", elements: "terre + feu", effets: ["-", "+", "+"], role: "Réveille l'appétit, aide à digérer. En excès : irritation.", exemples: "Citron, yaourt, tamarin, aliments fermentés", couleur: "#BBD439" },
-  { nom: "Salé", translit: "lavaṇa", deva: "लवण", elements: "eau + feu", effets: ["-", "+", "+"], role: "Humidifie, donne du goût. En excès : rétention d'eau.", exemples: "Sel, algues, sauce soja", couleur: "#C4DCD5" },
-  { nom: "Piquant", translit: "kaṭu", deva: "कटु", elements: "feu + air", effets: ["+", "+", "-"], role: "Réchauffe, stimule, dégage. En excès : sécheresse, échauffement.", exemples: "Gingembre, poivre, piment, ail, moutarde", couleur: "#5B2A4E" },
-  { nom: "Amer", translit: "tikta", deva: "तिक्त", elements: "air + éther", effets: ["+", "-", "-"], role: "Rafraîchit, allège. En excès : froid, sécheresse.", exemples: "Légumes verts à feuilles, curcuma, fenugrec, chicorée", couleur: "#0E4D47" },
-  { nom: "Astringent", translit: "kaṣāya", deva: "कषाय", elements: "air + terre", effets: ["+", "-", "-"], role: "Resserre, assèche. En excès : constipation.", exemples: "Lentilles, pois chiches, grenade, thé", couleur: "#8A6A1E" },
+  { nom: "Sucré", translit: "madhura", deva: "मधुर", elements: "terre + eau", effets: ["-", "-", "+"], role: "Le sucré nourrit et donne de la force. Trop de sucré alourdit.", exemples: "Riz, blé, lait, ghee, dattes, patate douce", couleur: "#B98AA8" },
+  { nom: "Acide", translit: "amla", deva: "अम्ल", elements: "terre + feu", effets: ["-", "+", "+"], role: "L'acide ouvre l'appétit et aide à digérer. En trop, il irrite.", exemples: "Citron, yaourt, tamarin, aliments fermentés", couleur: "#BBD439" },
+  { nom: "Salé", translit: "lavaṇa", deva: "लवण", elements: "eau + feu", effets: ["-", "+", "+"], role: "Le salé humidifie et relève le goût. En trop, il fait retenir l'eau.", exemples: "Sel, algues, sauce soja", couleur: "#C4DCD5" },
+  { nom: "Piquant", translit: "kaṭu", deva: "कटु", elements: "feu + air", effets: ["+", "+", "-"], role: "Le piquant réchauffe et dégage. En trop, il dessèche et échauffe.", exemples: "Gingembre, poivre, piment, ail, moutarde", couleur: "#5B2A4E" },
+  { nom: "Amer", translit: "tikta", deva: "तिक्त", elements: "air + éther", effets: ["+", "-", "-"], role: "L'amer rafraîchit et allège. En trop, il refroidit.", exemples: "Légumes verts à feuilles, curcuma, fenugrec, chicorée", couleur: "#0E4D47" },
+  { nom: "Astringent", translit: "kaṣāya", deva: "कषाय", elements: "air + terre", effets: ["+", "-", "-"], role: "L'astringent resserre. En trop, il constipe.", exemples: "Lentilles, pois chiches, grenade, thé", couleur: "#8A6A1E" },
 ];
 
 export const SAVEURS_PAR_DOSHA = [
@@ -188,7 +188,7 @@ export const SIGNES_AMA = [
 
 export const GESTES_AGNI = [
   "Manger à heures régulières, et seulement quand on a faim.",
-  "Faire du déjeuner le repas principal : le feu est au plus fort vers midi.",
+  "Faire du déjeuner le repas principal, car le feu digestif est au plus fort vers midi.",
   "Manger chaud et cuit, boire tiède. Éviter le glacé.",
   "Avant le repas, une fine tranche de gingembre frais avec un peu de citron et de sel.",
   "Laisser trois à quatre heures entre deux repas, sans grignoter.",
@@ -199,11 +199,11 @@ export const GESTES_AGNI = [
 
 export const MOMENTS_JOURNEE: { debut: number; heures: string; dosha: DoshaKey; titre: string; gestes: string[] }[] = [
   { debut: 2, heures: "Avant 6 h", dosha: "vata", titre: "Se lever", gestes: ["Se lever avant le soleil, quand l'air est léger.", "Gratter la langue, se rincer la bouche.", "Boire un grand verre d'eau tiède."] },
-  { debut: 6, heures: "6 h – 10 h", dosha: "kapha", titre: "Bouger", gestes: ["Abhyanga : se masser à l'huile tiède, puis la douche.", "Marcher, faire du yoga : le corps est lourd, il faut le réveiller.", "Un petit-déjeuner léger et chaud."] },
+  { debut: 6, heures: "6 h – 10 h", dosha: "kapha", titre: "Bouger", gestes: ["Se masser à l'huile tiède (abhyanga), puis prendre sa douche.", "Marcher ou faire du yoga pour réveiller un corps encore lourd.", "Un petit-déjeuner léger et chaud."] },
   { debut: 10, heures: "10 h – 14 h", dosha: "pitta", titre: "Manger et agir", gestes: ["Le moment des tâches qui demandent de la concentration.", "Le déjeuner, repas principal de la journée."] },
   { debut: 14, heures: "14 h – 18 h", dosha: "vata", titre: "Créer", gestes: ["Le moment des idées, des échanges, de l'écriture.", "Une boisson chaude plutôt qu'un grignotage."] },
   { debut: 18, heures: "18 h – 22 h", dosha: "kapha", titre: "Ralentir", gestes: ["Un dîner léger, avant 19 h si possible.", "Une marche courte, de la lecture, une tisane.", "Se coucher avant 22 h."] },
-  { debut: 22, heures: "22 h – 2 h", dosha: "pitta", titre: "Dormir", gestes: ["Le corps digère et répare : c'est le sommeil le plus utile."] },
+  { debut: 22, heures: "22 h – 2 h", dosha: "pitta", titre: "Dormir", gestes: ["Pendant ces heures, le corps digère et se répare. C'est le sommeil le plus utile."] },
 ];
 
 /** Le moment de la journée en cours (les tranches commencent à 2 h, 6 h, 10 h…). */
@@ -216,17 +216,17 @@ export function momentEnCours(heure: number): number {
 
 export const LEXIQUE = [
   { mot: "Abhyanga", deva: "अभ्यङ्ग", sens: "Le massage à l'huile tiède, de préférence le matin avant la douche." },
-  { mot: "Agni", deva: "अग्नि", sens: "Le feu digestif : la capacité à transformer ce que l'on mange." },
+  { mot: "Agni", deva: "अग्नि", sens: "Le feu digestif, qui transforme ce que l'on mange." },
   { mot: "Āma", deva: "आम", sens: "Le résidu de ce qui a été mal digéré, lourd et collant." },
-  { mot: "Āyurveda", deva: "आयुर्वेद", sens: "De āyus, la vie, et veda, la connaissance : la science de la vie." },
+  { mot: "Āyurveda", deva: "आयुर्वेद", sens: "La science de la vie, de āyus (la vie) et veda (la connaissance)." },
   { mot: "Dinacharya", deva: "दिनचर्या", sens: "La routine du jour, calée sur le rythme des doshas." },
   { mot: "Dosha", deva: "दोष", sens: "L'une des trois énergies, Vata, Pitta et Kapha, qui gouvernent le corps et l'esprit." },
-  { mot: "Kapha", deva: "कफ", sens: "Le dosha de l'eau et de la terre : la structure, la stabilité." },
-  { mot: "Pitta", deva: "पित्त", sens: "Le dosha du feu et de l'eau : la transformation, la digestion." },
+  { mot: "Kapha", deva: "कफ", sens: "Le dosha de l'eau et de la terre, qui donne la structure et la stabilité." },
+  { mot: "Pitta", deva: "पित्त", sens: "Le dosha du feu et de l'eau, qui gouverne la digestion." },
   { mot: "Prakriti", deva: "प्रकृति", sens: "Votre constitution de naissance, le dosage qui vous est propre." },
   { mot: "Rasa", deva: "रस", sens: "La saveur. Il y en a six." },
   { mot: "Ritucharya", deva: "ऋतुचर्या", sens: "La façon d'adapter sa vie aux saisons." },
-  { mot: "Vata", deva: "वात", sens: "Le dosha de l'air et de l'éther : le mouvement." },
+  { mot: "Vata", deva: "वात", sens: "Le dosha de l'air et de l'éther, qui gouverne le mouvement." },
   { mot: "Vikriti", deva: "विकृति", sens: "Votre état du moment, quand l'équilibre s'est déplacé." },
   { mot: "Vipāka", deva: "विपाक", sens: "L'effet d'un aliment après la digestion." },
   { mot: "Vīrya", deva: "वीर्य", sens: "L'effet chauffant ou rafraîchissant d'un aliment." },

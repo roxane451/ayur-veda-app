@@ -142,8 +142,7 @@ const Doshas = () => {
             <FilAriane page="Les doshas" />
             <h1 className="m-0 text-[clamp(2.6rem,6.4vw,5.25rem)] leading-none">Les trois doshas</h1>
             <p className="m-0 max-w-[40ch] text-xl text-doux">
-              Ce sont les trois énergies qui gouvernent le corps et l'esprit. Chacun de nous les porte toutes, dans un
-              dosage qui lui est propre&nbsp;: sa <em className="font-body normal-case">prakriti</em>.
+              Les trois énergies qui gouvernent le corps et l'esprit. Chacun les porte toutes, dans des proportions qui lui sont propres et que l'on appelle sa <em className="font-body normal-case">prakriti</em>.
             </p>
             <div role="tablist" aria-label="Choisir un dosha" className="flex flex-wrap gap-2">
               {DOSHAS_DETAIL.map((d) => (
@@ -224,8 +223,8 @@ const Doshas = () => {
       <section className="bg-citron">
         <div className="mx-auto flex max-w-[1220px] flex-wrap items-center justify-between gap-8 px-4 py-16 sm:px-10 md:py-[72px]">
           <div className="flex max-w-[560px] flex-col gap-2.5">
-            <h2 className="m-0 text-[clamp(2.2rem,5vw,3rem)] leading-none">{fr("Et vous, quel est votre dosha ?")}</h2>
-            <p className="m-0">{fr("Le quiz se fait en deux parties : votre nature, puis votre état du moment.")}</p>
+            <h2 className="m-0 text-[clamp(2.2rem,5vw,3rem)] leading-none">Connaître votre dosha</h2>
+            <p className="m-0">Le quiz mesure d'abord votre nature, puis votre état du moment.</p>
           </div>
           <Link
             to="/profil"

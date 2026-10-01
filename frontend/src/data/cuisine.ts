@@ -55,7 +55,7 @@ export const EPICES: Epice[] = [
     virya: "Chauffant",
     vipaka: "Piquant",
     usage:
-      "En Ayurveda, on l'utilise traditionnellement pour soutenir la digestion, pour la peau, et pour les articulations. C'est un usage traditionnel, pas une promesse de soin.",
+      "En Ayurveda, on l'utilise traditionnellement pour soutenir la digestion, pour la peau, et pour les articulations. ",
     cuisine: [
       "Une demi-cuillère à café revenue dans le ghee, au début de la cuisson",
       "Dans le dal, le riz, les soupes de légumes",
@@ -80,12 +80,12 @@ export const EPICES: Epice[] = [
     avec: "Citron, miel, cannelle.",
     seGarde: "Frais : trois semaines au réfrigérateur.",
     accroche:
-      "L'épice que l'Ayurveda appelle volontiers « le remède universel ». Frais, il est plus doux ; sec, il chauffe davantage.",
+      "L'Ayurveda l'appelle volontiers le remède universel. Sec, il chauffe davantage que frais.",
     rasa: "Piquante",
     virya: "Chauffant",
     vipaka: "Doux",
     usage:
-      "Traditionnellement, on l'utilise pour réveiller l'appétit et soutenir la digestion, en particulier quand le feu digestif est lent. C'est un usage traditionnel, pas une promesse de soin.",
+      "Traditionnellement, on l'utilise pour réveiller l'appétit et soutenir la digestion, en particulier quand le feu digestif est lent. ",
     cuisine: [
       "Râpé frais au début de la cuisson des légumes et du dal",
       "Une fine tranche avec citron et sel, avant le repas",
@@ -114,7 +114,7 @@ export const EPICES: Epice[] = [
     virya: "Chauffant",
     vipaka: "Piquant",
     usage:
-      "Traditionnellement, on l'associe aux plats de légumineuses pour limiter les ballonnements. C'est un usage traditionnel, pas une promesse de soin.",
+      "Traditionnellement, on l'associe aux plats de légumineuses pour limiter les ballonnements. ",
     cuisine: [
       "Une cuillère à café de graines dans le ghee chaud, jusqu'à ce qu'elles crépitent",
       "Torréfié à sec puis moulu, sur le riz et les yaourts",
@@ -143,7 +143,7 @@ export const EPICES: Epice[] = [
     virya: "Rafraîchissant",
     vipaka: "Doux",
     usage:
-      "Traditionnellement, c'est l'épice qu'on choisit quand il fait chaud ou quand Pitta s'échauffe, notamment en eau de coriandre. C'est un usage traditionnel, pas une promesse de soin.",
+      "Traditionnellement, c'est l'épice qu'on choisit quand il fait chaud ou quand Pitta s'échauffe, notamment en eau de coriandre. ",
     cuisine: [
       "Graines moulues en fin de cuisson",
       "Feuilles fraîches ciselées sur le dal et le riz",
@@ -172,7 +172,7 @@ export const EPICES: Epice[] = [
     virya: "Rafraîchissant",
     vipaka: "Doux",
     usage:
-      "Traditionnellement, on le croque après le repas pour faciliter la digestion et rafraîchir l'haleine. C'est un usage traditionnel, pas une promesse de soin.",
+      "Traditionnellement, on le croque après le repas pour faciliter la digestion et rafraîchir l'haleine. ",
     cuisine: [
       "Une demi-cuillère à café à croquer après le repas",
       "En infusion, seul ou avec cumin et coriandre",
@@ -196,12 +196,12 @@ export const EPICES: Epice[] = [
     avec: "Lait, cannelle, safran, rose.",
     seGarde: "En gousses : un an. La poudre s'évente vite.",
     accroche:
-      "La reine des épices douces. Quelques gousses écrasées suffisent pour parfumer un riz, un lait, un dessert.",
+      "Quelques gousses écrasées suffisent pour parfumer un riz, un lait ou un dessert.",
     rasa: "Piquante, douce",
     virya: "Chauffant léger",
     vipaka: "Doux",
     usage:
-      "Traditionnellement, on l'ajoute au lait et au café pour les rendre plus digestes. C'est un usage traditionnel, pas une promesse de soin.",
+      "Traditionnellement, on l'ajoute au lait et au café pour les rendre plus digestes. ",
     cuisine: [
       "Deux ou trois gousses écrasées dans le riz ou le lait",
       "Les graines moulues dans le chaï et les desserts",
@@ -230,7 +230,7 @@ export const EPICES: Epice[] = [
     virya: "Chauffant",
     vipaka: "Piquant",
     usage:
-      "Traditionnellement, on l'utilise pour réchauffer et aider la digestion des plats sucrés. C'est un usage traditionnel, pas une promesse de soin.",
+      "Traditionnellement, on l'utilise pour réchauffer et aider la digestion des plats sucrés. ",
     cuisine: [
       "Un bâton dans le chaï, le lait, les compotes",
       "Une pincée de poudre sur les fruits cuits et le porridge",
@@ -255,12 +255,12 @@ export const EPICES: Epice[] = [
     avec: "Curcuma, gingembre, miel.",
     seGarde: "En grains : deux ans.",
     accroche:
-      "Le plus piquant de la boîte. Une pincée suffit : il réveille les plats et accompagne toujours le curcuma.",
+      "Le plus piquant de la boîte. Une pincée suffit à relever un plat, et il accompagne toujours le curcuma.",
     rasa: "Piquante",
     virya: "Chauffant",
     vipaka: "Piquant",
     usage:
-      "Traditionnellement, on l'associe au curcuma et au gingembre pour stimuler un feu digestif paresseux. C'est un usage traditionnel, pas une promesse de soin.",
+      "Traditionnellement, on l'associe au curcuma et au gingembre pour stimuler un feu digestif paresseux. ",
     cuisine: [
       "Moulu au dernier moment, en fin de cuisson",
       "Une pincée avec le curcuma, toujours",
@@ -286,7 +286,7 @@ export const MELANGES: Melange[] = [
   {
     id: "chai",
     nom: "Chaï masala",
-    sousTitre: "Pour deux tasses · Vata et Kapha",
+    sousTitre: "Deux tasses, pour Vata et Kapha",
     illu: "chai",
     ingredients: ["1 bâton de cannelle", "4 gousses de cardamome, écrasées", "3 clous de girofle", "2 cm de gingembre frais, en lamelles", "4 grains de poivre noir"],
     methode:
@@ -295,7 +295,7 @@ export const MELANGES: Melange[] = [
   {
     id: "the-ccf",
     nom: "Thé cumin, coriandre, fenouil",
-    sousTitre: "Pour la journée · les trois doshas",
+    sousTitre: "Pour la journée, convient aux trois doshas",
     illu: "fenouil",
     ingredients: ["½ cuillère à café de graines de cumin", "½ cuillère à café de graines de coriandre", "½ cuillère à café de graines de fenouil"],
     methode:
@@ -304,7 +304,7 @@ export const MELANGES: Melange[] = [
   {
     id: "lait-dore",
     nom: "Lait doré",
-    sousTitre: "Pour une tasse · le soir",
+    sousTitre: "Une tasse, le soir",
     illu: "curcuma",
     ingredients: ["250 ml de lait, ou de lait d'amande", "½ cuillère à café de curcuma", "1 pincée de poivre noir", "1 pincée de cannelle et de gingembre", "1 cuillère à café de miel"],
     methode:
@@ -313,7 +313,7 @@ export const MELANGES: Melange[] = [
   {
     id: "melange-vata",
     nom: "Mélange pour Vata",
-    sousTitre: "À saupoudrer · chaud et doux",
+    sousTitre: "À saupoudrer, chaud et doux",
     illu: "cumin",
     ingredients: ["2 parts de cumin", "2 parts de coriandre", "1 part de fenouil", "1 part de gingembre en poudre", "½ part de cannelle", "Une pincée de sel"],
     methode: "Torréfier les graines à sec, laisser refroidir, moudre avec le reste. Une cuillère à café dans les soupes, le riz, les légumes.",
@@ -321,7 +321,7 @@ export const MELANGES: Melange[] = [
   {
     id: "melange-pitta",
     nom: "Mélange pour Pitta",
-    sousTitre: "À saupoudrer · frais et doux",
+    sousTitre: "À saupoudrer, frais et doux",
     illu: "coriandre",
     ingredients: ["2 parts de coriandre", "2 parts de fenouil", "1 part de cumin", "½ part de cardamome", "½ part de curcuma"],
     methode: "Moudre sans torréfier. Une cuillère à café en fin de cuisson, ou sur un yaourt, une salade de légumes cuits.",
@@ -329,7 +329,7 @@ export const MELANGES: Melange[] = [
   {
     id: "melange-kapha",
     nom: "Mélange pour Kapha",
-    sousTitre: "À saupoudrer · piquant et léger",
+    sousTitre: "À saupoudrer, piquant et léger",
     illu: "poivre",
     ingredients: ["1 part de gingembre en poudre", "1 part de curcuma", "1 part de cumin", "½ part de poivre noir", "½ part de graines de moutarde"],
     methode: "Torréfier cumin et moutarde, moudre avec le reste. Une cuillère à café dans les légumes, les lentilles, les soupes.",
@@ -459,7 +459,7 @@ export const RECETTES_COMPLETES: Record<string, RecetteComplete> = {
   kitchari: {
     id: "kitchari",
     intro:
-      "Riz et lentilles jaunes mijotés au ghee, au cumin et au curcuma. Le plat de base de l'Ayurveda : doux pour la digestion, il convient aux trois doshas.",
+      "Riz et lentilles jaunes mijotés au ghee, au cumin et au curcuma. C'est le plat de base de l'Ayurveda. Il ménage la digestion et convient aux trois doshas.",
     portions: "Pour 4 personnes",
     ingredients: [
       "150 g de riz basmati",

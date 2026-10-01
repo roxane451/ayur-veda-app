@@ -8,7 +8,7 @@ const Melanges = () => (
     <TeteCuisine
       page="Les mélanges"
       titre="Les mélanges"
-      intro="Six préparations à faire chez soi : trois boissons et un mélange d'épices pour chaque dosha. Les proportions sont indicatives, à ajuster à votre goût."
+      intro="Trois boissons et trois mélanges d'épices, un par dosha, à préparer chez soi. Les proportions sont à ajuster à votre goût."
     >
       <IlluEpice id="chai" size={160} className="h-auto w-[40%] max-w-[160px]" />
       <IlluEpice id="fenouil" size={120} className="h-auto w-[30%] max-w-[120px]" />
@@ -47,7 +47,7 @@ const Melanges = () => (
     <section className="mx-auto max-w-[1220px] px-4 pb-[88px] sm:px-10">
       <p className="m-0 rounded-xl bg-surface px-6 py-5 text-base">
         {fr(
-          "Enceinte, sous traitement ou avec un trouble digestif qui dure ? Demandez conseil avant de consommer ces mélanges tous les jours.",
+          "Si vous êtes enceinte, sous traitement, ou si un trouble digestif dure, demandez conseil avant d'en prendre tous les jours.",
         )}
       </p>
     </section>

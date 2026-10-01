@@ -75,7 +75,7 @@ const Journee = ({ rubrique = "comprendre" }: { rubrique?: "comprendre" | "quoti
           titre="La journée idéale"
           deva="दिनचर्या"
           translit="dinacharya"
-          intro="La journée suit le même cycle que les saisons : chaque dosha domine tour à tour, deux fois en vingt-quatre heures. Caler ses gestes sur ce rythme est la façon la plus simple de rester en équilibre."
+          intro="La journée suit le même cycle que l'année. Chaque dosha y domine deux fois, quatre heures à chaque fois, et l'on cale ses gestes sur ce rythme."
         />
         <div className="flex justify-center pb-8 md:py-6">
           <Horloge actuel={actuel} />
@@ -113,10 +113,9 @@ const Journee = ({ rubrique = "comprendre" }: { rubrique?: "comprendre" | "quoti
       <section className="mx-auto max-w-[1220px] px-4 pb-[72px] sm:px-10">
         <div className="flex flex-wrap items-center justify-between gap-6 rounded-2xl bg-surface px-6 py-8 sm:px-9">
           <div className="flex max-w-[620px] flex-col gap-1.5">
-            <span className="font-display text-[1.75rem]">Pas besoin de tout faire</span>
+            <span className="font-display text-[1.75rem]">Par où commencer</span>
             <span className="text-doux">
-              Commencez par un geste, le plus facile pour vous, et tenez-le trois semaines. Le programme de saison de
-              l'espace membre en propose un par jour.
+              Choisissez le geste qui vous semble le plus facile et tenez-le trois semaines avant d'en ajouter un autre. Le programme de saison de l'espace membre en propose un par jour.
             </span>
           </div>
           <Link

@@ -13,7 +13,7 @@ const Agni = () => (
         titre="Agni, le feu digestif"
         deva="अग्नि"
         translit="agni"
-        intro="Pour l'Ayurveda, on n'est pas ce que l'on mange, mais ce que l'on digère. Agni, c'est la capacité à transformer la nourriture, et aussi les émotions et les expériences."
+        intro="Agni est le feu qui transforme la nourriture. Pour l'Ayurveda, il digère aussi les émotions et les expériences, et la santé dépend de sa vigueur."
       />
       <div className="relative mx-4 mb-8 h-[300px] md:mx-10 md:mb-0 md:h-[380px]">
         <Photo description="casserole qui frémit sur le feu, épices autour" arche />
@@ -30,7 +30,7 @@ const Agni = () => (
           Les quatre états du feu
         </h2>
         <p className="m-0 text-doux">
-          Chaque dosha en excès dérègle le feu à sa manière. Reconnaître le vôtre aide à choisir quoi changer.
+          Chaque dosha en excès dérègle le feu d'une façon qui lui est propre.
         </p>
       </div>
       <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
@@ -65,7 +65,7 @@ const Agni = () => (
             <span className="italic text-[#C4DCD5]">āma</span>
           </p>
           <h2 id="a-ama" className="m-0 text-[clamp(2.2rem,4.4vw,2.75rem)] leading-[1.05]">
-            {fr("Quand le feu faiblit : āma")}
+            Āma, ce qui reste quand le feu faiblit
           </h2>
           <p className="m-0 text-[#D3E3DE]">
             Ce qui n'est pas bien digéré laisse un résidu lourd et collant, āma. Pour l'Ayurveda, c'est le point de
@@ -87,7 +87,7 @@ const Agni = () => (
 
     <section aria-labelledby="a-gestes" className="mx-auto grid max-w-[1220px] gap-10 px-4 py-16 sm:px-10 md:grid-cols-2 md:gap-12 md:py-[72px]">
       <h2 id="a-gestes" className="m-0 text-[clamp(2.2rem,4.4vw,3.25rem)] leading-[1.05]">
-        Entretenir son feu, au quotidien
+        Entretenir le feu digestif
       </h2>
       <ol className="m-0 list-none p-0">
         {GESTES_AGNI.map((t, i) => (

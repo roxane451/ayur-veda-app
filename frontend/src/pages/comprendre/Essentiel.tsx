@@ -8,10 +8,10 @@ import { fr } from "@/components/quiz/conseils";
 import { ELEMENTS } from "@/data/comprendre";
 
 const NOTIONS = [
-  { n: "I", titre: "Les doshas", texte: "Vata, Pitta, Kapha : les trois énergies qui naissent des cinq éléments.", href: "/comprendre/doshas", Illu: Vent },
-  { n: "II", titre: "Les six saveurs", texte: "Sucré, acide, salé, piquant, amer, astringent : la clé pour composer son assiette.", href: "/comprendre/saveurs", Illu: Poudre },
-  { n: "III", titre: "Agni, le feu digestif", texte: "Ce qui transforme ce que l'on mange. Quand il va bien, tout va mieux.", href: "/comprendre/agni", Illu: Flamme },
-  { n: "IV", titre: "La journée", texte: "Chaque moment du jour a son dosha : quand se lever, manger, se reposer.", href: "/comprendre/journee", Illu: SoleilLune },
+  { n: "I", titre: "Les doshas", texte: "Les trois énergies qui naissent des cinq éléments.", href: "/comprendre/doshas", Illu: Vent },
+  { n: "II", titre: "Les six saveurs", texte: "Chaque saveur agit sur les doshas. Les connaître aide à composer une assiette.", href: "/comprendre/saveurs", Illu: Poudre },
+  { n: "III", titre: "Agni, le feu digestif", texte: "Le feu qui transforme ce que l'on mange. Pour l'Ayurveda, la santé commence par lui.", href: "/comprendre/agni", Illu: Flamme },
+  { n: "IV", titre: "La journée", texte: "Chaque moment du jour a son dosha, ce qui guide l'heure du lever, des repas et du coucher.", href: "/comprendre/journee", Illu: SoleilLune },
 ];
 
 const Essentiel = () => (
@@ -28,15 +28,14 @@ const Essentiel = () => (
           <h1 className="m-0 text-[clamp(2.6rem,6.4vw,5.25rem)] leading-none">Comprendre l'Ayurveda</h1>
           <p className="m-0 max-w-[46ch] text-xl text-doux">
             {fr(
-              "La médecine traditionnelle de l'Inde repose sur quelques idées simples. Les voici dans l'ordre où elles s'enchaînent : les éléments forment les doshas, les saveurs les nourrissent, le feu digestif fait le reste.",
+              "La médecine traditionnelle de l'Inde part de cinq éléments. Ils forment les doshas, que les saveurs nourrissent et que le feu digestif entretient.",
             )}
           </p>
         </div>
         <div className="flex flex-col gap-3 rounded-2xl bg-carte px-8 py-7 shadow-[inset_0_0_0_2px_hsl(var(--encre))]">
           <span className="font-display text-2xl">L'idée de départ</span>
           <p className="m-0">
-            Tout ce qui existe, nous compris, est fait des cinq mêmes éléments. Être en bonne santé, c'est garder leur
-            équilibre propre à chacun, et le retrouver quand il se dérègle.
+            Pour l'Ayurveda, tout ce qui existe est fait des cinq mêmes éléments, nous compris. La santé tient à leur équilibre, qui est propre à chacun.
           </p>
         </div>
       </div>
@@ -51,7 +50,7 @@ const Essentiel = () => (
           </h2>
           <p className="m-0 text-[#D3E3DE]">
             {fr(
-              "Les pañca mahābhūta. Ils se combinent deux à deux pour former les trois doshas : l'air et l'éther font Vata, le feu et l'eau font Pitta, l'eau et la terre font Kapha.",
+              "En sanskrit, les pañca mahābhūta. Combinés deux à deux, ils forment les doshas. L'air et l'éther donnent Vata, le feu et l'eau donnent Pitta, l'eau et la terre donnent Kapha.",
             )}
           </p>
         </div>
@@ -71,7 +70,7 @@ const Essentiel = () => (
 
     <section aria-labelledby="h-suite" className="mx-auto flex max-w-[1220px] flex-col gap-3 px-4 pb-24 pt-16 sm:px-10 md:pt-20">
       <h2 id="h-suite" className="m-0 mb-3 text-[clamp(2.2rem,4.4vw,3.25rem)]">
-        Quatre notions pour tout comprendre
+        Les notions de base
       </h2>
       <ol className="m-0 list-none p-0">
         {NOTIONS.map(({ n, titre, texte, href, Illu }) => (
@@ -95,7 +94,7 @@ const Essentiel = () => (
         ))}
       </ol>
       <Link to="/comprendre/lexique" className={`${lienSouligne} mt-4 self-start`}>
-        Les mots sanskrits du site, dans le lexique <ArrowRight className="h-[18px] w-[18px]" aria-hidden="true" />
+        Le lexique des mots sanskrits <ArrowRight className="h-[18px] w-[18px]" aria-hidden="true" />
       </Link>
     </section>
   </PageComprendre>

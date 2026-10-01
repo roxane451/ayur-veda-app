@@ -61,7 +61,7 @@ const Recettes = () => {
       <TeteCuisine
         page="Les recettes"
         titre="Les recettes"
-        intro={`${RECETTES.length} plats simples de la cuisine ayurvédique, du petit-déjeuner au dessert. Chacun indique le dosha qu'il apaise et sa saison. ${gratuites} sont en accès libre, les autres dans l'espace membre.`}
+        intro={`${RECETTES.length} plats de la cuisine ayurvédique, du petit-déjeuner au dessert, avec pour chacun le dosha qu'il apaise et sa saison. ${gratuites} sont en accès libre.`}
       >
         <Poudre size={150} decorative className="h-auto w-[38%] max-w-[150px]" />
         <IlluEpice id="gingembre" size={120} className="h-auto w-[30%] max-w-[120px]" />
@@ -109,7 +109,7 @@ const Recettes = () => {
               Kitchari
             </h2>
             <p className="m-0">{RECETTES_COMPLETES.kitchari.intro}</p>
-            <p className="m-0 text-doux">Les trois doshas · toute l'année · 40 min · gratuit</p>
+            <p className="m-0 text-doux">Pour les trois doshas, toute l'année. 40 minutes, en accès libre.</p>
             <Link
               to="/cuisine/recettes/kitchari"
               className="mt-1 inline-flex min-h-[52px] self-start items-center rounded-buta bg-aubergine px-6 font-bold text-pistache no-underline hover:opacity-90"
@@ -154,8 +154,7 @@ const Recettes = () => {
       <section className="mx-auto max-w-[1220px] px-4 pb-[88px] sm:px-10">
         <div className="flex flex-wrap items-center justify-between gap-5 rounded-2xl bg-paon px-6 py-7 text-pistache sm:px-8">
           <span className="max-w-[640px]">
-            Avec l'espace membre : toutes les recettes, triées selon votre dosha, et deux nouvelles chaque mois au fil
-            des saisons.
+            L'espace membre donnera accès à toutes les recettes, triées selon votre dosha, avec deux nouveautés par mois.
           </span>
           <Link
             to="/espace-membre"

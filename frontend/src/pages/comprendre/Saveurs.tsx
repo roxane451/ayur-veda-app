@@ -49,7 +49,7 @@ const Saveurs = () => (
         titre="Les six saveurs"
         deva="षड्रस"
         translit="ṣaḍ rasa"
-        intro="En Ayurveda, chaque saveur est faite de deux éléments. Elle fait donc monter ou descendre certains doshas. Savoir les reconnaître, c'est savoir composer une assiette qui vous équilibre."
+        intro="Chaque saveur est faite de deux éléments, et fait donc monter ou baisser certains doshas. En les reconnaissant, on compose plus facilement une assiette qui équilibre."
       />
       <div className="flex justify-center pb-8 md:py-6">
         <Anneau />
@@ -95,14 +95,13 @@ const Saveurs = () => (
       <div className="mx-auto grid max-w-[1220px] gap-12 px-4 py-16 sm:px-10 md:grid-cols-2 md:py-[72px]">
         <div className="flex flex-col gap-3.5">
           <h2 id="s-dosha" className="m-0 text-[clamp(2.2rem,4.4vw,2.75rem)] leading-[1.05]">
-            {fr("Quelles saveurs pour mon dosha ?")}
+            Les saveurs de chaque dosha
           </h2>
           <p className="m-0 text-doux">
-            Un repas complet contient les six saveurs. On met simplement l'accent sur celles qui apaisent son dosha,
-            surtout quand il est en excès.
+            Un repas complet contient les six saveurs. Selon son dosha, on force un peu sur celles qui l'apaisent, surtout quand il est en excès.
           </p>
           <Link to="/profil" className={`${lienSouligne} self-start`}>
-            {fr("Je ne connais pas mon dosha : faire le quiz")}
+            Faire le quiz pour connaître mon dosha
           </Link>
         </div>
         <div className="flex flex-col">

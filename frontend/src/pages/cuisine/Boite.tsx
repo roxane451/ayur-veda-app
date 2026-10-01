@@ -18,7 +18,7 @@ const Boite = () => {
 
   return (
     <PageCuisine>
-      <TeteCuisine titre="La boîte à épices" intro="Huit épices suffisent pour cuisiner selon l'Ayurveda. Voici comment les choisir, les marier et les garder.">
+      <TeteCuisine titre="La boîte à épices" intro="Avec ces huit épices, on peut cuisiner selon l'Ayurveda toute l'année. Chaque fiche dit comment les utiliser et les conserver.">
         <IlluEpice id="curcuma" size={150} className="h-auto w-[34%] max-w-[150px]" />
         <IlluEpice id="cardamome" size={120} className="h-auto w-[28%] max-w-[120px]" />
         <IlluEpice id="cannelle" size={130} className="h-auto w-[30%] max-w-[130px]" />

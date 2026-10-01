@@ -130,7 +130,7 @@ const TableauDeBord = () => {
             ) : (
               <>
                 <span className="pr-16 font-display text-[2.2rem] leading-tight">Pas encore connue</span>
-                <p className="m-0 text-doux">Vingt questions, environ cinq minutes, une fois pour toutes.</p>
+                <p className="m-0 text-doux">Vingt questions, environ cinq minutes. À faire une seule fois.</p>
                 <Link
                   to="/profil"
                   state={{ depart: "nature" }}
@@ -194,8 +194,7 @@ const TableauDeBord = () => {
               </>
             ) : (
               <p className="m-0 rounded-2xl bg-surface p-6 text-doux">
-                Ici apparaîtra votre état à chaque saison : vous verrez Vata monter à l'automne, Pitta l'été… Faites le
-                point une première fois pour commencer.
+                Vos bilans de saison s'afficheront ici. On y voit par exemple Vata monter à l'automne. Faites le point une première fois pour commencer.
               </p>
             )}
           </div>
@@ -206,12 +205,12 @@ const TableauDeBord = () => {
             <div className="flex items-center gap-4 rounded-[14px] bg-carte p-4 shadow-[inset_0_0_0_1.5px_hsl(var(--encre))]">
               <Chai size={72} decorative />
               <div className="flex flex-col gap-1">
-                <span className="text-sm text-doux">Un geste par jour</span>
+                <span className="text-sm text-doux">Exemple de geste</span>
                 <span className="font-display text-[1.3rem] leading-tight">Un chaï l'après-midi, à la place du café</span>
               </div>
             </div>
             <p className="m-0 text-doux">
-              {PROGRAMME_AUTOMNE.duree}, un geste par jour. Le programme s'ouvrira ici, avec votre progression.
+              Le programme s'ouvrira ici, avec votre progression jour après jour.
             </p>
             <Link
               to="/au-quotidien/programme"
@@ -271,7 +270,7 @@ const TableauDeBord = () => {
                 Mon compte
               </h2>
               <p className="m-0">{user?.email}</p>
-              <p className="m-0 text-doux">Compte gratuit. L'abonnement arrive bientôt : vous serez prévenu avant tout paiement.</p>
+              <p className="m-0 text-doux">Compte gratuit. Vous serez prévenu avant l'arrivée de l'abonnement payant.</p>
             </div>
             <div className="flex flex-col items-start gap-4 md:items-end">
               <button

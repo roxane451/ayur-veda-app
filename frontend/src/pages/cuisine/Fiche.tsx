@@ -65,13 +65,14 @@ const Fiche = () => {
 
       <section aria-labelledby="f-ayur" className="mx-auto flex max-w-[1220px] flex-col gap-5 px-4 py-16 sm:px-10">
         <h2 id="f-ayur" className="m-0 text-[clamp(2rem,4vw,2.5rem)]">
-          Ce qu'en dit l'Ayurveda
+          Selon l'Ayurveda
         </h2>
         <div className="grid gap-4 md:grid-cols-3">
           <Trio titre="La saveur" sanskrit="rasa" valeur={e.rasa} explication="Ce que l'on sent en bouche." />
           <Trio titre="L'effet" sanskrit="vīrya" valeur={e.virya} explication="Ce que l'épice fait au corps : réchauffer ou rafraîchir." />
           <Trio titre="Après digestion" sanskrit="vipāka" valeur={e.vipaka} explication="L'effet qui reste une fois digéré." />
         </div>
+        <p className="m-0 text-[15px] text-doux">Ces effets relèvent de l'usage traditionnel et ne remplacent pas un avis médical.</p>
         <p className="m-0 mt-2 max-w-[70ch]">{fr(e.usage)}</p>
       </section>
 

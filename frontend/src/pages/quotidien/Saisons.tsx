@@ -57,7 +57,7 @@ const Saisons = () => {
             <h1 className="m-0 text-[clamp(2.6rem,6.4vw,5.25rem)] leading-none">Vivre avec les saisons</h1>
           </div>
           <p className="m-0 text-xl text-doux">
-            Chaque saison réveille un dosha. On adapte l'assiette et la journée pour ne pas le laisser s'accumuler.
+            Chaque saison fait monter un dosha. En adaptant ses repas et ses journées, on l'empêche de s'accumuler.
           </p>
         </div>
         <div role="tablist" aria-label="Les quatre saisons" className="mt-3 grid grid-cols-2 gap-3 lg:grid-cols-4">
@@ -155,7 +155,7 @@ const Saisons = () => {
         <Motif id="dabu" />
         <div className="relative mx-auto flex max-w-[1220px] flex-col gap-9 px-4 py-16 sm:px-10 md:py-[88px]">
           <h2 id="s-toute" className="m-0 text-[clamp(2.2rem,4.4vw,3.25rem)]">
-            Toute l'année, selon votre dosha
+            Ce qui aide chaque dosha, toute l'année
           </h2>
           <div className="grid gap-10 md:grid-cols-3">
             {EQUILIBRE_DOSHA.map((e) => (
@@ -183,8 +183,7 @@ const Saisons = () => {
           <p className="m-0 font-bold text-aubergine">Espace membre</p>
           <h2 className="m-0 text-[clamp(2rem,4vw,2.5rem)] leading-[1.05]">Le programme d'automne, jour par jour</h2>
           <p className="m-0 text-doux">
-            {PROGRAMME_AUTOMNE.duree} pour apaiser Vata&nbsp;: un geste par jour, les recettes de la semaine, un rappel le
-            matin.
+            Trois semaines pour apaiser Vata, avec un rappel chaque matin.
           </p>
         </div>
         <div className="flex flex-wrap gap-3 md:justify-end">

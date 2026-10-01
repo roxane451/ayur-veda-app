@@ -73,8 +73,8 @@ const Acces = ({ mode }: { mode: "connexion" | "inscription" }) => {
             </h1>
             <p className="m-0 max-w-[44ch] text-xl text-doux">
               {inscription
-                ? "Votre nature et vos bilans de saison restent sur votre compte : vous les retrouvez sur tous vos appareils, et vous voyez votre état évoluer au fil de l'année."
-                : "Retrouvez votre nature, vos bilans de saison et votre suivi."}
+                ? "Le compte garde votre nature et vos bilans de saison. Vous les retrouvez sur tous vos appareils."
+                : "Pour retrouver votre nature et vos bilans de saison."}
             </p>
             {inscription && aUnProfil && (
               <p className="m-0 rounded-xl bg-citron px-5 py-3.5">Le quiz que vous avez déjà fait sera gardé sur votre compte.</p>

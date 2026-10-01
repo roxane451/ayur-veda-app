@@ -26,8 +26,8 @@ const CONTENUS = [
 ];
 
 const FAQ = [
-  ["À quoi sert le compte ?", "À garder votre nature et vos bilans de saison, et à les retrouver sur tous vos appareils. Vous voyez votre état évoluer au fil de l'année."],
-  ["Le compte est-il payant ?", "Non, pas pour l'instant. L'abonnement, qui ajoutera les programmes et les recettes de la semaine, arrive bientôt. Vous serez prévenu avant tout paiement."],
+  ["À quoi sert le compte ?", "Il garde votre nature et vos bilans de saison sur tous vos appareils, et montre comment votre état change d'une saison à l'autre."],
+  ["Le compte est-il payant ?", "Non, pas pour l'instant. L'abonnement ajoutera les programmes et les recettes de la semaine. Vous serez prévenu avant tout paiement."],
   ["Les contenus achetés à l'unité resteront-ils accessibles ?", "Oui, à vie, même sans abonnement."],
   ["Le site remplace-t-il une consultation ?", "Non. Il donne des repères pour le quotidien. Pour un trouble qui dure, consultez un professionnel de santé."],
 ];
@@ -40,11 +40,10 @@ const Offre = () => (
         <Motif id="buta" />
         <div className="relative mx-auto flex max-w-[1220px] flex-col gap-5 px-4 pb-14 pt-8 sm:px-10 md:pb-[72px] md:pt-10">
           <h1 className="m-0 max-w-[16ch] text-[clamp(2.6rem,6.4vw,5.25rem)] leading-none">
-            Aller plus loin, <em>saison après saison</em>
+            Suivre son état <em>d'une saison à l'autre</em>
           </h1>
           <p className="m-0 max-w-[52ch] text-xl text-doux">
-            Le quiz, la cuisine et les saisons restent gratuits. L'espace membre suit votre état au fil de l'année et vous
-            accompagne au quotidien. Les programmes et les guides s'achèteront aussi à l'unité.
+            Le quiz, la cuisine et les saisons restent gratuits. Avec un compte, vos bilans sont gardés et vous voyez votre état changer au long de l'année. Les programmes et les guides seront aussi vendus à l'unité.
           </p>
           <p className="m-0 text-[15px]">
             Déjà un compte ?{" "}
@@ -110,7 +109,7 @@ const Offre = () => (
           </p>
           <ul className="m-0 list-none p-0">
             <Coche>Les programmes de saison, en 21 jours</Coche>
-            <Coche>Les guides : la routine du matin, la cuisine pour chaque dosha</Coche>
+            <Coche>Des guides, comme la routine du matin</Coche>
             <Coche>Les ateliers en ligne, en direct ou en replay</Coche>
           </ul>
           <a

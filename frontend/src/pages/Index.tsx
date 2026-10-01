@@ -40,7 +40,7 @@ const Hero = () => (
           Retrouver son équilibre, <em>une saison</em> après l'autre.
         </h1>
         <p className="m-0 max-w-[36ch] text-xl text-doux">
-          {fr("Vos épices, vos rythmes, votre nature : la sagesse de l'Ayurveda, racontée simplement et à appliquer chez soi.")}
+          {fr("L'Ayurveda expliqué sans jargon, pour l'appliquer dans sa cuisine et dans ses journées.")}
         </p>
         <div className="flex flex-wrap items-center gap-x-6 gap-y-4">
           <Link
@@ -137,7 +137,7 @@ const DOSHAS = [
     nom: "Vata",
     deva: "वात",
     elements: "l'air et l'éther",
-    texte: "Ce qui bouge : la respiration, la circulation, les idées. En excès, il disperse et dessèche.",
+    texte: "Il gouverne ce qui bouge en nous, de la respiration aux idées. En excès, il disperse et dessèche.",
     Illu: Vent,
     decal: "md:ml-0",
   },
@@ -145,7 +145,7 @@ const DOSHAS = [
     nom: "Pitta",
     deva: "पित्त",
     elements: "le feu et l'eau",
-    texte: "Ce qui transforme : la digestion, la chaleur du corps, la concentration. En excès, il irrite et échauffe.",
+    texte: "Il gouverne ce qui transforme, à commencer par la digestion. En excès, il irrite et échauffe.",
     Illu: Flamme,
     decal: "md:ml-[clamp(0px,14vw,220px)]",
   },
@@ -153,7 +153,7 @@ const DOSHAS = [
     nom: "Kapha",
     deva: "कफ",
     elements: "l'eau et la terre",
-    texte: "Ce qui tient ensemble : les os, les muscles, l'immunité, le calme. En excès, il alourdit et ralentit.",
+    texte: "Il donne au corps sa structure et à l'esprit son calme. En excès, il alourdit et ralentit.",
     Illu: Goutte,
     decal: "md:ml-[clamp(0px,28vw,440px)]",
   },
@@ -169,8 +169,7 @@ const TroisDoshas = () => (
             Les trois doshas
           </h2>
           <p className="m-0 text-[#D3E3DE]">
-            Ce sont trois façons dont les cinq éléments s'organisent en nous. Tout le monde a les trois&nbsp;; c'est le
-            dosage qui change d'une personne à l'autre.
+            Les cinq éléments se combinent en nous de trois façons, que l'on appelle les doshas. Tout le monde a les trois, en proportions différentes.
           </p>
         </div>
         {DOSHAS.map(({ nom, deva, elements, texte, Illu, decal }) => (
@@ -262,11 +261,10 @@ const AvantGoutQuiz = () => {
         <div className="flex flex-col gap-5">
           <Sceau size={84} rotate={-14} fond="hsl(var(--aubergine))" reserve="hsl(var(--citron))" />
           <h2 id="accueil-quiz" className="m-0 text-[clamp(2.4rem,5vw,4rem)] leading-none">
-            {fr("Vata, Pitta ou Kapha ?")}
+            Connaître sa nature
           </h2>
           <p className="m-0 max-w-[40ch]">
-            Le quiz pose des questions simples sur votre corps, votre digestion, votre sommeil, votre humeur. À la
-            fin, vous savez quel dosha domine chez vous et quoi en faire.
+            Vingt questions sur le corps, la digestion, le sommeil et l'humeur. Le résultat indique le dosha qui domine chez vous et ce qu'il demande au quotidien.
           </p>
         </div>
         <div className="flex flex-col gap-3">

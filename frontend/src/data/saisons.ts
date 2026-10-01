@@ -22,7 +22,7 @@ export const SAISONS: Record<SaisonId, SaisonAccueil> = {
     nom: "L'automne",
     dosha: "Vata",
     presentation:
-      "De septembre à novembre, la lumière baisse, le froid arrive et Vata s'accumule. On le sent : peau sèche, sommeil plus léger, pensées qui s'éparpillent.",
+      "De septembre à novembre, la lumière baisse et le froid arrive. Vata s'accumule, et cela se remarque à la peau qui sèche, au sommeil plus léger ou aux pensées qui s'éparpillent.",
     assiette: "Soupes et ragoûts, légumes racines, riz, ghee. Gingembre, cannelle, cardamome, cumin.",
     onEvite: "les crudités et les boissons glacées.",
     matin: [
@@ -37,7 +37,7 @@ export const SAISONS: Record<SaisonId, SaisonAccueil> = {
     nom: "L'hiver",
     dosha: "Kapha",
     presentation:
-      "De décembre à février, le froid et l'humidité font monter Kapha. On le sent : lourdeur, envie de rester sous la couette, nez pris, digestion lente.",
+      "De décembre à février, le froid humide fait monter Kapha. On a envie de rester sous la couette, le nez se prend et la digestion ralentit.",
     assiette: "Soupes épicées, légumes verts, millet, orge, sarrasin. Poivre noir, gingembre, ail, un peu de miel cru.",
     onEvite: "les plats lourds, le sucre et les laitages en excès.",
     matin: [
@@ -52,7 +52,7 @@ export const SAISONS: Record<SaisonId, SaisonAccueil> = {
     nom: "Le printemps",
     dosha: "Kapha",
     presentation:
-      "De mars à mai, le Kapha accumulé pendant l'hiver fond avec la chaleur. On le sent : rhumes, allergies, fatigue, digestion paresseuse.",
+      "De mars à mai, le Kapha accumulé pendant l'hiver fond avec la chaleur. C'est la saison des rhumes, des allergies et des coups de fatigue.",
     assiette: "Légumes verts et amers, asperges, quinoa, millet. Cumin, coriandre, fenouil, un peu de piquant.",
     onEvite: "les laitages, le sucre raffiné et les plats gras.",
     matin: ["Se lever avec le soleil", "Se frictionner à sec avec un gant de soie"],
@@ -64,7 +64,7 @@ export const SAISONS: Record<SaisonId, SaisonAccueil> = {
     nom: "L'été",
     dosha: "Pitta",
     presentation:
-      "De juin à août, la chaleur et le soleil font monter Pitta. On le sent : irritabilité, peau qui chauffe, acidité, sommeil court.",
+      "De juin à août, la chaleur fait monter Pitta. La peau chauffe, on s'irrite plus vite et les nuits raccourcissent.",
     assiette: "Fruits juteux, concombre, courgette, riz basmati. Menthe, coriandre, fenouil, cardamome.",
     onEvite: "le piquant, la friture, l'alcool et les plats très acides.",
     matin: ["Bouger tôt, avant la chaleur", "Se masser à l'huile de coco"],
@@ -109,7 +109,7 @@ export const SAISONS_DETAIL: SaisonDetail[] = [
     dosha: "vata",
     qualites: ["Sec", "Froid", "Mobile"],
     intro:
-      "La lumière baisse et le froid arrive : Vata s'accumule naturellement. La saison peut apporter sécheresse, irrégularité, anxiété et dispersion.",
+      "Avec la lumière qui baisse et le froid, Vata s'accumule. Beaucoup ressentent alors de la sécheresse, de l'anxiété ou du mal à se concentrer.",
     photo: "feuilles d'automne et tasse fumante sur un tissu block print",
     assiette: [
       "Des plats chauds, humides et nourrissants",
@@ -142,7 +142,7 @@ export const SAISONS_DETAIL: SaisonDetail[] = [
     dosha: "kapha",
     qualites: ["Lourd", "Froid", "Humide"],
     intro:
-      "Le froid et l'humidité font monter Kapha. La saison peut apporter lourdeur, léthargie, nez pris et digestion ralentie.",
+      "Le froid humide fait monter Kapha. On se sent plus lourd, le nez se prend et la digestion ralentit.",
     photo: "bol de soupe épicée et écharpe en laine près d'une fenêtre",
     assiette: [
       "Des plats chauds, légers et épicés",
@@ -175,7 +175,7 @@ export const SAISONS_DETAIL: SaisonDetail[] = [
     dosha: "kapha",
     qualites: ["Humide", "Lourd", "Doux"],
     intro:
-      "Avec le réchauffement, le Kapha accumulé pendant l'hiver fond. La saison peut apporter rhumes, allergies, fatigue et digestion paresseuse.",
+      "Avec le réchauffement, le Kapha accumulé pendant l'hiver fond. Rhumes et allergies arrivent souvent à ce moment-là.",
     photo: "asperges et herbes fraîches sur une planche, lumière du matin",
     assiette: [
       "Des aliments légers, amers et astringents",
@@ -208,7 +208,7 @@ export const SAISONS_DETAIL: SaisonDetail[] = [
     dosha: "pitta",
     qualites: ["Chaud", "Intense", "Léger"],
     intro:
-      "La chaleur et le soleil font monter Pitta. La saison peut apporter irritabilité, peau qui chauffe, acidité et sommeil court.",
+      "La chaleur fait monter Pitta. On devient plus irritable, la peau réagit au soleil et l'acidité gagne l'estomac.",
     photo: "pastèque et menthe fraîche sur un tissu clair, à l'ombre",
     assiette: [
       "Des aliments frais, mais pas glacés",
@@ -246,7 +246,7 @@ export const EQUILIBRE_DOSHA: { dosha: "vata" | "pitta" | "kapha"; conseils: str
 export const PROGRAMME_AUTOMNE = {
   titre: "L'automne, pour apaiser Vata",
   duree: "21 jours",
-  intro: "Un geste par jour pendant trois semaines, pour traverser la saison de Vata sans vous disperser.",
+  intro: "Trois semaines pour traverser l'automne sans que Vata prenne le dessus, avec un geste nouveau chaque jour.",
   inclus: [
     "21 fiches du jour, à lire en 5 minutes",
     "Les recettes d'automne pour Vata",

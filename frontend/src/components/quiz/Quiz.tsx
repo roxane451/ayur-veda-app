@@ -185,8 +185,7 @@ const Quiz = ({ onEnCours, depart }: QuizProps) => {
           {libelleProfil(parts)}
         </h1>
         <p className="m-0 text-xl text-doux">
-          C'est votre nature. Maintenant, voyons comment vous allez en ce moment&nbsp;: 15 questions sur les dernières
-          semaines.
+          Voilà votre nature. La deuxième partie porte sur les dernières semaines, en 15 questions.
         </p>
         <div className="flex flex-wrap items-center gap-4">
           <button
@@ -230,11 +229,11 @@ const Accueil = ({ onNature, onEtat }: { onNature: () => void; onEtat: () => voi
     <div className="relative mx-auto flex max-w-[1220px] flex-col gap-12 px-4 pb-24 pt-8 sm:px-10 md:pt-10">
     <div className="flex max-w-[760px] flex-col gap-4">
       <h1 className="m-0 text-[clamp(2.1rem,6vw,3.6rem)] leading-[1.02]">
-        Deux questionnaires, <em>deux questions</em> différentes.
+        Le quiz se fait <em>en deux temps</em>.
       </h1>
       <p className="m-0 text-xl text-doux">
         {fr(
-          "Votre nature ne change pas au cours de la vie. Votre état, lui, change avec les saisons, le stress, l'alimentation. L'Ayurveda les distingue, et c'est l'écart entre les deux qui dit quoi rééquilibrer.",
+          "D'abord votre nature, qui reste la même toute la vie. Ensuite votre état du moment, qui varie avec les saisons et le mode de vie. L'Ayurveda compare les deux pour savoir quel dosha rééquilibrer.",
         )}
       </p>
     </div>
@@ -245,17 +244,17 @@ const Accueil = ({ onNature, onEtat }: { onNature: () => void; onEtat: () => voi
         <div className="mb-3 flex justify-center">
           <Lotus size={96} stroke="#F3F5E6" decorative />
         </div>
-        <span className="text-[15px] font-bold uppercase tracking-[0.12em] text-citron">Commencez par ici</span>
+        <span className="text-[15px] font-bold uppercase tracking-[0.12em] text-citron">D'abord</span>
         <h2 className="m-0 text-[clamp(1.7rem,3vw,2.1rem)]">
           Ma nature <em className="!text-citron">prakriti</em>
         </h2>
         <p className="m-0 font-display text-[1.2rem] leading-snug">{fr("Qui êtes-vous depuis toujours, quand tout va bien ?")}</p>
         <p className="m-0 text-[#D3E3DE]">
           {fr(
-            "Votre corps, votre digestion, votre caractère, vos rythmes : ce qui vous ressemble depuis l'enfance, pas ce qui vous arrive cette semaine.",
+            "Les questions portent sur votre corps, votre digestion, votre caractère et vos rythmes, tels qu'ils sont depuis l'enfance.",
           )}
         </p>
-        <p className="m-0 text-[15px] font-bold text-[#D3E3DE]">20 questions · environ 5 minutes · une fois pour toutes</p>
+        <p className="m-0 text-[15px] font-bold text-[#D3E3DE]">20 questions, environ 5 minutes. À faire une seule fois.</p>
         <button
           type="button"
           onClick={onNature}
@@ -268,17 +267,17 @@ const Accueil = ({ onNature, onEtat }: { onNature: () => void; onEtat: () => voi
         <div className="mb-3 flex justify-center">
           <SoleilLune size={96} decorative />
         </div>
-        <span className="text-[15px] font-bold uppercase tracking-[0.12em] text-aubergine">Puis à chaque saison</span>
+        <span className="text-[15px] font-bold uppercase tracking-[0.12em] text-aubergine">Ensuite, à chaque saison</span>
         <h2 className="m-0 text-[clamp(1.7rem,3vw,2.1rem)]">
           Mon état du moment <em>vikriti</em>
         </h2>
         <p className="m-0 font-display text-[1.2rem] leading-snug">{fr("Comment allez-vous ces dernières semaines ?")}</p>
         <p className="m-0 text-doux">
           {fr(
-            "Sommeil, digestion, peau, humeur, énergie : ce qui s'est dérangé récemment. On le compare à votre nature pour voir quel dosha est en excès.",
+            "Les questions portent sur le sommeil, la digestion, la peau et l'humeur ces dernières semaines. Le résultat est comparé à votre nature pour repérer un dosha en excès.",
           )}
         </p>
-        <p className="m-0 text-[15px] font-bold text-doux">15 questions · environ 3 minutes · à refaire à chaque saison</p>
+        <p className="m-0 text-[15px] font-bold text-doux">15 questions, environ 3 minutes. À refaire à chaque saison.</p>
         <button
           type="button"
           onClick={onEtat}
@@ -363,8 +362,7 @@ const QuestionEcran = ({
                 vous allez bien.
               </p>
               <p className="m-0 mt-2 hidden text-base sm:block">
-                Pas à cette semaine, ni à une période difficile. En cas de doute, demandez-vous comment vous étiez à
-                vingt ans.
+                Si vous hésitez, pensez à vous vers vingt ans plutôt qu'aux dernières semaines.
               </p>
             </div>
           ) : (
@@ -377,8 +375,7 @@ const QuestionEcran = ({
                 Ces dernières <em className="font-body normal-case italic tracking-normal text-citron">semaines</em>…
               </p>
               <p className="relative m-0 hidden text-[#D3E3DE] sm:block">
-                Répondez selon ce que vous avez vécu depuis un mois environ, même si ça ne vous ressemble pas
-                d'habitude.
+                Répondez pour le mois qui vient de passer, même si ce n'est pas comme d'habitude.
               </p>
             </div>
           )}
@@ -445,8 +442,8 @@ const QuestionEcran = ({
           </div>
           <p className="m-0 mt-1.5 text-base text-doux">
             {estP
-              ? fr("Deux réponses vous ressemblent autant ? Cochez les deux : les points sont partagés.")
-              : fr("Ces dernières semaines, à quelle fréquence ? Touchez une réponse pour passer à la suite.")}
+              ? "Si deux réponses vous ressemblent autant, cochez les deux. Les points seront partagés."
+              : "Indiquez la fréquence sur les dernières semaines. La question suivante s'affiche dès que vous répondez."}
           </p>
           <div className="mt-4 flex min-h-[54px] items-center justify-between gap-4">
             {index > 0 ? (
@@ -568,10 +565,10 @@ const Resultat = ({ titre, profil, onNature, onEtat, onRecommencer, connecte }: 
           {etat
             ? fr(
                 connecte
-                  ? "Refaites le point à la prochaine saison : votre nature et votre historique restent sur votre compte."
-                  : "Refaites le point à la prochaine saison : votre nature reste enregistrée sur cet appareil.",
+                  ? "Votre nature et votre historique restent sur votre compte. Refaites le point à la prochaine saison."
+                  : "Votre nature reste enregistrée sur cet appareil. Refaites le point à la prochaine saison.",
               )
-            : fr("Votre nature est connue. Mesurez maintenant votre état du moment.")}
+            : "Il reste à mesurer votre état du moment."}
         </p>
         <button
           type="button"
