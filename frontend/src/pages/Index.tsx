@@ -18,7 +18,7 @@ import {
 import { PRAKRITI } from "@/data/quiz";
 import { saisonDuMoment } from "@/data/saisons";
 import { fr } from "@/components/quiz/conseils";
-import ChaineElements from "@/components/accueil/ChaineElements";
+import RencontreElements from "@/components/accueil/RencontreElements";
 
 const lienSouligne =
   "inline-flex items-center gap-2 font-bold underline decoration-citron decoration-[3px] underline-offset-[6px]";
@@ -158,11 +158,25 @@ const DOSHAS = [
 ];
 
 const COULEUR_ARC: Record<string, string> = { Vata: "#8DB9B0", Pitta: "#DCBFD5", Kapha: "#BBD439" };
+const PAIRES: Record<string, [{ nom: string; deva: string }, { nom: string; deva: string }]> = {
+  Vata: [
+    { nom: "Éther", deva: "आकाश" },
+    { nom: "Air", deva: "वायु" },
+  ],
+  Pitta: [
+    { nom: "Feu", deva: "अग्नि" },
+    { nom: "Eau", deva: "जल" },
+  ],
+  Kapha: [
+    { nom: "Eau", deva: "जल" },
+    { nom: "Terre", deva: "पृथ्वी" },
+  ],
+};
 
 const TroisDoshas = () => (
   <section aria-labelledby="accueil-doshas" className="relative overflow-hidden bg-paon text-pistache">
     <Motif id="dabu" />
-    <div className="relative mx-auto flex max-w-[1220px] flex-col gap-10 px-4 py-20 sm:px-10 md:pb-28 md:pt-24">
+    <div className="relative mx-auto flex max-w-[1220px] flex-col gap-12 px-4 py-20 sm:px-10 md:pb-28 md:pt-24">
       <div className="grid items-end gap-5 md:grid-cols-2 md:gap-14">
         <h2 id="accueil-doshas" className="m-0 text-[clamp(2.3rem,4.6vw,3.6rem)] leading-none">
           Les trois doshas
@@ -171,19 +185,29 @@ const TroisDoshas = () => (
           Les cinq éléments se combinent en nous de trois façons, que l'on appelle les doshas. Tout le monde a les trois, en proportions différentes.
         </p>
       </div>
-      <ChaineElements />
-      <div className="grid gap-8 md:grid-cols-3 md:gap-10">
-        {DOSHAS.map(({ nom, elements, texte }) => (
-          <div key={nom} className="flex flex-col gap-2 border-t-[3px] pt-4" style={{ borderColor: COULEUR_ARC[nom] }}>
-            <p className="m-0 flex flex-wrap items-baseline gap-x-3">
-              <span className="font-display text-[1.9rem] leading-none">{nom}</span>
-              <span className="italic text-[#C4DCD5]">{elements}</span>
+      <div className="grid gap-14 md:grid-cols-3 md:gap-10">
+        {DOSHAS.map(({ nom, deva, elements, texte, Illu }) => (
+          <article key={nom} className="flex flex-col items-center gap-5 text-center">
+            <h3 className="m-0 flex items-baseline gap-2.5 text-[2.1rem] leading-none">
+              {nom}
+              <span lang="sa" className="font-devanagari text-2xl normal-case" style={{ color: COULEUR_ARC[nom] }}>
+                {deva}
+              </span>
+            </h3>
+            <RencontreElements
+              gauche={PAIRES[nom][0]}
+              droite={PAIRES[nom][1]}
+              couleur={COULEUR_ARC[nom]}
+              Illu={Illu}
+              label={`${nom} naît de la rencontre de ${elements}.`}
+            />
+            <p className="m-0 w-full max-w-[34ch] border-t-[3px] pt-4 text-[#D3E3DE]" style={{ borderColor: COULEUR_ARC[nom] }}>
+              {fr(texte)}
             </p>
-            <p className="m-0 text-[#D3E3DE]">{fr(texte)}</p>
-          </div>
+          </article>
         ))}
       </div>
-      <Link to="/comprendre/doshas" className={`${lienSouligne} self-start text-pistache`}>
+      <Link to="/comprendre/doshas" className={`${lienSouligne} self-center text-pistache`}>
         Comprendre les doshas
       </Link>
     </div>
