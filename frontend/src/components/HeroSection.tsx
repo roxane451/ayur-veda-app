@@ -19,21 +19,21 @@ const HeroSection = () => {
       title: "Quiz Dosha",
       description:
         "Découvrez votre constitution ayurvédique unique à travers notre quiz complet et personnalisé.",
-      href: "/quiz",
+      href: "/profil",
     },
     {
       icon: Calendar,
       title: "Ritucharya",
       description:
         "Adaptez votre mode de vie aux cycles des saisons pour maintenir l'équilibre naturel.",
-      href: "/ritucharya",
+      href: "/au-quotidien",
     },
     {
       icon: BookOpen,
       title: "Encyclopédie",
       description:
         "Explorez notre collection d'épices, plantes et remèdes ayurvédiques traditionnels.",
-      href: "/spices",
+      href: "/cuisine",
     },
   ];
 

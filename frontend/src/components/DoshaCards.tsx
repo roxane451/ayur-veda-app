@@ -94,7 +94,7 @@ const DoshaCards = () => {
             const Icon = dosha.icon;
 
             return (
-              <Link to="/doshas" key={dosha.name}>
+              <Link to="/comprendre" key={dosha.name}>
                 <Card
                   className={`h-full bg-card border-2 ${colors.border} ${colors.hoverBorder} transition-all duration-300 hover:shadow-hover hover:-translate-y-1 group cursor-pointer relative overflow-hidden`}
                   style={{ animationDelay: `${index * 0.1}s` }}

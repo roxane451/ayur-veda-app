@@ -16,28 +16,28 @@ const features = [
     icon: Activity,
     title: "Quiz Vikriti",
     description: "Découvre ton déséquilibre actuel",
-    href: "/quiz",
+    href: "/profil",
   },
   {
     id: "spices",
     icon: Leaf,
     title: "Encyclopédie des Épices",
     description: "Explore les épices ayurvédiques",
-    href: "/spices",
+    href: "/cuisine",
   },
   {
     id: "recipes",
     icon: UtensilsCrossed,
     title: "Recettes Saisonnières",
     description: "Menus adaptés à ton dosha",
-    href: "/ritucharya",
+    href: "/au-quotidien",
   },
   {
     id: "seasons",
     icon: Calendar,
     title: "Planificateur Saisonnier",
     description: "Anticipe les transitions",
-    href: "/ritucharya",
+    href: "/au-quotidien",
   },
   {
     id: "mantras",
@@ -106,7 +106,7 @@ const InteractiveTools = () => {
         {/* Bottom CTA */}
         <div className="text-center">
           <Button asChild size="lg" className="shadow-soft hover:shadow-hover">
-            <Link to="/quiz">Découvrir mon Dosha</Link>
+            <Link to="/profil">Découvrir mon Dosha</Link>
           </Button>
         </div>
       </div>

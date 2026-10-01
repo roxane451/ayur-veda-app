@@ -431,7 +431,7 @@ const Doshas = () => {
                 {/* CTA */}
                 <div className="flex flex-wrap justify-center gap-4">
                   <Button asChild>
-                    <Link to="/quiz">
+                    <Link to="/profil">
                       Quiz personnalisé
                       <ArrowRight className="w-4 h-4 ml-2" />
                     </Link>
@@ -521,7 +521,7 @@ const Doshas = () => {
               constitution ayurvédique unique
             </p>
             <Button size="lg" asChild>
-              <Link to="/quiz">
+              <Link to="/profil">
                 <Sparkles className="w-5 h-5 mr-2" />
                 Faire le Quiz Dosha
                 <ArrowRight className="w-5 h-5 ml-2" />

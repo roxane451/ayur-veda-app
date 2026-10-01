@@ -2,11 +2,12 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Navigate, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 
 import Doshas from "./pages/Doshas";
-import Quiz from "./pages/Quiz";
+import Profil from "./pages/Profil";
+import EspaceMembre from "./pages/EspaceMembre";
 import Ritucharya from "./pages/Ritucharya";
 import Spices from "./pages/Spices";
 import NotFound from "./pages/NotFound";
@@ -24,10 +25,17 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
 
-          <Route path="/doshas" element={<Doshas />} />
-          <Route path="/quiz" element={<Quiz />} />
-          <Route path="/ritucharya" element={<Ritucharya />} />
-          <Route path="/spices" element={<Spices />} />
+          <Route path="/comprendre" element={<Doshas />} />
+          <Route path="/profil" element={<Profil />} />
+          <Route path="/au-quotidien" element={<Ritucharya />} />
+          <Route path="/cuisine" element={<Spices />} />
+          <Route path="/espace-membre" element={<EspaceMembre />} />
+
+          {/* Anciennes adresses */}
+          <Route path="/doshas" element={<Navigate to="/comprendre" replace />} />
+          <Route path="/quiz" element={<Navigate to="/profil" replace />} />
+          <Route path="/ritucharya" element={<Navigate to="/au-quotidien" replace />} />
+          <Route path="/spices" element={<Navigate to="/cuisine" replace />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

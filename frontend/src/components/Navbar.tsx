@@ -1,84 +1,89 @@
-import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Leaf } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { useEffect, useState } from "react";
+import { Link, NavLink } from "react-router-dom";
+import { Menu, X } from "lucide-react";
+import Logo from "@/components/brand/Logo";
+import { NAV_LINKS } from "@/components/navLinks";
+
+
+const lienClasse = ({ isActive }: { isActive: boolean }) =>
+  `transition-colors hover:text-aubergine ${
+    isActive ? "text-aubergine underline underline-offset-8 decoration-2" : "text-encre"
+  }`;
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const location = useLocation();
-
-  const navLinks = [
-    { name: "Accueil", href: "/" },
-
-    { name: "Les 3 Doshas", href: "/doshas" },
-    { name: "Épices & Plantes", href: "/spices" },
-    { name: "Quiz Dosha", href: "/quiz" },
-    { name: "Ritucharya", href: "/ritucharya" },
-  ];
-
-  const isActive = (href: string) => location.pathname === href;
+  const [ouvert, setOuvert] = useState(false);
+  useEffect(() => {
+    document.body.style.overflow = ouvert ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [ouvert]);
 
   return (
-    <nav className="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16 md:h-20">
-          <Link to="/" className="flex items-center gap-2 group">
-            <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-              <Leaf className="w-5 h-5 text-primary" />
-            </div>
-            <span className="text-xl md:text-2xl font-display font-semibold text-foreground">
-              Ayuressence
-            </span>
-          </Link>
+    <header className="sticky top-0 z-50 bg-pistache/95 backdrop-blur-md pt-[env(safe-area-inset-top)]">
+      <div className="mx-auto flex max-w-[1220px] items-center justify-between gap-5 px-4 py-3 sm:px-10 sm:py-4">
+        <Link to="/" aria-label="Ayur-Veda, accueil" className="no-underline">
+          <Logo size={30} />
+        </Link>
 
-          <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                to={link.href}
-                className={`text-sm font-medium transition-colors hover:text-primary ${
-                  isActive(link.href) ? "text-primary" : "text-muted-foreground"
-                }`}
-              >
-                {link.name}
-              </Link>
-            ))}
-          </div>
+        <nav aria-label="Navigation principale" className="hidden items-center gap-7 text-base font-bold lg:flex">
+          {NAV_LINKS.map((l) => (
+            <NavLink key={l.href} to={l.href} className={lienClasse}>
+              {l.name}
+            </NavLink>
+          ))}
+        </nav>
 
-          <div className="hidden md:block">
-            <Button asChild>
-              <Link to="/quiz">Découvrir mon Dosha</Link>
-            </Button>
-          </div>
+        <Link
+          to="/profil"
+          className="hidden min-h-[46px] items-center rounded-full bg-aubergine px-6 font-bold text-pistache hover:opacity-90 lg:inline-flex"
+        >
+          Découvrir mon dosha
+        </Link>
 
-          <button onClick={() => setIsOpen(!isOpen)} className="md:hidden p-2">
-            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
-        </div>
+        <button
+          type="button"
+          onClick={() => setOuvert((o) => !o)}
+          aria-expanded={ouvert}
+          aria-controls="menu-mobile"
+          aria-label={ouvert ? "Fermer le menu" : "Ouvrir le menu"}
+          className="-mr-2 inline-flex h-11 w-11 items-center justify-center rounded-full lg:hidden"
+        >
+          {ouvert ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+        </button>
       </div>
 
-      {isOpen && (
-        <div className="md:hidden bg-background border-b border-border px-4 py-4 space-y-3">
-          {navLinks.map((link) => (
-            <Link
-              key={link.name}
-              to={link.href}
-              onClick={() => setIsOpen(false)}
-              className={`block py-2 ${
-                isActive(link.href) ? "text-primary" : "text-muted-foreground"
-              }`}
-            >
-              {link.name}
-            </Link>
-          ))}
-          <Button asChild className="w-full">
-            <Link to="/quiz" onClick={() => setIsOpen(false)}>
-              Découvrir mon Dosha
-            </Link>
-          </Button>
-        </div>
+      {ouvert && (
+        <nav
+          id="menu-mobile"
+          aria-label="Navigation principale"
+          className="fixed inset-x-0 bottom-0 top-[calc(4.25rem+env(safe-area-inset-top))] overflow-y-auto bg-pistache px-4 pb-safe lg:hidden"
+        >
+          <ul className="flex flex-col">
+            {NAV_LINKS.map((l) => (
+              <li key={l.href} className="border-t border-dashed border-trait">
+                <NavLink
+                  to={l.href}
+                  onClick={() => setOuvert(false)}
+                  className={({ isActive }) =>
+                    `block py-5 font-display text-[1.75rem] leading-none ${isActive ? "text-aubergine" : "text-encre"}`
+                  }
+                >
+                  {l.name}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+          <Link
+            to="/profil"
+            onClick={() => setOuvert(false)}
+            className="mt-6 flex min-h-[54px] items-center justify-center rounded-full bg-aubergine px-6 font-bold text-pistache"
+          >
+            Découvrir mon dosha
+          </Link>
+        </nav>
       )}
-    </nav>
+    </header>
   );
 };
 

@@ -717,7 +717,7 @@ const Ritucharya = () => {
             className="bg-background text-foreground hover:bg-background/90"
             asChild
           >
-            <Link to="/quiz" className="inline-flex items-center gap-2">
+            <Link to="/profil" className="inline-flex items-center gap-2">
               Faire le quiz Dosha
               <ArrowRight className="w-5 h-5" />
             </Link>

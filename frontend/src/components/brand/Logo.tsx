@@ -16,16 +16,18 @@ interface LogoProps {
 
 export const Logo = ({
   size = 32,
-  color = "hsl(var(--syahi))",
-  barColor = "hsl(var(--garance))",
+  color = "hsl(var(--encre))",
+  barColor = "hsl(var(--aubergine))",
   word = "ayurveda",
   label = "Ayur-Veda",
   className,
 }: LogoProps) => {
   const wrap: CSSProperties = {
     display: "inline-grid",
+    width: "max-content",
+    alignSelf: "flex-start",
     fontSize: size,
-    fontWeight: 420,
+    fontWeight: 400,
     lineHeight: 1.2,
     color,
     whiteSpace: "nowrap",
@@ -40,7 +42,7 @@ export const Logo = ({
     borderRadius: 2,
   };
   return (
-    <span role="img" aria-label={label} className={`font-display ${className ?? ""}`} style={wrap}>
+    <span role="img" aria-label={label} className={`font-logo ${className ?? ""}`} style={wrap}>
       <span aria-hidden="true" style={{ gridArea: "1 / 1", letterSpacing: "-0.01em" }}>
         {word}
       </span>

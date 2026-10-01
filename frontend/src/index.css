@@ -1,4 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..700,100,1;1,9..144,300..700,100,1&family=Karla:wght@400;500;700&family=Tiro+Devanagari+Sanskrit&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -6,80 +5,91 @@
 
 @layer base {
   :root {
-    /* Identité « block print » : teintures et coton */
-    --kora: 39 51% 91%; /* coton écru, fond */
-    --kora-2: 39 42% 86%; /* surfaces secondaires */
-    --papier: 40 65% 95%; /* cartes */
-    --syahi: 18 23% 11%; /* encre noire */
-    --doux: 24 18% 31%; /* texte secondaire */
-    --garance: 7 62% 43%; /* rouge de garance */
-    --indigo: 223 52% 25%;
-    --haldi: 38 74% 53%; /* curcuma */
-    --henne: 74 36% 35%;
-    --ciel: 210 39% 76%;
-    --rose: 13 62% 71%;
+    /* Identité finale : vert paon, aubergine, citron vert sur fond pistache */
+    --pistache: 68 43% 93%; /* fond */
+    --surface: 69 34% 88%; /* surfaces secondaires */
+    --carte: 68 57% 97%; /* cartes */
+    --encre: 171 25% 10%; /* texte */
+    --doux: 167 8% 33%; /* texte secondaire */
+    --trait: 156 8% 74%; /* filets, contours discrets */
+    --paon: 174 69% 18%; /* sections sombres, boutons principaux */
+    --aubergine: 316 37% 26%; /* actions, italiques */
+    --citron: 70 64% 53%; /* accent */
+    --citron-fonce: 70 66% 30%;
+    --ocre: 43 67% 49%; /* illustrations seulement */
 
-    --background: var(--kora);
-    --foreground: var(--syahi);
+    /* Anciens noms, redirigés vers la nouvelle palette */
+    --kora: var(--pistache);
+    --kora-2: var(--surface);
+    --papier: var(--carte);
+    --syahi: var(--encre);
+    --garance: var(--aubergine);
+    --indigo: var(--paon);
+    --haldi: var(--citron);
+    --henne: var(--citron-fonce);
+    --ciel: 168 24% 64%;
+    --rose: 316 30% 80%;
 
-    --card: var(--papier);
-    --card-foreground: var(--syahi);
+    --background: var(--pistache);
+    --foreground: var(--encre);
 
-    --popover: var(--papier);
-    --popover-foreground: var(--syahi);
+    --card: var(--carte);
+    --card-foreground: var(--encre);
 
-    --primary: var(--garance);
-    --primary-foreground: var(--kora);
+    --popover: var(--carte);
+    --popover-foreground: var(--encre);
 
-    --secondary: var(--indigo);
-    --secondary-foreground: var(--kora);
+    --primary: var(--paon);
+    --primary-foreground: var(--pistache);
 
-    --muted: var(--kora-2);
+    --secondary: var(--aubergine);
+    --secondary-foreground: var(--pistache);
+
+    --muted: var(--surface);
     --muted-foreground: var(--doux);
 
-    --accent: var(--kora-2);
-    --accent-foreground: var(--syahi);
+    --accent: var(--surface);
+    --accent-foreground: var(--encre);
 
-    --destructive: 0 70% 42%;
-    --destructive-foreground: var(--kora);
+    --destructive: 0 62% 40%;
+    --destructive-foreground: var(--pistache);
 
-    --border: 38 32% 78%;
-    --input: 38 32% 78%;
-    --ring: var(--garance);
+    --border: var(--trait);
+    --input: var(--trait);
+    --ring: var(--citron);
 
-    --radius: 0.75rem;
+    --radius: 0.875rem;
 
-    /* Doshas : à distinguer aussi par la clarté */
-    --vata: 210 40% 64%;
-    --vata-foreground: var(--syahi);
-    --vata-muted: 210 40% 92%;
+    /* Doshas */
+    --vata: 168 24% 64%;
+    --vata-foreground: var(--encre);
+    --vata-muted: 168 24% 90%;
 
-    --pitta: var(--garance);
-    --pitta-foreground: var(--kora);
-    --pitta-muted: 7 62% 93%;
+    --pitta: var(--aubergine);
+    --pitta-foreground: var(--pistache);
+    --pitta-muted: 316 30% 92%;
 
-    --kapha: var(--henne);
-    --kapha-foreground: var(--kora);
-    --kapha-muted: 74 30% 90%;
+    --kapha: var(--citron-fonce);
+    --kapha-foreground: var(--pistache);
+    --kapha-muted: 70 40% 86%;
 
     /* Éléments */
-    --ether: 260 25% 55%;
-    --air: 210 40% 55%;
-    --fire: var(--garance);
-    --water: 205 45% 42%;
-    --earth: 24 40% 38%;
+    --ether: 260 20% 55%;
+    --air: 168 24% 52%;
+    --fire: var(--aubergine);
+    --water: 190 45% 32%;
+    --earth: 43 40% 36%;
 
-    /* Anciens noms conservés pour les pages existantes */
-    --forest: var(--indigo);
-    --forest-light: 223 40% 38%;
-    --forest-dark: 223 55% 18%;
-    --gold: var(--haldi);
-    --gold-light: 38 70% 75%;
-    --cream: var(--kora);
+    --forest: var(--paon);
+    --forest-light: 174 45% 30%;
+    --forest-dark: 174 70% 12%;
+    --gold: var(--citron);
+    --gold-light: 70 60% 78%;
+    --cream: var(--pistache);
 
-    --shadow-soft: 0 4px 20px -4px hsl(18 23% 11% / 0.08);
-    --shadow-card: 0 10px 40px -10px hsl(18 23% 11% / 0.12);
-    --shadow-hover: 0 20px 50px -15px hsl(18 23% 11% / 0.15);
+    --shadow-soft: 0 4px 20px -4px hsl(171 25% 10% / 0.08);
+    --shadow-card: 0 10px 40px -10px hsl(171 25% 10% / 0.12);
+    --shadow-hover: 0 20px 50px -15px hsl(171 25% 10% / 0.15);
 
     --sidebar-background: var(--kora);
     --sidebar-foreground: var(--syahi);
@@ -99,7 +109,9 @@
 
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: "Karla", system-ui, -apple-system, sans-serif;
+    font-family: "Castoro", Georgia, serif;
+    font-size: 1.0625rem;
+    line-height: 1.55;
   }
 
   h1,
@@ -108,9 +120,21 @@
   h4,
   h5,
   h6 {
-    font-family: "Fraunces", Georgia, serif;
-    font-variation-settings: "SOFT" 100, "WONK" 1;
+    font-family: "Castoro Titling", Georgia, serif;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
     font-weight: 400;
+    line-height: 1.08;
+  }
+
+  h1 em,
+  h2 em,
+  h3 em {
+    font-family: "Castoro", Georgia, serif;
+    font-style: italic;
+    text-transform: none;
+    letter-spacing: 0;
+    color: hsl(var(--aubergine));
   }
 
   :lang(sa) {
@@ -136,25 +160,36 @@
     box-shadow:
       0 0 0 2px hsl(var(--syahi)),
       0 0 0 7px hsl(var(--papier)),
-      0 0 0 9px hsl(var(--garance));
+      0 0 0 9px hsl(var(--aubergine));
   }
 
   .lien-souligne {
     text-decoration: underline;
     text-underline-offset: 6px;
-    text-decoration-color: hsl(var(--haldi));
+    text-decoration-color: hsl(var(--citron));
     text-decoration-thickness: 3px;
   }
 }
 
 @layer utilities {
   .font-display {
-    font-family: "Fraunces", Georgia, serif;
-    font-variation-settings: "SOFT" 100, "WONK" 1;
+    font-family: "Castoro Titling", Georgia, serif;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
   }
 
   .font-body {
-    font-family: "Karla", system-ui, sans-serif;
+    font-family: "Castoro", Georgia, serif;
+  }
+
+  .font-logo {
+    font-family: "Castoro", Georgia, serif;
+    text-transform: none;
+    letter-spacing: -0.01em;
+  }
+
+  .pb-safe {
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
   }
 
   .font-devanagari {

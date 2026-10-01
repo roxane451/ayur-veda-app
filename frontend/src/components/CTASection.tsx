@@ -39,7 +39,7 @@ const CTASection = () => {
               className="bg-card text-foreground hover:bg-card/90 shadow-hover"
               asChild
             >
-              <Link to="/quiz" className="group">
+              <Link to="/profil" className="group">
                 Commencer le Quiz
                 <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
               </Link>
