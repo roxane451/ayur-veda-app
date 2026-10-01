@@ -28,7 +28,8 @@ export interface DoshaDetail {
   esprit: [string, string][];
   signes: string[];
   conseils: string[];
-  plantes: string[];
+  /** [À VALIDER] par une praticienne */
+  plantes: { nom: string; texte: string }[];
 }
 
 export const DOSHAS_DETAIL: DoshaDetail[] = [
@@ -63,7 +64,11 @@ export const DOSHAS_DETAIL: DoshaDetail[] = [
       "Des huiles nourrissantes",
       "Se protéger du froid et du vent",
     ],
-    plantes: ["Ashwagandha", "Shatavari", "Triphala"],
+    plantes: [
+      { nom: "Ashwagandha", texte: "Le tonique du système nerveux, contre le stress" },
+      { nom: "Shatavari", texte: "La plante qui nourrit et apaise" },
+      { nom: "Triphala", texte: "Trois fruits réunis, pour un transit régulier" },
+    ],
   },
   {
     id: "pitta",
@@ -96,7 +101,11 @@ export const DOSHAS_DETAIL: DoshaDetail[] = [
       "Un environnement frais",
       "Apprendre à lâcher prise",
     ],
-    plantes: ["Amalaki", "Brahmi", "Aloe vera"],
+    plantes: [
+      { nom: "Amalaki", texte: "Le fruit acidulé qui rafraîchit, riche en vitamine C" },
+      { nom: "Brahmi", texte: "La plante de la concentration" },
+      { nom: "Aloe vera", texte: "Le gel qui rafraîchit, dedans comme dehors" },
+    ],
   },
   {
     id: "kapha",
@@ -129,7 +138,11 @@ export const DOSHAS_DETAIL: DoshaDetail[] = [
       "Éviter de trop dormir",
       "Un environnement chaud et sec",
     ],
-    plantes: ["Trikatu", "Guggul", "Boswellia"],
+    plantes: [
+      { nom: "Trikatu", texte: "Poivre, gingembre et poivre long, pour réveiller le feu" },
+      { nom: "Guggul", texte: "Une résine traditionnelle de Kapha" },
+      { nom: "Boswellia", texte: "La résine d'encens, pour les articulations" },
+    ],
   },
 ];
 
