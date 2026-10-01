@@ -4,6 +4,7 @@ import { Chai, Feuille, Poudre } from "@/components/brand/Illustrations";
 import { Deva } from "@/components/comprendre/Commun";
 import { EffetsEpice, FilCuisine, IlluEpice, PageCuisine, Pastille } from "@/components/cuisine/Commun";
 import Dabba from "@/components/cuisine/Dabba";
+import Ingredients from "@/components/cuisine/Ingredients";
 import { COULEUR_DOSHA, fr } from "@/components/quiz/conseils";
 import { EPICES, MELANGES, PLANTES, RECETTES } from "@/data/cuisine";
 import { DOSHAS, NOM_DOSHA, type DoshaKey } from "@/lib/doshaLogic";
@@ -88,6 +89,8 @@ const Boite = () => {
           ))}
         </ul>
       </section>
+
+      <Ingredients filtre={filtre} />
 
       <section aria-label="Pour aller plus loin" className="bg-surface">
         <div className="mx-auto grid max-w-[1220px] gap-6 px-4 py-16 sm:px-10 md:grid-cols-3 md:py-[72px]">

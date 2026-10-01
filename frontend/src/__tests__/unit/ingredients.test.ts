@@ -1,0 +1,24 @@
+import { describe, expect, it } from "vitest";
+import { INGREDIENTS, ingredientsQuiApaisent, initialeIngredient } from "@/data/ingredients";
+
+describe("ingrédients de A à Z", () => {
+  it("reprend les 31 ingrédients, rangés par ordre alphabétique", () => {
+    expect(INGREDIENTS).toHaveLength(31);
+    const noms = INGREDIENTS.map((i) => i.nom);
+    expect([...noms].sort((a, b) => a.localeCompare(b, "fr"))).toEqual(noms);
+  });
+  it("lit les effets sur les doshas", () => {
+    const ghee = INGREDIENTS.find((i) => i.nom === "Ghee")!;
+    expect(ghee.doshas).toEqual({ vata: "diminue", pitta: "diminue", kapha: "augmente" });
+    expect(INGREDIENTS.find((i) => i.nom === "Trimada")!.doshas).toBeNull();
+  });
+  it("filtre ceux qui apaisent un dosha", () => {
+    const pitta = ingredientsQuiApaisent("pitta").map((i) => i.nom);
+    expect(pitta).toContain("Shatavari");
+    expect(pitta).not.toContain("Curcuma");
+    expect(ingredientsQuiApaisent(null)).toHaveLength(31);
+  });
+  it("donne l'initiale sans accent", () => {
+    expect(initialeIngredient("Éther")).toBe("E");
+  });
+});
