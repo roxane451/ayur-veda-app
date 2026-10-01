@@ -32,10 +32,21 @@ export const SousNav = ({ label, pages }: { label: string; pages: SousPage[] }) 
 );
 
 /** Gabarit d'une page de rubrique : menu, sous-navigation, contenu, pied de page. */
-export const PageRubrique = ({ label, pages, children }: { label: string; pages: SousPage[]; children: ReactNode }) => (
+export const PageRubrique = ({
+  label,
+  pages,
+  navigation,
+  children,
+}: {
+  label: string;
+  pages: SousPage[];
+  /** Remplace la sous-navigation en pastilles (le sommaire de Comprendre, par exemple). */
+  navigation?: ReactNode;
+  children: ReactNode;
+}) => (
   <>
     <Navbar />
-    <SousNav label={label} pages={pages} />
+    {navigation ?? <SousNav label={label} pages={pages} />}
     <main>{children}</main>
     <Footer />
   </>

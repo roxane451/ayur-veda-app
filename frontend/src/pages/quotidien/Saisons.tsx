@@ -5,6 +5,7 @@ import Photo from "@/components/brand/PhotoPlaceholder";
 import { Deva } from "@/components/comprendre/Commun";
 import { Fil, PageRubrique } from "@/components/Rubrique";
 import { PAGES_QUOTIDIEN } from "@/components/quotidien/pages";
+import Roue from "@/components/quotidien/Roue";
 import { COULEUR_DOSHA, fr } from "@/components/quiz/conseils";
 import { EQUILIBRE_DOSHA, PROGRAMME_AUTOMNE, SAISONS_DETAIL, saisonDuMoment } from "@/data/saisons";
 import { NOM_DOSHA } from "@/lib/doshaLogic";
@@ -46,50 +47,23 @@ const Saisons = () => {
 
   return (
     <PageRubrique label="Au quotidien" pages={PAGES_QUOTIDIEN}>
-      <section className="mx-auto flex max-w-[1220px] flex-col gap-5 px-4 pb-12 pt-6 sm:px-10">
-        <Fil rubrique="Au quotidien" href="/au-quotidien" page="Les saisons" />
-        <div className="grid items-end gap-6 md:grid-cols-2 md:gap-10">
-          <div className="flex flex-col gap-2">
-            <p className="m-0 flex items-baseline gap-3.5">
-              <Deva>ऋतुचर्या</Deva>
-              <span className="italic text-doux">ritucharya</span>
-            </p>
-            <h1 className="m-0 text-[clamp(2.6rem,6.4vw,5.25rem)] leading-none">Vivre avec les saisons</h1>
-          </div>
-          <p className="m-0 text-xl text-doux">
+      <section className="mx-auto grid max-w-[1220px] items-center gap-10 px-4 pb-12 pt-6 sm:px-10 md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] md:pb-16">
+        <div className="flex flex-col gap-5">
+          <Fil rubrique="Au quotidien" href="/au-quotidien" page="Les saisons" />
+          <p className="m-0 flex items-baseline gap-3.5">
+            <Deva>ऋतुचर्या</Deva>
+            <span className="italic text-doux">ritucharya</span>
+          </p>
+          <h1 className="m-0 text-[clamp(2.6rem,5.6vw,4.25rem)] leading-[0.95]">Vivre avec les saisons</h1>
+          <p className="m-0 max-w-[36ch] text-xl text-doux">
             Chaque saison fait monter un dosha. En adaptant ses repas et ses journées, on l'empêche de s'accumuler.
           </p>
+          <p className="m-0 max-w-[36ch]">
+            Nous sommes en <b>{SAISONS_DETAIL.find((x) => x.id === actuelle)!.court.toLowerCase()}</b>, la saison de{" "}
+            {NOM_DOSHA[SAISONS_DETAIL.find((x) => x.id === actuelle)!.dosha]}. Touchez une autre saison sur la roue pour lire ses conseils.
+          </p>
         </div>
-        <div role="tablist" aria-label="Les quatre saisons" className="mt-3 grid grid-cols-2 gap-3 lg:grid-cols-4">
-          {SAISONS_DETAIL.map((x) => {
-            const choisi = x.id === id;
-            return (
-              <button
-                key={x.id}
-                type="button"
-                role="tab"
-                aria-selected={choisi}
-                aria-controls="detail-saison"
-                onClick={() => setParams(x.id === actuelle ? {} : { saison: x.id }, { replace: true })}
-                className={`flex min-w-0 flex-col gap-0.5 rounded-2xl px-4 py-4 text-left sm:px-6 lg:px-5 xl:px-6 ${
-                  choisi ? "bg-encre text-pistache" : "bg-carte shadow-[inset_0_0_0_1.5px_hsl(var(--encre))] hover:bg-surface"
-                }`}
-              >
-                <span className={`text-[13px] font-bold ${choisi ? "text-citron" : "text-aubergine"}`}>
-                  {x.id === actuelle ? "En ce moment" : " "}
-                </span>
-                <span className="font-display text-[1.15rem] leading-tight [overflow-wrap:anywhere] min-[400px]:text-[1.3rem] sm:text-[1.75rem] lg:text-[1.45rem] xl:text-[1.75rem]">
-                  {x.court}
-                </span>
-                <span className={`text-[15px] ${choisi ? "text-[#C5D1CC]" : "text-doux"}`}>{x.periode}</span>
-                <span className="mt-1.5 inline-flex items-center gap-1.5 text-[15px] font-bold">
-                  <span aria-hidden="true" className="h-2.5 w-2.5 rounded-full" style={{ background: COULEUR_DOSHA[x.dosha] }} />
-                  {NOM_DOSHA[x.dosha]}
-                </span>
-              </button>
-            );
-          })}
-        </div>
+        <Roue choisie={id} actuelle={actuelle} onChoisir={(x) => setParams(x === actuelle ? {} : { saison: x }, { replace: true })} />
       </section>
       <Bande />
 

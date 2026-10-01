@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { Search } from "lucide-react";
 import { Bande } from "@/components/brand/BrandDefs";
-import { Deva, PageComprendre, PiedSuite, TitrePage } from "@/components/comprendre/Commun";
+import { Deva, Frontispice, PageComprendre, PiedSuite } from "@/components/comprendre/Commun";
 import { fr } from "@/components/quiz/conseils";
 import { LEXIQUE, initiale } from "@/data/comprendre";
 
@@ -17,14 +17,10 @@ const Lexique = () => {
 
   return (
     <PageComprendre>
+      <Frontispice deva="शब्दकोश" translit="śabdakośa, le lexique" titre="Lexique">
+        <p className="m-0 mt-1 max-w-[44ch] text-xl text-doux">Les mots sanskrits que vous croiserez sur le site, avec leur sens en une phrase.</p>
+      </Frontispice>
       <div className="mx-auto max-w-[1220px] px-4 sm:px-10">
-        <TitrePage
-          fil="Lexique"
-          titre="Lexique"
-          deva="शब्दकोश"
-          translit="śabdakośa"
-          intro="Les mots sanskrits que vous croiserez sur le site, avec leur sens en une phrase."
-        />
         <div className="flex flex-col gap-4 pb-6 sm:flex-row sm:items-center sm:justify-between">
           <nav aria-label="Lettres" className="flex flex-wrap gap-1.5">
             {lettres.map((l) => (

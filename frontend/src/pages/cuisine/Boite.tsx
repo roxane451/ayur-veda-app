@@ -2,7 +2,8 @@ import { Link, useSearchParams } from "react-router-dom";
 import { Bande } from "@/components/brand/BrandDefs";
 import { Chai, Feuille, Poudre } from "@/components/brand/Illustrations";
 import { Deva } from "@/components/comprendre/Commun";
-import { EffetsEpice, IlluEpice, PageCuisine, Pastille, TeteCuisine } from "@/components/cuisine/Commun";
+import { EffetsEpice, FilCuisine, IlluEpice, PageCuisine, Pastille } from "@/components/cuisine/Commun";
+import Dabba from "@/components/cuisine/Dabba";
 import { COULEUR_DOSHA, fr } from "@/components/quiz/conseils";
 import { EPICES, MELANGES, PLANTES, RECETTES } from "@/data/cuisine";
 import { DOSHAS, NOM_DOSHA, type DoshaKey } from "@/lib/doshaLogic";
@@ -17,29 +18,32 @@ const Boite = () => {
 
   return (
     <PageCuisine>
-      <TeteCuisine titre="La boîte à épices" intro="Avec ces huit épices, on peut cuisiner selon l'Ayurveda toute l'année. Chaque fiche dit comment les utiliser et les conserver.">
-        <IlluEpice id="curcuma" size={150} className="h-auto w-[34%] max-w-[150px]" />
-        <IlluEpice id="cardamome" size={120} className="h-auto w-[28%] max-w-[120px]" />
-        <IlluEpice id="cannelle" size={130} className="h-auto w-[30%] max-w-[130px]" />
-      </TeteCuisine>
+      <section className="mx-auto grid max-w-[1220px] items-center gap-8 px-4 pb-12 pt-6 sm:px-10 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] md:gap-2 md:pb-14">
+        <div className="flex flex-col gap-5">
+          <FilCuisine />
+          <Deva className="text-[clamp(2rem,4vw,2.5rem)] !leading-none text-aubergine">मसाला डब्बा</Deva>
+          <h1 className="m-0 text-[clamp(2.6rem,6.4vw,4.75rem)] leading-[0.95]">La boîte à épices</h1>
+          <p className="m-0 max-w-[36ch] text-xl text-doux">
+            {fr("Avec ces huit épices, on peut cuisiner selon l'Ayurveda toute l'année. Chaque fiche dit comment les utiliser et les conserver.")}
+          </p>
+          <div role="group" aria-label="Filtrer les épices" className="flex flex-wrap items-center gap-2 pt-2">
+            <span className="mr-1.5 font-bold">Pour apaiser</span>
+            <Pastille actif={!filtre} onClick={() => choisir(null)}>
+              Tous
+            </Pastille>
+            {DOSHAS.map((d) => (
+              <Pastille key={d} actif={filtre === d} onClick={() => choisir(d)} couleur={COULEUR_DOSHA[d]}>
+                {NOM_DOSHA[d]}
+              </Pastille>
+            ))}
+          </div>
+        </div>
+        <Dabba actives={filtre ? new Set(epices.map((e) => e.id)) : undefined} />
+      </section>
       <Bande />
 
-      <section aria-label="Filtrer les épices" className="sticky top-[calc(4.25rem+env(safe-area-inset-top))] z-10 border-b-2 border-encre bg-pistache lg:top-[5.25rem]">
-        <div className="mx-auto flex max-w-[1220px] items-center gap-2 overflow-x-auto px-4 py-3.5 [scrollbar-width:none] sm:flex-wrap sm:px-10">
-          <span className="mr-1.5 shrink-0 font-bold">Pour apaiser</span>
-          <Pastille actif={!filtre} onClick={() => choisir(null)}>
-            Tous
-          </Pastille>
-          {DOSHAS.map((d) => (
-            <Pastille key={d} actif={filtre === d} onClick={() => choisir(d)} couleur={COULEUR_DOSHA[d]}>
-              {NOM_DOSHA[d]}
-            </Pastille>
-          ))}
-          <span className="ml-auto hidden shrink-0 text-[15px] text-doux md:inline">↓ apaise · = neutre · ↑ fait monter</span>
-        </div>
-      </section>
-
       <section aria-label="Les épices" className="mx-auto max-w-[1220px] px-4 pb-20 pt-12 sm:px-10" aria-live="polite">
+        <p className="m-0 mb-6 text-[15px] text-doux">↓ apaise, = neutre, ↑ fait monter</p>
         <p className="sr-only">
           {epices.length} épices{filtre ? ` qui apaisent ${NOM_DOSHA[filtre]}` : ""}.
         </p>

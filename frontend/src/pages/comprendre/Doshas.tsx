@@ -1,7 +1,7 @@
 import { Link, useSearchParams } from "react-router-dom";
 import { Bande, Motif } from "@/components/brand/BrandDefs";
 import { Flamme, Goutte, Vent } from "@/components/brand/Illustrations";
-import { Deva, FilAriane, PageComprendre, PiedSuite } from "@/components/comprendre/Commun";
+import { Deva, Frontispice, Ornement, PageComprendre, PiedSuite } from "@/components/comprendre/Commun";
 import { COULEUR_DOSHA, fr } from "@/components/quiz/conseils";
 import { COMPARAISON, DOSHAS_DETAIL, type DoshaDetail } from "@/data/comprendre";
 import type { DoshaKey } from "@/lib/doshaLogic";
@@ -125,8 +125,8 @@ const Resume = ({ d, onChoisir }: { d: DoshaDetail; onChoisir: () => void }) => 
 
 const Doshas = () => {
   const [params, setParams] = useSearchParams();
-  const choisi = (DOSHAS_DETAIL.find((d) => d.id === params.get("dosha")) ?? DOSHAS_DETAIL[0]).id;
-  const actif = DOSHAS_DETAIL.find((d) => d.id === choisi)!;
+  const idChoisi = (DOSHAS_DETAIL.find((d) => d.id === params.get("dosha")) ?? DOSHAS_DETAIL[0]).id;
+  const actif = DOSHAS_DETAIL.find((d) => d.id === idChoisi)!;
   const choisir = (id: DoshaKey) => {
     setParams({ dosha: id }, { replace: true });
     document.getElementById("detail-dosha")?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -134,52 +134,51 @@ const Doshas = () => {
 
   return (
     <PageComprendre>
-      <section className="relative overflow-hidden">
-        <Motif id="buta" />
-        <div className="relative mx-auto grid max-w-[1220px] items-end gap-10 px-4 pb-14 pt-6 sm:px-10 md:grid-cols-2 md:pb-20">
-          <div className="flex flex-col gap-5">
-            <FilAriane page="Les doshas" />
-            <h1 className="m-0 text-[clamp(2.6rem,6.4vw,5.25rem)] leading-none">Les trois doshas</h1>
-            <p className="m-0 max-w-[40ch] text-xl text-doux">
-              Les trois énergies qui gouvernent le corps et l'esprit. Chacun les porte toutes, dans des proportions qui lui sont propres et que l'on appelle sa <em className="font-body normal-case">prakriti</em>.
-            </p>
-            <div role="tablist" aria-label="Choisir un dosha" className="flex flex-wrap gap-2">
-              {DOSHAS_DETAIL.map((d) => (
-                <button
-                  key={d.id}
-                  type="button"
-                  role="tab"
-                  aria-selected={d.id === choisi}
-                  aria-controls="detail-dosha"
-                  onClick={() => choisir(d.id)}
-                  className={`inline-flex min-h-10 items-center gap-2 rounded-full px-4 text-[15px] font-bold ${
-                    d.id === choisi ? "bg-encre text-pistache" : "shadow-[inset_0_0_0_1.5px_hsl(var(--trait))] hover:bg-surface"
-                  }`}
-                >
-                  <span aria-hidden="true" className="h-2.5 w-2.5 rounded-full" style={{ background: COULEUR_DOSHA[d.id] }} />
-                  {d.nom}
-                </button>
-              ))}
-              <a href="#d-comparer" className="inline-flex min-h-10 items-center rounded-full px-4 text-[15px] font-bold no-underline shadow-[inset_0_0_0_1.5px_hsl(var(--trait))] hover:bg-surface">
-                Comparer les trois
-              </a>
-            </div>
-          </div>
-          <div className="flex items-end justify-center gap-2">
-            <Vent size={150} stroke="#13201E" decorative className="h-auto w-[30%] max-w-[150px]" />
-            <Flamme size={170} stroke="#13201E" decorative className="h-auto w-[34%] max-w-[170px]" />
-            <Goutte size={150} stroke="#13201E" decorative className="h-auto w-[30%] max-w-[150px]" />
-          </div>
+      <Frontispice deva="त्रिदोष" translit="tridoṣa, les trois doshas" titre="Les trois doshas">
+        <p className="m-0 mt-1 max-w-[44ch] text-xl text-doux">
+          Les trois énergies qui gouvernent le corps et l'esprit. Chacun les porte toutes, dans des proportions qui lui sont propres et que l'on appelle sa{" "}
+          <em className="font-body normal-case">prakriti</em>.
+        </p>
+        <div className="mt-5">
+          <Ornement />
         </div>
-      </section>
+        <div role="tablist" aria-label="Choisir un dosha" className="mt-6 grid w-full max-w-[640px] grid-cols-3 gap-2 sm:gap-6">
+          {DOSHAS_DETAIL.map((d) => {
+            const Illu = d.id === "vata" ? Vent : d.id === "pitta" ? Flamme : Goutte;
+            const choisi = d.id === idChoisi;
+            return (
+              <button
+                key={d.id}
+                type="button"
+                role="tab"
+                aria-selected={choisi}
+                aria-controls="detail-dosha"
+                onClick={() => choisir(d.id)}
+                className="group flex flex-col items-center gap-1.5 rounded-buta px-1 pb-3 pt-2 hover:bg-surface"
+              >
+                <Illu size={104} stroke="#13201E" decorative className="h-auto w-[72px] transition-transform group-hover:-translate-y-1 motion-reduce:transition-none sm:w-[104px]" />
+                <span
+                  className={`font-display text-[1.35rem] leading-none sm:text-[1.65rem] ${choisi ? "border-b-2 border-aubergine pb-1" : "border-b-2 border-transparent pb-1"}`}
+                >
+                  {d.nom}
+                </span>
+                <span className="text-sm italic text-doux sm:text-base">{d.elements}</span>
+              </button>
+            );
+          })}
+        </div>
+        <a href="#d-comparer" className="mt-2 text-base font-bold underline underline-offset-4">
+          Comparer les trois
+        </a>
+      </Frontispice>
       <Bande />
 
-      <div id="detail-dosha" role="tabpanel" className="scroll-mt-20" key={choisi}>
+      <div id="detail-dosha" role="tabpanel" className="scroll-mt-20" key={idChoisi}>
         <Detail d={actif} />
       </div>
 
       <section aria-label="Les deux autres doshas" className="mx-auto flex max-w-[1220px] flex-col gap-4 px-4 pb-24 sm:px-10">
-        {DOSHAS_DETAIL.filter((d) => d.id !== choisi).map((d) => (
+        {DOSHAS_DETAIL.filter((d) => d.id !== idChoisi).map((d) => (
           <Resume key={d.id} d={d} onChoisir={() => choisir(d.id)} />
         ))}
       </section>

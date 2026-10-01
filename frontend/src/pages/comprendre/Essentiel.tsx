@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Bande, Motif } from "@/components/brand/BrandDefs";
 import { Flamme, Poudre, SoleilLune, Vent } from "@/components/brand/Illustrations";
-import { Deva, FilAriane, PageComprendre } from "@/components/comprendre/Commun";
+import { Deva, Frontispice, Ornement, PageComprendre } from "@/components/comprendre/Commun";
 import { lienSouligne } from "@/components/comprendre/sousPages";
 import { fr } from "@/components/quiz/conseils";
 import { ELEMENTS } from "@/data/comprendre";
@@ -15,30 +15,19 @@ const NOTIONS = [
 
 const Essentiel = () => (
   <PageComprendre>
-    <section className="relative overflow-hidden">
-      <Motif id="buta" />
-      <div className="relative mx-auto grid max-w-[1220px] items-end gap-12 px-4 pb-16 pt-6 sm:px-10 md:grid-cols-2 md:pb-[72px]">
-        <div className="flex flex-col gap-4">
-          <FilAriane />
-          <p className="m-0 flex flex-wrap items-baseline gap-x-3.5">
-            <Deva>आयुर्वेद</Deva>
-            <span className="italic text-doux">āyus, la vie · veda, la connaissance</span>
-          </p>
-          <h1 className="m-0 text-[clamp(2.6rem,6.4vw,5.25rem)] leading-none">Comprendre l'Ayurveda</h1>
-          <p className="m-0 max-w-[46ch] text-xl text-doux">
-            {fr(
-              "La médecine traditionnelle de l'Inde part de cinq éléments. Ils forment les doshas, que les saveurs nourrissent et que le feu digestif entretient.",
-            )}
-          </p>
-        </div>
-        <div className="flex flex-col gap-3 rounded-2xl bg-carte px-8 py-7 shadow-[inset_0_0_0_2px_hsl(var(--encre))]">
-          <span className="font-display text-2xl">L'idée de départ</span>
-          <p className="m-0">
-            Pour l'Ayurveda, tout ce qui existe est fait des cinq mêmes éléments, nous compris. La santé tient à leur équilibre, qui est propre à chacun.
-          </p>
-        </div>
+    <Frontispice deva="आयुर्वेद" translit="āyus, la vie, et veda, la connaissance" titre="Comprendre l'Ayurveda">
+      <p className="m-0 mt-1 max-w-[46ch] text-xl text-doux">
+        {fr(
+          "La médecine traditionnelle de l'Inde part de cinq éléments. Ils forment les doshas, que les saveurs nourrissent et que le feu digestif entretient.",
+        )}
+      </p>
+      <div className="mt-5">
+        <Ornement />
       </div>
-    </section>
+      <p className="m-0 mt-4 max-w-[40ch] font-body text-[1.45rem] italic leading-snug">
+        Pour l'Ayurveda, tout ce qui existe est fait des cinq mêmes éléments, nous compris. La santé tient à leur équilibre, qui est propre à chacun.
+      </p>
+    </Frontispice>
 
     <section aria-labelledby="h-elements" className="relative overflow-hidden bg-paon text-pistache">
       <Motif id="dabu" />

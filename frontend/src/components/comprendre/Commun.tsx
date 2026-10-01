@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Fil, PageRubrique } from "@/components/Rubrique";
 import { fr } from "@/components/quiz/conseils";
@@ -8,11 +8,59 @@ import { SOUS_PAGES } from "./sousPages";
 
 
 
+const ROMAINS = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII"];
+
+/** Le sommaire de la rubrique, comme la table d'un livre : chapitres numérotés entre deux filets. */
+export const Sommaire = () => (
+  <nav aria-label="Sommaire de Comprendre" className="mx-auto max-w-[1220px] px-4 sm:px-10">
+    <ol className="m-0 flex list-none gap-x-8 overflow-x-auto border-y border-b-[3px] border-double border-encre px-1 py-2.5 [scrollbar-width:none] lg:justify-center">
+      {SOUS_PAGES.map((p, i) => (
+        <li key={p.href} className="shrink-0">
+          <NavLink
+            to={p.href}
+            end
+            className={({ isActive }) =>
+              `inline-flex min-h-10 items-baseline gap-2 whitespace-nowrap border-b-2 pt-2 text-base no-underline ${
+                isActive ? "border-aubergine font-bold" : "border-transparent hover:border-trait"
+              }`
+            }
+          >
+            <span className="font-normal italic text-aubergine">{ROMAINS[i]}</span>
+            {p.titre}
+          </NavLink>
+        </li>
+      ))}
+    </ol>
+  </nav>
+);
+
 /** Gabarit commun des pages « Comprendre ». */
 export const PageComprendre = ({ children }: { children: ReactNode }) => (
-  <PageRubrique label="Comprendre" pages={SOUS_PAGES}>
+  <PageRubrique label="Comprendre" pages={SOUS_PAGES} navigation={<Sommaire />}>
     {children}
   </PageRubrique>
+);
+
+/** Petit ornement de fin de page de garde : un filet, trois points. */
+export const Ornement = () => (
+  <svg width="120" height="16" viewBox="0 0 120 16" aria-hidden="true" className="block">
+    <g fill="#5B2A4E">
+      <circle cx="60" cy="8" r="4" />
+      <circle cx="46" cy="8" r="2" />
+      <circle cx="74" cy="8" r="2" />
+    </g>
+    <path d="M4 8 H38 M82 8 H116" stroke="#13201E" strokeWidth="1.5" />
+  </svg>
+);
+
+/** Ouverture centrée des pages de Comprendre : le mot sanskrit en grand, puis le titre. */
+export const Frontispice = ({ deva, translit, titre, children }: { deva: string; translit: string; titre: ReactNode; children?: ReactNode }) => (
+  <section className="mx-auto flex max-w-[1060px] flex-col items-center gap-4 px-4 pb-14 pt-10 text-center sm:px-10 md:pb-[72px] md:pt-14">
+    <Deva className="text-[clamp(4.25rem,11vw,8rem)] !leading-[1.05] text-paon">{deva}</Deva>
+    <span className="-mt-1 italic text-doux">{translit}</span>
+    <h1 className="m-0 mt-2 text-[clamp(2.5rem,7vw,5rem)] leading-[0.95]">{titre}</h1>
+    {children}
+  </section>
 );
 
 export const FilAriane = ({ page }: { page?: string }) => <Fil rubrique="Comprendre" href="/comprendre" page={page} />;
@@ -25,6 +73,7 @@ export const Deva = ({ children, className = "text-[30px] text-aubergine" }: { c
 );
 
 interface TitrePageProps {
+  /** Nom de la page (le sommaire indique déjà où l'on est) */
   fil: string;
   /** Le fil d'Ariane, s'il ne s'agit pas de la rubrique Comprendre */
   filAriane?: ReactNode;
@@ -34,9 +83,9 @@ interface TitrePageProps {
   intro: string;
 }
 
-export const TitrePage = ({ fil, filAriane, titre, deva, translit, intro }: TitrePageProps) => (
+export const TitrePage = ({ filAriane, titre, deva, translit, intro }: TitrePageProps) => (
   <div className="flex flex-col gap-4 py-6 md:py-8">
-    {filAriane ?? <FilAriane page={fil} />}
+    {filAriane}
     <p className="m-0 flex items-baseline gap-3.5">
       <Deva>{deva}</Deva>
       <span className="italic text-doux">{translit}</span>
