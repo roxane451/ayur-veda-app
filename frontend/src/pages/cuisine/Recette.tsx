@@ -24,13 +24,19 @@ const Recette = () => {
           <FilCuisine page={r.nom} />
           <h1 className="m-0 text-[clamp(3rem,7vw,5.5rem)] leading-[0.95]">{r.nom}</h1>
           <p className="m-0 max-w-[46ch] text-xl">{fr(c.intro)}</p>
-          <ul className="m-0 flex list-none flex-wrap gap-2 p-0 text-[15px] font-bold">
-            {[doshasTexte(r), saisonsTexte(r), `${r.minutes} min`, c.portions].map((t) => (
-              <li key={t} className="rounded-full px-3.5 py-1 shadow-[inset_0_0_0_1.5px_hsl(var(--trait))]">
-                {t}
-              </li>
+          <dl className="m-0 mt-2 grid grid-cols-2 border-y-2 border-encre sm:grid-cols-4">
+            {[
+              ["Doshas", doshasTexte(r)],
+              ["Saison", saisonsTexte(r)],
+              ["Durée", `${r.minutes} minutes`],
+              ["Portions", c.portions.replace(/^Pour /, "")],
+            ].map(([t, v], i) => (
+              <div key={t} className={`flex flex-col gap-0.5 py-3 pr-3 ${i % 2 ? "pl-4" : ""} ${i > 0 ? "sm:border-l sm:border-trait sm:pl-4" : ""} ${i > 1 ? "border-t border-trait sm:border-t-0" : ""} ${i % 2 ? "border-l border-trait" : ""}`}>
+                <dt className="text-sm text-doux">{t}</dt>
+                <dd className="m-0 font-bold">{v}</dd>
+              </div>
             ))}
-          </ul>
+          </dl>
         </div>
         <div className="h-[280px] md:h-[400px]">
           <Photo description={`${r.nom.toLowerCase()} dans un bol, vu d'en haut`} arche />

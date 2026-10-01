@@ -95,18 +95,17 @@ const Fiche = () => {
         {melanges.length > 0 && (
           <div className="flex flex-col gap-3">
             <h2 className="m-0 text-2xl">On la retrouve dans</h2>
-            <ul className="m-0 flex list-none flex-wrap gap-2 p-0">
-              {melanges.map((m) => (
-                <li key={m.id}>
-                  <Link
-                    to={`/cuisine/melanges#${m.id}`}
-                    className="inline-flex min-h-10 items-center rounded-full px-4 text-[15px] font-bold no-underline shadow-[inset_0_0_0_1.5px_hsl(var(--trait))] hover:bg-surface"
-                  >
+            <p className="m-0 text-lg">
+              {melanges.map((m, i) => (
+                <span key={m.id}>
+                  {i > 0 && (i === melanges.length - 1 ? " et " : ", ")}
+                  <Link to={`/cuisine/melanges#${m.id}`} className="font-bold underline underline-offset-4">
                     {m.nom}
                   </Link>
-                </li>
+                </span>
               ))}
-            </ul>
+              .
+            </p>
           </div>
         )}
       </section>

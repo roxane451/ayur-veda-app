@@ -3,21 +3,16 @@ import { Bande, Motif } from "@/components/brand/BrandDefs";
 import { Flamme, Goutte, Vent } from "@/components/brand/Illustrations";
 import { Deva, Frontispice, Ornement, PageComprendre, PiedSuite } from "@/components/comprendre/Commun";
 import { COULEUR_DOSHA, fr } from "@/components/quiz/conseils";
+import { enListe, enListePhrase, enPhrases } from "@/lib/texte";
 import { COMPARAISON, DOSHAS_DETAIL, type DoshaDetail } from "@/data/comprendre";
 import type { DoshaKey } from "@/lib/doshaLogic";
 
 const ILLU: Record<DoshaKey, typeof Vent> = { vata: Vent, pitta: Flamme, kapha: Goutte };
 
-const Liste = ({ titre, items, couleur }: { titre: string; items: string[]; couleur: string }) => (
-  <div className="flex flex-col gap-1">
-    <h3 className={`m-0 mb-1 font-body text-[1.35rem] normal-case italic tracking-normal ${couleur}`}>{titre}</h3>
-    <ul className="m-0 list-none p-0">
-      {items.map((t) => (
-        <li key={t} className="border-t border-dashed border-trait py-2.5">
-          {t}
-        </li>
-      ))}
-    </ul>
+const Bloc = ({ titre, couleur, children }: { titre: string; couleur: string; children: string }) => (
+  <div className="flex flex-col gap-2">
+    <h3 className={`m-0 font-body text-[1.35rem] normal-case italic tracking-normal ${couleur}`}>{titre}</h3>
+    <p className="m-0">{fr(children)}</p>
   </div>
 );
 
@@ -50,13 +45,7 @@ const Detail = ({ d }: { d: DoshaDetail }) => {
           </h2>
           <p className="m-0 text-[1.9rem] italic text-aubergine">{d.essence}</p>
           <p className="m-0 max-w-[42ch]">{fr(d.presentation)}</p>
-          <ul className="m-0 flex list-none flex-wrap gap-2 p-0" aria-label="Ses qualités">
-            {d.qualites.map((q) => (
-              <li key={q} className="rounded-full bg-carte px-3.5 py-1 text-[15px] font-bold shadow-[inset_0_0_0_1.5px_hsl(var(--encre))]">
-                {q}
-              </li>
-            ))}
-          </ul>
+          <p className="m-0 font-body text-xl italic">Il est {enListe(d.qualites)}.</p>
         </div>
         <div className="relative flex h-[300px] items-center justify-center overflow-hidden rounded-b-2xl rounded-t-full bg-paon md:h-[380px]">
           <Motif id="dabu" />
@@ -70,18 +59,16 @@ const Detail = ({ d }: { d: DoshaDetail }) => {
         <Tableau titre="L'esprit" lignes={d.esprit} />
       </div>
       <div className="grid gap-10 rounded-2xl bg-carte p-6 shadow-[inset_0_0_0_2px_hsl(var(--encre))] sm:p-10 md:grid-cols-3">
-        <Liste titre={`Quand ${d.nom} est en excès`} items={d.signes} couleur="text-aubergine" />
-        <Liste titre="Pour le rééquilibrer" items={d.conseils} couleur="text-citron-fonce" />
-        <div className="flex flex-col gap-3">
+        <Bloc titre={`Quand ${d.nom} est en excès`} couleur="text-aubergine">
+          {enListePhrase(d.signes)}
+        </Bloc>
+        <Bloc titre="Pour le rééquilibrer" couleur="text-citron-fonce">
+          {enPhrases(d.conseils)}
+        </Bloc>
+        <div className="flex flex-col gap-2">
           <h3 className="m-0 font-body text-[1.35rem] normal-case italic tracking-normal text-paon">Les plantes de {d.nom}</h3>
-          <ul className="m-0 flex list-none flex-wrap gap-2 p-0">
-            {d.plantes.map((p) => (
-              <li key={p} className="inline-flex min-h-10 items-center rounded-full bg-surface px-4 text-[15px] font-bold">
-                {p}
-              </li>
-            ))}
-          </ul>
-          <p className="m-0 mt-2 text-base text-doux">
+          <p className="m-0 font-body text-xl font-semibold">{enListe(d.plantes).replace(/^./, (c) => c.toUpperCase())}.</p>
+          <p className="m-0 mt-1 text-base text-doux">
             {/* [À FAIRE] fiches plantes à rédiger, avec leurs précautions d'emploi */}
             Leurs fiches, avec les précautions d'emploi, arrivent dans la rubrique La cuisine.
           </p>
@@ -104,16 +91,10 @@ const Resume = ({ d, onChoisir }: { d: DoshaDetail; onChoisir: () => void }) => 
         <span className="flex flex-wrap items-baseline gap-x-3.5 gap-y-1">
           <span className="font-display text-[2.2rem] leading-none sm:text-[2.6rem]">{d.nom}</span>
           <Deva className="text-[26px] text-citron">{d.deva}</Deva>
-          <span className="italic text-[#C4DCD5]">
-            {d.essence.toLowerCase()} · {d.elements}
-          </span>
+          <span className="italic text-[#C4DCD5]">{d.elements}</span>
         </span>
-        <span className="flex flex-wrap gap-1.5">
-          {d.qualites.map((q) => (
-            <span key={q} className="rounded-full px-3 py-0.5 text-sm shadow-[inset_0_0_0_1.5px_hsl(var(--pistache))]">
-              {q}
-            </span>
-          ))}
+        <span className="text-[#D3E3DE]">
+          {d.essence}. Il est {enListe(d.qualites)}.
         </span>
       </span>
       <span className="col-span-2 inline-flex items-center gap-2 font-bold sm:col-span-1">
@@ -215,23 +196,16 @@ const Doshas = () => {
               </tbody>
             </table>
           </div>
+          <p className="m-0 text-lg">
+            Pour savoir lequel domine chez vous,{" "}
+            <Link to="/profil" className="font-bold underline underline-offset-4">
+              faites le quiz
+            </Link>
+            . Il mesure votre nature, puis votre état du moment.
+          </p>
         </div>
       </section>
 
-      <section className="bg-citron">
-        <div className="mx-auto flex max-w-[1220px] flex-wrap items-center justify-between gap-8 px-4 py-16 sm:px-10 md:py-[72px]">
-          <div className="flex max-w-[560px] flex-col gap-2.5">
-            <h2 className="m-0 text-[clamp(2.2rem,5vw,3rem)] leading-none">Connaître votre dosha</h2>
-            <p className="m-0">Le quiz mesure d'abord votre nature, puis votre état du moment.</p>
-          </div>
-          <Link
-            to="/profil"
-            className="inline-flex min-h-[52px] items-center gap-2.5 rounded-buta bg-aubergine px-6 font-bold text-pistache no-underline hover:opacity-90"
-          >
-            Faire le quiz
-          </Link>
-        </div>
-      </section>
       <div className="h-16" />
       <PiedSuite precedent="L'essentiel" suivant="Les six saveurs" />
     </PageComprendre>

@@ -9,17 +9,12 @@ import Roue from "@/components/quotidien/Roue";
 import { COULEUR_DOSHA, fr } from "@/components/quiz/conseils";
 import { EQUILIBRE_DOSHA, PROGRAMME_AUTOMNE, SAISONS_DETAIL, saisonDuMoment } from "@/data/saisons";
 import { NOM_DOSHA } from "@/lib/doshaLogic";
+import { enListe, enPhrases } from "@/lib/texte";
 
 const Liste = ({ titre, items, couleur }: { titre: string; items: string[]; couleur: string }) => (
-  <div className="flex flex-col gap-1">
-    <h3 className={`m-0 mb-1 font-body text-[1.35rem] normal-case italic tracking-normal ${couleur}`}>{titre}</h3>
-    <ul className="m-0 list-none p-0">
-      {items.map((t) => (
-        <li key={t} className="border-t border-dashed border-trait py-2.5">
-          {fr(t)}
-        </li>
-      ))}
-    </ul>
+  <div className="flex flex-col gap-2">
+    <h3 className={`m-0 font-body text-[1.35rem] normal-case italic tracking-normal ${couleur}`}>{titre}</h3>
+    <p className="m-0 text-lg leading-relaxed">{fr(enPhrases(items))}</p>
   </div>
 );
 
@@ -73,17 +68,11 @@ const Saisons = () => {
             <h2 id="s-titre" className="m-0 text-[clamp(3rem,6.4vw,5.25rem)] leading-[0.9]">
               {nomLong}
             </h2>
-            <ul className="m-0 flex list-none flex-wrap gap-2 p-0">
-              <li className="inline-flex min-h-10 items-center gap-2 rounded-full px-4 text-[15px] font-bold shadow-[inset_0_0_0_1.5px_hsl(var(--trait))]">
-                <span aria-hidden="true" className="h-2.5 w-2.5 rounded-full" style={{ background: COULEUR_DOSHA[s.dosha] }} />
-                Saison de {NOM_DOSHA[s.dosha]}
-              </li>
-              {s.qualites.map((q) => (
-                <li key={q} className="inline-flex min-h-10 items-center rounded-full px-4 text-[15px] font-bold shadow-[inset_0_0_0_1.5px_hsl(var(--trait))]">
-                  {q}
-                </li>
-              ))}
-            </ul>
+            <p className="m-0 flex flex-wrap items-baseline gap-x-2 font-body text-xl">
+              <span aria-hidden="true" className="h-3 w-3 shrink-0 self-center rounded-full" style={{ background: COULEUR_DOSHA[s.dosha] }} />
+              <b>Saison de {NOM_DOSHA[s.dosha]},</b>
+              <i>au climat {enListe(s.qualites)}.</i>
+            </p>
             <p className="m-0 max-w-[46ch] text-[19px]">{fr(s.intro)}</p>
           </div>
           <div className="relative h-[300px] md:h-[380px]">
@@ -138,13 +127,7 @@ const Saisons = () => {
                   <span aria-hidden="true" className="h-3.5 w-3.5 rounded-full" style={{ background: COULEUR_DOSHA[e.dosha] }} />
                   <span className="font-display text-[1.9rem]">{NOM_DOSHA[e.dosha]}</span>
                 </span>
-                <ul className="m-0 list-none p-0 text-[#D3E3DE]">
-                  {e.conseils.map((c) => (
-                    <li key={c} className="border-t border-dashed border-[#2C6B63] py-2">
-                      {c}
-                    </li>
-                  ))}
-                </ul>
+                <p className="m-0 text-[#D3E3DE]">{fr(enPhrases(e.conseils))}</p>
               </div>
             ))}
           </div>
