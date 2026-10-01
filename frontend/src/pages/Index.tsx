@@ -193,7 +193,7 @@ const TroisDoshas = () => (
             </div>
           </div>
         ))}
-        <Link to="/comprendre" className={`${lienSouligne} self-start text-pistache`}>
+        <Link to="/comprendre/doshas" className={`${lienSouligne} self-start text-pistache`}>
           Comprendre les doshas <ArrowRight className="h-[18px] w-[18px]" aria-hidden="true" />
         </Link>
       </div>

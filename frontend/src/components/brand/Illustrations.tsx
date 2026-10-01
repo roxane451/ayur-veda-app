@@ -57,3 +57,33 @@ export const Goutte = ({ size = 120, stroke = KORA, decorative = false, classNam
 export const Chai = ({ size = 120, stroke = SYAHI, decorative = false, className }: IlluProps) => (
   <svg width={size} height={size} viewBox="0 0 120 120" role={decorative ? undefined : "img"} aria-label={decorative ? undefined : "Tasse de chaï"} aria-hidden={decorative || undefined} className={className} style={{ display: "block", overflow: "visible" }}><g transform="translate(3 3)" filter="url(#stamp)"><path d="M30 50 L90 50 L84 92 C83 98 78 102 72 102 L48 102 C42 102 37 98 36 92 Z" fill="#E8EBD6" /><path d="M33 66 L87 66 L86 74 L34 74 Z" fill="#5B2A4E" /></g><g fill="none" stroke={stroke} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" filter="url(#ink)"><path d="M30 50 L90 50 L84 92 C83 98 78 102 72 102 L48 102 C42 102 37 98 36 92 Z" /><path d="M88 60 C102 58 104 80 86 82" /><path d="M48 40 C42 32 54 26 48 16" /><path d="M62 42 C56 32 68 26 62 14" /><path d="M76 40 C70 32 82 26 76 18" /><path d="M24 106 L96 106" /></g></svg>
 );
+
+export const Poudre = ({ size = 120, stroke = SYAHI, decorative = false, className }: IlluProps) => (
+  <svg width={size} height={size} viewBox="0 0 120 120" role={decorative ? undefined : "img"} aria-label={decorative ? undefined : "Bol de poudre d'épice"} aria-hidden={decorative || undefined} className={className} style={{ display: "block", overflow: "visible" }}><g transform="translate(3 3)" filter="url(#stamp)"><path d="M30 62 C36 44 50 36 60 36 C70 36 84 44 90 62 Z" fill="#D2A12A" /><path d="M18 62 L102 62 C102 84 84 98 60 98 C36 98 18 84 18 62 Z" fill="#5B2A4E" /></g><g fill="none" stroke={stroke} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" filter="url(#ink)"><path d="M30 62 C36 44 50 36 60 36 C70 36 84 44 90 62 Z" /><path d="M18 62 L102 62 C102 84 84 98 60 98 C36 98 18 84 18 62 Z" /><path d="M44 104 L76 104" /><path d="M30 74 C50 80 70 80 90 74" /></g></svg>
+);
+
+export const Feuille = ({ size = 120, stroke = SYAHI, decorative = false, className }: IlluProps) => {
+  const feuilles = [
+    "M60 40 C46 30 34 32 28 40 C38 46 50 46 60 40 Z",
+    "M60 40 C74 30 86 32 92 40 C82 46 70 46 60 40 Z",
+    "M60 66 C44 56 30 58 24 68 C36 74 50 74 60 66 Z",
+    "M60 66 C76 56 90 58 96 68 C84 74 70 74 60 66 Z",
+    "M60 22 C54 12 56 6 60 2 C64 6 66 12 60 22 Z",
+  ];
+  return (
+    <svg width={size} height={size} viewBox="0 0 120 120" role={decorative ? undefined : "img"} aria-label={decorative ? undefined : "Brin de tulsi"} aria-hidden={decorative || undefined} className={className} style={{ display: "block", overflow: "visible" }}>
+      <g transform="translate(3 3)" filter="url(#stamp)">
+        {feuilles.map((d) => (
+          <path key={d} d={d} fill="#8A6A1E" />
+        ))}
+      </g>
+      <g fill="none" stroke={stroke} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" filter="url(#ink)">
+        <path d="M60 108 C60 80 58 50 60 18" />
+        {feuilles.map((d) => (
+          <path key={d} d={d} />
+        ))}
+        <path d="M60 40 L36 40" /><path d="M60 40 L84 40" /><path d="M60 66 L32 68" /><path d="M60 66 L88 68" />
+      </g>
+    </svg>
+  );
+};
