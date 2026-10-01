@@ -23,6 +23,7 @@ import Melanges from "./pages/cuisine/Melanges";
 import FicheEpice from "./pages/cuisine/Fiche";
 import Recettes from "./pages/cuisine/Recettes";
 import Recette from "./pages/cuisine/Recette";
+import PageIngredients from "./pages/cuisine/Ingredients";
 import NotFound from "./pages/NotFound";
 import BrandDefs from "./components/brand/BrandDefs";
 
@@ -58,6 +59,7 @@ const App = () => (
             <Route path="/cuisine/epices/:id" element={<FicheEpice />} />
             <Route path="/cuisine/recettes" element={<Recettes />} />
             <Route path="/cuisine/recettes/:id" element={<Recette />} />
+            <Route path="/cuisine/ingredients" element={<PageIngredients />} />
             <Route path="/espace-membre" element={<EspaceMembre />} />
             <Route path="/connexion" element={<Acces mode="connexion" />} />
             <Route path="/inscription" element={<Acces mode="inscription" />} />
