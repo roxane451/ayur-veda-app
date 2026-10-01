@@ -211,7 +211,9 @@ export default Quiz;
 /* ─────────────────────────── Accueil ─────────────────────────── */
 
 const Accueil = ({ onNature, onEtat }: { onNature: () => void; onEtat: () => void }) => (
-  <section className="mx-auto flex max-w-[1220px] flex-col gap-12 px-4 pb-24 pt-8 sm:px-10 md:pt-10">
+  <section className="relative overflow-hidden">
+    <Motif id="buta" />
+    <div className="relative mx-auto flex max-w-[1220px] flex-col gap-12 px-4 pb-24 pt-8 sm:px-10 md:pt-10">
     <div className="flex max-w-[760px] flex-col gap-4">
       <h1 className="m-0 text-[clamp(2.1rem,6vw,3.6rem)] leading-[1.02]">
         Deux questionnaires, <em>deux questions</em> différentes.
@@ -224,7 +226,8 @@ const Accueil = ({ onNature, onEtat }: { onNature: () => void; onEtat: () => voi
     </div>
     {/* Deux arches en décalé : la nature d'abord, l'état du moment un peu plus bas */}
     <div className="grid items-start gap-6 md:grid-cols-2">
-      <div className="flex flex-col gap-3.5 rounded-b-md rounded-t-[999px] bg-paon px-8 pb-10 pt-24 text-pistache sm:px-10 md:pt-28">
+      <div className="relative flex flex-col gap-3.5 overflow-hidden rounded-b-md rounded-t-[999px] bg-paon px-8 pb-10 pt-24 text-pistache sm:px-10 md:pt-28 [&>*:not(svg)]:relative">
+        <Motif id="dabu" />
         <div className="mb-3 flex justify-center">
           <Lotus size={96} stroke="#F3F5E6" decorative />
         </div>
@@ -270,6 +273,7 @@ const Accueil = ({ onNature, onEtat }: { onNature: () => void; onEtat: () => voi
           Faire le point <ArrowRight className="h-5 w-5" aria-hidden="true" />
         </button>
       </div>
+    </div>
     </div>
   </section>
 );
