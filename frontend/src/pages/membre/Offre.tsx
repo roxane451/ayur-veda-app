@@ -106,7 +106,7 @@ const Offre = () => (
             <div className="h-[380px] md:h-[560px]">
               <Photo arche description="tasse de chaï et couverture en laine" />
             </div>
-            <div className="absolute -right-3 top-[38%] md:-right-8">
+            <div className="absolute right-2 top-[38%] md:-right-8">
               <Sceau size={88} rotate={12} fond="hsl(var(--aubergine))" reserve="hsl(var(--pistache))" />
             </div>
           </div>
