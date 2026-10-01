@@ -71,14 +71,16 @@ const Saisons = () => {
                 aria-selected={choisi}
                 aria-controls="detail-saison"
                 onClick={() => setParams(x.id === actuelle ? {} : { saison: x.id }, { replace: true })}
-                className={`flex flex-col gap-0.5 rounded-2xl px-5 py-4 text-left sm:px-6 ${
+                className={`flex min-w-0 flex-col gap-0.5 rounded-2xl px-4 py-4 text-left sm:px-6 lg:px-5 xl:px-6 ${
                   choisi ? "bg-encre text-pistache" : "bg-carte shadow-[inset_0_0_0_1.5px_hsl(var(--encre))] hover:bg-surface"
                 }`}
               >
                 <span className={`text-[13px] font-bold ${choisi ? "text-citron" : "text-aubergine"}`}>
                   {x.id === actuelle ? "En ce moment" : " "}
                 </span>
-                <span className="font-display text-[1.3rem] leading-tight sm:text-[1.9rem]">{x.court}</span>
+                <span className="font-display text-[1.15rem] leading-tight [overflow-wrap:anywhere] min-[400px]:text-[1.3rem] sm:text-[1.75rem] lg:text-[1.45rem] xl:text-[1.75rem]">
+                  {x.court}
+                </span>
                 <span className={`text-[15px] ${choisi ? "text-[#C5D1CC]" : "text-doux"}`}>{x.periode}</span>
                 <span className="mt-1.5 inline-flex items-center gap-1.5 text-[15px] font-bold">
                   <span aria-hidden="true" className="h-2.5 w-2.5 rounded-full" style={{ background: COULEUR_DOSHA[x.dosha] }} />
