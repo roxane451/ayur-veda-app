@@ -18,6 +18,7 @@ import {
 import { PRAKRITI } from "@/data/quiz";
 import { saisonDuMoment } from "@/data/saisons";
 import { fr } from "@/components/quiz/conseils";
+import ChaineElements from "@/components/accueil/ChaineElements";
 
 const lienSouligne =
   "inline-flex items-center gap-2 font-bold underline decoration-citron decoration-[3px] underline-offset-[6px]";
@@ -156,45 +157,37 @@ const DOSHAS = [
   },
 ];
 
+const COULEUR_ARC: Record<string, string> = { Vata: "#8DB9B0", Pitta: "#DCBFD5", Kapha: "#BBD439" };
+
 const TroisDoshas = () => (
-  <>
-    <section aria-labelledby="accueil-doshas" className="relative overflow-hidden bg-paon text-pistache">
-      <Motif id="dabu" />
-      <div className="relative mx-auto flex max-w-[1220px] flex-col gap-11 px-4 py-20 sm:px-10 md:pb-28 md:pt-24">
-        <div className="flex max-w-[560px] flex-col gap-4">
-          <h2 id="accueil-doshas" className="m-0 text-[clamp(2.3rem,4.6vw,3.6rem)]">
-            Les trois doshas
-          </h2>
-          <p className="m-0 text-[#D3E3DE]">
-            Les cinq éléments se combinent en nous de trois façons, que l'on appelle les doshas. Tout le monde a les trois, en proportions différentes.
-          </p>
-        </div>
-        {DOSHAS.map(({ nom, deva, elements, texte, Illu, decal }) => (
-          <div
-            key={nom}
-            className={`grid max-w-[640px] grid-cols-[88px_minmax(0,1fr)] items-center gap-5 sm:grid-cols-[170px_minmax(0,1fr)] sm:gap-8 ${decal}`}
-          >
-            <div className="flex justify-center">
-              <Illu size={150} decorative className="h-auto w-[88px] sm:w-[150px]" />
-            </div>
-            <div className="flex flex-col gap-1.5">
-              <p className="m-0 flex items-baseline gap-3.5">
-                <span className="font-display text-[clamp(2rem,5vw,2.9rem)] leading-none">{nom}</span>
-                <span lang="sa" className="font-devanagari text-[28px] text-citron">
-                  {deva}
-                </span>
-              </p>
-              <p className="m-0 italic text-[#C4DCD5]">{elements}</p>
-              <p className="m-0 text-[#D3E3DE]">{fr(texte)}</p>
-            </div>
+  <section aria-labelledby="accueil-doshas" className="relative overflow-hidden bg-paon text-pistache">
+    <Motif id="dabu" />
+    <div className="relative mx-auto flex max-w-[1220px] flex-col gap-10 px-4 py-20 sm:px-10 md:pb-28 md:pt-24">
+      <div className="grid items-end gap-5 md:grid-cols-2 md:gap-14">
+        <h2 id="accueil-doshas" className="m-0 text-[clamp(2.3rem,4.6vw,3.6rem)] leading-none">
+          Les trois doshas
+        </h2>
+        <p className="m-0 text-lg text-[#D3E3DE]">
+          Les cinq éléments se combinent en nous de trois façons, que l'on appelle les doshas. Tout le monde a les trois, en proportions différentes.
+        </p>
+      </div>
+      <ChaineElements />
+      <div className="grid gap-8 md:grid-cols-3 md:gap-10">
+        {DOSHAS.map(({ nom, elements, texte }) => (
+          <div key={nom} className="flex flex-col gap-2 border-t-[3px] pt-4" style={{ borderColor: COULEUR_ARC[nom] }}>
+            <p className="m-0 flex flex-wrap items-baseline gap-x-3">
+              <span className="font-display text-[1.9rem] leading-none">{nom}</span>
+              <span className="italic text-[#C4DCD5]">{elements}</span>
+            </p>
+            <p className="m-0 text-[#D3E3DE]">{fr(texte)}</p>
           </div>
         ))}
-        <Link to="/comprendre/doshas" className={`${lienSouligne} self-start text-pistache`}>
-          Comprendre les doshas
-        </Link>
       </div>
-    </section>
-  </>
+      <Link to="/comprendre/doshas" className={`${lienSouligne} self-start text-pistache`}>
+        Comprendre les doshas
+      </Link>
+    </div>
+  </section>
 );
 
 /* ───────────── Sur l'étagère ───────────── */
