@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Bande } from "@/components/brand/BrandDefs";
 import { PageComprendre, PiedSuite, TitrePage } from "@/components/comprendre/Commun";
+import { Fil, PageRubrique } from "@/components/Rubrique";
+import { PAGES_QUOTIDIEN } from "@/components/quotidien/pages";
 import { COULEUR_DOSHA, fr } from "@/components/quiz/conseils";
 import { MOMENTS_JOURNEE, momentEnCours } from "@/data/comprendre";
 import { NOM_DOSHA } from "@/lib/doshaLogic";
@@ -51,13 +53,25 @@ const Horloge = ({ actuel }: { actuel: number }) => {
   );
 };
 
-const Journee = () => {
+const Cadre = ({ quotidien, children }: { quotidien: boolean; children: React.ReactNode }) =>
+  quotidien ? (
+    <PageRubrique label="Au quotidien" pages={PAGES_QUOTIDIEN}>
+      {children}
+    </PageRubrique>
+  ) : (
+    <PageComprendre>{children}</PageComprendre>
+  );
+
+/** La journée : dans « Comprendre », et aussi dans « Au quotidien ». */
+const Journee = ({ rubrique = "comprendre" }: { rubrique?: "comprendre" | "quotidien" }) => {
+  const quotidien = rubrique === "quotidien";
   const [actuel] = useState(() => momentEnCours(new Date().getHours()));
   return (
-    <PageComprendre>
+    <Cadre quotidien={quotidien}>
       <div className="mx-auto grid max-w-[1220px] items-center gap-6 px-4 sm:px-10 md:grid-cols-2">
         <TitrePage
           fil="La journée"
+          filAriane={quotidien ? <Fil rubrique="Au quotidien" href="/au-quotidien" page="La journée" /> : undefined}
           titre="La journée idéale"
           deva="दिनचर्या"
           translit="dinacharya"
@@ -113,8 +127,8 @@ const Journee = () => {
           </Link>
         </div>
       </section>
-      <PiedSuite precedent="Agni, le feu digestif" suivant="Lexique" />
-    </PageComprendre>
+      {!quotidien && <PiedSuite precedent="Agni, le feu digestif" suivant="Lexique" />}
+    </Cadre>
   );
 };
 

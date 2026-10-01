@@ -14,7 +14,8 @@ import Lexique from "./pages/comprendre/Lexique";
 import RetourEnHaut from "./components/RetourEnHaut";
 import Profil from "./pages/Profil";
 import EspaceMembre from "./pages/EspaceMembre";
-import Ritucharya from "./pages/Ritucharya";
+import Saisons from "./pages/quotidien/Saisons";
+import Programme from "./pages/quotidien/Programme";
 import Boite from "./pages/cuisine/Boite";
 import Melanges from "./pages/cuisine/Melanges";
 import FicheEpice from "./pages/cuisine/Fiche";
@@ -43,7 +44,9 @@ const App = () => (
           <Route path="/comprendre/journee" element={<Journee />} />
           <Route path="/comprendre/lexique" element={<Lexique />} />
           <Route path="/profil" element={<Profil />} />
-          <Route path="/au-quotidien" element={<Ritucharya />} />
+          <Route path="/au-quotidien" element={<Saisons />} />
+          <Route path="/au-quotidien/journee" element={<Journee rubrique="quotidien" />} />
+          <Route path="/au-quotidien/programme" element={<Programme />} />
           <Route path="/cuisine" element={<Boite />} />
           <Route path="/cuisine/melanges" element={<Melanges />} />
           <Route path="/cuisine/epices/:id" element={<FicheEpice />} />

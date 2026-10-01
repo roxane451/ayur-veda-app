@@ -26,15 +26,17 @@ export const Deva = ({ children, className = "text-[30px] text-aubergine" }: { c
 
 interface TitrePageProps {
   fil: string;
+  /** Le fil d'Ariane, s'il ne s'agit pas de la rubrique Comprendre */
+  filAriane?: ReactNode;
   titre: ReactNode;
   deva: string;
   translit: string;
   intro: string;
 }
 
-export const TitrePage = ({ fil, titre, deva, translit, intro }: TitrePageProps) => (
+export const TitrePage = ({ fil, filAriane, titre, deva, translit, intro }: TitrePageProps) => (
   <div className="flex flex-col gap-4 py-6 md:py-8">
-    <FilAriane page={fil} />
+    {filAriane ?? <FilAriane page={fil} />}
     <p className="m-0 flex items-baseline gap-3.5">
       <Deva>{deva}</Deva>
       <span className="italic text-doux">{translit}</span>

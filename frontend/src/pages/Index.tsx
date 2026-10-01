@@ -116,7 +116,7 @@ const Saison = () => {
             </p>
           </div>
         </div>
-        <Link to={`/au-quotidien#${s.id}`} className={`${lienSouligne} self-start`}>
+        <Link to="/au-quotidien" className={`${lienSouligne} self-start`}>
           {s.nom.replace(/^L'|^Le /, (m) => (m === "L'" ? "Tout l'" : "Tout le "))}, saison de {s.dosha}
           <ArrowRight className="h-[18px] w-[18px]" aria-hidden="true" />
         </Link>
