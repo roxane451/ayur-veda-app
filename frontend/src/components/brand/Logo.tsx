@@ -1,4 +1,4 @@
-import { LOGO_BINDU, LOGO_CADRE, LOGO_LETTRES, LOGO_SHIROREKHA } from "./logoTraces";
+import { LOGO_BINDU, LOGO_BINDU_PETIT, LOGO_CADRE, LOGO_LETTRES, LOGO_SHIROREKHA, LOGO_SHIROREKHA_PETIT } from "./logoTraces";
 
 /**
  * Le logo : « ayurveda » suspendu sous la shirorekha, le trait des écritures devanagari.
@@ -22,6 +22,8 @@ export const Logo = ({
 }: LogoProps) => {
   const [x, y, w, h] = LOGO_CADRE;
   const hauteur = (size * h) / 1000;
+  // En petit, le trait et le bindu s'épaississent pour rester visibles
+  const petit = size < 48;
   return (
     <svg
       role="img"
@@ -31,9 +33,9 @@ export const Logo = ({
       height={hauteur}
       className={`block shrink-0 ${className ?? ""}`}
     >
-      <path d={LOGO_SHIROREKHA} fill={barColor} />
+      <path d={petit ? LOGO_SHIROREKHA_PETIT : LOGO_SHIROREKHA} fill={barColor} />
       <path d={LOGO_LETTRES} fill={color} />
-      <circle cx={LOGO_BINDU.cx} cy={LOGO_BINDU.cy} r={LOGO_BINDU.r} fill={barColor} />
+      <circle cx={LOGO_BINDU.cx} cy={LOGO_BINDU.cy} r={petit ? LOGO_BINDU_PETIT.r : LOGO_BINDU.r} fill={barColor} />
     </svg>
   );
 };
