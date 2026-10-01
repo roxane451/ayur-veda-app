@@ -1,5 +1,4 @@
 import { Link, useSearchParams } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
 import { Bande, Motif } from "@/components/brand/BrandDefs";
 import { Flamme, Goutte, Vent } from "@/components/brand/Illustrations";
 import { Deva, FilAriane, PageComprendre, PiedSuite } from "@/components/comprendre/Commun";
@@ -118,7 +117,7 @@ const Resume = ({ d, onChoisir }: { d: DoshaDetail; onChoisir: () => void }) => 
         </span>
       </span>
       <span className="col-span-2 inline-flex items-center gap-2 font-bold sm:col-span-1">
-        Lire <ArrowRight className="h-[18px] w-[18px]" aria-hidden="true" />
+        Lire
       </span>
     </button>
   );
@@ -230,7 +229,7 @@ const Doshas = () => {
             to="/profil"
             className="inline-flex min-h-[52px] items-center gap-2.5 rounded-buta bg-aubergine px-6 font-bold text-pistache no-underline hover:opacity-90"
           >
-            Faire le quiz <ArrowRight className="h-5 w-5" aria-hidden="true" />
+            Faire le quiz
           </Link>
         </div>
       </section>

@@ -1,5 +1,4 @@
 import { Link, useSearchParams } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
 import { Bande } from "@/components/brand/BrandDefs";
 import { Chai, Feuille, Poudre } from "@/components/brand/Illustrations";
 import { Deva } from "@/components/comprendre/Commun";
@@ -78,7 +77,7 @@ const Boite = () => {
                   ))}
                 </dl>
                 <Link to={`/cuisine/epices/${e.id}`} className="mt-auto inline-flex items-center gap-1.5 pt-1 font-bold underline underline-offset-4">
-                  La fiche complète <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                  La fiche complète
                 </Link>
               </article>
             </li>
@@ -95,7 +94,7 @@ const Boite = () => {
             <span className="font-display text-[1.9rem] leading-tight">Les mélanges</span>
             <span className="text-doux">Chaï masala, thé cumin-coriandre-fenouil, lait doré, et un mélange pour chaque dosha.</span>
             <span className="mt-auto inline-flex items-center gap-2 font-bold group-hover:underline">
-              Voir les {MELANGES.length} mélanges <ArrowRight className="h-[18px] w-[18px]" aria-hidden="true" />
+              Voir les {MELANGES.length} mélanges
             </span>
           </Link>
           <Link to="/cuisine/recettes" className="group flex flex-col gap-3 rounded-2xl bg-carte p-7 no-underline shadow-[inset_0_0_0_1.5px_hsl(var(--encre))]">
@@ -107,7 +106,7 @@ const Boite = () => {
               {RECETTES.length} plats, du petit-déjeuner au dessert, classés par dosha et par saison.
             </span>
             <span className="mt-auto inline-flex items-center gap-2 font-bold group-hover:underline">
-              Voir les recettes <ArrowRight className="h-[18px] w-[18px]" aria-hidden="true" />
+              Voir les recettes
             </span>
           </Link>
           <div className="flex flex-col gap-2.5 rounded-2xl bg-paon p-7 text-pistache">

@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
 import { Bande, Motif } from "@/components/brand/BrandDefs";
 import { Flamme, Poudre, SoleilLune, Vent } from "@/components/brand/Illustrations";
 import { Deva, FilAriane, PageComprendre } from "@/components/comprendre/Commun";
@@ -66,7 +65,6 @@ const Essentiel = () => (
         </ul>
       </div>
     </section>
-    <Bande variante="paon" />
 
     <section aria-labelledby="h-suite" className="mx-auto flex max-w-[1220px] flex-col gap-3 px-4 pb-24 pt-16 sm:px-10 md:pt-20">
       <h2 id="h-suite" className="m-0 mb-3 text-[clamp(2.2rem,4.4vw,3.25rem)]">
@@ -94,7 +92,7 @@ const Essentiel = () => (
         ))}
       </ol>
       <Link to="/comprendre/lexique" className={`${lienSouligne} mt-4 self-start`}>
-        Le lexique des mots sanskrits <ArrowRight className="h-[18px] w-[18px]" aria-hidden="true" />
+        Le lexique des mots sanskrits
       </Link>
     </section>
   </PageComprendre>

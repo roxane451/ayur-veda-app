@@ -17,7 +17,6 @@ const Programme = () => (
     <section className="mx-auto grid max-w-[1220px] items-start gap-12 px-4 pb-16 pt-6 sm:px-10 md:grid-cols-2 md:gap-14 md:pb-[72px]">
       <div className="flex flex-col gap-5">
         <Fil rubrique="Au quotidien" href="/au-quotidien" page="Mon programme" />
-        <p className="m-0 font-bold text-aubergine">Programme de saison · {P.duree}</p>
         <h1 className="m-0 text-[clamp(2.6rem,6vw,4.75rem)] leading-none">{P.titre}</h1>
         <p className="m-0 text-xl text-doux">{fr(P.intro)}</p>
         <ul className="m-0 list-none p-0">

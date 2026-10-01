@@ -63,11 +63,11 @@ const Acces = ({ mode }: { mode: "connexion" | "inscription" }) => {
             <h1 className="m-0 text-[clamp(2.4rem,5.6vw,4.25rem)] leading-none">
               {inscription ? (
                 <>
-                  Créer <em>mon compte</em>
+                  Créer mon compte
                 </>
               ) : (
                 <>
-                  Me <em>connecter</em>
+                  Me connecter
                 </>
               )}
             </h1>

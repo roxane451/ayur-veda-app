@@ -244,11 +244,9 @@ const Accueil = ({ onNature, onEtat }: { onNature: () => void; onEtat: () => voi
         <div className="mb-3 flex justify-center">
           <Lotus size={96} stroke="#F3F5E6" decorative />
         </div>
-        <span className="text-[15px] font-bold uppercase tracking-[0.12em] text-citron">D'abord</span>
         <h2 className="m-0 text-[clamp(1.7rem,3vw,2.1rem)]">
           Ma nature <em className="!text-citron">prakriti</em>
         </h2>
-        <p className="m-0 font-display text-[1.2rem] leading-snug">{fr("Qui êtes-vous depuis toujours, quand tout va bien ?")}</p>
         <p className="m-0 text-[#D3E3DE]">
           {fr(
             "Les questions portent sur votre corps, votre digestion, votre caractère et vos rythmes, tels qu'ils sont depuis l'enfance.",
@@ -260,18 +258,16 @@ const Accueil = ({ onNature, onEtat }: { onNature: () => void; onEtat: () => voi
           onClick={onNature}
           className="mt-2 inline-flex min-h-[54px] self-start items-center gap-2.5 rounded-buta bg-aubergine px-7 font-bold text-pistache hover:opacity-90"
         >
-          Découvrir ma nature <ArrowRight className="h-5 w-5" aria-hidden="true" />
+          Découvrir ma nature
         </button>
       </div>
       <div className="flex flex-col gap-3.5 rounded-b-md rounded-t-[999px] bg-carte px-8 pb-10 pt-24 shadow-[inset_0_0_0_2px_hsl(var(--encre))] sm:px-10 md:mt-[72px] md:pt-28">
         <div className="mb-3 flex justify-center">
           <SoleilLune size={96} decorative />
         </div>
-        <span className="text-[15px] font-bold uppercase tracking-[0.12em] text-aubergine">Ensuite, à chaque saison</span>
         <h2 className="m-0 text-[clamp(1.7rem,3vw,2.1rem)]">
           Mon état du moment <em>vikriti</em>
         </h2>
-        <p className="m-0 font-display text-[1.2rem] leading-snug">{fr("Comment allez-vous ces dernières semaines ?")}</p>
         <p className="m-0 text-doux">
           {fr(
             "Les questions portent sur le sommeil, la digestion, la peau et l'humeur ces dernières semaines. Le résultat est comparé à votre nature pour repérer un dosha en excès.",
@@ -283,7 +279,7 @@ const Accueil = ({ onNature, onEtat }: { onNature: () => void; onEtat: () => voi
           onClick={onEtat}
           className="mt-2 inline-flex min-h-[54px] self-start items-center gap-2.5 rounded-buta border-2 border-encre px-7 font-bold hover:bg-encre hover:text-pistache"
         >
-          Faire le point <ArrowRight className="h-5 w-5" aria-hidden="true" />
+          Faire le point
         </button>
       </div>
     </div>

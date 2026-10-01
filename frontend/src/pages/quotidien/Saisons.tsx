@@ -176,11 +176,9 @@ const Saisons = () => {
           </div>
         </div>
       </section>
-      <Bande variante="paon" />
 
       <section className="mx-auto grid max-w-[1220px] items-center gap-10 px-4 py-16 sm:px-10 md:grid-cols-2 md:py-[72px]">
         <div className="flex flex-col gap-2.5">
-          <p className="m-0 font-bold text-aubergine">Espace membre</p>
           <h2 className="m-0 text-[clamp(2rem,4vw,2.5rem)] leading-[1.05]">Le programme d'automne, jour par jour</h2>
           <p className="m-0 text-doux">
             Trois semaines pour apaiser Vata, avec un rappel chaque matin.

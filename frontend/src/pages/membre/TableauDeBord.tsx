@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Lock } from "lucide-react";
+import { Lock } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Motif } from "@/components/brand/BrandDefs";
@@ -200,7 +200,7 @@ const TableauDeBord = () => {
           </div>
 
           <div id="programme" className="flex scroll-mt-24 flex-col gap-4 rounded-[18px] bg-surface p-7 sm:p-8">
-            <p className="m-0 font-bold text-aubergine">Mon programme · bientôt</p>
+            <p className="m-0 font-bold text-aubergine">Bientôt dans votre espace</p>
             <h2 className="m-0 text-[clamp(1.7rem,3vw,2.1rem)] leading-[1.1]">{PROGRAMME_AUTOMNE.titre}</h2>
             <div className="flex items-center gap-4 rounded-[14px] bg-carte p-4 shadow-[inset_0_0_0_1.5px_hsl(var(--encre))]">
               <Chai size={72} decorative />
@@ -216,7 +216,7 @@ const TableauDeBord = () => {
               to="/au-quotidien/programme"
               className="inline-flex min-h-[52px] self-start items-center gap-2.5 rounded-buta bg-aubergine px-6 font-bold text-pistache no-underline hover:opacity-90"
             >
-              Voir le programme <ArrowRight className="h-5 w-5" aria-hidden="true" />
+              Voir le programme
             </Link>
           </div>
         </section>

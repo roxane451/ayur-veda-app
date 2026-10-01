@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Sceau from "@/components/brand/Sceau";
@@ -47,7 +46,7 @@ const Hero = () => (
             to="/profil"
             className="inline-flex min-h-14 items-center gap-2.5 rounded-buta bg-paon px-[30px] font-bold text-pistache hover:opacity-90"
           >
-            Faire le quiz dosha <ArrowRight className="h-5 w-5" aria-hidden="true" />
+            Faire le quiz dosha
           </Link>
           <Link to="/cuisine" className={lienSouligne}>
             Explorer la cuisine
@@ -99,7 +98,6 @@ const Saison = () => {
       className="mx-auto grid max-w-[1220px] gap-14 px-4 py-20 sm:px-10 md:grid-cols-2 md:gap-[72px] md:py-24"
     >
       <div className="flex flex-col gap-5">
-        <p className="m-0 font-bold text-aubergine">En ce moment</p>
         <h2 id="accueil-saison" className="m-0 text-[clamp(3.2rem,6.6vw,5.4rem)] leading-[0.92]">
           {s.nom}
         </h2>
@@ -118,7 +116,6 @@ const Saison = () => {
         </div>
         <Link to="/au-quotidien" className={`${lienSouligne} self-start`}>
           {s.nom.replace(/^L'|^Le /, (m) => (m === "L'" ? "Tout l'" : "Tout le "))}, saison de {s.dosha}
-          <ArrowRight className="h-[18px] w-[18px]" aria-hidden="true" />
         </Link>
       </div>
       <div className="flex flex-col gap-7 md:pt-2">
@@ -193,11 +190,10 @@ const TroisDoshas = () => (
           </div>
         ))}
         <Link to="/comprendre/doshas" className={`${lienSouligne} self-start text-pistache`}>
-          Comprendre les doshas <ArrowRight className="h-[18px] w-[18px]" aria-hidden="true" />
+          Comprendre les doshas
         </Link>
       </div>
     </section>
-    <Bande variante="paon" />
   </>
 );
 
@@ -218,7 +214,7 @@ const Etagere = () => (
         Sur l'étagère
       </h2>
       <Link to="/cuisine" className="inline-flex items-center gap-2 font-bold underline underline-offset-4">
-        La boîte à épices <ArrowRight className="h-[18px] w-[18px]" aria-hidden="true" />
+        La boîte à épices
       </Link>
     </div>
     <div className="-mx-4 overflow-x-auto px-4 pb-4 [scrollbar-width:none] sm:mx-0 sm:px-0">
@@ -297,7 +293,7 @@ const Citation = () => (
       <Photo description="mains qui pilent des épices au mortier, vue de près" />
     </div>
     <figure className="m-0 flex flex-col gap-4 md:pb-6">
-      <blockquote className="m-0 font-display text-[clamp(1.6rem,3.4vw,2.75rem)] leading-[1.15]">
+      <blockquote className="m-0 font-body text-[clamp(1.7rem,3.2vw,2.6rem)] leading-[1.2]">
         {fr(
           "« Lorsque le régime alimentaire est correct, la médecine n'est pas nécessaire. Lorsqu'il est incorrect, la médecine est inutile. »",
         )}

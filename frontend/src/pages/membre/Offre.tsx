@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
-import { Check } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { Bande, Motif } from "@/components/brand/BrandDefs";
+import { Motif } from "@/components/brand/BrandDefs";
 import Photo from "@/components/brand/PhotoPlaceholder";
 import Sceau from "@/components/brand/Sceau";
 import { fr } from "@/components/quiz/conseils";
@@ -12,15 +11,8 @@ import { PROGRAMME_AUTOMNE } from "@/data/saisons";
  * L'offre : gratuit, espace membre, contenus à l'unité.
  * [À FAIRE] prix et paiement. En attendant, le compte est gratuit : il garde le profil et le suivi.
  */
-const Coche = ({ children, clair }: { children: string; clair?: boolean }) => (
-  <li className={`flex gap-3 border-t border-dashed py-2.5 ${clair ? "border-[#2C6B63]" : "border-trait"}`}>
-    <Check className={`mt-1 h-5 w-5 shrink-0 ${clair ? "text-citron" : "text-citron-fonce"}`} strokeWidth={2.6} aria-hidden="true" />
-    <span>{children}</span>
-  </li>
-);
-
 const CONTENUS = [
-  { type: `Programme · ${PROGRAMME_AUTOMNE.duree}`, titre: PROGRAMME_AUTOMNE.titre, photo: "tasse de chaï et couverture en laine", href: "/au-quotidien/programme", sceau: true },
+  { type: `Programme de ${PROGRAMME_AUTOMNE.duree}`, titre: PROGRAMME_AUTOMNE.titre, photo: "tasse de chaï et couverture en laine", href: "/au-quotidien/programme", sceau: true },
   { type: "Guide à télécharger", titre: "La routine du matin", photo: "mains, gratte-langue en cuivre et bol d'eau tiède" },
   { type: "Atelier en ligne", titre: "Cuisiner pour son dosha", photo: "plan de travail, épices, casserole de dal" },
 ];
@@ -54,78 +46,51 @@ const Offre = () => (
         </div>
       </section>
 
-      <section className="mx-auto grid max-w-[1220px] items-stretch gap-6 px-4 pb-20 pt-6 sm:px-10 lg:grid-cols-3">
-        <article className="flex flex-col gap-5 rounded-[18px] bg-carte px-7 py-9 shadow-[inset_0_0_0_2px_hsl(var(--encre))] sm:px-8">
-          <h2 className="m-0 text-[2.1rem] leading-none">Gratuit</h2>
-          <p className="m-0 flex flex-col gap-1">
-            <span className="font-display text-[2.6rem] leading-none">0 €</span>
-            <span className="text-doux">pour toujours</span>
+      <section aria-label="Avec ou sans compte" className="mx-auto grid max-w-[1220px] items-center gap-12 px-4 pb-24 pt-6 sm:px-10 md:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] md:gap-16">
+        <div className="flex flex-col gap-5 md:pl-2">
+          <h2 className="m-0 text-[clamp(2rem,3.6vw,2.6rem)] leading-none">Sans compte</h2>
+          <p className="m-0 text-lg">
+            Le quiz et son résultat, la boîte à épices, les mélanges, six recettes et les conseils des quatre saisons restent en accès libre.
           </p>
-          <ul className="m-0 list-none p-0">
-            <Coche>Le quiz en deux parties</Coche>
-            <Coche>Votre résultat et les premiers conseils</Coche>
-            <Coche>La boîte à épices, les mélanges, six recettes</Coche>
-            <Coche>Les conseils des quatre saisons</Coche>
-          </ul>
           <Link
             to="/profil"
-            className="mt-auto inline-flex min-h-[52px] self-start items-center rounded-buta border-2 border-encre px-6 font-bold no-underline hover:bg-encre hover:text-pistache"
+            className="mt-2 inline-flex min-h-[52px] self-start items-center rounded-buta border-2 border-encre px-6 font-bold no-underline hover:bg-encre hover:text-pistache"
           >
             Faire le quiz
           </Link>
-        </article>
+        </div>
 
-        <article className="relative flex flex-col gap-5 overflow-hidden rounded-[18px] bg-paon px-7 py-9 text-pistache sm:px-8">
+        <article
+          className="relative flex flex-col gap-5 overflow-hidden bg-paon px-8 py-12 text-pistache sm:px-12 sm:py-14"
+          style={{ borderRadius: "clamp(56px, 9vw, 120px) 18px clamp(56px, 9vw, 120px) 18px" }}
+        >
           <Motif id="dabu" />
           <div className="relative flex flex-col gap-5">
-            <h2 className="m-0 text-[2.1rem] leading-none">Espace membre</h2>
-            <p className="m-0 flex flex-col gap-1">
-              <span className="font-display text-[2.6rem] leading-none">Compte gratuit</span>
-              <span className="text-[#D3E3DE]">l'abonnement arrive bientôt</span>
+            <h2 className="m-0 text-[clamp(2rem,3.6vw,2.6rem)] leading-none">Avec un compte</h2>
+            <p className="m-0 text-lg">
+              Votre nature reste enregistrée et vous faites le point à chaque saison, avec l'historique de vos états. Le programme de 21 jours et les
+              recettes de la semaine s'y ajouteront avec l'abonnement.
             </p>
-            <ul className="m-0 list-none p-0">
-              <Coche clair>Votre constitution enregistrée</Coche>
-              <Coche clair>Le point à chaque saison, et l'historique de vos états</Coche>
-              <Coche clair>Bientôt : un programme de 21 jours à chaque saison</Coche>
-              <Coche clair>Bientôt : les recettes de la semaine, selon votre dosha</Coche>
-            </ul>
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-3 pt-2">
+              <Link
+                to="/inscription"
+                className="inline-flex min-h-[52px] items-center rounded-buta bg-citron px-6 font-bold text-encre no-underline hover:opacity-90"
+              >
+                Créer mon compte
+              </Link>
+              <p className="m-0 max-w-[30ch] text-[15px] text-[#D3E3DE]">Gratuit, sans carte bancaire. Vous serez prévenu avant tout abonnement.</p>
+            </div>
           </div>
-          <div className="relative mt-auto flex flex-col gap-2.5">
-            <Link
-              to="/inscription"
-              className="inline-flex min-h-[52px] items-center justify-center rounded-buta bg-citron px-6 font-bold text-encre no-underline hover:opacity-90"
-            >
-              Créer mon compte
-            </Link>
-            <p className="m-0 text-[15px] text-[#D3E3DE]">Sans carte bancaire. Vous serez prévenu avant tout abonnement payant.</p>
-          </div>
-        </article>
-
-        <article className="flex flex-col gap-5 rounded-[18px] bg-carte px-7 py-9 shadow-[inset_0_0_0_2px_hsl(var(--encre))] sm:px-8">
-          <h2 className="m-0 text-[2.1rem] leading-none">À l'unité</h2>
-          <p className="m-0 flex flex-col gap-1">
-            <span className="font-display text-[2.6rem] leading-none">Bientôt</span>
-            <span className="text-doux">par contenu, à vie</span>
-          </p>
-          <ul className="m-0 list-none p-0">
-            <Coche>Les programmes de saison, en 21 jours</Coche>
-            <Coche>Des guides, comme la routine du matin</Coche>
-            <Coche>Les ateliers en ligne, en direct ou en replay</Coche>
-          </ul>
-          <a
-            href="#contenus"
-            className="mt-auto inline-flex min-h-[52px] self-start items-center rounded-buta border-2 border-encre px-6 font-bold no-underline hover:bg-encre hover:text-pistache"
-          >
-            Voir les contenus
-          </a>
         </article>
       </section>
-      <Bande variante="paon" />
 
       <section id="contenus" aria-labelledby="o-catalogue" className="mx-auto flex max-w-[1220px] scroll-mt-24 flex-col gap-8 px-4 py-16 sm:px-10 md:py-[88px]">
-        <h2 id="o-catalogue" className="m-0 text-[clamp(2.2rem,4.4vw,3.25rem)]">
-          Les contenus à l'unité
-        </h2>
+        <div className="flex flex-col gap-3">
+          <h2 id="o-catalogue" className="m-0 text-[clamp(2.2rem,4.4vw,3.25rem)]">
+            Les contenus à l'unité
+          </h2>
+          <p className="m-0 max-w-[52ch] text-lg text-doux">Chaque contenu s'achètera une fois et restera accessible à vie, avec ou sans abonnement.</p>
+        </div>
         <ul className="m-0 grid list-none gap-6 p-0 md:grid-cols-3">
           {CONTENUS.map((c) => {
             const carte = (
@@ -167,7 +132,7 @@ const Offre = () => (
           </h2>
           {FAQ.map(([q, r], i) => (
             <details key={q} open={i === 0} className="group border-t border-dashed border-trait py-[18px]">
-              <summary className="cursor-pointer font-display text-[1.35rem] leading-snug marker:text-aubergine sm:text-2xl">{fr(q)}</summary>
+              <summary className="cursor-pointer font-body text-[1.3rem] font-semibold leading-snug marker:text-aubergine sm:text-[1.4rem]">{fr(q)}</summary>
               <p className="m-0 mt-2.5 text-doux">{fr(r)}</p>
             </details>
           ))}
