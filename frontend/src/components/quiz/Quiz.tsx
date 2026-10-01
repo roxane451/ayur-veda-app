@@ -22,7 +22,7 @@ import {
 import { ecrireProfil, effacerProfil, lireProfil, type ProfilEnregistre } from "@/lib/profilStorage";
 import { CONSEILS, COULEUR_DOSHA, PORTRAITS, PORTRAIT_TRIDOSHA, fr } from "./conseils";
 
-type Partie = "p" | "v";
+export type Partie = "p" | "v";
 type Ecran = "accueil" | "question" | "pause" | "resultat";
 
 const DELAI_AUTO = 320; // ms : le temps de voir sa réponse cochée avant de passer à la suivante
@@ -32,16 +32,22 @@ const aujourdhui = () => new Date().toISOString().slice(0, 10);
 interface QuizProps {
   /** Prévenu quand on entre ou sort des questions (la page masque alors le menu). */
   onEnCours?: (enCours: boolean) => void;
+  /** Démarrer directement la partie 1, avec éventuellement une première réponse déjà cochée (depuis l'accueil). */
+  depart?: { partie: Partie; premier?: number };
 }
 
-const Quiz = ({ onEnCours }: QuizProps) => {
+const Quiz = ({ onEnCours, depart }: QuizProps) => {
   const [profil, setProfil] = useState<ProfilEnregistre>(() => lireProfil());
-  const [ecran, setEcran] = useState<Ecran>(() => (lireProfil().nature ? "resultat" : "accueil"));
-  const [partie, setPartie] = useState<Partie>("p");
+  const [ecran, setEcran] = useState<Ecran>(() =>
+    depart ? "question" : lireProfil().nature ? "resultat" : "accueil",
+  );
+  const [partie, setPartie] = useState<Partie>(depart?.partie ?? "p");
   const [index, setIndex] = useState(0);
   const [repP, setRepP] = useState<number[][]>([]);
   const [repV, setRepV] = useState<number[]>([]);
-  const [selection, setSelection] = useState<number[]>([]);
+  const [selection, setSelection] = useState<number[]>(
+    depart?.premier !== undefined ? [depart.premier] : [],
+  );
   const minuteur = useRef<number>();
   const titre = useRef<HTMLHeadingElement>(null);
 

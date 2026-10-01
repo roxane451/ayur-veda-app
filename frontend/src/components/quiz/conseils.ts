@@ -38,4 +38,5 @@ export const COULEUR_DOSHA: Record<DoshaKey, string> = {
 };
 
 /** Espace insécable devant « ? : ! ; » (typographie française). */
-export const fr = (t: string) => t.replace(/ ([?:!;])/g, " $1");
+export const fr = (t: string) =>
+  t.replace(/ ([?:!;»])/g, "\u00a0$1").replace(/« /g, "«\u00a0");
