@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import { Motif } from "@/components/brand/BrandDefs";
 import Photo from "@/components/brand/PhotoPlaceholder";
 import Sceau from "@/components/brand/Sceau";
+import { Poudre, SoleilLune } from "@/components/brand/Illustrations";
 import { fr } from "@/components/quiz/conseils";
 import { PROGRAMME_AUTOMNE } from "@/data/saisons";
 
@@ -11,10 +12,19 @@ import { PROGRAMME_AUTOMNE } from "@/data/saisons";
  * L'offre : gratuit, espace membre, contenus à l'unité.
  * [À FAIRE] prix et paiement. En attendant, le compte est gratuit : il garde le profil et le suivi.
  */
-const CONTENUS = [
-  { type: `Programme de ${PROGRAMME_AUTOMNE.duree}`, titre: PROGRAMME_AUTOMNE.titre, photo: "tasse de chaï et couverture en laine", href: "/au-quotidien/programme", sceau: true },
-  { type: "Guide à télécharger", titre: "La routine du matin", photo: "mains, gratte-langue en cuivre et bol d'eau tiède" },
-  { type: "Atelier en ligne", titre: "Cuisiner pour son dosha", photo: "plan de travail, épices, casserole de dal" },
+const A_VENIR = [
+  {
+    type: "Guide à imprimer",
+    titre: "La routine du matin",
+    texte: "La première heure de la journée détaillée pas à pas, du gratte-langue à l'auto-massage.",
+    Illu: SoleilLune,
+  },
+  {
+    type: "Atelier en ligne",
+    titre: "Cuisiner pour son dosha",
+    texte: "Deux heures pour apprendre à composer ses repas selon son dosha, en direct ou en replay.",
+    Illu: Poudre,
+  },
 ];
 
 const FAQ = [
@@ -91,38 +101,48 @@ const Offre = () => (
           </h2>
           <p className="m-0 max-w-[52ch] text-lg text-doux">Chaque contenu s'achètera une fois et restera accessible à vie, avec ou sans abonnement.</p>
         </div>
-        <ul className="m-0 grid list-none gap-6 p-0 md:grid-cols-3">
-          {CONTENUS.map((c) => {
-            const carte = (
-              <>
-                <div className="relative h-[220px] md:h-[240px]">
-                  <Photo description={c.photo} />
-                  {c.sceau && (
-                    <div className="absolute right-3.5 top-3.5">
-                      <Sceau size={60} rotate={10} fond="hsl(var(--aubergine))" reserve="hsl(var(--pistache))" />
-                    </div>
-                  )}
-                </div>
-                <span className="text-sm font-bold text-aubergine">{c.type}</span>
-                <span className="font-display text-[1.75rem] leading-tight">{c.titre}</span>
-                <span className="flex justify-between text-doux">
-                  <span>{c.href ? "Bientôt disponible" : "En préparation"}</span>
-                </span>
-              </>
-            );
-            return (
-              <li key={c.titre}>
-                {c.href ? (
-                  <Link to={c.href} className="group flex flex-col gap-3.5 no-underline">
-                    {carte}
-                  </Link>
-                ) : (
-                  <div className="flex flex-col gap-3.5">{carte}</div>
-                )}
-              </li>
-            );
-          })}
-        </ul>
+        <div className="grid items-start gap-10 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] md:gap-16">
+          <div className="relative">
+            <div className="h-[380px] md:h-[560px]">
+              <Photo arche description="tasse de chaï et couverture en laine" />
+            </div>
+            <div className="absolute -right-3 top-[38%] md:-right-8">
+              <Sceau size={88} rotate={12} fond="hsl(var(--aubergine))" reserve="hsl(var(--pistache))" />
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-10 md:pt-16">
+            <article className="flex flex-col gap-4">
+              <span className="font-bold text-aubergine">Programme de {PROGRAMME_AUTOMNE.duree}, bientôt disponible</span>
+              <h3 className="m-0 text-[clamp(2rem,4vw,3rem)] leading-[1.02]">{PROGRAMME_AUTOMNE.titre}</h3>
+              <p className="m-0 max-w-[46ch] text-lg">{fr(PROGRAMME_AUTOMNE.intro)}</p>
+              <Link
+                to="/au-quotidien/programme"
+                className="mt-1 inline-flex min-h-[52px] self-start items-center rounded-buta bg-aubergine px-6 font-bold text-pistache no-underline hover:opacity-90"
+              >
+                Voir le programme
+              </Link>
+            </article>
+
+            <div className="flex flex-col">
+              <p className="m-0 pb-3 text-doux">En préparation</p>
+              <ul className="m-0 list-none p-0">
+                {A_VENIR.map(({ type, titre, texte, Illu }) => (
+                  <li key={titre} className="grid grid-cols-[84px_minmax(0,1fr)] items-start gap-5 border-t-2 border-encre py-6 sm:grid-cols-[104px_minmax(0,1fr)]">
+                    <span className="flex aspect-square items-center justify-center rounded-buta bg-surface">
+                      <Illu size={72} decorative />
+                    </span>
+                    <span className="flex flex-col gap-1.5">
+                      <span className="text-sm font-bold text-aubergine">{type}</span>
+                      <span className="font-display text-[1.5rem] leading-tight">{titre}</span>
+                      <span className="text-doux">{fr(texte)}</span>
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section aria-labelledby="o-faq" className="bg-surface">
