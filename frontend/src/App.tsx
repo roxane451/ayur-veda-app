@@ -10,12 +10,14 @@ import Quiz from "./pages/Quiz";
 import Ritucharya from "./pages/Ritucharya";
 import Spices from "./pages/Spices";
 import NotFound from "./pages/NotFound";
+import BrandDefs from "./components/brand/BrandDefs";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
+      <BrandDefs />
       <Toaster />
       <Sonner />
       <BrowserRouter>

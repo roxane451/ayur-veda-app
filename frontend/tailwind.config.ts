@@ -19,10 +19,11 @@ export default {
     },
     extend: {
       fontFamily: {
-        display: ["'Cormorant Garamond'", "Georgia", "serif"],
-        body: ["'Poppins'", "system-ui", "sans-serif"],
-        serif: ["'Cormorant Garamond'", "Georgia", "serif"],
-        sans: ["'Poppins'", "system-ui", "sans-serif"],
+        display: ["'Fraunces'", "Georgia", "serif"],
+        body: ["'Karla'", "system-ui", "sans-serif"],
+        serif: ["'Fraunces'", "Georgia", "serif"],
+        sans: ["'Karla'", "system-ui", "sans-serif"],
+        devanagari: ["'Tiro Devanagari Sanskrit'", "serif"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -88,6 +89,16 @@ export default {
           light: "hsl(var(--gold-light))",
         },
         cream: "hsl(var(--cream))",
+        kora: { DEFAULT: "hsl(var(--kora))", 2: "hsl(var(--kora-2))" },
+        papier: "hsl(var(--papier))",
+        syahi: "hsl(var(--syahi))",
+        doux: "hsl(var(--doux))",
+        garance: "hsl(var(--garance))",
+        indigo: "hsl(var(--indigo))",
+        haldi: "hsl(var(--haldi))",
+        henne: "hsl(var(--henne))",
+        ciel: "hsl(var(--ciel))",
+        rose: "hsl(var(--rose))",
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
