@@ -15,7 +15,11 @@ import RetourEnHaut from "./components/RetourEnHaut";
 import Profil from "./pages/Profil";
 import EspaceMembre from "./pages/EspaceMembre";
 import Ritucharya from "./pages/Ritucharya";
-import Spices from "./pages/Spices";
+import Boite from "./pages/cuisine/Boite";
+import Melanges from "./pages/cuisine/Melanges";
+import FicheEpice from "./pages/cuisine/Fiche";
+import Recettes from "./pages/cuisine/Recettes";
+import Recette from "./pages/cuisine/Recette";
 import NotFound from "./pages/NotFound";
 import BrandDefs from "./components/brand/BrandDefs";
 
@@ -40,7 +44,11 @@ const App = () => (
           <Route path="/comprendre/lexique" element={<Lexique />} />
           <Route path="/profil" element={<Profil />} />
           <Route path="/au-quotidien" element={<Ritucharya />} />
-          <Route path="/cuisine" element={<Spices />} />
+          <Route path="/cuisine" element={<Boite />} />
+          <Route path="/cuisine/melanges" element={<Melanges />} />
+          <Route path="/cuisine/epices/:id" element={<FicheEpice />} />
+          <Route path="/cuisine/recettes" element={<Recettes />} />
+          <Route path="/cuisine/recettes/:id" element={<Recette />} />
           <Route path="/espace-membre" element={<EspaceMembre />} />
 
           {/* Anciennes adresses */}

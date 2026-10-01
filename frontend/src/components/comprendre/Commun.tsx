@@ -1,62 +1,22 @@
 import type { ReactNode } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import { Fil, PageRubrique } from "@/components/Rubrique";
 import { fr } from "@/components/quiz/conseils";
 import type { Effet } from "@/data/comprendre";
 import { SOUS_PAGES } from "./sousPages";
 
 
 
-/** Sous-navigation de la rubrique : défile au doigt sur téléphone. */
-const SousNav = () => (
-  <nav aria-label="Comprendre" className="mx-auto max-w-[1220px] px-4 pb-2 sm:px-10">
-    <ul className="-mx-4 m-0 flex list-none gap-2 overflow-x-auto px-4 py-1 [scrollbar-width:none] sm:mx-0 sm:flex-wrap sm:px-0">
-      {SOUS_PAGES.map((p) => (
-        <li key={p.href} className="shrink-0">
-          <NavLink
-            to={p.href}
-            end
-            className={({ isActive }) =>
-              `inline-flex min-h-10 items-center whitespace-nowrap rounded-full px-4 text-[15px] font-bold ${
-                isActive ? "bg-encre text-pistache" : "text-encre shadow-[inset_0_0_0_1.5px_hsl(var(--trait))] hover:bg-surface"
-              }`
-            }
-          >
-            {p.titre}
-          </NavLink>
-        </li>
-      ))}
-    </ul>
-  </nav>
-);
-
 /** Gabarit commun des pages « Comprendre ». */
-export const PageComprendre = ({ children }: { children: ReactNode }) => {
-  return (
-    <>
-      <Navbar />
-      <SousNav />
-      <main>{children}</main>
-      <Footer />
-    </>
-  );
-};
-
-export const FilAriane = ({ page }: { page?: string }) => (
-  <nav aria-label="Fil d'Ariane" className="text-[15px] text-doux">
-    <Link to="/">Accueil</Link> <span aria-hidden="true" className="text-trait">/</span>{" "}
-    {page ? (
-      <>
-        <Link to="/comprendre">Comprendre</Link> <span aria-hidden="true" className="text-trait">/</span>{" "}
-        <span aria-current="page">{page}</span>
-      </>
-    ) : (
-      <span aria-current="page">Comprendre</span>
-    )}
-  </nav>
+export const PageComprendre = ({ children }: { children: ReactNode }) => (
+  <PageRubrique label="Comprendre" pages={SOUS_PAGES}>
+    {children}
+  </PageRubrique>
 );
+
+export const FilAriane = ({ page }: { page?: string }) => <Fil rubrique="Comprendre" href="/comprendre" page={page} />;
+
 
 export const Deva = ({ children, className = "text-[30px] text-aubergine" }: { children: string; className?: string }) => (
   <span lang="sa" className={`font-devanagari leading-tight ${className}`}>
