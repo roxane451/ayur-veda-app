@@ -8,20 +8,22 @@ import { ELEMENTS } from "@/data/comprendre";
  */
 
 const ARCS = [
-  { nom: "VATA", deva: "वात", de: 0, a: 1, couleur: "#8DB9B0", Illu: Vent },
-  { nom: "PITTA", deva: "पित्त", de: 2, a: 3, couleur: "#DCBFD5", Illu: Flamme },
-  { nom: "KAPHA", deva: "कफ", de: 3, a: 4, couleur: "#BBD439", Illu: Goutte },
+  { nom: "VATA", deva: "वात", de: 0, a: 1, couleur: "#8DB9B0", Illu: Vent, dessous: false },
+  { nom: "PITTA", deva: "पित्त", de: 2, a: 3, couleur: "#DCBFD5", Illu: Flamme, dessous: false },
+  // Kapha, l'eau et la terre, passe sous la chaîne : il ne se colle plus à Pitta
+  { nom: "KAPHA", deva: "कफ", de: 3, a: 4, couleur: "#BBD439", Illu: Goutte, dessous: true },
 ];
 
 const DESCRIPTION = "Les cinq éléments, de l'éther à la terre. Vata relie l'éther et l'air, Pitta le feu et l'eau, Kapha l'eau et la terre.";
 
 /* ───────── À l'horizontale ───────── */
 const LARGEUR = 1140;
-const HAUTEUR = 440;
-const Y = 330;
+const HAUTEUR = 540;
+const Y = 280;
 const R = 54;
 const X = ELEMENTS.map((_, i) => (LARGEUR * (2 * i + 1)) / 10);
 const BASE = Y - R - 8;
+const BAS = Y + R + 8;
 
 const Horizontal = () => (
   <div className="relative hidden w-full lg:block" style={{ aspectRatio: `${LARGEUR} / ${HAUTEUR}` }}>
@@ -31,17 +33,22 @@ const Horizontal = () => (
         const r = (X[a.a] - X[a.de]) / 2;
         const cx = (X[a.de] + X[a.a]) / 2;
         const haut = BASE - r * 0.95;
+        const bas = BAS + r * 0.95;
         return (
           <g key={a.nom}>
             <path
-              d={`M${X[a.de]} ${BASE} A${r} ${r * 0.95} 0 0 1 ${X[a.a]} ${BASE}`}
+              d={
+                a.dessous
+                  ? `M${X[a.de]} ${BAS} A${r} ${r * 0.95} 0 0 0 ${X[a.a]} ${BAS}`
+                  : `M${X[a.de]} ${BASE} A${r} ${r * 0.95} 0 0 1 ${X[a.a]} ${BASE}`
+              }
               fill="none"
               stroke={a.couleur}
               strokeWidth="5"
               strokeLinecap="round"
               filter="url(#ink)"
             />
-            <text x={cx} y={haut - 26} textAnchor="middle" fill="#F3F5E6">
+            <text x={cx} y={a.dessous ? bas + 50 : haut - 26} textAnchor="middle" fill="#F3F5E6">
               <tspan className="font-display" fontSize="34" letterSpacing="1">
                 {a.nom}
               </tspan>
@@ -55,21 +62,21 @@ const Horizontal = () => (
       {ELEMENTS.map((e, i) => (
         <g key={e.nom}>
           <circle cx={X[i]} cy={Y} r={R} fill="#F3F5E6" stroke="#13201E" strokeWidth="2" />
-          <text x={X[i]} y={Y + 10} textAnchor="middle" className="font-devanagari" fontSize="30" fill="#0E4D47">
+          <text x={X[i]} y={Y + 4} textAnchor="middle" className="font-devanagari" fontSize="28" fill="#0E4D47">
             {e.deva}
           </text>
-          <text x={X[i]} y={Y + R + 34} textAnchor="middle" fontStyle="italic" fontSize="18" fill="#D3E3DE">
+          <text x={X[i]} y={Y + 30} textAnchor="middle" fontStyle="italic" fontSize="15" fill="#4C5A57">
             {e.nom}
           </text>
         </g>
       ))}
     </svg>
-    {ARCS.map(({ nom, de, a, Illu }) => (
+    {ARCS.map(({ nom, de, a, Illu, dessous }) => (
       <div
         key={nom}
         aria-hidden="true"
         className="absolute -translate-x-1/2 -translate-y-1/2"
-        style={{ left: `${((X[de] + X[a]) / 2 / LARGEUR) * 100}%`, top: `${((BASE - 52) / HAUTEUR) * 100}%`, width: `${(64 / LARGEUR) * 100}%` }}
+        style={{ left: `${((X[de] + X[a]) / 2 / LARGEUR) * 100}%`, top: `${((dessous ? BAS + 52 : BASE - 52) / HAUTEUR) * 100}%`, width: `${(64 / LARGEUR) * 100}%` }}
       >
         <Illu size={64} stroke="#F3F5E6" decorative className="h-auto w-full" />
       </div>
