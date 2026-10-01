@@ -154,3 +154,15 @@ describe('validateBody middleware', () => {
     expect(next).toHaveBeenCalled();
   });
 });
+
+describe('bilanSchema', () => {
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const { bilanSchema } = require('../../middleware/validation');
+  it('accepte un bilan valide', () => {
+    expect(bilanSchema.safeParse({ type: 'etat', scores: { vata: 9, pitta: 2, kapha: 1.5 } }).success).toBe(true);
+  });
+  it('refuse un type inconnu ou des scores négatifs', () => {
+    expect(bilanSchema.safeParse({ type: 'autre', scores: { vata: 1, pitta: 1, kapha: 1 } }).success).toBe(false);
+    expect(bilanSchema.safeParse({ type: 'nature', scores: { vata: -1, pitta: 1, kapha: 1 } }).success).toBe(false);
+  });
+});

@@ -13,6 +13,8 @@ export default defineConfig(({ mode }) => ({
       "localhost", // pour tests locaux
       "127.0.0.1",
     ],
+    // En développement, l'API tourne à part sur le port 5000.
+    proxy: { "/api": "http://localhost:5000" },
   },
   plugins: [
     react(),

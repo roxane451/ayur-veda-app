@@ -21,6 +21,7 @@ import quizRoutes from "./routes/quiz";
 import spicesRoutes from "./routes/spices";
 import doshasRoutes from "./routes/doshas";
 import ritucharyaRoutes from "./routes/ritucharya";
+import bilanRoutes from "./routes/bilans";
 import { swaggerRouter } from "./config/swagger";
 
 // ────────────────────────────────────────────────
@@ -216,6 +217,7 @@ app.use("/api/quiz", quizRoutes);
 app.use("/api/spices", spicesRoutes);
 app.use("/api/doshas", doshasRoutes);
 app.use("/api/ritucharya", ritucharyaRoutes);
+app.use("/api/bilans", bilanRoutes);
 
 // ────────────────────────────────────────────────
 // Health check complet

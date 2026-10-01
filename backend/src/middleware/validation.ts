@@ -110,3 +110,12 @@ export function validateQuery<T>(schema: ZodSchema<T>) {
     next();
   };
 }
+
+// ── Bilans du quiz en deux parties ─────────────────────────────────────────
+const score = z.number().min(0).max(200);
+export const bilanSchema = z.object({
+  type: z.enum(["nature", "etat"], { error: "Type de bilan invalide" }),
+  scores: z.object({ vata: score, pitta: score, kapha: score }),
+  /** Date du bilan, pour reprendre un résultat fait avant la création du compte. */
+  date: z.string().datetime().optional(),
+});

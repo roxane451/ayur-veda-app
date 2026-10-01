@@ -14,6 +14,8 @@ import Lexique from "./pages/comprendre/Lexique";
 import RetourEnHaut from "./components/RetourEnHaut";
 import Profil from "./pages/Profil";
 import EspaceMembre from "./pages/EspaceMembre";
+import Acces from "./pages/membre/Acces";
+import { CompteProvider } from "./components/compte/CompteContext";
 import Saisons from "./pages/quotidien/Saisons";
 import Programme from "./pages/quotidien/Programme";
 import Boite from "./pages/cuisine/Boite";
@@ -32,36 +34,52 @@ const App = () => (
       <BrandDefs />
       <Toaster />
       <Sonner />
-      <BrowserRouter>
-        <RetourEnHaut />
-        <Routes>
-          <Route path="/" element={<Index />} />
+      <CompteProvider>
+        <BrowserRouter>
+          <RetourEnHaut />
+          <Routes>
+            <Route path="/" element={<Index />} />
 
-          <Route path="/comprendre" element={<Essentiel />} />
-          <Route path="/comprendre/doshas" element={<Doshas />} />
-          <Route path="/comprendre/saveurs" element={<Saveurs />} />
-          <Route path="/comprendre/agni" element={<Agni />} />
-          <Route path="/comprendre/journee" element={<Journee />} />
-          <Route path="/comprendre/lexique" element={<Lexique />} />
-          <Route path="/profil" element={<Profil />} />
-          <Route path="/au-quotidien" element={<Saisons />} />
-          <Route path="/au-quotidien/journee" element={<Journee rubrique="quotidien" />} />
-          <Route path="/au-quotidien/programme" element={<Programme />} />
-          <Route path="/cuisine" element={<Boite />} />
-          <Route path="/cuisine/melanges" element={<Melanges />} />
-          <Route path="/cuisine/epices/:id" element={<FicheEpice />} />
-          <Route path="/cuisine/recettes" element={<Recettes />} />
-          <Route path="/cuisine/recettes/:id" element={<Recette />} />
-          <Route path="/espace-membre" element={<EspaceMembre />} />
+            <Route path="/comprendre" element={<Essentiel />} />
+            <Route path="/comprendre/doshas" element={<Doshas />} />
+            <Route path="/comprendre/saveurs" element={<Saveurs />} />
+            <Route path="/comprendre/agni" element={<Agni />} />
+            <Route path="/comprendre/journee" element={<Journee />} />
+            <Route path="/comprendre/lexique" element={<Lexique />} />
+            <Route path="/profil" element={<Profil />} />
+            <Route path="/au-quotidien" element={<Saisons />} />
+            <Route
+              path="/au-quotidien/journee"
+              element={<Journee rubrique="quotidien" />}
+            />
+            <Route path="/au-quotidien/programme" element={<Programme />} />
+            <Route path="/cuisine" element={<Boite />} />
+            <Route path="/cuisine/melanges" element={<Melanges />} />
+            <Route path="/cuisine/epices/:id" element={<FicheEpice />} />
+            <Route path="/cuisine/recettes" element={<Recettes />} />
+            <Route path="/cuisine/recettes/:id" element={<Recette />} />
+            <Route path="/espace-membre" element={<EspaceMembre />} />
+            <Route path="/connexion" element={<Acces mode="connexion" />} />
+            <Route path="/inscription" element={<Acces mode="inscription" />} />
 
-          {/* Anciennes adresses */}
-          <Route path="/doshas" element={<Navigate to="/comprendre/doshas" replace />} />
-          <Route path="/quiz" element={<Navigate to="/profil" replace />} />
-          <Route path="/ritucharya" element={<Navigate to="/au-quotidien" replace />} />
-          <Route path="/spices" element={<Navigate to="/cuisine" replace />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
+            {/* Anciennes adresses */}
+            <Route
+              path="/doshas"
+              element={<Navigate to="/comprendre/doshas" replace />}
+            />
+            <Route path="/quiz" element={<Navigate to="/profil" replace />} />
+            <Route
+              path="/ritucharya"
+              element={<Navigate to="/au-quotidien" replace />}
+            />
+            <Route
+              path="/spices"
+              element={<Navigate to="/cuisine" replace />}
+            />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </CompteProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );

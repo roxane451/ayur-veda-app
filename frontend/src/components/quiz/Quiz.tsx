@@ -20,6 +20,7 @@ import {
 } from "@/lib/doshaLogic";
 import { ecrireProfil, effacerProfil, lireProfil, type ProfilEnregistre } from "@/lib/profilStorage";
 import { CONSEILS, COULEUR_DOSHA, PORTRAITS, PORTRAIT_TRIDOSHA, fr } from "./conseils";
+import { useCompteOptionnel } from "@/components/compte/CompteContext";
 
 export type Partie = "p" | "v";
 type Ecran = "accueil" | "question" | "pause" | "resultat";
@@ -36,10 +37,20 @@ interface QuizProps {
 }
 
 const Quiz = ({ onEnCours, depart }: QuizProps) => {
-  const [profil, setProfil] = useState<ProfilEnregistre>(() => lireProfil());
+  const compte = useCompteOptionnel();
   const [ecran, setEcran] = useState<Ecran>(() =>
     depart ? "question" : lireProfil().nature ? "resultat" : "accueil",
   );
+  const [profil, setProfil] = useState<ProfilEnregistre>(() => lireProfil());
+  // Quand le compte a mis à jour le profil de l'appareil, on le relit.
+  const [versionLue, setVersionLue] = useState(compte?.version ?? 0);
+  if (compte && compte.version !== versionLue) {
+    setVersionLue(compte.version);
+    const p = lireProfil();
+    setProfil(p);
+    if (ecran === "accueil" && p.nature) setEcran("resultat");
+    if (ecran === "resultat" && !p.nature && !p.etat) setEcran("accueil");
+  }
   const [partie, setPartie] = useState<Partie>(depart?.partie ?? "p");
   const [index, setIndex] = useState(0);
   const [repP, setRepP] = useState<number[][]>([]);
@@ -93,6 +104,7 @@ const Quiz = ({ onEnCours, depart }: QuizProps) => {
     }
     setProfil(suivant);
     ecrireProfil(suivant);
+    compte?.enregistrerBilan(p === "p" ? "nature" : "etat", p === "p" ? suivant.nature!.scores : suivant.etat!.scores);
     setSelection([]);
     setIndex(0);
     setEcran(p === "p" && !suivant.etat ? "pause" : "resultat");
@@ -140,7 +152,8 @@ const Quiz = ({ onEnCours, depart }: QuizProps) => {
   };
 
   const recommencer = () => {
-    effacerProfil();
+    if (compte?.connecte) void compte.effacerTout();
+    else effacerProfil();
     setProfil({});
     setRepP([]);
     setRepV([]);
@@ -199,6 +212,7 @@ const Quiz = ({ onEnCours, depart }: QuizProps) => {
         onNature={() => commencer("p")}
         onEtat={() => commencer("v")}
         onRecommencer={recommencer}
+        connecte={Boolean(compte?.connecte)}
       />
     );
   }
@@ -466,12 +480,14 @@ interface ResultatProps {
   onNature: () => void;
   onEtat: () => void;
   onRecommencer: () => void;
+  connecte?: boolean;
 }
 
 const dateCourte = (iso: string) =>
   new Date(`${iso}T12:00:00`).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" });
 
-const Resultat = ({ titre, profil, onNature, onEtat, onRecommencer }: ResultatProps) => {
+const Resultat = ({ titre, profil, onNature, onEtat, onRecommencer, connecte }: ResultatProps) => {
+  const [confirmer, setConfirmer] = useState(false);
   const nature = profil.nature ? partsEntieres(profil.nature.scores) : undefined;
   const etatScores: DoshaScores | undefined = profil.etat?.scores;
   const etat = etatScores ? partsEntieres(etatScores) : undefined;
@@ -550,7 +566,11 @@ const Resultat = ({ titre, profil, onNature, onEtat, onRecommencer }: ResultatPr
       <div className="flex flex-wrap items-center gap-3.5 rounded-[18px] bg-paon px-6 py-7 text-pistache sm:px-8">
         <p className="m-0 flex-grow basis-64">
           {etat
-            ? fr("Refaites le point à la prochaine saison : votre nature reste enregistrée sur cet appareil.")
+            ? fr(
+                connecte
+                  ? "Refaites le point à la prochaine saison : votre nature et votre historique restent sur votre compte."
+                  : "Refaites le point à la prochaine saison : votre nature reste enregistrée sur cet appareil.",
+              )
             : fr("Votre nature est connue. Mesurez maintenant votre état du moment.")}
         </p>
         <button
@@ -573,9 +593,21 @@ const Resultat = ({ titre, profil, onNature, onEtat, onRecommencer }: ResultatPr
 
       <div className="flex flex-wrap items-center justify-between gap-4 text-[15px] text-doux">
         <p className="m-0">Ce questionnaire donne des repères, il ne remplace pas une consultation.</p>
-        <button type="button" onClick={onRecommencer} className="min-h-11 font-bold text-encre underline underline-offset-4">
-          Tout effacer et recommencer
-        </button>
+        {confirmer ? (
+          <span className="flex flex-wrap items-center gap-3">
+            <span>{connecte ? "Effacer aussi l'historique de votre compte ?" : "Effacer votre profil ?"}</span>
+            <button type="button" onClick={onRecommencer} className="min-h-11 font-bold text-aubergine underline underline-offset-4">
+              Oui, tout effacer
+            </button>
+            <button type="button" onClick={() => setConfirmer(false)} className="min-h-11 font-bold text-encre underline underline-offset-4">
+              Annuler
+            </button>
+          </span>
+        ) : (
+          <button type="button" onClick={() => setConfirmer(true)} className="min-h-11 font-bold text-encre underline underline-offset-4">
+            Tout effacer et recommencer
+          </button>
+        )}
       </div>
     </section>
   );
