@@ -147,3 +147,119 @@ export function calculateResults(answers: QuizOption[]): QuizResults {
 
   return { scores, percentages, profile };
 }
+
+// ── Quiz en deux parties : nature (prakriti) et état du moment (vikriti) ──
+
+export const DOSHAS: DoshaKey[] = ["vata", "pitta", "kapha"];
+
+export const NOM_DOSHA: Record<DoshaKey, string> = {
+  vata: "Vata",
+  pitta: "Pitta",
+  kapha: "Kapha",
+};
+
+/** Seuil au-delà duquel un dosha est dit « en excès » (en points de pourcentage). */
+export const SEUIL_EXCES = 10;
+
+/** En dessous de ce total de points, la partie 2 dit simplement « proche de l'équilibre ». */
+export const SEUIL_GENE = 6;
+
+export type Parts = Record<DoshaKey, number>;
+
+/** Parts entières qui totalisent exactement 100 (méthode des plus grands restes). */
+export function partsEntieres(scores: DoshaScores): Parts {
+  const total = scores.vata + scores.pitta + scores.kapha;
+  if (total === 0) return { vata: 0, pitta: 0, kapha: 0 };
+  const brut = DOSHAS.map((d) => ({ d, v: (scores[d] * 100) / total }));
+  const parts = Object.fromEntries(brut.map(({ d, v }) => [d, Math.floor(v)])) as Parts;
+  let reste = 100 - DOSHAS.reduce((s, d) => s + parts[d], 0);
+  [...brut]
+    .sort((a, b) => (b.v % 1) - (a.v % 1))
+    .forEach(({ d }) => {
+      if (reste > 0) {
+        parts[d] += 1;
+        reste -= 1;
+      }
+    });
+  return parts;
+}
+
+export interface OptionPonderee {
+  dosha: DoshaKey;
+  poids: number;
+}
+
+/**
+ * Partie 1 : chaque réponse est la liste des options cochées (une ou deux).
+ * Quand deux options sont cochées, le poids de la question est partagé.
+ */
+export function scoresPrakriti(reponses: OptionPonderee[][]): DoshaScores {
+  const scores: DoshaScores = { vata: 0, pitta: 0, kapha: 0 };
+  for (const choix of reponses) {
+    if (!choix.length) continue;
+    for (const o of choix) scores[o.dosha] += o.poids / choix.length;
+  }
+  return scores;
+}
+
+/** Partie 2 : chaque affirmation vaut de 0 (jamais) à 3 (presque tous les jours). */
+export function scoresVikriti(reponses: { dosha: DoshaKey; frequence: number }[]): DoshaScores {
+  const scores: DoshaScores = { vata: 0, pitta: 0, kapha: 0 };
+  for (const r of reponses) scores[r.dosha] += Math.max(0, Math.min(3, r.frequence));
+  return scores;
+}
+
+/** Libellé lisible de la constitution : « Vata », « Vata-Pitta », « Tridosha »… */
+export function libelleProfil(parts: Parts): string {
+  const profil = computeProfile({
+    vata: String(parts.vata),
+    pitta: String(parts.pitta),
+    kapha: String(parts.kapha),
+  });
+  const p = profil.primary ? NOM_DOSHA[profil.primary] : "";
+  const s = profil.secondary ? NOM_DOSHA[profil.secondary] : "";
+  switch (profil.type) {
+    case "mono":
+      return p;
+    case "bi":
+      return `${p}-${s}`;
+    case "tri":
+      return "Tridosha";
+    default:
+      return `${p}, tendance ${s}`;
+  }
+}
+
+export function doshaDominant(parts: Parts): DoshaKey {
+  return [...DOSHAS].sort((a, b) => parts[b] - parts[a])[0];
+}
+
+export type EtatDuMoment =
+  | { type: "equilibre" }
+  | { type: "exces"; dosha: DoshaKey; ecart: number }
+  | { type: "reparti" };
+
+/**
+ * Compare l'état du moment à la nature.
+ * Un dosha est en excès quand sa part dépasse celle de la nature de SEUIL_EXCES points ou plus.
+ * Sans nature connue, on compare à une répartition égale (33 %).
+ */
+export function comparerEtat(scoresEtat: DoshaScores, nature?: Parts): EtatDuMoment {
+  const total = scoresEtat.vata + scoresEtat.pitta + scoresEtat.kapha;
+  if (total < SEUIL_GENE) return { type: "equilibre" };
+  const etat = partsEntieres(scoresEtat);
+  let pire: { dosha: DoshaKey; ecart: number } | null = null;
+  for (const d of DOSHAS) {
+    const ecart = etat[d] - (nature ? nature[d] : 33);
+    if (ecart >= SEUIL_EXCES && (!pire || ecart > pire.ecart)) pire = { dosha: d, ecart };
+  }
+  return pire ? { type: "exces", ...pire } : { type: "reparti" };
+}
+
+/** Phrase courte sur l'écart d'un dosha entre la nature et le moment. */
+export function noteEcart(nature: number, etat: number): string {
+  const e = etat - nature;
+  if (e >= SEUIL_EXCES) return `+${e} pts : en excès`;
+  if (e <= -SEUIL_EXCES) return `−${-e} pts : en baisse`;
+  return "proche de votre nature";
+}

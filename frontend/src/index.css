@@ -1,4 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -6,149 +5,100 @@
 
 @layer base {
   :root {
-    /* Ayuressence Natural Palette */
-    --background: 42 33% 97%;
-    --foreground: 30 10% 20%;
+    /* Identité finale : vert paon, aubergine, citron vert sur fond pistache */
+    --pistache: 68 43% 93%; /* fond */
+    --surface: 69 34% 88%; /* surfaces secondaires */
+    --carte: 68 57% 97%; /* cartes */
+    --encre: 171 25% 10%; /* texte */
+    --doux: 167 8% 33%; /* texte secondaire */
+    --trait: 156 8% 74%; /* filets, contours discrets */
+    --paon: 174 69% 18%; /* sections sombres, boutons principaux */
+    --aubergine: 316 37% 26%; /* actions, italiques */
+    --citron: 70 64% 53%; /* accent */
+    --citron-fonce: 70 66% 30%;
+    --ocre: 43 67% 49%; /* illustrations seulement */
 
-    --card: 0 0% 100%;
-    --card-foreground: 30 10% 20%;
+    /* Anciens noms, redirigés vers la nouvelle palette */
+    --kora: var(--pistache);
+    --kora-2: var(--surface);
+    --papier: var(--carte);
+    --syahi: var(--encre);
+    --garance: var(--aubergine);
+    --indigo: var(--paon);
+    --haldi: var(--citron);
+    --henne: var(--citron-fonce);
+    --ciel: 168 24% 64%;
+    --rose: 316 30% 80%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 30 10% 20%;
+    --background: var(--pistache);
+    --foreground: var(--encre);
 
-    /* Sage Green Primary */
-    --primary: 145 25% 45%;
-    --primary-foreground: 0 0% 100%;
+    --card: var(--carte);
+    --card-foreground: var(--encre);
 
-    /* Terracotta Secondary */
-    --secondary: 18 45% 55%;
-    --secondary-foreground: 0 0% 100%;
+    --popover: var(--carte);
+    --popover-foreground: var(--encre);
 
-    /* Warm Beige Muted */
-    --muted: 40 30% 92%;
-    --muted-foreground: 30 10% 45%;
+    --primary: var(--paon);
+    --primary-foreground: var(--pistache);
 
-    /* Soft Cream Accent */
-    --accent: 45 40% 95%;
-    --accent-foreground: 30 10% 20%;
+    --secondary: var(--aubergine);
+    --secondary-foreground: var(--pistache);
 
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 100%;
+    --muted: var(--surface);
+    --muted-foreground: var(--doux);
 
-    --border: 40 20% 85%;
-    --input: 40 20% 85%;
-    --ring: 145 25% 45%;
+    --accent: var(--surface);
+    --accent-foreground: var(--encre);
 
-    --radius: 0.75rem;
+    --destructive: 0 62% 40%;
+    --destructive-foreground: var(--pistache);
 
-    /* Dosha Colors - Natural tones */
-    --vata: 200 35% 55%;
-    --vata-foreground: 0 0% 100%;
-    --vata-muted: 200 40% 95%;
+    --border: var(--trait);
+    --input: var(--trait);
+    --ring: var(--citron);
 
-    --pitta: 20 60% 55%;
-    --pitta-foreground: 0 0% 100%;
-    --pitta-muted: 20 50% 95%;
+    --radius: 0.875rem;
 
-    --kapha: 145 30% 45%;
-    --kapha-foreground: 0 0% 100%;
-    --kapha-muted: 145 35% 95%;
+    /* Doshas */
+    --vata: 168 24% 64%;
+    --vata-foreground: var(--encre);
+    --vata-muted: 168 24% 90%;
 
-    /* Element Colors */
-    --ether: 260 30% 60%;
-    --air: 200 40% 60%;
-    --fire: 25 70% 55%;
-    --water: 195 50% 50%;
-    --earth: 35 40% 45%;
+    --pitta: var(--aubergine);
+    --pitta-foreground: var(--pistache);
+    --pitta-muted: 316 30% 92%;
 
-    /* Forest Theme Colors */
-    --forest: 145 35% 22%;
-    --forest-light: 145 30% 35%;
-    --forest-dark: 145 40% 15%;
-    --gold: 45 70% 55%;
-    --gold-light: 45 60% 75%;
-    --cream: 45 30% 95%;
+    --kapha: var(--citron-fonce);
+    --kapha-foreground: var(--pistache);
+    --kapha-muted: 70 40% 86%;
 
-    /* Custom gradients */
-    --gradient-natural: linear-gradient(
-      135deg,
-      hsl(42 33% 97%) 0%,
-      hsl(45 40% 95%) 50%,
-      hsl(40 30% 92%) 100%
-    );
-    --gradient-primary: linear-gradient(
-      135deg,
-      hsl(145 25% 45%) 0%,
-      hsl(145 30% 55%) 100%
-    );
-    --gradient-hero: linear-gradient(
-      180deg,
-      hsl(45 40% 97%) 0%,
-      hsl(42 33% 95%) 100%
-    );
-    --gradient-forest: linear-gradient(
-      180deg,
-      hsl(145 35% 22%) 0%,
-      hsl(145 40% 15%) 100%
-    );
+    /* Éléments */
+    --ether: 260 20% 55%;
+    --air: 168 24% 52%;
+    --fire: var(--aubergine);
+    --water: 190 45% 32%;
+    --earth: 43 40% 36%;
 
-    /* Shadows */
-    --shadow-soft: 0 4px 20px -4px hsl(30 10% 20% / 0.08);
-    --shadow-card: 0 10px 40px -10px hsl(30 10% 20% / 0.12);
-    --shadow-hover: 0 20px 50px -15px hsl(30 10% 20% / 0.15);
+    --forest: var(--paon);
+    --forest-light: 174 45% 30%;
+    --forest-dark: 174 70% 12%;
+    --gold: var(--citron);
+    --gold-light: 70 60% 78%;
+    --cream: var(--pistache);
 
-    /* Sidebar */
-    --sidebar-background: 42 33% 97%;
-    --sidebar-foreground: 30 10% 20%;
-    --sidebar-primary: 145 25% 45%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 45 40% 95%;
-    --sidebar-accent-foreground: 30 10% 20%;
-    --sidebar-border: 40 20% 85%;
-    --sidebar-ring: 145 25% 45%;
-  }
+    --shadow-soft: 0 4px 20px -4px hsl(171 25% 10% / 0.08);
+    --shadow-card: 0 10px 40px -10px hsl(171 25% 10% / 0.12);
+    --shadow-hover: 0 20px 50px -15px hsl(171 25% 10% / 0.15);
 
-  .dark {
-    --background: 30 10% 10%;
-    --foreground: 42 30% 92%;
-
-    --card: 30 10% 14%;
-    --card-foreground: 42 30% 92%;
-
-    --popover: 30 10% 14%;
-    --popover-foreground: 42 30% 92%;
-
-    --primary: 145 30% 50%;
-    --primary-foreground: 30 10% 10%;
-
-    --secondary: 18 50% 60%;
-    --secondary-foreground: 30 10% 10%;
-
-    --muted: 30 10% 20%;
-    --muted-foreground: 42 20% 60%;
-
-    --accent: 30 10% 18%;
-    --accent-foreground: 42 30% 92%;
-
-    --destructive: 0 62% 50%;
-    --destructive-foreground: 0 0% 100%;
-
-    --border: 30 10% 22%;
-    --input: 30 10% 22%;
-    --ring: 145 30% 50%;
-
-    --vata-muted: 200 25% 18%;
-    --pitta-muted: 20 30% 18%;
-    --kapha-muted: 145 25% 18%;
-
-    --sidebar-background: 30 10% 12%;
-    --sidebar-foreground: 42 30% 92%;
-    --sidebar-primary: 145 30% 50%;
-    --sidebar-primary-foreground: 30 10% 10%;
-    --sidebar-accent: 30 10% 16%;
-    --sidebar-accent-foreground: 42 30% 92%;
-    --sidebar-border: 30 10% 22%;
-    --sidebar-ring: 145 30% 50%;
+    --sidebar-background: var(--kora);
+    --sidebar-foreground: var(--syahi);
+    --sidebar-primary: var(--garance);
+    --sidebar-primary-foreground: var(--kora);
+    --sidebar-accent: var(--kora-2);
+    --sidebar-accent-foreground: var(--syahi);
+    --sidebar-border: 38 32% 78%;
+    --sidebar-ring: var(--garance);
   }
 }
 
@@ -159,11 +109,9 @@
 
   body {
     @apply bg-background text-foreground antialiased;
-    font-family:
-      "Poppins",
-      system-ui,
-      -apple-system,
-      sans-serif;
+    font-family: "Castoro", Georgia, serif;
+    font-size: 1.0625rem;
+    line-height: 1.55;
   }
 
   h1,
@@ -172,20 +120,29 @@
   h4,
   h5,
   h6 {
-    font-family: "Cormorant Garamond", Georgia, serif;
-    font-weight: 500;
+    font-family: "Castoro Titling", Georgia, serif;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-weight: 400;
+    line-height: 1.08;
+  }
+
+  h1 em,
+  h2 em,
+  h3 em {
+    font-family: "Castoro", Georgia, serif;
+    font-style: italic;
+    text-transform: none;
+    letter-spacing: 0;
+    color: hsl(var(--aubergine));
+  }
+
+  :lang(sa) {
+    font-family: "Tiro Devanagari Sanskrit", serif;
   }
 }
 
 @layer components {
-  .gradient-natural {
-    background: var(--gradient-natural);
-  }
-
-  .gradient-primary {
-    background: var(--gradient-primary);
-  }
-
   .shadow-soft {
     box-shadow: var(--shadow-soft);
   }
@@ -197,63 +154,66 @@
   .shadow-hover {
     box-shadow: var(--shadow-hover);
   }
+
+  /* Carte encadrée comme un tissu : trait d'encre + liseré garance */
+  .cadre-tissu {
+    box-shadow:
+      0 0 0 2px hsl(var(--syahi)),
+      0 0 0 7px hsl(var(--papier)),
+      0 0 0 9px hsl(var(--aubergine));
+  }
+
+  .lien-souligne {
+    text-decoration: underline;
+    text-underline-offset: 6px;
+    text-decoration-color: hsl(var(--citron));
+    text-decoration-thickness: 3px;
+  }
 }
 
 @layer utilities {
-  .text-gradient {
-    @apply bg-clip-text text-transparent;
-    background-image: var(--gradient-primary);
+  .font-display {
+    font-family: "Castoro Titling", Georgia, serif;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
   }
 
-  .animate-float {
-    animation: float 6s ease-in-out infinite;
+  .font-body {
+    font-family: "Castoro", Georgia, serif;
+  }
+
+  .font-logo {
+    font-family: "Castoro", Georgia, serif;
+    text-transform: none;
+    letter-spacing: -0.01em;
+  }
+
+  .pb-safe {
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+
+  .font-devanagari {
+    font-family: "Tiro Devanagari Sanskrit", serif;
   }
 
   .animate-fade-up {
     animation: fadeUp 0.6s ease-out forwards;
   }
 
-  .animate-scale-in {
-    animation: scaleIn 0.5s ease-out forwards;
-  }
-
-  .font-display {
-    font-family: "Cormorant Garamond", Georgia, serif;
-  }
-
-  .font-body {
-    font-family: "Poppins", system-ui, sans-serif;
-  }
-}
-
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
+  @media (prefers-reduced-motion: reduce) {
+    .animate-fade-up {
+      animation: none;
+    }
   }
 }
 
 @keyframes fadeUp {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(16px);
   }
   to {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-
-@keyframes scaleIn {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
   }
 }
