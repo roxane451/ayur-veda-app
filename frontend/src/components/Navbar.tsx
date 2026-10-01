@@ -36,7 +36,7 @@ const Navbar = () => {
 
         <Link
           to="/profil"
-          className="hidden min-h-[46px] items-center rounded-full bg-aubergine px-6 font-bold text-pistache hover:opacity-90 lg:inline-flex"
+          className="hidden min-h-[46px] items-center rounded-buta bg-aubergine px-6 font-bold text-pistache hover:opacity-90 lg:inline-flex"
         >
           Découvrir mon dosha
         </Link>
@@ -77,7 +77,7 @@ const Navbar = () => {
           <Link
             to="/profil"
             onClick={() => setOuvert(false)}
-            className="mt-6 flex min-h-[54px] items-center justify-center rounded-full bg-aubergine px-6 font-bold text-pistache"
+            className="mt-6 flex min-h-[54px] items-center justify-center rounded-buta bg-aubergine px-6 font-bold text-pistache"
           >
             Découvrir mon dosha
           </Link>

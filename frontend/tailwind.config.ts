@@ -121,6 +121,8 @@ export default {
         },
       },
       borderRadius: {
+        // La forme « buta » des boutons : la goutte du cachemire, deux coins pleins en diagonale
+        buta: "26px 4px 26px 4px",
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",

@@ -45,7 +45,7 @@ const Hero = () => (
         <div className="flex flex-wrap items-center gap-x-6 gap-y-4">
           <Link
             to="/profil"
-            className="inline-flex min-h-14 items-center gap-2.5 rounded-full bg-paon px-[30px] font-bold text-pistache hover:opacity-90"
+            className="inline-flex min-h-14 items-center gap-2.5 rounded-buta bg-paon px-[30px] font-bold text-pistache hover:opacity-90"
           >
             Faire le quiz dosha <ArrowRight className="h-5 w-5" aria-hidden="true" />
           </Link>
@@ -276,7 +276,7 @@ const AvantGoutQuiz = () => {
               key={o.texte}
               to="/profil"
               state={{ depart: "nature", premier: j }}
-              className="flex min-h-14 items-center gap-3.5 rounded-full bg-pistache px-5 py-2 no-underline shadow-[inset_0_0_0_1.5px_hsl(var(--encre))] transition-colors hover:bg-carte"
+              className="flex min-h-14 items-center gap-3.5 rounded-[14px] bg-pistache px-5 py-2 no-underline shadow-[inset_0_0_0_1.5px_hsl(var(--encre))] transition-colors hover:bg-carte"
             >
               <span aria-hidden="true" className="h-[18px] w-[18px] shrink-0 rounded-[5px] shadow-[inset_0_0_0_2px_hsl(var(--encre))]" />
               {o.texte}

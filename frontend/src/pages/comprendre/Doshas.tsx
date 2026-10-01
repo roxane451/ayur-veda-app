@@ -229,7 +229,7 @@ const Doshas = () => {
           </div>
           <Link
             to="/profil"
-            className="inline-flex min-h-[52px] items-center gap-2.5 rounded-full bg-aubergine px-6 font-bold text-pistache no-underline hover:opacity-90"
+            className="inline-flex min-h-[52px] items-center gap-2.5 rounded-buta bg-aubergine px-6 font-bold text-pistache no-underline hover:opacity-90"
           >
             Faire le quiz <ArrowRight className="h-5 w-5" aria-hidden="true" />
           </Link>

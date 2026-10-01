@@ -180,7 +180,7 @@ const Quiz = ({ onEnCours, depart }: QuizProps) => {
           <button
             type="button"
             onClick={() => commencer("v")}
-            className="inline-flex min-h-[54px] items-center rounded-full bg-aubergine px-7 font-bold text-pistache hover:opacity-90"
+            className="inline-flex min-h-[54px] items-center rounded-buta bg-aubergine px-7 font-bold text-pistache hover:opacity-90"
           >
             Continuer avec la partie 2
           </button>
@@ -234,7 +234,7 @@ const Accueil = ({ onNature, onEtat }: { onNature: () => void; onEtat: () => voi
         <button
           type="button"
           onClick={onNature}
-          className="mt-1 inline-flex min-h-[54px] self-start items-center rounded-full bg-citron px-7 font-bold text-encre hover:opacity-90"
+          className="mt-1 inline-flex min-h-[54px] self-start items-center rounded-buta bg-citron px-7 font-bold text-encre hover:opacity-90"
         >
           Découvrir ma nature
         </button>
@@ -249,7 +249,7 @@ const Accueil = ({ onNature, onEtat }: { onNature: () => void; onEtat: () => voi
         <button
           type="button"
           onClick={onEtat}
-          className="mt-1 inline-flex min-h-[54px] self-start items-center rounded-full border-2 border-encre px-7 font-bold hover:bg-encre hover:text-pistache"
+          className="mt-1 inline-flex min-h-[54px] self-start items-center rounded-buta border-2 border-encre px-7 font-bold hover:bg-encre hover:text-pistache"
         >
           Faire le point
         </button>
@@ -426,7 +426,7 @@ const QuestionEcran = ({
               <button
                 type="button"
                 onClick={onSuivante}
-                className="inline-flex min-h-[54px] items-center gap-2.5 rounded-full bg-aubergine px-7 font-bold text-pistache hover:opacity-90"
+                className="inline-flex min-h-[54px] items-center gap-2.5 rounded-buta bg-aubergine px-7 font-bold text-pistache hover:opacity-90"
               >
                 {index + 1 === total ? "Voir ma nature" : "Suivante"} <ArrowRight className="h-5 w-5" aria-hidden="true" />
               </button>
@@ -536,7 +536,7 @@ const Resultat = ({ titre, profil, onNature, onEtat, onRecommencer }: ResultatPr
         <button
           type="button"
           onClick={onEtat}
-          className="inline-flex min-h-[52px] items-center rounded-full bg-citron px-6 font-bold text-encre hover:opacity-90"
+          className="inline-flex min-h-[52px] items-center rounded-buta bg-citron px-6 font-bold text-encre hover:opacity-90"
         >
           {etat ? "Refaire le point" : "Faire le point maintenant"}
         </button>
@@ -544,7 +544,7 @@ const Resultat = ({ titre, profil, onNature, onEtat, onRecommencer }: ResultatPr
           <button
             type="button"
             onClick={onNature}
-            className="inline-flex min-h-[52px] items-center rounded-full border-2 border-pistache px-6 font-bold"
+            className="inline-flex min-h-[52px] items-center rounded-buta border-2 border-pistache px-6 font-bold"
           >
             Découvrir ma nature
           </button>

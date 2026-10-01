@@ -17,7 +17,7 @@ const EspaceMembre = () => (
       </p>
       <Link
         to="/profil"
-        className="inline-flex min-h-[54px] self-start items-center rounded-full bg-aubergine px-7 font-bold text-pistache"
+        className="inline-flex min-h-[54px] self-start items-center rounded-buta bg-aubergine px-7 font-bold text-pistache"
       >
         En attendant, faire le quiz
       </Link>
