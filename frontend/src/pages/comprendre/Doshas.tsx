@@ -314,7 +314,7 @@ const Doshas = () => {
       </section>
 
       <div className="h-16" />
-      <PiedSuite precedent="L'essentiel" suivant="Les six saveurs" />
+      <PiedSuite precedent="L'essentiel" suivant="Les qualités" />
     </PageComprendre>
   );
 };

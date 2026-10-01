@@ -11,6 +11,8 @@ import Saveurs from "./pages/comprendre/Saveurs";
 import Agni from "./pages/comprendre/Agni";
 import Journee from "./pages/comprendre/Journee";
 import Lexique from "./pages/comprendre/Lexique";
+import Qualites from "./pages/comprendre/Qualites";
+import CorpsEsprit from "./pages/comprendre/CorpsEsprit";
 import RetourEnHaut from "./components/RetourEnHaut";
 import Profil from "./pages/Profil";
 import EspaceMembre from "./pages/EspaceMembre";
@@ -43,7 +45,9 @@ const App = () => (
 
             <Route path="/comprendre" element={<Essentiel />} />
             <Route path="/comprendre/doshas" element={<Doshas />} />
+            <Route path="/comprendre/qualites" element={<Qualites />} />
             <Route path="/comprendre/saveurs" element={<Saveurs />} />
+            <Route path="/comprendre/corps-et-esprit" element={<CorpsEsprit />} />
             <Route path="/comprendre/agni" element={<Agni />} />
             <Route path="/comprendre/journee" element={<Journee />} />
             <Route path="/comprendre/lexique" element={<Lexique />} />

@@ -119,7 +119,7 @@ const Saveurs = () => (
       </div>
     </section>
     <div className="h-16" />
-    <PiedSuite precedent="Les doshas" suivant="Agni, le feu digestif" />
+    <PiedSuite precedent="Les qualités" suivant="Agni, le feu digestif" />
   </PageComprendre>
 );
 

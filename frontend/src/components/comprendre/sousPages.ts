@@ -2,8 +2,10 @@
 export const SOUS_PAGES = [
   { titre: "L'essentiel", href: "/comprendre" },
   { titre: "Les doshas", href: "/comprendre/doshas" },
+  { titre: "Les qualités", href: "/comprendre/qualites" },
   { titre: "Les six saveurs", href: "/comprendre/saveurs" },
   { titre: "Agni, le feu digestif", href: "/comprendre/agni" },
+  { titre: "Le corps et l'esprit", href: "/comprendre/corps-et-esprit" },
   { titre: "La journée", href: "/comprendre/journee" },
   { titre: "Lexique", href: "/comprendre/lexique" },
 ];

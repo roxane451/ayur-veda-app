@@ -98,7 +98,7 @@ const Agni = () => (
         ))}
       </ol>
     </section>
-    <PiedSuite precedent="Les six saveurs" suivant="La journée" />
+    <PiedSuite precedent="Les six saveurs" suivant="Le corps et l'esprit" />
   </PageComprendre>
 );
 

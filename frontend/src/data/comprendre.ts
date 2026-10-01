@@ -243,7 +243,16 @@ export const LEXIQUE = [
   { mot: "Vikriti", deva: "विकृति", sens: "Votre état du moment, quand l'équilibre s'est déplacé." },
   { mot: "Vipāka", deva: "विपाक", sens: "L'effet d'un aliment après la digestion." },
   { mot: "Vīrya", deva: "वीर्य", sens: "L'effet chauffant ou rafraîchissant d'un aliment." },
-];
+  { mot: "Āhāra", deva: "आहार", sens: "L'alimentation, premier des trois piliers de la santé." },
+  { mot: "Dhātu", deva: "धातु", sens: "Les sept tissus du corps, du plasma aux tissus reproducteurs, chacun nourrissant le suivant." },
+  { mot: "Guṇa", deva: "गुण", sens: "Une qualité. Vingt qualités décrivent la matière, et trois décrivent l'esprit." },
+  { mot: "Mala", deva: "मल", sens: "Les déchets du corps, c'est-à-dire les selles, l'urine et la sueur." },
+  { mot: "Nidrā", deva: "निद्रा", sens: "Le sommeil, deuxième pilier de la santé." },
+  { mot: "Ojas", deva: "ओजस्", sens: "L'essence de tous les tissus, qui donne l'immunité et l'endurance." },
+  { mot: "Rajas", deva: "रजस्", sens: "La qualité de l'esprit liée au mouvement et à l'agitation." },
+  { mot: "Sattva", deva: "सत्त्व", sens: "La qualité de l'esprit liée à la clarté et au calme." },
+  { mot: "Tamas", deva: "तमस्", sens: "La qualité de l'esprit liée à l'inertie et à la lourdeur." },
+].sort((x, y) => x.mot.localeCompare(y.mot, "fr", { sensitivity: "base" }));
 
 /** Première lettre sans accent ni macron, pour l'index du lexique. */
 export const initiale = (mot: string) => mot.normalize("NFD").replace(/[̀-ͯ]/g, "")[0].toUpperCase();

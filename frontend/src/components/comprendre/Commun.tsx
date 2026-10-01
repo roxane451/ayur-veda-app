@@ -13,14 +13,14 @@ const ROMAINS = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII"];
 /** Le sommaire de la rubrique, comme la table d'un livre : chapitres numérotés entre deux filets. */
 export const Sommaire = () => (
   <nav aria-label="Sommaire de Comprendre" className="mx-auto max-w-[1220px] px-4 sm:px-10">
-    <ol className="m-0 flex list-none gap-x-8 overflow-x-auto border-y border-b-[3px] border-double border-encre px-1 py-2.5 [scrollbar-width:none] lg:justify-center">
+    <ol className="m-0 flex list-none gap-x-7 overflow-x-auto border-y border-b-[3px] border-double border-encre px-1 py-2.5 [scrollbar-width:none] lg:flex-wrap lg:justify-center lg:gap-x-5 lg:overflow-visible lg:text-[15px]">
       {SOUS_PAGES.map((p, i) => (
         <li key={p.href} className="shrink-0">
           <NavLink
             to={p.href}
             end
             className={({ isActive }) =>
-              `inline-flex min-h-10 items-baseline gap-2 whitespace-nowrap border-b-2 pt-2 text-base no-underline ${
+              `inline-flex min-h-10 items-baseline gap-2 whitespace-nowrap border-b-2 pt-2 text-base no-underline lg:text-[15px] ${
                 isActive ? "border-aubergine font-bold" : "border-transparent hover:border-trait"
               }`
             }
