@@ -34,7 +34,7 @@ export const Sceau = ({
     role={label ? "img" : undefined}
     aria-label={label}
     aria-hidden={label ? undefined : true}
-    className={className}
+    className={`shrink-0 ${className ?? ""}`}
     style={{ display: "block", transform: rotate ? `rotate(${rotate}deg)` : undefined }}
   >
     <g filter={filter === "none" ? undefined : `url(#${filter})`}>

@@ -11,8 +11,8 @@ const Footer = () => (
     <Bande />
     <footer className="bg-encre text-pistache">
       <div className="mx-auto flex max-w-[1220px] flex-wrap justify-between gap-8 px-4 py-14 text-[15px] sm:px-10">
-        <div className="flex max-w-[460px] items-start gap-5">
-          <Sceau size={64} rotate={-6} fond="hsl(var(--aubergine))" reserve="hsl(var(--pistache))" />
+        <div className="flex max-w-[520px] items-center gap-6">
+          <Sceau size={88} rotate={-6} fond="hsl(var(--aubergine))" reserve="hsl(var(--pistache))" />
           <div className="flex flex-col gap-2">
             <Logo size={28} color="hsl(var(--pistache))" barColor="hsl(var(--citron))" />
             <p className="m-0 text-[#D3E3DE]">
