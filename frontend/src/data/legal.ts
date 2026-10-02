@@ -29,7 +29,7 @@ export const EDITEUR: Personne = {
   statut: null,
   adresse: null,
   siret: null,
-  email: null,
+  email: "contact@ayur-veda.fr",
   telephone: null,
   directeurPublication: null,
 };
