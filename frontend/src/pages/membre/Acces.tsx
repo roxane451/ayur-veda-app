@@ -77,7 +77,7 @@ const Acces = ({ mode }: { mode: "connexion" | "inscription" }) => {
                 : "Pour retrouver votre nature et vos bilans de saison."}
             </p>
             {inscription && aUnProfil && (
-              <p className="m-0 rounded-xl bg-citron px-5 py-3.5">Le quiz que vous avez déjà fait sera gardé sur votre compte.</p>
+              <p className="m-0 rounded-xl bg-citron px-5 py-3.5">Le test que vous avez déjà fait sera gardé sur votre compte.</p>
             )}
           </div>
 

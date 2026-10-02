@@ -42,7 +42,7 @@ const Hero = () => (
           to="/profil"
           className="inline-flex min-h-14 items-center gap-2.5 rounded-buta bg-paon px-[30px] font-bold text-pistache hover:opacity-90"
         >
-          Faire le quiz dosha
+          Faire le test dosha
         </Link>
         <Link to="/cuisine" className={lienSouligne}>
           Explorer la cuisine

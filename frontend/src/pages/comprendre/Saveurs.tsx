@@ -115,7 +115,7 @@ const Saveurs = () => (
             <Renvoi n={3} />
           </p>
           <Link to="/profil" className={`${lienSouligne} self-start`}>
-            Faire le quiz pour connaître mon dosha
+            Faire le test pour connaître mon dosha
           </Link>
         </div>
         <div className="flex flex-col">

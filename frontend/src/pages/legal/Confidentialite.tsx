@@ -29,7 +29,7 @@ const Confidentialite = () => (
   >
     <Section id="bref" titre="En bref">
       <ul>
-        <li>Vous pouvez lire le site et faire le quiz sans créer de compte.</li>
+        <li>Vous pouvez lire le site et faire le test sans créer de compte.</li>
         <li>
           Si vous créez un compte, nous gardons votre adresse e-mail, votre mot
           de passe sous forme chiffrée et vos bilans.
@@ -64,7 +64,7 @@ const Confidentialite = () => (
           si vous choisissez de les donner.
         </Ligne>
         <Ligne intitule="Vos bilans">
-          Les résultats du quiz, c'est-à-dire vos scores Vata, Pitta et Kapha,
+          Les résultats du test, c'est-à-dire vos scores Vata, Pitta et Kapha,
           le type de bilan (votre nature ou votre état du moment) et sa date.
         </Ligne>
         <Ligne intitule="Rien d'autre">
@@ -73,7 +73,7 @@ const Confidentialite = () => (
         </Ligne>
       </dl>
       <p>
-        Les résultats du quiz décrivent votre constitution selon l'Ayurveda. Ce
+        Les résultats du test décrivent votre constitution selon l'Ayurveda. Ce
         ne sont pas des données médicales, mais ils vous concernent de près.
         C'est pourquoi ils ne servent qu'à vous les montrer.
       </p>
@@ -112,7 +112,7 @@ const Confidentialite = () => (
           déconnectez.
         </Ligne>
         <Ligne intitule="ayurveda.profil.v1">
-          Le résultat de votre quiz, pour le retrouver même sans compte. Effacé
+          Le résultat de votre test, pour le retrouver même sans compte. Effacé
           quand vous effacez votre profil.
         </Ligne>
         <Ligne intitule="ayurveda.installation.v1">

@@ -24,7 +24,7 @@ const Cgu = () => (
     <Section id="objet" titre="L'objet">
       <p>
         {SITE} présente l'Ayurveda d'après ses textes anciens. Il propose des
-        explications, un quiz pour connaître sa constitution, des conseils pour
+        explications, un test pour connaître sa constitution, des conseils pour
         les saisons et la journée, et des recettes. Ces conditions encadrent
         l'utilisation de ces contenus et de l'espace membre.
       </p>
@@ -33,8 +33,8 @@ const Cgu = () => (
     <Section id="acces" titre="L'accès au site">
       <p>
         {CONTENU_PAYANT
-          ? "L'essentiel du site est gratuit et se lit sans compte, quiz compris. Certains contenus sont réservés aux abonnés. Un compte sert à garder vos bilans et à accéder à ces contenus."
-          : "Le site est gratuit. Vous pouvez tout lire et faire le quiz sans compte. Un compte sert seulement à garder vos bilans et à les retrouver sur un autre appareil."}
+          ? "L'essentiel du site est gratuit et se lit sans compte, test compris. Certains contenus sont réservés aux abonnés. Un compte sert à garder vos bilans et à accéder à ces contenus."
+          : "Le site est gratuit. Vous pouvez tout lire et faire le test sans compte. Un compte sert seulement à garder vos bilans et à les retrouver sur un autre appareil."}
       </p>
       <p>
         Nous faisons notre possible pour que le site reste disponible, sans
@@ -70,7 +70,7 @@ const Cgu = () => (
 
     <Section id="sante" titre="Ce que le site n'est pas">
       <p className="border-l-4 border-citron bg-surface px-5 py-4">
-        Le site n'est pas un service médical. Le quiz décrit votre constitution
+        Le site n'est pas un service médical. Le test décrit votre constitution
         selon l'Ayurveda, il ne pose pas de diagnostic. Les conseils sont
         généraux et ne tiennent pas compte de votre santé particulière.
       </p>
