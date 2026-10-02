@@ -14,7 +14,7 @@ export interface Epice {
   translit: string;
   deva: string;
   latin: string;
-  nature: "Réchauffant" | "Réchauffante" | "Rafraîchissant" | "Rafraîchissante";
+  nature: "Réchauffant" | "Réchauffante" | "Rafraîchissant" | "Rafraîchissante" | "Neutre";
   gout: string;
   effets: Record<DoshaKey, EffetEpice>;
   enCuisine: string;
@@ -55,7 +55,7 @@ export const EPICES: Epice[] = [
     virya: "Chauffant",
     vipaka: "Piquant",
     usage:
-      "En Ayurveda, on l'utilise traditionnellement pour soutenir la digestion, pour la peau, et pour les articulations. ",
+      "En Ayurveda, on l'utilise traditionnellement pour soutenir la digestion, pour le teint et la peau, et contre les gonflements. ",
     cuisine: [
       "Une demi-cuillère à café revenue dans le ghee, au début de la cuisson",
       "Dans le dal, le riz, les soupes de légumes",
@@ -74,13 +74,13 @@ export const EPICES: Epice[] = [
     deva: "शुण्ठी",
     latin: "Zingiber officinale",
     nature: "Réchauffant",
-    gout: "Piquant, doux",
+    gout: "Piquant",
     effets: { vata: "diminue", pitta: "augmente", kapha: "diminue" },
     enCuisine: "Frais en début de cuisson, sec dans les mélanges et le chaï.",
     avec: "Citron, miel, cannelle.",
     seGarde: "Frais : trois semaines au réfrigérateur.",
     accroche:
-      "L'Ayurveda l'appelle volontiers le remède universel. Sec, il chauffe davantage que frais.",
+      "L'Ayurveda l'appelle volontiers le remède universel. Frais ou sec, il réchauffe. Les textes décrivent le frais comme plus vif, le sec comme plus doux pour la digestion.",
     rasa: "Piquante",
     virya: "Chauffant",
     vipaka: "Doux",
@@ -103,18 +103,18 @@ export const EPICES: Epice[] = [
     deva: "जीरक",
     latin: "Cuminum cyminum",
     nature: "Réchauffant",
-    gout: "Piquant, amer",
-    effets: { vata: "diminue", pitta: "equilibre", kapha: "diminue" },
+    gout: "Piquant",
+    effets: { vata: "diminue", pitta: "augmente", kapha: "diminue" },
     enCuisine: "Torréfié à sec ou revenu dans le ghee, au début de la cuisson.",
     avec: "Coriandre, fenouil, lentilles et légumes secs.",
     seGarde: "En graines : un an. Moudre au dernier moment.",
     accroche:
       "La première graine qui crépite dans le ghee. Il donne leur parfum aux lentilles et rend les légumes secs plus faciles à digérer.",
-    rasa: "Piquante, amère",
+    rasa: "Piquante",
     virya: "Chauffant",
     vipaka: "Piquant",
     usage:
-      "Traditionnellement, on l'associe aux plats de légumineuses pour limiter les ballonnements. ",
+      "Traditionnellement, on l'associe aux plats de légumineuses pour limiter les ballonnements. Il entre aussi, à petite dose, dans le mélange pour Pitta, adouci par la coriandre et le fenouil. ",
     cuisine: [
       "Une cuillère à café de graines dans le ghee chaud, jusqu'à ce qu'elles crépitent",
       "Torréfié à sec puis moulu, sur le riz et les yaourts",
@@ -131,16 +131,16 @@ export const EPICES: Epice[] = [
     translit: "dhānyaka",
     deva: "धान्यक",
     latin: "Coriandrum sativum",
-    nature: "Rafraîchissante",
+    nature: "Neutre",
     gout: "Douce, amère",
     effets: { vata: "equilibre", pitta: "diminue", kapha: "equilibre" },
     enCuisine: "Graines moulues dans les plats, feuilles fraîches à la fin.",
     avec: "Cumin, fenouil, menthe, yaourt.",
     seGarde: "En graines : un an.",
     accroche:
-      "L'épice douce de l'été. Ses graines parfument sans chauffer, et ses feuilles fraîches terminent les plats.",
+      "L'épice douce de la boîte. Ses graines parfument sans échauffer, et ses feuilles fraîches terminent les plats.",
     rasa: "Astringente, amère, douce",
-    virya: "Rafraîchissant",
+    virya: "Légèrement chauffant selon le Bhāvaprakāśa, mais apaise les trois doshas",
     vipaka: "Doux",
     usage:
       "Traditionnellement, c'est l'épice qu'on choisit quand il fait chaud ou quand Pitta s'échauffe, notamment en eau de coriandre. ",
@@ -157,8 +157,8 @@ export const EPICES: Epice[] = [
   {
     id: "fenouil",
     nom: "Fenouil",
-    translit: "śatapuṣpā",
-    deva: "शतपुष्पा",
+    translit: "miśreyā",
+    deva: "मिश्रेया",
     latin: "Foeniculum vulgare",
     nature: "Rafraîchissant",
     gout: "Doux, piquant",
@@ -169,7 +169,7 @@ export const EPICES: Epice[] = [
     accroche:
       "Les petites graines qu'on croque à la fin du repas dans les restaurants indiens. Douces et anisées, elles conviennent à presque tout le monde.",
     rasa: "Douce, piquante",
-    virya: "Rafraîchissant",
+    virya: "Rafraîchissant selon la plupart des auteurs, chaud selon le Bhāvaprakāśa",
     vipaka: "Doux",
     usage:
       "Traditionnellement, on le croque après le repas pour faciliter la digestion et rafraîchir l'haleine. ",
@@ -189,7 +189,7 @@ export const EPICES: Epice[] = [
     translit: "elā",
     deva: "एला",
     latin: "Elettaria cardamomum",
-    nature: "Réchauffante",
+    nature: "Rafraîchissante",
     gout: "Piquante, douce",
     effets: { vata: "diminue", pitta: "equilibre", kapha: "diminue" },
     enCuisine: "Gousses écrasées dans le riz, le chaï, les desserts.",
@@ -198,7 +198,7 @@ export const EPICES: Epice[] = [
     accroche:
       "Quelques gousses écrasées suffisent pour parfumer un riz, un lait ou un dessert.",
     rasa: "Piquante, douce",
-    virya: "Chauffant léger",
+    virya: "Rafraîchissant",
     vipaka: "Doux",
     usage:
       "Traditionnellement, on l'ajoute au lait et au café pour les rendre plus digestes. ",
@@ -263,7 +263,7 @@ export const EPICES: Epice[] = [
       "Traditionnellement, on l'associe au curcuma et au gingembre pour stimuler un feu digestif paresseux. ",
     cuisine: [
       "Moulu au dernier moment, en fin de cuisson",
-      "Une pincée avec le curcuma, toujours",
+      "Une pincée avec le curcuma, comme on le fait souvent aujourd'hui",
       "Dans le rasam, le bouillon poivré",
     ],
     avecQuoi: ["Le curcuma", "Le gingembre", "Le miel"],
@@ -308,7 +308,7 @@ export const MELANGES: Melange[] = [
     illu: "curcuma",
     ingredients: ["250 ml de lait, ou de lait d'amande", "½ cuillère à café de curcuma", "1 pincée de poivre noir", "1 pincée de cannelle et de gingembre", "1 cuillère à café de miel"],
     methode:
-      "Chauffer le lait avec les épices sans faire bouillir. Laisser tiédir avant d'ajouter le miel : l'Ayurveda déconseille de le chauffer.",
+      "Chauffer le lait avec les épices sans faire bouillir. Attendre qu'il soit à peine tiède avant d'ajouter le miel, car les textes anciens déconseillent le miel chauffé ou mêlé à une boisson chaude.",
   },
   {
     id: "melange-vata",
@@ -398,14 +398,14 @@ const CARNET: [string, [string, string, string, number, boolean, string][]][] = 
     ["Bouillon de légumes au gingembre et au poivre", "Kapha", "Printemps", 30, true, "#DCE3DF"],
   ]],
   ["À côté", [
-    ["Raïta concombre et menthe", "Pitta", "Été", 10, false, "#D6E2DD"],
+    ["Raïta concombre et menthe", "Pitta", "Automne, Hiver", 10, false, "#D6E2DD"],
     ["Chutney de coriandre fraîche", "Pitta", "Été", 10, true, "#DCE3DF"],
     ["Chutney de dattes et de gingembre", "Vata", "Hiver", 20, true, "#DDE3D6"],
     ["Ghee maison", "Vata, Pitta", "Toute l'année", 40, false, "#E8DFB8"],
   ]],
   ["Les boissons", [
-    ["Takra, le lassi digestif au cumin", "Les trois", "Toute l'année", 5, false, "#E2D6DE"],
-    ["Lassi à la menthe", "Pitta", "Été", 5, true, "#D6E2DD"],
+    ["Takra, le lassi digestif au cumin", "Les trois", "Automne, Hiver, Printemps", 5, false, "#E2D6DE"],
+    ["Lassi à la menthe", "Pitta", "Automne, Hiver", 5, true, "#D6E2DD"],
     ["Eau de coriandre", "Pitta", "Été", 5, true, "#DCE3DF"],
     ["Infusion gingembre et citron", "Kapha", "Printemps, Hiver", 10, true, "#E8DFB8"],
   ]],

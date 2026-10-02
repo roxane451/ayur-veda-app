@@ -19,14 +19,14 @@ const GROUPES = [
     texte: "Les gestes de ce site suffisent, côté assiette, rythme et saison.",
     trait: "border-citron",
     couleur: "text-citron-fonce",
-    etapes: [0, 1, 2],
+    etapes: [0, 1],
   },
   {
     titre: "Il faut consulter",
     texte: "Un médecin, et une praticienne pour l'accompagnement.",
     trait: "border-aubergine",
     couleur: "text-aubergine",
-    etapes: [3, 4, 5],
+    etapes: [2, 3, 4, 5],
   },
 ];
 
@@ -34,7 +34,7 @@ const Desequilibre = () => (
   <PageComprendre>
     <Frontispice deva="षट् क्रियाकाल" translit="ṣaṭ kriyākāla, les six moments pour agir" titre="Comment naît un déséquilibre">
       <p className="m-0 mt-1 max-w-[46ch] text-xl text-doux">
-        Pour l'Ayurveda, une maladie ne surgit pas d'un coup. Elle passe par six étapes, et plus on agit tôt, plus il est simple de revenir à
+        Pour l'Ayurveda, une maladie née des doshas ne surgit pas d'un coup. Elle passe par six étapes, et plus on agit tôt, plus il est simple de revenir à
         l'équilibre.
       </p>
       <div className="mt-5">
@@ -52,14 +52,14 @@ const Desequilibre = () => (
           D'après Sushruta, <i>Sūtrasthāna</i>, chapitre 21.
         </p>
       </div>
-      <div className="grid gap-12 lg:grid-cols-2 lg:gap-[18px]">
+      <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] lg:gap-[18px]">
         {GROUPES.map((g) => (
           <div key={g.titre} className="flex flex-col gap-6">
             <div className={`flex flex-col border-t-4 pt-2 ${g.trait}`}>
               <span className={`font-display text-[17px] ${g.couleur}`}>{g.titre}</span>
               <span className="text-[15px] text-doux">{g.texte}</span>
             </div>
-            <ol start={g.etapes[0] + 1} className="m-0 grid list-none grid-cols-3 items-start gap-3 p-0 sm:gap-[18px]">
+            <ol start={g.etapes[0] + 1} className={`m-0 grid list-none items-start gap-3 p-0 sm:gap-[18px] ${g.etapes.length > 2 ? "grid-cols-2 sm:grid-cols-4" : "grid-cols-2"}`}>
               {g.etapes.map((i) => {
                 const e = ETAPES[i];
                 const a = ARCHES[i];
@@ -94,7 +94,7 @@ const Desequilibre = () => (
             Un exemple avec Vata
           </h2>
           <p className="m-0 text-lg text-[#D3E3DE]">
-            Les mêmes six étapes, suivies sur une saison. À chacune, un repas chaud, un massage à l'huile ou un coucher plus tôt aurait pu arrêter la
+            Les mêmes six étapes, transposées à nos saisons, où l'automne joue le rôle de la saison des pluies indienne, et suivies sur plusieurs saisons. À chacune, un repas chaud, un massage à l'huile ou un coucher plus tôt aurait pu arrêter la
             suite.
           </p>
         </div>

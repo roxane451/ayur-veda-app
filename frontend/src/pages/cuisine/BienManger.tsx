@@ -45,14 +45,14 @@ const BienManger = () => (
         </p>
         <h1 className="m-0 text-[clamp(2.6rem,6.4vw,4.75rem)] leading-[0.95]">Bien manger</h1>
         <p className="m-0 max-w-[40ch] text-xl text-doux">
-          Pour l'Ayurveda, la façon de manger compte autant que ce qu'on mange. Charaka en a fixé les règles il y a près de deux mille ans, et elles
-          tiennent toujours.
+          Pour l'Ayurveda, la façon de manger compte autant que ce qu'on mange. Le traité de Charaka, rédigé il y a près de deux mille ans, en fixe les
+          règles, et elles tiennent toujours.
         </p>
       </div>
       <figure className="m-0 flex flex-col items-center gap-3.5">
         <TroisTiers />
         <figcaption className="max-w-[34ch] text-center">
-          Un tiers de l'estomac pour la nourriture, un tiers pour les liquides, un tiers laissé vide pour bien digérer.
+          Un tiers de l'estomac pour la nourriture, un tiers pour les liquides, et le dernier tiers laissé libre pour Vata, Pitta et Kapha, qui font le travail de la digestion.
         </figcaption>
       </figure>
     </section>
@@ -94,7 +94,7 @@ const BienManger = () => (
             </h2>
           </div>
           <p className="m-0 text-lg text-[#D3E3DE]">
-            Certains aliments, bons séparément, deviennent indigestes ensemble. Charaka en consacre un long passage au <i>Sūtrasthāna</i>, chapitre 26.
+            Certains aliments, bons séparément, deviennent indigestes ensemble. Charaka en consacre un long passage au <i>Sūtrasthāna</i>, chapitre 26. La règle sur le yaourt vient du chapitre 7.
           </p>
         </div>
         <ul className="m-0 grid list-none gap-5 p-0 sm:grid-cols-2 lg:grid-cols-3">

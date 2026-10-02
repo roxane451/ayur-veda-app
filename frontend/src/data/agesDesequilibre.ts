@@ -7,13 +7,13 @@ import type { DoshaKey } from "@/lib/doshaLogic";
 
 export const AGES = [
   {
-    nom: "L'enfance",
+    nom: "L'enfance et la jeunesse",
     sanskrit: "bāla",
     deva: "बाल",
     dosha: "kapha" as DoshaKey,
     periode: "jusqu'à 30 ans",
     part: 30,
-    texte: "Le corps se construit. Il grandit, se remplit et dort profondément. Les tissus mûrissent jusqu'à seize ans environ.",
+    texte: "Le corps se construit. Jusqu'à seize ans, les tissus ne sont pas encore mûrs, puis ils continuent de se renforcer jusqu'à trente ans.",
     exces: "Rhumes, mucus, appétit irrégulier, lourdeur après les repas.",
     aide: "Nourrir sans alourdir, bouger chaque jour, préférer les épices douces au sucre.",
   },
@@ -30,8 +30,8 @@ export const AGES = [
   },
   {
     nom: "La vieillesse",
-    sanskrit: "vṛddha",
-    deva: "वृद्ध",
+    sanskrit: "jīrṇa",
+    deva: "जीर्ण",
     dosha: "vata" as DoshaKey,
     periode: "après 60 ans",
     part: 40,
@@ -42,18 +42,18 @@ export const AGES = [
 ];
 
 export const CYCLES: { echelle: string; kapha: string; pitta: string; vata: string }[] = [
-  { echelle: "Dans la journée", kapha: "Le matin", pitta: "Le midi", vata: "Le soir" },
-  { echelle: "Dans l'année", kapha: "Le printemps", pitta: "L'été", vata: "L'automne" },
+  { echelle: "Dans la journée", kapha: "Le matin", pitta: "Le milieu du jour", vata: "La fin d'après-midi" },
+  { echelle: "Dans l'année, sous nos climats", kapha: "Le printemps", pitta: "L'été", vata: "L'automne" },
   { echelle: "Dans la vie", kapha: "L'enfance", pitta: "L'âge adulte", vata: "La vieillesse" },
 ];
 
 export const ETAPES = [
-  { nom: "Accumulation", sanskrit: "sañcaya", deva: "सञ्चय", texte: "Le dosha s'amasse à sa place. On le sent à peine, un peu plus froid ou plus sec que d'habitude." },
-  { nom: "Aggravation", sanskrit: "prakopa", deva: "प्रकोप", texte: "Il déborde de son siège. Ballonnements, sommeil agité ou irritabilité s'installent." },
+  { nom: "Accumulation", sanskrit: "sañcaya", deva: "सञ्चय", texte: "Le dosha s'amasse à sa place. Les signes sont discrets, ventre tendu pour Vata, teint jaune pour Pitta, lourdeur pour Kapha, et l'on se détourne de ce qui l'a fait monter." },
+  { nom: "Aggravation", sanskrit: "prakopa", deva: "प्रकोप", texte: "Il s'échauffe dans son siège sans encore en sortir. Ballonnements, aigreurs ou dégoût des aliments apparaissent." },
   { nom: "Diffusion", sanskrit: "prasara", deva: "प्रसर", texte: "Il quitte sa place et circule dans le corps. Les signes deviennent diffus et changeants." },
   { nom: "Localisation", sanskrit: "sthāna-saṃśraya", deva: "स्थानसंश्रय", texte: "Il se fixe dans un point faible, une articulation, la peau ou un organe déjà fragile." },
   { nom: "Manifestation", sanskrit: "vyakti", deva: "व्यक्ति", texte: "Le trouble apparaît clairement, avec ses signes propres. C'est là qu'on lui donne un nom." },
-  { nom: "Complication", sanskrit: "bheda", deva: "भेद", texte: "Le trouble s'installe, se complique ou devient chronique." },
+  { nom: "Complication", sanskrit: "bheda", deva: "भेद", texte: "Le trouble prend sa forme propre, se complique ou devient chronique." },
 ];
 
 export const EXEMPLE_VATA = [

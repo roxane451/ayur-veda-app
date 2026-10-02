@@ -92,6 +92,13 @@ const Saisons = () => {
             {NOM_DOSHA[SAISONS_DETAIL.find((x) => x.id === actuelle)!.dosha]}.
             Touchez une autre saison sur la roue pour lire ses conseils.
           </p>
+          <p className="m-0 max-w-[46ch] text-[15px] text-doux">
+            Les textes anciens de l'Ayurveda, la Charaka Samhita et la Sushruta
+            Samhita, décrivent six saisons propres au climat de l'Inde du Nord.
+            Nous les ramenons ici aux quatre saisons européennes, comme le font
+            la plupart des praticiens en Occident. Cette correspondance est une
+            adaptation, pas une règle des textes.
+          </p>
         </div>
         <Roue
           choisie={id}

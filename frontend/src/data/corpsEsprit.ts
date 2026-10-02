@@ -18,10 +18,10 @@ export const PAIRES_QUALITES: PaireQualites[] = [
   { gauche: { nom: "Froid", sanskrit: "śīta", doshas: ["vata", "kapha"] }, droite: { nom: "Chaud", sanskrit: "uṣṇa", doshas: ["pitta"] } },
   { gauche: { nom: "Onctueux", sanskrit: "snigdha", doshas: ["kapha", "pitta"] }, droite: { nom: "Sec", sanskrit: "rūkṣa", doshas: ["vata"] } },
   { gauche: { nom: "Lisse", sanskrit: "ślakṣṇa", doshas: ["kapha"] }, droite: { nom: "Rugueux", sanskrit: "khara", doshas: ["vata"] } },
-  { gauche: { nom: "Dense", sanskrit: "sāndra", doshas: ["kapha"] }, droite: { nom: "Fluide", sanskrit: "drava", doshas: ["pitta"] } },
+  { gauche: { nom: "Dense", sanskrit: "sāndra", doshas: [] }, droite: { nom: "Fluide", sanskrit: "drava", doshas: ["pitta"] } },
   { gauche: { nom: "Mou", sanskrit: "mṛdu", doshas: ["kapha"] }, droite: { nom: "Dur", sanskrit: "kaṭhina", doshas: [] } },
   { gauche: { nom: "Stable", sanskrit: "sthira", doshas: ["kapha"] }, droite: { nom: "Mobile", sanskrit: "cala", doshas: ["vata"] } },
-  { gauche: { nom: "Grossier", sanskrit: "sthūla", doshas: ["kapha"] }, droite: { nom: "Subtil", sanskrit: "sūkṣma", doshas: ["vata"] } },
+  { gauche: { nom: "Grossier", sanskrit: "sthūla", doshas: [] }, droite: { nom: "Subtil", sanskrit: "sūkṣma", doshas: ["vata"] } },
   { gauche: { nom: "Gluant", sanskrit: "picchila", doshas: ["kapha"] }, droite: { nom: "Clair", sanskrit: "viśada", doshas: ["vata"] } },
 ];
 
@@ -37,8 +37,8 @@ export const VIPAKA = [
 
 export const PILIERS = [
   { nom: "L'alimentation", sanskrit: "āhāra", deva: "आहार", texte: "Manger selon sa nature, à heures régulières, et seulement quand on a faim." },
-  { nom: "Le sommeil", sanskrit: "nidrā", deva: "निद्रा", texte: "Se coucher tôt et dormir assez, car c'est la nuit que le corps se répare." },
-  { nom: "La conduite de vie", sanskrit: "brahmacarya", deva: "ब्रह्मचर्य", texte: "La modération en toute chose, dans l'effort comme dans les plaisirs." },
+  { nom: "Le sommeil", sanskrit: "nidrā", deva: "निद्रा", texte: "Dormir la nuit, à heures régulières. Pour Charaka, un bon sommeil donne force, embonpoint et clarté." },
+  { nom: "La maîtrise de soi", sanskrit: "brahmacarya", deva: "ब्रह्मचर्य", texte: "La maîtrise des sens et des désirs, à commencer par une sexualité mesurée." },
 ];
 
 /* ───────── Les sept tissus (dhātu) ───────── */
@@ -49,7 +49,7 @@ export const DHATUS = [
   { nom: "Māṃsa", deva: "मांस", fr: "Les muscles" },
   { nom: "Meda", deva: "मेद", fr: "La graisse" },
   { nom: "Asthi", deva: "अस्थि", fr: "Les os" },
-  { nom: "Majjā", deva: "मज्जा", fr: "La moelle et les nerfs" },
+  { nom: "Majjā", deva: "मज्जा", fr: "La moelle" },
   { nom: "Śukra", deva: "शुक्र", fr: "Les tissus reproducteurs" },
 ];
 
@@ -60,7 +60,7 @@ export const GUNAS_ESPRIT = [
     nom: "Sattva",
     deva: "सत्त्व",
     essence: "La clarté",
-    texte: "L'esprit calme, attentif, bienveillant. Les aliments frais et simples, le sommeil et la nature le nourrissent.",
+    texte: "L'esprit calme, attentif, bienveillant. L'étude, la patience et une nourriture fraîche et simple le soutiennent.",
     fond: "bg-carte text-encre",
   },
   {

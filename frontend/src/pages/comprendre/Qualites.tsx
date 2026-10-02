@@ -55,7 +55,7 @@ const Vipaka = () => {
               {v.nom.toUpperCase()}
             </text>
             <text x="460" y={ty + 20} fontSize="15" fill="#4C5A57">
-              nourrit {NOM_DOSHA[v.nourrit]}
+              augmente {NOM_DOSHA[v.nourrit]}
             </text>
           </g>
         );
@@ -68,7 +68,7 @@ const Qualites = () => (
   <PageComprendre>
     <Frontispice deva="गुण" translit="guṇa, les vingt qualités" titre="Les qualités">
       <p className="m-0 mt-1 max-w-[46ch] text-xl text-doux">
-        Tout ce qui existe peut se décrire par vingt qualités, rangées en dix paires de contraires. Elles disent comment une chose agit sur nous.
+        Chaque substance, aliment, plante ou climat, peut se décrire par vingt qualités, rangées en dix paires de contraires. Elles disent comment une chose agit sur nous.
       </p>
       <div className="mt-5">
         <Ornement />
@@ -92,7 +92,7 @@ const Qualites = () => (
             {NOM_DOSHA[d]}
           </span>
         ))}
-        <span>Le point indique le côté où se range chaque dosha.</span>
+        <span>Le point indique le côté où se range chaque dosha. Les paires sans point ne sont rattachées à aucun dosha dans les textes.</span>
       </p>
       <ul className="m-0 list-none border-b border-encre/20 p-0">
         {PAIRES_QUALITES.map(({ gauche, droite }) => (
@@ -163,7 +163,7 @@ const Qualites = () => (
             <span className="italic text-doux">vīrya</span>
           </p>
           <p className="m-0 text-lg">
-            {fr("Un aliment ou une plante réchauffe le corps ou le rafraîchit. Le gingembre chauffe, la coriandre rafraîchit. Le chaud apaise Vata et Kapha, le froid apaise Pitta.")}
+            {fr("Un aliment ou une plante réchauffe le corps ou le rafraîchit. Le gingembre chauffe, le lait rafraîchit. Le chaud apaise Vata et Kapha, le froid apaise Pitta.")}
           </p>
         </div>
         <div className="flex flex-col gap-3">
@@ -173,7 +173,7 @@ const Qualites = () => (
             <span className="italic text-doux">vipāka</span>
           </p>
           <p className="m-0 text-lg">
-            Une fois digérées, les six saveurs se ramènent à trois effets, qui agissent longtemps après le repas. Le schéma montre lesquels.
+            Une fois digérées, les six saveurs se ramènent à trois effets, qui agissent longtemps après le repas. Le schéma montre lesquels. Sushruta, lui, n'en retient que deux, lourd et léger.
           </p>
         </div>
       </div>
@@ -190,7 +190,7 @@ const Qualites = () => (
               {v.sanskrit}
             </span>
             <span className="flex flex-col">
-              <span className="font-display text-lg">{v.nom}, nourrit {NOM_DOSHA[v.nourrit]}</span>
+              <span className="font-display text-lg">{v.nom}, augmente {NOM_DOSHA[v.nourrit]}</span>
               <span className="text-doux">Vient {v.saveurs.length > 1 ? "des saveurs" : "de la saveur"} {v.saveurs.join(", ").toLowerCase()}</span>
             </span>
           </li>

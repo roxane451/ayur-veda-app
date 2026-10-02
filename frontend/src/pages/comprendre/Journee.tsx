@@ -75,7 +75,7 @@ const Journee = ({ rubrique = "comprendre" }: { rubrique?: "comprendre" | "quoti
           titre="La journée idéale"
           deva="दिनचर्या"
           translit="dinacharya"
-          intro="La journée suit le même cycle que l'année. Chaque dosha y domine deux fois, quatre heures à chaque fois, et l'on cale ses gestes sur ce rythme."
+          intro="Chaque dosha domine deux fois dans la journée, et l'on cale ses gestes sur ce rythme. Les textes parlent du matin, du milieu du jour et de la fin du jour. Les horaires ci-dessous supposent un lever du soleil vers 6 h et un coucher vers 18 h, et le dîner avant 19 h comme les heures de la nuit sont une lecture moderne."
         />
         <div className="flex justify-center pb-8 md:py-6">
           <Horloge actuel={actuel} />

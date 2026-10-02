@@ -8,7 +8,7 @@ const Ages = () => (
   <PageComprendre>
     <Frontispice deva="वयस्" translit="vayas, l'âge" titre="Les âges de la vie">
       <p className="m-0 mt-1 max-w-[46ch] text-xl text-doux">
-        Chaque âge a son dosha. Ce qui est naturel à vingt ans ne l'est plus à soixante, et les conseils changent avec lui.
+        Chaque âge a son dosha dominant. Ce qui est naturel à vingt ans ne l'est plus à soixante, et les conseils changent avec lui.
       </p>
       <div className="mt-5">
         <Ornement />
@@ -22,7 +22,7 @@ const Ages = () => (
           Trois âges, trois doshas
         </h2>
         <p className="m-0 text-lg text-doux">
-          Les âges sont ceux de Charaka (<i>Vimānasthāna</i>, chapitre 8). Ce sont des repères, pas des frontières.
+          Les âges sont ceux de Charaka (<i>Vimānasthāna</i> 8.122). Ce sont des repères, pas des frontières.
         </p>
       </div>
 
@@ -76,7 +76,7 @@ const Ages = () => (
             Le même cycle
           </h2>
           <p className="m-0 text-lg text-[#D3E3DE]">
-            Kapha, Pitta puis Vata se succèdent à trois échelles. Le conseil d'une saison vaut souvent pour l'âge qui lui correspond.
+            Kapha, Pitta puis Vata se succèdent dans la journée et dans la vie. Pour l'année, les textes indiens suivent les saisons de l'Inde, avec Vata à la saison des pluies et Pitta à la fin de celle-ci. Sous nos climats, on associe plutôt l'été à Pitta et l'automne à Vata.
           </p>
         </div>
         <table className="w-full border-collapse text-left text-[15px] sm:text-lg">
