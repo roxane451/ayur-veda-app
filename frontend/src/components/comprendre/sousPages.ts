@@ -7,6 +7,8 @@ export const SOUS_PAGES = [
   { titre: "Agni, le feu digestif", href: "/comprendre/agni" },
   { titre: "Le corps et l'esprit", href: "/comprendre/corps-et-esprit" },
   { titre: "La journée", href: "/comprendre/journee" },
+  { titre: "Les âges de la vie", href: "/comprendre/ages-de-la-vie" },
+  { titre: "Le déséquilibre", href: "/comprendre/desequilibre" },
   { titre: "Lexique", href: "/comprendre/lexique" },
 ];
 

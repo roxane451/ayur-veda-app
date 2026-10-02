@@ -8,7 +8,7 @@ import { SOUS_PAGES } from "./sousPages";
 
 
 
-const ROMAINS = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII"];
+const ROMAINS = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"];
 
 /** Le sommaire de la rubrique, comme la table d'un livre : chapitres numérotés entre deux filets. */
 export const Sommaire = () => (

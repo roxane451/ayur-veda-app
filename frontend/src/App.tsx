@@ -13,6 +13,8 @@ import Journee from "./pages/comprendre/Journee";
 import Lexique from "./pages/comprendre/Lexique";
 import Qualites from "./pages/comprendre/Qualites";
 import CorpsEsprit from "./pages/comprendre/CorpsEsprit";
+import Ages from "./pages/comprendre/Ages";
+import Desequilibre from "./pages/comprendre/Desequilibre";
 import RetourEnHaut from "./components/RetourEnHaut";
 import Profil from "./pages/Profil";
 import EspaceMembre from "./pages/EspaceMembre";
@@ -51,6 +53,8 @@ const App = () => (
             <Route path="/comprendre/corps-et-esprit" element={<CorpsEsprit />} />
             <Route path="/comprendre/agni" element={<Agni />} />
             <Route path="/comprendre/journee" element={<Journee />} />
+            <Route path="/comprendre/ages-de-la-vie" element={<Ages />} />
+            <Route path="/comprendre/desequilibre" element={<Desequilibre />} />
             <Route path="/comprendre/lexique" element={<Lexique />} />
             <Route path="/profil" element={<Profil />} />
             <Route path="/au-quotidien" element={<Saisons />} />

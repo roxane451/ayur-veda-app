@@ -251,6 +251,8 @@ export const LEXIQUE = [
   { mot: "Ojas", deva: "ओजस्", sens: "L'essence de tous les tissus, qui donne l'immunité et l'endurance." },
   { mot: "Rajas", deva: "रजस्", sens: "La qualité de l'esprit liée au mouvement et à l'agitation." },
   { mot: "Sattva", deva: "सत्त्व", sens: "La qualité de l'esprit liée à la clarté et au calme." },
+  { mot: "Kriyākāla", deva: "क्रियाकाल", sens: "Les six moments où l'on peut agir sur un déséquilibre, de l'accumulation à la complication." },
+  { mot: "Vayas", deva: "वयस्", sens: "L'âge. Kapha domine l'enfance, Pitta l'âge adulte, Vata la vieillesse." },
   { mot: "Tamas", deva: "तमस्", sens: "La qualité de l'esprit liée à l'inertie et à la lourdeur." },
 ].sort((x, y) => x.mot.localeCompare(y.mot, "fr", { sensitivity: "base" }));
 
