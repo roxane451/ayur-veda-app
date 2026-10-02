@@ -93,6 +93,15 @@ export const InviteInstallation = () => {
   const { bandeau, ios, installer, fermer } = useInstallation();
   const [fiche, setFiche] = useState(false);
 
+  // Signale le bandeau à la page, pour que le bouton « haut de page » passe au-dessus.
+  useEffect(() => {
+    if (bandeau && !fiche) document.body.dataset.bandeau = "1";
+    else delete document.body.dataset.bandeau;
+    return () => {
+      delete document.body.dataset.bandeau;
+    };
+  }, [bandeau, fiche]);
+
   if (fiche) {
     return (
       <FicheIos

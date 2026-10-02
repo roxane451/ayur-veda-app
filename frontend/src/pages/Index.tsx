@@ -169,7 +169,7 @@ const TroisDoshas = () => (
           Les cinq éléments se combinent en nous de trois façons, que l'on appelle les doshas. Tout le monde a les trois, en proportions différentes.
         </p>
       </div>
-      <div className="grid gap-14 md:grid-cols-3 md:gap-10">
+      <div className="carrousel-mobile grid gap-14 [--carte:78%] md:grid-cols-3 md:gap-10">
         {DOSHAS.map(({ nom, deva, elements, texte, Illu }) => (
           <article key={nom} className="flex flex-col items-center gap-5 text-center">
             <h3 className="m-0 flex items-baseline gap-2.5 text-[2.1rem] leading-none">

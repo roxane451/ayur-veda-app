@@ -28,14 +28,14 @@ const Tissus = () => (
           </p>
         </div>
         <div className="relative">
-          <div aria-hidden="true" className="absolute bottom-8 left-[45px] top-8 border-l-2 border-dashed border-pistache/50 lg:bottom-auto lg:left-[6%] lg:right-[6%] lg:top-[46px] lg:border-l-0 lg:border-t-2" />
-          <ol className="relative m-0 grid list-none gap-5 p-0 lg:grid-cols-7 lg:gap-2.5">
+          <div aria-hidden="true" className="absolute hidden md:block bottom-8 left-[45px] top-8 border-l-2 border-dashed border-pistache/50 lg:bottom-auto lg:left-[6%] lg:right-[6%] lg:top-[46px] lg:border-l-0 lg:border-t-2" />
+          <ol className="carrousel-mobile relative m-0 grid list-none gap-5 p-0 [--carte:104px] lg:grid-cols-7 lg:gap-2.5">
             {DHATUS.map((d) => (
-              <li key={d.nom} className="flex items-center gap-5 lg:flex-col lg:gap-2 lg:text-center">
+              <li key={d.nom} className="flex flex-col items-center gap-2 text-center md:flex-row md:gap-5 md:text-left lg:flex-col lg:gap-2 lg:text-center">
                 <span className="flex h-[92px] w-[92px] shrink-0 items-center justify-center rounded-full bg-pistache text-paon shadow-[0_0_0_2px_hsl(var(--encre))]">
                   <Deva className="text-[26px] text-paon">{d.deva}</Deva>
                 </span>
-                <span className="flex flex-col lg:items-center">
+                <span className="flex flex-col items-center md:items-start lg:items-center">
                   <span className="font-display text-[1.2rem] leading-none">{d.nom}</span>
                   <span className="text-[15px] leading-snug text-[#D3E3DE] lg:max-w-[12ch]">{d.fr}</span>
                 </span>
