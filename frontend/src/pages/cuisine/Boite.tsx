@@ -115,7 +115,7 @@ const Boite = () => {
           </Link>
           <div className="flex flex-col gap-2.5 rounded-2xl bg-paon p-7 text-pistache">
             <span className="flex justify-center">
-              <Feuille size={100} stroke="#F3F5E6" decorative />
+              <Feuille size={100} stroke="#F0F4E0" decorative />
             </span>
             <span className="font-display text-[1.9rem] leading-tight">Les plantes</span>
             <span className="text-[#D3E3DE]">

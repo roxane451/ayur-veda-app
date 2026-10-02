@@ -5,7 +5,7 @@
  */
 
 const SYAHI = "#13201E";
-const KORA = "#F3F5E6";
+const KORA = "#F0F4E0";
 
 interface IlluProps {
   size?: number;

@@ -30,7 +30,7 @@ const Vipaka = () => {
         return (
           <g key={v.nom}>
             <circle cx="400" cy={ty} r="44" fill={COULEUR_DOSHA[v.nourrit]} stroke="#13201E" strokeWidth="2" />
-            <text x="400" y={ty + 6} textAnchor="middle" fontSize="18" fontStyle="italic" fill={clair ? "#13201E" : "#F3F5E6"}>
+            <text x="400" y={ty + 6} textAnchor="middle" fontSize="18" fontStyle="italic" fill={clair ? "#13201E" : "#F0F4E0"}>
               {v.sanskrit}
             </text>
             <text x="460" y={ty - 4} fontSize="20" fill="#13201E" className="font-display">

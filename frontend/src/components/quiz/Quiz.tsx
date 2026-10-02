@@ -242,7 +242,7 @@ const Accueil = ({ onNature, onEtat }: { onNature: () => void; onEtat: () => voi
       <div className="relative flex flex-col gap-3.5 overflow-hidden rounded-b-md rounded-t-[999px] bg-paon px-8 pb-10 pt-24 text-pistache sm:px-10 md:pt-28 [&>*:not(svg)]:relative">
         <Motif id="dabu" />
         <div className="mb-3 flex justify-center">
-          <Lotus size={96} stroke="#F3F5E6" decorative />
+          <Lotus size={96} stroke="#F0F4E0" decorative />
         </div>
         <h2 className="m-0 text-[clamp(1.7rem,3vw,2.1rem)]">
           Ma nature <em className="!text-citron">prakriti</em>
@@ -365,7 +365,7 @@ const QuestionEcran = ({
             <div className="relative flex flex-col gap-3.5 overflow-hidden rounded-2xl bg-paon px-5 py-4 text-pistache sm:p-7">
               <Motif id="dabu" />
               <div className="relative hidden sm:block">
-                <SoleilLune size={84} stroke="#F3F5E6" decorative />
+                <SoleilLune size={84} stroke="#F0F4E0" decorative />
               </div>
               <p className="relative m-0 font-display text-2xl leading-tight">
                 Ces dernières <em className="font-body normal-case italic tracking-normal text-citron">semaines</em>…
