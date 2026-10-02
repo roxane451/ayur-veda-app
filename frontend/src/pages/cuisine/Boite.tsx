@@ -46,7 +46,7 @@ const Boite = () => {
         <p className="sr-only">
           {epices.length} épices{filtre ? ` qui apaisent ${NOM_DOSHA[filtre]}` : ""}.
         </p>
-        <ul className="m-0 grid list-none gap-x-5 gap-y-7 p-0 sm:grid-cols-2 lg:grid-cols-4">
+        <ul className="carrousel-mobile m-0 grid list-none gap-x-5 gap-y-7 p-0 sm:grid-cols-2 lg:grid-cols-4">
           {epices.map((e) => (
             <li key={e.id}>
               <article
@@ -63,7 +63,7 @@ const Boite = () => {
                 <span className="flex flex-col">
                   <h2 className="m-0 text-[1.75rem] leading-[1.05]">{e.nom}</h2>
                   <span className="italic text-doux">
-                    {e.translit} · {e.gout.toLowerCase()}
+                    {e.translit}, {e.gout.toLowerCase()}
                   </span>
                 </span>
                 <EffetsEpice effets={e.effets} />

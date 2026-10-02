@@ -128,7 +128,7 @@ const Constitution = () => (
           <Renvoi n={4} />
         </p>
       </div>
-      <div className="grid gap-12 md:grid-cols-3 md:gap-9">
+      <div className="carrousel-mobile grid gap-12 md:grid-cols-3 md:gap-9">
         {PORTRAITS.map((p) => (
           <article key={p.dosha} className="flex flex-col gap-4">
             <div

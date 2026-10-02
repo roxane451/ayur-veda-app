@@ -45,6 +45,7 @@ import Confidentialite from "./pages/legal/Confidentialite";
 import Cgu from "./pages/legal/Cgu";
 import BrandDefs from "./components/brand/BrandDefs";
 import { InviteInstallation } from "./components/installation/Installation";
+import { BoutonHaut, SommaireMobile } from "./components/navigation/AideDefilement";
 
 const queryClient = new QueryClient();
 
@@ -58,6 +59,8 @@ const App = () => (
         <BrowserRouter>
           <RetourEnHaut />
           <InviteInstallation />
+          <SommaireMobile />
+          <BoutonHaut />
           <Routes>
             <Route path="/" element={<Index />} />
 
