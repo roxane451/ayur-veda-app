@@ -60,7 +60,6 @@ const Recettes = () => {
   return (
     <PageCuisine>
       <TeteCuisine
-        page="Les recettes"
         titre="Les recettes"
         intro={`${RECETTES_VISIBLES.length} plats de la cuisine ayurvédique, du petit-déjeuner au dessert, avec pour chacun le dosha qu'il apaise et sa saison. ${CONTENU_PAYANT ? `${gratuites} sont en accès libre.` : ""}`.trim()}
       >

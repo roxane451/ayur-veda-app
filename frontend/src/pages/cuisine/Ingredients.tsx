@@ -15,7 +15,6 @@ const PageIngredients = () => {
   return (
     <PageCuisine>
       <TeteCuisine
-        page="Les ingrédients"
         titre="Les ingrédients"
         intro="Plantes, fruits, résines et préparations que l'on croise en Ayurveda, avec leurs saveurs, leur effet chauffant ou rafraîchissant (virya) et leur action sur les doshas."
       >
