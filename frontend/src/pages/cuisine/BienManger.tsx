@@ -17,7 +17,7 @@ const secteur = (a0: number, a1: number) => {
 
 const TroisTiers = () => (
   <svg viewBox="0 0 340 340" className="h-auto w-full max-w-[340px] overflow-visible" role="img" aria-label="Un tiers solide, un tiers liquide, un tiers vide.">
-    <g filter="url(#ink)">
+    <g>
       <path d={secteur(0, 120)} fill="#D2A12A" stroke="#13201E" strokeWidth="2" />
       <path d={secteur(120, 240)} fill="#8DB9B0" stroke="#13201E" strokeWidth="2" />
       <path d={secteur(240, 360)} fill="#FBFCF4" stroke="#13201E" strokeWidth="2" strokeDasharray="6 6" />

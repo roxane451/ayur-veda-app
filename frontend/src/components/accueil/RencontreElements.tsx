@@ -34,7 +34,7 @@ const RencontreElements = ({ gauche, droite, couleur, Illu, label }: RencontrePr
           </clipPath>
         </defs>
         <circle cx={CX2} cy={CY} r={R} fill={couleur} clipPath={`url(#lentille-${id})`} />
-        <g filter="url(#ink)" fill="none" stroke="#F3F5E6" strokeWidth="2.2">
+        <g fill="none" stroke="#F3F5E6" strokeWidth="2.2">
           <circle cx={CX1} cy={CY} r={R} />
           <circle cx={CX2} cy={CY} r={R} />
         </g>
