@@ -1,0 +1,53 @@
+/**
+ * Informations légales du site.
+ * Les valeurs nulles sont à compléter : elles s'affichent surlignées « à compléter » sur les pages.
+ */
+
+export interface Personne {
+  nom: string | null;
+  statut: string | null;
+  adresse: string | null;
+  siret: string | null;
+  email: string | null;
+  telephone: string | null;
+  directeurPublication: string | null;
+}
+
+export interface Hebergeur {
+  nom: string | null;
+  adresse: string | null;
+  telephone: string | null;
+  /** Pays où se trouvent les serveurs. */
+  pays: string | null;
+}
+
+export const EDITEUR: Personne = {
+  nom: null,
+  statut: null,
+  adresse: null,
+  siret: null,
+  email: null,
+  telephone: null,
+  directeurPublication: null,
+};
+
+export const HEBERGEUR: Hebergeur = {
+  nom: null,
+  adresse: null,
+  telephone: null,
+  pays: null,
+};
+
+export const SITE = "ayur-veda.fr";
+
+/** Date de la dernière mise à jour des trois pages. */
+export const MISE_A_JOUR = "2 octobre 2026";
+
+/** Âge minimum pour créer un compte (âge du consentement numérique en France). */
+export const AGE_MINIMUM = 15;
+
+export const PAGES_LEGALES = [
+  { titre: "Mentions légales", href: "/mentions-legales" },
+  { titre: "Confidentialité", href: "/confidentialite" },
+  { titre: "CGU", href: "/cgu" },
+];

@@ -3,8 +3,8 @@ import Logo from "@/components/brand/Logo";
 import Sceau from "@/components/brand/Sceau";
 import { Bande } from "@/components/brand/BrandDefs";
 import { NAV_LINKS } from "@/components/navLinks";
+import { PAGES_LEGALES } from "@/data/legal";
 
-const LEGAL = ["Mentions légales", "Confidentialité", "CGU", "Conditions de vente"];
 
 const Footer = () => (
   <>
@@ -31,12 +31,11 @@ const Footer = () => (
             ))}
           </ul>
           <ul className="m-0 flex list-none flex-col gap-2 p-0">
-            {LEGAL.map((l) => (
-              <li key={l}>
-                {/* [À FAIRE] pages légales à rédiger */}
-                <a href="#" className="text-[#D3E3DE] hover:text-citron">
-                  {l}
-                </a>
+            {PAGES_LEGALES.map((l) => (
+              <li key={l.href}>
+                <Link to={l.href} className="text-[#D3E3DE] hover:text-citron">
+                  {l.titre}
+                </Link>
               </li>
             ))}
           </ul>
