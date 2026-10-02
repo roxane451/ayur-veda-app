@@ -35,10 +35,10 @@ export const EDITEUR: Personne = {
 };
 
 export const HEBERGEUR: Hebergeur = {
-  nom: null,
-  adresse: null,
-  telephone: null,
-  pays: null,
+  nom: "OVH SAS",
+  adresse: "2 rue Kellermann, 59100 Roubaix, France",
+  telephone: "+33 9 72 10 10 07",
+  pays: "France",
 };
 
 export const SITE = "ayur-veda.fr";
