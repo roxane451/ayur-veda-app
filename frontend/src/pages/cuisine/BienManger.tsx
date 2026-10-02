@@ -115,7 +115,7 @@ const BienManger = ({ rubrique = "cuisine" }: { rubrique?: "cuisine" | "comprend
                 <span className="font-display text-[1.3rem]">{x.a}</span>
                 <svg width="30" height="30" viewBox="0 0 34 34" role="img" aria-label="ne va pas avec">
                   <circle cx="17" cy="17" r="15" fill="#5B2A4E" />
-                  <path d="M11 11 L23 23 M23 11 L11 23" stroke="#F3F5E6" strokeWidth="2.6" strokeLinecap="round" />
+                  <path d="M11 11 L23 23 M23 11 L11 23" stroke="#F0F4E0" strokeWidth="2.6" strokeLinecap="round" />
                 </svg>
                 <span className="font-display text-[1.3rem]">{x.b}</span>
               </p>

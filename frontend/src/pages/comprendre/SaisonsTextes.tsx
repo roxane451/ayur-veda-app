@@ -23,7 +23,7 @@ const Roue = () => (
       const [x2, y2] = point(R0, a1);
       const [x3, y3] = point(R0, a0);
       const [tx, ty] = point((R0 + R1) / 2, a0 + 30);
-      const c = s.couleur === "#5B2A4E" ? "#F3F5E6" : "#13201E";
+      const c = s.couleur === "#5B2A4E" ? "#F0F4E0" : "#13201E";
       return (
         <g key={s.sanskrit}>
           <path d={`M${x0} ${y0} A${R1} ${R1} 0 0 1 ${x1} ${y1} L${x2} ${y2} A${R0} ${R0} 0 0 0 ${x3} ${y3} Z`} fill={s.couleur} stroke="#13201E" strokeWidth="2" />
@@ -36,7 +36,7 @@ const Roue = () => (
         </g>
       );
     })}
-    <circle cx={C} cy={C} r="112" fill="#F3F5E6" stroke="#13201E" strokeWidth="2" />
+    <circle cx={C} cy={C} r="112" fill="#F0F4E0" stroke="#13201E" strokeWidth="2" />
     <path d="M260 148 V372" stroke="#13201E" strokeWidth="1.5" strokeDasharray="5 6" />
     {[
       [206, "VISARGA", "la lune donne"],

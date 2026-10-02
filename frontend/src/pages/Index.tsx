@@ -26,53 +26,37 @@ const lienSouligne =
 /* ───────────── Hero ───────────── */
 
 const Hero = () => (
-  <section className="relative overflow-hidden">
-    <Motif id="buta" />
-    <div className="relative mx-auto grid max-w-[1220px] items-center gap-12 px-4 pb-16 pt-8 sm:px-10 md:grid-cols-2 md:pb-[88px] md:pt-14">
-      <div className="flex flex-col gap-6">
-        <p className="m-0 flex items-baseline gap-3.5">
-          <span lang="sa" className="font-devanagari text-[30px] text-aubergine">
-            आयुर्वेद
-          </span>
-          <span className="italic text-doux">la science de la vie</span>
-        </p>
-        <h1 className="m-0 text-[clamp(2.2rem,6.2vw,3.7rem)] leading-[1.02]">
-          Retrouver son équilibre, <em>une saison</em> après l'autre.
-        </h1>
-        <p className="m-0 max-w-[36ch] text-xl text-doux">
-          {fr("L'Ayurveda expliqué sans jargon, pour l'appliquer dans sa cuisine et dans ses journées.")}
-        </p>
-        <div className="flex flex-wrap items-center gap-x-6 gap-y-4">
-          <Link
-            to="/profil"
-            className="inline-flex min-h-14 items-center gap-2.5 rounded-buta bg-paon px-[30px] font-bold text-pistache hover:opacity-90"
-          >
-            Faire le quiz dosha
-          </Link>
-          <Link to="/cuisine" className={lienSouligne}>
-            Explorer la cuisine
-          </Link>
-        </div>
-      </div>
-
-      <div className="relative mx-auto h-[420px] w-full max-w-[480px] md:h-[560px]">
-        <div className="absolute inset-y-0 left-8 right-4 sm:left-10 sm:right-5">
-          <Photo description="épices en vrac sur un étal, lumière chaude du matin" arche />
-        </div>
-        <div className="absolute right-6 top-[56%] opacity-90 sm:right-9">
-          <Sceau size={92} rotate={-10} />
-        </div>
-        <div className="absolute -left-2 bottom-16 -rotate-[8deg] sm:-left-11 sm:bottom-[90px]">
-          <Curcuma size={130} decorative />
-        </div>
-        <div className="absolute -right-2 top-8 rotate-[10deg] sm:-right-6 sm:top-10">
-          <Cardamome size={96} decorative />
-        </div>
-        <div className="absolute -left-1 top-14 -rotate-[20deg] sm:-left-2.5 sm:top-[70px]">
-          <Cannelle size={104} decorative />
-        </div>
+  <section className="relative mx-auto flex max-w-[1220px] flex-col-reverse items-center gap-6 px-4 pt-6 sm:px-10 md:min-h-[640px] md:flex-row md:items-center md:justify-between md:gap-10 md:pt-0">
+    <div className="flex w-full flex-col gap-5 pb-14 md:max-w-[520px] md:pb-0">
+      <p lang="sa" className="m-0 font-devanagari text-[34px] leading-none text-aubergine">
+        आयुर्वेद
+      </p>
+      <h1 className="m-0 text-[clamp(2.3rem,4.6vw,3.1rem)] leading-[1.08]">
+        L'Ayurveda, <em>au fil des saisons</em>
+      </h1>
+      <p className="m-0 max-w-[32ch] text-xl text-doux">
+        {fr("Comprendre sa nature et prendre soin de soi, d'après les textes anciens.")}
+      </p>
+      <div className="flex flex-wrap items-center gap-x-6 gap-y-4 pt-2">
+        <Link
+          to="/profil"
+          className="inline-flex min-h-14 items-center gap-2.5 rounded-buta bg-paon px-[30px] font-bold text-pistache hover:opacity-90"
+        >
+          Faire le quiz dosha
+        </Link>
+        <Link to="/cuisine" className={lienSouligne}>
+          Explorer la cuisine
+        </Link>
       </div>
     </div>
+    <img
+      src="/hanuman.webp"
+      alt="Hanuman dansant sur une fleur de lotus, à l'aquarelle"
+      width={784}
+      height={1168}
+      fetchPriority="high"
+      className="h-auto w-[min(78vw,340px)] md:-mb-8 md:mr-4 md:w-auto md:max-h-[690px] md:self-end"
+    />
   </section>
 );
 

@@ -40,7 +40,11 @@ import Recette from "./pages/cuisine/Recette";
 import PageIngredients from "./pages/cuisine/Ingredients";
 import BienManger from "./pages/cuisine/BienManger";
 import NotFound from "./pages/NotFound";
+import MentionsLegales from "./pages/legal/MentionsLegales";
+import Confidentialite from "./pages/legal/Confidentialite";
+import Cgu from "./pages/legal/Cgu";
 import BrandDefs from "./components/brand/BrandDefs";
+import { InviteInstallation } from "./components/installation/Installation";
 
 const queryClient = new QueryClient();
 
@@ -53,6 +57,7 @@ const App = () => (
       <CompteProvider>
         <BrowserRouter>
           <RetourEnHaut />
+          <InviteInstallation />
           <Routes>
             <Route path="/" element={<Index />} />
 
@@ -110,6 +115,9 @@ const App = () => (
               path="/spices"
               element={<Navigate to="/cuisine" replace />}
             />
+            <Route path="/mentions-legales" element={<MentionsLegales />} />
+            <Route path="/confidentialite" element={<Confidentialite />} />
+            <Route path="/cgu" element={<Cgu />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

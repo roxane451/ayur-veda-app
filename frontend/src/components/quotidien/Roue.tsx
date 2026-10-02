@@ -76,14 +76,14 @@ const Roue = ({ choisie, actuelle, onChoisir }: RoueProps) => {
   return (
     <div className="relative mx-auto aspect-square w-full max-w-[520px] max-sm:w-[calc(100%+1rem)] max-sm:-mx-2">
       <svg viewBox="-16 -16 552 552" className="absolute inset-0 h-full w-full overflow-visible" role="tablist" aria-label="Les quatre saisons">
-        <circle cx={C} cy={C} r={R_INT - 10} fill="#F3F5E6" stroke="#13201E" strokeWidth="2" />
+        <circle cx={C} cy={C} r={R_INT - 10} fill="#F0F4E0" stroke="#13201E" strokeWidth="2" />
         {ORDRE.map((id) => {
           const s = SAISONS_DETAIL.find((x) => x.id === id)!;
           const a0 = DEPART[id].angle;
           const d = secteur(a0);
           const lue = id === choisie;
           const [lx, ly] = point(170, a0 + 45);
-          const clair = lue ? "#F3F5E6" : "#13201E";
+          const clair = lue ? "#F0F4E0" : "#13201E";
           return (
             <g
               key={id}

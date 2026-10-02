@@ -99,7 +99,7 @@ const Elements = () => (
               className="flex h-[74px] w-[74px] shrink-0 items-center justify-center rounded-full shadow-[0_0_0_2px_hsl(var(--encre))]"
               style={{ background: COULEUR_DOSHA[f.dosha] }}
             >
-              <Glyphe id={f.element} taille={46} couleur={f.dosha === "vata" ? "#13201E" : "#F3F5E6"} />
+              <Glyphe id={f.element} taille={46} couleur={f.dosha === "vata" ? "#13201E" : "#F0F4E0"} />
             </span>
             <span className="flex flex-col gap-0.5">
               <span className="font-display text-2xl">

@@ -44,7 +44,7 @@ const Triangle = () => (
     ).map(([d, x, y]) => (
       <g key={d}>
         <circle cx={x} cy={y} r="38" fill={d === "pitta" ? "#5B2A4E" : d === "vata" ? "#8DB9B0" : "#6E7F1A"} stroke="#13201E" strokeWidth="2" />
-        <text x={x} y={y + 6} textAnchor="middle" className="font-display" fontSize="17" fill={d === "vata" ? "#13201E" : "#F3F5E6"}>
+        <text x={x} y={y + 6} textAnchor="middle" className="font-display" fontSize="17" fill={d === "vata" ? "#13201E" : "#F0F4E0"}>
           {NOM_DOSHA[d].toUpperCase()}
         </text>
       </g>

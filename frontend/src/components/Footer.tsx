@@ -3,12 +3,14 @@ import Logo from "@/components/brand/Logo";
 import Sceau from "@/components/brand/Sceau";
 import { Bande } from "@/components/brand/BrandDefs";
 import { NAV_LINKS } from "@/components/navLinks";
+import { PAGES_LEGALES } from "@/data/legal";
+import { BlocInstallation } from "@/components/installation/Installation";
 
-const LEGAL = ["Mentions légales", "Confidentialité", "CGU", "Conditions de vente"];
 
 const Footer = () => (
   <>
     <Bande />
+    <BlocInstallation />
     <footer className="bg-encre text-pistache">
       <div className="mx-auto flex max-w-[1220px] flex-wrap justify-between gap-8 px-4 py-14 text-[15px] sm:px-10">
         <div className="flex max-w-[520px] items-center gap-6">
@@ -31,12 +33,11 @@ const Footer = () => (
             ))}
           </ul>
           <ul className="m-0 flex list-none flex-col gap-2 p-0">
-            {LEGAL.map((l) => (
-              <li key={l}>
-                {/* [À FAIRE] pages légales à rédiger */}
-                <a href="#" className="text-[#D3E3DE] hover:text-citron">
-                  {l}
-                </a>
+            {PAGES_LEGALES.map((l) => (
+              <li key={l.href}>
+                <Link to={l.href} className="text-[#D3E3DE] hover:text-citron">
+                  {l.titre}
+                </Link>
               </li>
             ))}
           </ul>

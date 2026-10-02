@@ -5,7 +5,7 @@
  *  - motifs : buta (cachemire), dabu (fleurs sur vert paon), bordures à arches
  */
 const AUBERGINE = "#5B2A4E";
-const PISTACHE = "#F3F5E6";
+const PISTACHE = "#F0F4E0";
 const CITRON = "#BBD439";
 const OCRE = "#D2A12A";
 const PAON = "#0E4D47";
