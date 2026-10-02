@@ -3,7 +3,7 @@ import { AlertTriangle, ArrowLeft, ArrowRight } from "lucide-react";
 import { Bande } from "@/components/brand/BrandDefs";
 import Photo from "@/components/brand/PhotoPlaceholder";
 import { Deva } from "@/components/comprendre/Commun";
-import { EffetsEpice, FilCuisine, IlluEpice, PageCuisine } from "@/components/cuisine/Commun";
+import { EffetsEpice, IlluEpice, PageCuisine } from "@/components/cuisine/Commun";
 import { fr } from "@/components/quiz/conseils";
 import { EPICES, MELANGES } from "@/data/cuisine";
 
@@ -41,9 +41,8 @@ const Fiche = () => {
 
   return (
     <PageCuisine>
-      <section className="mx-auto grid max-w-[1220px] items-center gap-12 px-4 pb-14 pt-6 sm:px-10 md:grid-cols-2 md:gap-14 md:pb-16">
+      <section className="mx-auto grid max-w-[1220px] items-center gap-12 px-4 pb-14 pt-10 sm:px-10 md:grid-cols-2 md:gap-14 md:pb-16">
         <div className="flex flex-col gap-4">
-          <FilCuisine page={e.nom} />
           <p className="m-0 flex flex-wrap items-baseline gap-x-3.5">
             <Deva className="text-[32px] text-aubergine">{e.deva}</Deva>
             <span className="italic text-doux">

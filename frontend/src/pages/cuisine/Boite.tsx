@@ -2,7 +2,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import { Bande } from "@/components/brand/BrandDefs";
 import { Chai, Feuille, Poudre } from "@/components/brand/Illustrations";
 import { Deva } from "@/components/comprendre/Commun";
-import { EffetsEpice, FilCuisine, IlluEpice, PageCuisine, Pastille } from "@/components/cuisine/Commun";
+import { EffetsEpice, IlluEpice, PageCuisine, Pastille } from "@/components/cuisine/Commun";
 import Dabba from "@/components/cuisine/Dabba";
 import { COULEUR_DOSHA, fr } from "@/components/quiz/conseils";
 import { EPICES, MELANGES, PLANTES, RECETTES } from "@/data/cuisine";
@@ -18,9 +18,8 @@ const Boite = () => {
 
   return (
     <PageCuisine>
-      <section className="mx-auto grid max-w-[1220px] items-center gap-8 px-4 pb-12 pt-6 sm:px-10 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] md:gap-2 md:pb-14">
+      <section className="mx-auto grid max-w-[1220px] items-center gap-8 px-4 pb-12 pt-10 sm:px-10 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] md:gap-2 md:pb-14">
         <div className="flex flex-col gap-5">
-          <FilCuisine />
           <Deva className="text-[clamp(2rem,4vw,2.5rem)] !leading-none text-aubergine">मसाला डब्बा</Deva>
           <h1 className="m-0 text-[clamp(2.6rem,6.4vw,4.75rem)] leading-[0.95]">La boîte à épices</h1>
           <p className="m-0 max-w-[36ch] text-xl text-doux">
