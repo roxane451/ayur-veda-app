@@ -44,9 +44,9 @@ const Desequilibre = () => (
       <div className="mt-5">
         <Ornement />
       </div>
+      <DApres>Suśruta, Sūtrasthāna 21</DApres>
     </Frontispice>
     <Bande />
-    <DApres>Suśruta, Sūtrasthāna 21</DApres>
 
     <section aria-labelledby="de-etapes" className="mx-auto flex max-w-[1180px] flex-col gap-9 px-4 pb-20 pt-16 sm:px-10 md:pt-20">
       <div className="grid items-end gap-4 md:grid-cols-2 md:gap-14">

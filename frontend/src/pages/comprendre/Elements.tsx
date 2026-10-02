@@ -15,9 +15,9 @@ const Elements = () => (
       <div className="mt-5">
         <Ornement />
       </div>
+      <DApres>Charaka, Śārīrasthāna 1 ; Suśruta, Sūtrasthāna 21</DApres>
     </Frontispice>
     <Bande />
-    <DApres>Charaka, Śārīrasthāna 1 ; Suśruta, Sūtrasthāna 21</DApres>
 
     <section aria-labelledby="el-cinq" className="mx-auto flex max-w-[1220px] flex-col gap-9 px-4 pb-20 pt-14 sm:px-10 md:pt-16">
       <div className="grid items-end gap-4 md:grid-cols-2 md:gap-14">

@@ -10,9 +10,9 @@ const Esprit = () => (
       <div className="mt-5">
         <Ornement />
       </div>
+      <DApres>Charaka, Sūtrasthāna 1 ; Śārīrasthāna 4</DApres>
     </Frontispice>
     <Bande />
-    <DApres>Charaka, Sūtrasthāna 1 ; Śārīrasthāna 4</DApres>
 
     {/* Sattva, rajas, tamas */}
     <section aria-labelledby="ce-esprit" className="mx-auto flex max-w-[1100px] flex-col gap-8 px-4 pb-16 pt-14 sm:px-10 md:pb-[88px] md:pt-16">

@@ -63,9 +63,9 @@ const SaisonsTextes = () => (
       <div className="mt-5">
         <Ornement />
       </div>
+      <DApres>Charaka, Sūtrasthāna 6 ; Vāgbhaṭa, Sūtrasthāna 3</DApres>
     </Frontispice>
     <Bande />
-    <DApres>Charaka, Sūtrasthāna 6 ; Vāgbhaṭa, Sūtrasthāna 3</DApres>
 
     <section aria-labelledby="st-six" className="mx-auto grid max-w-[1100px] items-center gap-10 px-4 pb-20 pt-14 sm:px-10 md:pt-16 lg:grid-cols-[minmax(0,440px)_minmax(0,1fr)] lg:gap-16">
       <Roue />

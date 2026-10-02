@@ -10,12 +10,12 @@ const Tissus = () => (
       <div className="mt-5">
         <Ornement />
       </div>
+      <DApres>Suśruta, Sūtrasthāna 14 et 15 ; Charaka, Sūtrasthāna 17</DApres>
     </Frontispice>
     <Bande />
-    <DApres>Suśruta, Sūtrasthāna 14 et 15 ; Charaka, Sūtrasthāna 17</DApres>
 
     {/* Les sept tissus */}
-    <section aria-labelledby="ce-tissus" className="relative mt-14 overflow-hidden bg-paon text-pistache">
+    <section aria-labelledby="ce-tissus" className="relative overflow-hidden bg-paon text-pistache">
       <Motif id="dabu" />
       <div className="relative mx-auto flex max-w-[1220px] flex-col gap-10 px-4 py-16 sm:px-10 md:py-20">
         <div className="grid items-end gap-5 md:grid-cols-2 md:gap-14">

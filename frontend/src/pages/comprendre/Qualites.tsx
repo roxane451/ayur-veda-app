@@ -34,9 +34,9 @@ const Qualites = () => (
       <div className="mt-5">
         <Ornement />
       </div>
+      <DApres>Charaka, Sūtrasthāna 1 et 26</DApres>
     </Frontispice>
     <Bande />
-    <DApres>Charaka, Sūtrasthāna 1 et 26</DApres>
 
     <section aria-labelledby="q-paires" className="mx-auto flex max-w-[1100px] flex-col gap-7 px-4 pb-20 pt-16 sm:px-10 md:pt-20">
       <div className="grid items-end gap-5 md:grid-cols-2 md:gap-14">

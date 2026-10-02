@@ -304,9 +304,9 @@ const Doshas = () => {
         >
           Comparer les trois
         </a>
+        <DApres>Charaka, Sūtrasthāna 1, 12 et 18 ; Vāgbhaṭa, Sūtrasthāna 1 et 12</DApres>
       </Frontispice>
       <Bande />
-      <DApres>Charaka, Sūtrasthāna 1, 12 et 18 ; Vāgbhaṭa, Sūtrasthāna 1 et 12</DApres>
 
       <div
         id="detail-dosha"

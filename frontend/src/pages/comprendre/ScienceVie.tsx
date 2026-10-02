@@ -23,9 +23,9 @@ const ScienceVie = () => (
       <div className="mt-5">
         <Ornement />
       </div>
+      <DApres>Charaka, Sūtrasthāna 1 et 30</DApres>
     </Frontispice>
     <Bande />
-    <DApres>Charaka, Sūtrasthāna 1 et 30</DApres>
 
     {/* Ce qu'est la vie */}
     <section aria-labelledby="sv-vie" className="mx-auto flex max-w-[1100px] flex-col gap-9 px-4 pb-20 pt-14 sm:px-10 md:pt-16">

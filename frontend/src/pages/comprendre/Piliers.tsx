@@ -11,9 +11,9 @@ const Piliers = () => (
       <div className="mt-5">
         <Ornement />
       </div>
+      <DApres>Charaka, Sūtrasthāna 11</DApres>
     </Frontispice>
     <Bande />
-    <DApres>Charaka, Sūtrasthāna 11</DApres>
 
     {/* Les trois piliers */}
     <section aria-labelledby="ce-piliers" className="mx-auto flex max-w-[1100px] flex-col gap-8 px-4 pb-20 pt-14 sm:px-10 md:pt-20">
