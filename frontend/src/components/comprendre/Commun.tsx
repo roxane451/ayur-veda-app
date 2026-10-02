@@ -1,7 +1,8 @@
-import type { ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Fil, PageRubrique } from "@/components/Rubrique";
+import { Motif } from "@/components/brand/BrandDefs";
 import { fr } from "@/components/quiz/conseils";
 import type { Effet } from "@/data/comprendre";
 import { ANNEXES, LIVRES, SOUS_PAGES, livreDe, numeroChapitre } from "./sousPages";
@@ -12,9 +13,20 @@ import { ANNEXES, LIVRES, SOUS_PAGES, livreDe, numeroChapitre } from "./sousPage
 export const Sommaire = () => {
   const { pathname } = useLocation();
   const ouvert = livreDe(pathname);
+  const livres = useRef<HTMLUListElement>(null);
+  const chapitres = useRef<HTMLOListElement>(null);
+  // Sur téléphone, les rangées défilent : on centre le livre et le chapitre ouverts.
+  useEffect(() => {
+    for (const rangee of [livres.current, chapitres.current]) {
+      const actif = rangee?.querySelector<HTMLElement>("[aria-current]")?.closest("li");
+      if (rangee && actif && rangee.scrollWidth > rangee.clientWidth) {
+        rangee.scrollLeft = actif.offsetLeft - (rangee.clientWidth - actif.clientWidth) / 2;
+      }
+    }
+  }, [pathname]);
   return (
     <nav aria-label="Sommaire de Comprendre" className="mx-auto max-w-[1220px] px-4 sm:px-10">
-      <ul className="m-0 flex list-none gap-x-6 overflow-x-auto border-y border-b-[3px] border-double border-encre px-1 [scrollbar-width:none] lg:flex-wrap lg:justify-center lg:overflow-visible">
+      <ul ref={livres} className="m-0 flex list-none gap-x-6 overflow-x-auto border-y border-b-[3px] border-double border-encre px-1 [scrollbar-width:none] lg:flex-wrap lg:justify-center lg:overflow-visible">
         {LIVRES.map((l) => {
           const actif = l === ouvert;
           return (
@@ -50,28 +62,33 @@ export const Sommaire = () => {
       </ul>
       {ouvert && (
         <ol
+          ref={chapitres}
           aria-label={`Les chapitres du livre ${ouvert.num}`}
-          className="-mx-4 m-0 flex list-none gap-2.5 overflow-x-auto px-4 pb-1 pt-3.5 [scrollbar-width:none] sm:mx-0 sm:flex-wrap sm:justify-center sm:px-0"
+          className="-mx-4 m-0 flex list-none gap-1 overflow-x-auto px-4 pb-1 pt-4 [scrollbar-width:none] sm:mx-0 sm:justify-center sm:px-0"
         >
           {ouvert.chapitres.map((c) => {
             const actif = c.href === pathname;
             return (
-              <li key={c.href} className="shrink-0">
+              <li key={c.href} className="w-[104px] shrink-0 sm:w-[136px]">
+                {/* Chaque chapitre est une petite porte en arche ; celle du chapitre ouvert est pleine. */}
                 <Link
                   to={c.href}
                   aria-current={actif ? "page" : undefined}
-                  className={`inline-flex min-h-10 items-center gap-2 whitespace-nowrap rounded-full py-1 pl-1.5 pr-4 text-[15px] no-underline ${
-                    actif ? "bg-encre text-pistache" : "shadow-[inset_0_0_0_1.5px_hsl(var(--trait))] hover:bg-surface"
-                  }`}
+                  className="group flex flex-col items-center gap-2 text-center no-underline"
                 >
                   <span
-                    className={`inline-flex h-7 w-7 items-center justify-center rounded-full text-sm italic ${
-                      actif ? "bg-citron text-encre" : "text-aubergine"
+                    className={`relative flex h-[56px] w-[44px] items-end justify-center overflow-hidden rounded-b-[4px] rounded-t-full pb-2 shadow-[inset_0_0_0_1.5px_hsl(var(--encre))] ${
+                      actif ? "bg-paon" : "bg-carte group-hover:bg-surface"
                     }`}
                   >
-                    {numeroChapitre(c.href)}
+                    {actif && <Motif id="dabu" />}
+                    <span className={`relative font-body text-lg italic leading-none ${actif ? "text-citron" : "text-aubergine"}`}>
+                      {numeroChapitre(c.href)}
+                    </span>
                   </span>
-                  {c.titre}
+                  <span className={`text-[14px] leading-tight sm:text-[15px] ${actif ? "font-bold text-encre" : "text-doux group-hover:text-encre"}`}>
+                    {c.titre}
+                  </span>
                 </Link>
               </li>
             );
