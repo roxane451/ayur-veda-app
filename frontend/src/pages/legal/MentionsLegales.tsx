@@ -22,29 +22,46 @@ const MentionsLegales = () => (
     sommaire={SOMMAIRE}
   >
     <Section id="editeur" titre="L'éditeur">
-      <dl className="m-0">
-        <Ligne intitule="Nom ou raison sociale">
-          <Valeur v={EDITEUR.nom} />
-        </Ligne>
-        <Ligne intitule="Statut">
-          <Valeur v={EDITEUR.statut} />
-        </Ligne>
-        <Ligne intitule="Adresse">
-          <Valeur v={EDITEUR.adresse} />
-        </Ligne>
-        <Ligne intitule="SIRET">
-          <Valeur v={EDITEUR.siret} />
-        </Ligne>
-        <Ligne intitule="Adresse e-mail">
-          <Valeur v={EDITEUR.email} />
-        </Ligne>
-        <Ligne intitule="Téléphone">
-          <Valeur v={EDITEUR.telephone} />
-        </Ligne>
-        <Ligne intitule="Directrice de la publication">
-          <Valeur v={EDITEUR.directeurPublication} />
-        </Ligne>
-      </dl>
+      {EDITEUR.anonyme ? (
+        <>
+          <p>
+            Ce site est publié à titre non professionnel par une personne
+            physique qui a choisi de ne pas rendre public son nom, comme
+            l'article 6-III-2 de la loi pour la confiance dans l'économie
+            numérique le permet. Son identité et ses coordonnées ont été
+            communiquées à l'hébergeur ci-dessous.
+          </p>
+          <dl className="m-0">
+            <Ligne intitule="Adresse e-mail">
+              <Valeur v={EDITEUR.email} />
+            </Ligne>
+          </dl>
+        </>
+      ) : (
+        <dl className="m-0">
+          <Ligne intitule="Nom ou raison sociale">
+            <Valeur v={EDITEUR.nom} />
+          </Ligne>
+          <Ligne intitule="Statut">
+            <Valeur v={EDITEUR.statut} />
+          </Ligne>
+          <Ligne intitule="Adresse">
+            <Valeur v={EDITEUR.adresse} />
+          </Ligne>
+          <Ligne intitule="SIRET">
+            <Valeur v={EDITEUR.siret} />
+          </Ligne>
+          <Ligne intitule="Adresse e-mail">
+            <Valeur v={EDITEUR.email} />
+          </Ligne>
+          <Ligne intitule="Téléphone">
+            <Valeur v={EDITEUR.telephone} />
+          </Ligne>
+          <Ligne intitule="Directrice de la publication">
+            <Valeur v={EDITEUR.directeurPublication} />
+          </Ligne>
+        </dl>
+      )}
     </Section>
 
     <Section id="hebergement" titre="L'hébergement">

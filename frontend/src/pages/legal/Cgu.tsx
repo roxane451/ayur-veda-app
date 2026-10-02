@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { PageLegale, Section, Valeur } from "@/components/legal/PageLegale";
 import { AGE_MINIMUM, EDITEUR, SITE } from "@/data/legal";
+import { CONTENU_PAYANT } from "@/lib/offre";
 
 const SOMMAIRE = [
   { id: "objet", titre: "L'objet" },
@@ -31,9 +32,9 @@ const Cgu = () => (
 
     <Section id="acces" titre="L'accès au site">
       <p>
-        Le site est gratuit. Vous pouvez tout lire et faire le quiz sans compte.
-        Un compte sert seulement à garder vos bilans et à les retrouver sur un
-        autre appareil.
+        {CONTENU_PAYANT
+          ? "L'essentiel du site est gratuit et se lit sans compte, quiz compris. Certains contenus sont réservés aux abonnés. Un compte sert à garder vos bilans et à accéder à ces contenus."
+          : "Le site est gratuit. Vous pouvez tout lire et faire le quiz sans compte. Un compte sert seulement à garder vos bilans et à les retrouver sur un autre appareil."}
       </p>
       <p>
         Nous faisons notre possible pour que le site reste disponible, sans

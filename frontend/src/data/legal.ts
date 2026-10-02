@@ -4,6 +4,8 @@
  */
 
 export interface Personne {
+  /** Particulier non professionnel qui ne publie pas son nom (LCEN, art. 6-III-2). */
+  anonyme: boolean;
   nom: string | null;
   statut: string | null;
   adresse: string | null;
@@ -22,6 +24,7 @@ export interface Hebergeur {
 }
 
 export const EDITEUR: Personne = {
+  anonyme: true,
   nom: null,
   statut: null,
   adresse: null,

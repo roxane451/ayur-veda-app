@@ -29,9 +29,7 @@ const Confidentialite = () => (
   >
     <Section id="bref" titre="En bref">
       <ul>
-        <li>
-          Vous pouvez lire tout le site et faire le quiz sans créer de compte.
-        </li>
+        <li>Vous pouvez lire le site et faire le quiz sans créer de compte.</li>
         <li>
           Si vous créez un compte, nous gardons votre adresse e-mail, votre mot
           de passe sous forme chiffrée et vos bilans.
@@ -47,10 +45,14 @@ const Confidentialite = () => (
 
     <Section id="responsable" titre="Qui est responsable">
       <p>
-        Le responsable du traitement est l'éditeur du site,{" "}
-        <Valeur v={EDITEUR.nom} />, que vous pouvez joindre à{" "}
-        <Valeur v={EDITEUR.email} />. Ses coordonnées complètes sont dans les{" "}
-        <Link to="/mentions-legales">mentions légales</Link>.
+        Le responsable du traitement est l'éditeur du site
+        {EDITEUR.anonyme ? null : (
+          <>
+            , <Valeur v={EDITEUR.nom} />
+          </>
+        )}
+        . Vous pouvez le joindre à <Valeur v={EDITEUR.email} />. Plus de détails
+        dans les <Link to="/mentions-legales">mentions légales</Link>.
       </p>
     </Section>
 
