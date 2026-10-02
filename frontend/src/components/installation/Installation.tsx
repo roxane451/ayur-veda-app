@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { useInstallation } from "@/lib/installation";
+import { useInstallation, type NavigateurIos } from "@/lib/installation";
 
 const BOUTON =
   "inline-flex min-h-11 items-center rounded-buta px-5 font-bold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-encre";
@@ -32,7 +32,13 @@ const Partager = () => (
 );
 
 /** Les deux gestes de Safari, dans une fiche qui monte du bas de l'écran. */
-const FicheIos = ({ onFermer }: { onFermer: () => void }) => {
+const FicheIos = ({
+  navigateur,
+  onFermer,
+}: {
+  navigateur: NavigateurIos;
+  onFermer: () => void;
+}) => {
   const bouton = useRef<HTMLButtonElement>(null);
   useEffect(() => {
     bouton.current?.focus();
@@ -66,15 +72,29 @@ const FicheIos = ({ onFermer }: { onFermer: () => void }) => {
           </h2>
         </div>
         <p className="m-0 text-doux">
-          Sur iPhone, l'installation se fait depuis Safari, en deux gestes.
+          Sur iPhone et iPad, l'app s'ajoute depuis le menu Partager, en deux
+          gestes.
         </p>
         <ol className="m-0 flex flex-col gap-2 pl-5">
+          {navigateur === "chrome" ? (
+            <li>
+              Dans Chrome, touchez <b>Partager</b>
+              <Partager /> en haut à droite, dans la barre d'adresse.
+            </li>
+          ) : navigateur === "safari" ? (
+            <li>
+              Dans Safari, touchez <b>Partager</b>
+              <Partager /> dans la barre du navigateur.
+            </li>
+          ) : (
+            <li>
+              Ouvrez le menu <b>Partager</b>
+              <Partager /> de votre navigateur.
+            </li>
+          )}
           <li>
-            Touchez le bouton <b>Partager</b>
-            <Partager /> en bas de l'écran.
-          </li>
-          <li>
-            Choisissez <b>Sur l'écran d'accueil</b>.
+            Choisissez <b>Sur l'écran d'accueil</b> ou{" "}
+            <b>Ajouter à l'écran d'accueil</b>.
           </li>
         </ol>
         <button
@@ -105,9 +125,10 @@ export const InviteInstallation = () => {
     };
   }, [bandeau, fiche]);
 
-  if (fiche) {
+  if (fiche && ios) {
     return (
       <FicheIos
+        navigateur={ios}
         onFermer={() => {
           setFiche(false);
           fermer();
@@ -182,7 +203,9 @@ export const BlocInstallation = () => {
           Installer l'app
         </button>
       </div>
-      {fiche && <FicheIos onFermer={() => setFiche(false)} />}
+      {fiche && ios && (
+        <FicheIos navigateur={ios} onFermer={() => setFiche(false)} />
+      )}
     </section>
   );
 };
