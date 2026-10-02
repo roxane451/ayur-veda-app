@@ -237,7 +237,7 @@ const Etagere = () => (
     <div className="-mx-4 overflow-x-auto px-4 pb-4 [scrollbar-width:none] sm:mx-0 sm:px-0">
       <ul className="relative m-0 grid min-w-[920px] list-none grid-cols-5 md:min-w-0 gap-3 p-0 pt-6">
         <svg width="100%" height="18" aria-hidden="true" className="absolute left-0 top-[184px] block overflow-visible">
-          <g>
+          <g filter="url(#ink)">
             <rect x="0" y="2" width="100%" height="12" rx="3" fill="#A8823A" stroke="#13201E" strokeWidth="2" />
           </g>
         </svg>

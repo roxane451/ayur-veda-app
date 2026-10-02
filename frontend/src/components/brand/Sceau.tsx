@@ -24,7 +24,7 @@ export const Sceau = ({
   reserve = "hsl(var(--citron))",
   rotate = 0,
   label,
-  filter = "none",
+  filter = "stamp",
   className,
 }: SceauProps) => (
   <svg
