@@ -18,7 +18,7 @@ export const Renvoi = ({ n, clair }: { n: number; clair?: boolean }) => (
 
 /** L'étiquette « d'après… », posée sur la bande sous l'ouverture de la page. */
 export const DApres = ({ children }: { children: string }) => (
-  <p className="relative z-10 m-0 -mt-[38px] mb-[6px] flex justify-center px-4 text-center text-[15px] text-doux">
+  <p className="relative z-10 m-0 -mt-[38px] mb-6 md:mb-8 flex justify-center px-4 text-center text-[15px] text-doux">
     <span className="rounded-full bg-carte px-4 py-1 shadow-[inset_0_0_0_1.5px_hsl(var(--encre))]">
       <i className="text-aubergine">d'après</i> {children}
     </span>
