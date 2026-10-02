@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Navigate, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 
+import { CONTENU_PAYANT } from "./lib/offre";
 import ScienceVie from "./pages/comprendre/ScienceVie";
 import Elements from "./pages/comprendre/Elements";
 import Textes from "./pages/comprendre/Textes";
@@ -64,18 +65,18 @@ const App = () => (
             <Route path="/comprendre/constitution" element={<Constitution />} />
             <Route path="/comprendre/tissus" element={<Tissus />} />
             <Route path="/comprendre/esprit" element={<Esprit />} />
-            <Route path="/comprendre/trois-piliers" element={<Piliers />} />
+            <Route path="/comprendre/trois-piliers" element={CONTENU_PAYANT ? <Piliers /> : <Navigate to="/comprendre" replace />} />
             <Route path="/comprendre/corps-et-esprit" element={<Navigate to="/comprendre/tissus" replace />} />
             <Route path="/comprendre/action-des-aliments" element={<Action />} />
             <Route path="/comprendre/agni" element={<Agni />} />
             <Route path="/comprendre/regles-du-repas" element={<BienManger rubrique="comprendre" />} />
-            <Route path="/comprendre/journee" element={<Journee />} />
-            <Route path="/comprendre/saisons" element={<SaisonsTextes />} />
-            <Route path="/comprendre/sommeil" element={<Sommeil />} />
-            <Route path="/comprendre/besoins-naturels" element={<Besoins />} />
-            <Route path="/comprendre/ages-de-la-vie" element={<Ages />} />
-            <Route path="/comprendre/trois-causes" element={<Causes />} />
-            <Route path="/comprendre/desequilibre" element={<Desequilibre />} />
+            <Route path="/comprendre/journee" element={CONTENU_PAYANT ? <Journee /> : <Navigate to="/comprendre" replace />} />
+            <Route path="/comprendre/saisons" element={CONTENU_PAYANT ? <SaisonsTextes /> : <Navigate to="/comprendre" replace />} />
+            <Route path="/comprendre/sommeil" element={CONTENU_PAYANT ? <Sommeil /> : <Navigate to="/comprendre" replace />} />
+            <Route path="/comprendre/besoins-naturels" element={CONTENU_PAYANT ? <Besoins /> : <Navigate to="/comprendre" replace />} />
+            <Route path="/comprendre/ages-de-la-vie" element={CONTENU_PAYANT ? <Ages /> : <Navigate to="/comprendre" replace />} />
+            <Route path="/comprendre/trois-causes" element={CONTENU_PAYANT ? <Causes /> : <Navigate to="/comprendre" replace />} />
+            <Route path="/comprendre/desequilibre" element={CONTENU_PAYANT ? <Desequilibre /> : <Navigate to="/comprendre" replace />} />
             <Route path="/comprendre/lexique" element={<Navigate to="/comprendre/textes" replace />} />
             <Route path="/profil" element={<Profil />} />
             <Route path="/au-quotidien" element={<Saisons />} />
@@ -83,7 +84,7 @@ const App = () => (
               path="/au-quotidien/journee"
               element={<Journee rubrique="quotidien" />}
             />
-            <Route path="/au-quotidien/programme" element={<Programme />} />
+            <Route path="/au-quotidien/programme" element={CONTENU_PAYANT ? <Programme /> : <Navigate to="/au-quotidien" replace />} />
             <Route path="/cuisine" element={<Boite />} />
             <Route path="/cuisine/melanges" element={<Melanges />} />
             <Route path="/cuisine/epices/:id" element={<FicheEpice />} />

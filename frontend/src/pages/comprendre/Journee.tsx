@@ -1,3 +1,4 @@
+import { CONTENU_PAYANT } from "@/lib/offre";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Bande } from "@/components/brand/BrandDefs";
@@ -130,15 +131,18 @@ const Journee = ({ rubrique = "comprendre" }: { rubrique?: "comprendre" | "quoti
           <div className="flex max-w-[620px] flex-col gap-1.5">
             <span className="font-display text-[1.75rem]">Par où commencer</span>
             <span className="text-doux">
-              Choisissez le geste qui vous semble le plus facile et tenez-le trois semaines avant d'en ajouter un autre. Le programme de saison de l'espace membre en propose un par jour.
+              Choisissez le geste qui vous semble le plus facile et tenez-le trois semaines avant d'en ajouter un autre.
+              {CONTENU_PAYANT && " Le programme de saison de l'espace membre en propose un par jour."}
             </span>
           </div>
+          {CONTENU_PAYANT && (
           <Link
             to="/espace-membre"
             className="inline-flex min-h-[52px] items-center rounded-buta bg-aubergine px-6 font-bold text-pistache no-underline hover:opacity-90"
           >
             Voir les programmes
           </Link>
+          )}
         </div>
       </section>
       <Sources refs={REFS} />

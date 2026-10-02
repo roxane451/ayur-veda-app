@@ -46,7 +46,7 @@ const Textes = () => (
         ))}
       </ol>
       <p className="m-0 max-w-[70ch] border-l-4 border-citron bg-surface px-5 py-4">
-        L'ordre des cinq livres de Comprendre est le nôtre. Il s'inspire des regroupements de Charaka et de Vāgbhaṭa, mais le contenu de chaque chapitre
+        L'ordre des livres de Comprendre est le nôtre. Il s'inspire des regroupements de Charaka et de Vāgbhaṭa, mais le contenu de chaque chapitre
         vient des textes, au passage indiqué.
       </p>
     </section>

@@ -3,6 +3,7 @@
  * [À VALIDER] par une praticienne avant la mise en ligne, en particulier les fiches
  * (rasa, vīrya, vipāka, usages traditionnels et précautions).
  */
+import { CONTENU_PAYANT } from "@/lib/offre";
 import type { DoshaKey } from "@/lib/doshaLogic";
 
 /** Effet d'une épice sur chaque dosha. */
@@ -431,6 +432,9 @@ export const RECETTES: Recette[] = CARNET.flatMap(([rubrique, liste]) =>
     teinte,
   })),
 );
+
+/** Les recettes affichées : sans les recettes réservées quand le contenu payant est masqué. */
+export const RECETTES_VISIBLES: Recette[] = CONTENU_PAYANT ? RECETTES : RECETTES.filter((r) => !r.membres);
 
 /** Filtre des recettes : dosha apaisé, saison, et « moins de 20 minutes ». */
 export function filtrerRecettes(

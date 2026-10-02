@@ -6,6 +6,8 @@ import { DApres, Renvoi, Sources } from "@/components/comprendre/Sources";
 import { LIVRES } from "@/components/comprendre/sousPages";
 import { QUATRE_DE_LA_VIE, REFS_SCIENCE_VIE, SANTE, SORTES_DE_VIE } from "@/data/principes";
 
+const NOMBRES = ["", "un", "deux", "trois", "quatre", "cinq"];
+
 const H2 = ({ id, children, clair }: { id?: string; children: string; clair?: boolean }) => (
   <h2 id={id} className={`m-0 text-[clamp(2.2rem,4.4vw,3rem)] leading-none ${clair ? "text-pistache" : ""}`}>
     {children}
@@ -139,7 +141,7 @@ const ScienceVie = () => (
 
     {/* Le plan */}
     <section aria-labelledby="sv-livres" className="mx-auto flex max-w-[1100px] flex-col gap-4 px-4 pb-8 sm:px-10">
-      <H2 id="sv-livres">Les cinq livres</H2>
+      <H2 id="sv-livres">{`Les ${NOMBRES[LIVRES.length]} livres`}</H2>
       <ol className="m-0 list-none p-0">
         {LIVRES.map((l) => (
           <li key={l.num}>

@@ -1,3 +1,4 @@
+import { CONTENU_PAYANT } from "@/lib/offre";
 import { Link, useSearchParams } from "react-router-dom";
 import { Bande, Motif } from "@/components/brand/BrandDefs";
 import { Chai } from "@/components/brand/Illustrations";
@@ -216,6 +217,7 @@ const Saisons = () => {
         </div>
       </section>
 
+      {CONTENU_PAYANT && (
       <section className="mx-auto grid max-w-[1220px] items-center gap-10 px-4 py-16 sm:px-10 md:grid-cols-2 md:py-[72px]">
         <div className="flex flex-col gap-2.5">
           <h2 className="m-0 text-[clamp(2rem,4vw,2.5rem)] leading-[1.05]">
@@ -240,6 +242,7 @@ const Saisons = () => {
           </Link>
         </div>
       </section>
+      )}
     </PageRubrique>
   );
 };

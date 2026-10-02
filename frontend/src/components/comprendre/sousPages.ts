@@ -2,6 +2,8 @@
  * La rubrique « Comprendre », rangée en livres comme les traités anciens.
  * Les chapitres sont numérotés à la suite d'un livre à l'autre.
  */
+import { CONTENU_PAYANT } from "@/lib/offre";
+
 export interface Chapitre {
   titre: string;
   href: string;
@@ -11,9 +13,11 @@ export interface Livre {
   num: string;
   titre: string;
   chapitres: Chapitre[];
+  /** Réservé à l'abonnement */
+  payant?: boolean;
 }
 
-export const LIVRES: Livre[] = [
+const TOUS_LIVRES: Livre[] = [
   {
     num: "I",
     titre: "Les principes",
@@ -45,6 +49,7 @@ export const LIVRES: Livre[] = [
   },
   {
     num: "IV",
+    payant: true,
     titre: "Rester en bonne santé",
     chapitres: [
       { titre: "Les trois piliers", href: "/comprendre/trois-piliers" },
@@ -57,6 +62,7 @@ export const LIVRES: Livre[] = [
   },
   {
     num: "V",
+    payant: true,
     titre: "Le déséquilibre",
     chapitres: [
       { titre: "Les trois causes", href: "/comprendre/trois-causes" },
@@ -64,6 +70,12 @@ export const LIVRES: Livre[] = [
     ],
   },
 ];
+
+/** Les livres affichés : sans les livres réservés quand le contenu payant est masqué. */
+export const LIVRES: Livre[] = TOUS_LIVRES.filter((l) => CONTENU_PAYANT || !l.payant);
+
+/** Les adresses des chapitres réservés à l'abonnement. */
+export const CHAPITRES_PAYANTS = TOUS_LIVRES.filter((l) => l.payant).flatMap((l) => l.chapitres.map((c) => c.href));
 
 /** Les pages de fin de rubrique, hors livres. */
 export const ANNEXES: Chapitre[] = [

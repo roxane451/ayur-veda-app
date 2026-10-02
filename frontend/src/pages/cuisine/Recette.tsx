@@ -1,3 +1,4 @@
+import { CONTENU_PAYANT } from "@/lib/offre";
 import { useState } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { ArrowLeft, Check } from "lucide-react";
@@ -14,7 +15,7 @@ const Recette = () => {
   const r = RECETTES.find((x) => x.id === id);
   const c = id ? RECETTES_COMPLETES[id] : undefined;
   const [coches, setCoches] = useState<number[]>([]);
-  if (!r || !c) return <Navigate to="/cuisine/recettes" replace />;
+  if (!r || !c || (r.membres && !CONTENU_PAYANT)) return <Navigate to="/cuisine/recettes" replace />;
   const basculer = (i: number) => setCoches((x) => (x.includes(i) ? x.filter((y) => y !== i) : [...x, i]));
 
   return (
