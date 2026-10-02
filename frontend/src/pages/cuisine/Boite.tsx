@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { Bande } from "@/components/brand/BrandDefs";
 import { Chai, Feuille, Poudre } from "@/components/brand/Illustrations";
@@ -46,28 +47,31 @@ const Boite = () => {
         <p className="sr-only">
           {epices.length} épices{filtre ? ` qui apaisent ${NOM_DOSHA[filtre]}` : ""}.
         </p>
-        <ul className="carrousel-mobile m-0 grid list-none gap-x-5 gap-y-7 p-0 sm:grid-cols-2 lg:grid-cols-4">
+        <ul className="m-0 grid list-none grid-cols-2 gap-3.5 p-0 sm:gap-x-5 sm:gap-y-7 lg:grid-cols-4">
           {epices.map((e) => (
             <li key={e.id}>
               <article
-                className="flex h-full flex-col gap-2.5 rounded-b-[18px] rounded-t-md bg-carte p-6 shadow-[inset_0_0_0_1.5px_hsl(var(--encre))]"
-                style={{ transform: `rotate(${INCLINAISON[EPICES.indexOf(e)]}deg)` }}
+                /* Sur téléphone, une petite porte en arche ; à partir de 640 px, la carte penchée. */
+                className="flex h-full flex-col items-center gap-1.5 rounded-b-[10px] rounded-t-[60px] bg-carte px-3 pb-4 pt-4 text-center shadow-[inset_0_0_0_1.5px_hsl(var(--encre))] sm:items-stretch sm:gap-2.5 sm:rounded-b-[18px] sm:rounded-t-md sm:p-6 sm:text-left sm:[transform:rotate(var(--incl))]"
+                style={{ "--incl": `${INCLINAISON[EPICES.indexOf(e)]}deg` } as CSSProperties}
               >
-                <span className="flex items-baseline justify-between">
+                <span className="hidden items-baseline justify-between sm:flex">
                   <span className={`text-[13px] font-bold ${e.nature === "Neutre" ? "text-doux" : e.nature.startsWith("Ré") ? "text-aubergine" : "text-paon"}`}>{e.nature}</span>
                   <Deva className="text-xl text-aubergine">{e.deva}</Deva>
                 </span>
-                <span className="flex h-[110px] items-center justify-center">
-                  <IlluEpice id={e.id} size={100} />
+                <span className="flex h-[84px] items-center justify-center sm:h-[110px]">
+                  <IlluEpice id={e.id} size={100} className="h-[76px] w-[76px] sm:h-[100px] sm:w-[100px]" />
                 </span>
                 <span className="flex flex-col">
-                  <h2 className="m-0 text-[1.75rem] leading-[1.05]">{e.nom}</h2>
-                  <span className="italic text-doux">
+                  <h2 className="m-0 text-[1.2rem] leading-[1.05] sm:text-[1.75rem]">{e.nom}</h2>
+                  <span className="text-[13px] italic text-doux sm:text-base">
                     {e.translit}, {e.gout.toLowerCase()}
                   </span>
                 </span>
-                <EffetsEpice effets={e.effets} />
-                <dl className="m-0 mt-1 text-[15px] leading-normal">
+                <span className="flex justify-center sm:block [&>span]:justify-center sm:[&>span]:justify-start">
+                  <EffetsEpice effets={e.effets} />
+                </span>
+                <dl className="m-0 mt-1 hidden text-[15px] leading-normal sm:block">
                   {[
                     ["En cuisine", e.enCuisine],
                     ["Avec", e.avec],
@@ -79,7 +83,7 @@ const Boite = () => {
                     </div>
                   ))}
                 </dl>
-                <Link to={`/cuisine/epices/${e.id}`} className="mt-auto inline-flex items-center gap-1.5 pt-1 font-bold underline underline-offset-4">
+                <Link to={`/cuisine/epices/${e.id}`} className="mt-auto inline-flex items-center gap-1.5 pt-1 text-[15px] font-bold underline underline-offset-4 sm:text-base">
                   La fiche complète
                 </Link>
               </article>
