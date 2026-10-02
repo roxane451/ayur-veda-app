@@ -102,8 +102,9 @@ const Confidentialite = () => (
 
     <Section id="appareil" titre="Sur votre appareil">
       <p>
-        Le site ne dépose aucun cookie. Il range deux éléments dans le stockage
-        local de votre navigateur, nécessaires à ce que vous faites.
+        Le site ne dépose aucun cookie. Il range trois éléments dans le stockage
+        local de votre navigateur. Ils restent sur votre appareil et ne nous
+        sont jamais envoyés.
       </p>
       <dl className="m-0">
         <Ligne intitule="ayurveda.session.v1">
@@ -113,6 +114,11 @@ const Confidentialite = () => (
         <Ligne intitule="ayurveda.profil.v1">
           Le résultat de votre quiz, pour le retrouver même sans compte. Effacé
           quand vous effacez votre profil.
+        </Ligne>
+        <Ligne intitule="ayurveda.installation.v1">
+          Le nombre de vos visites et si vous avez fermé l'invitation à
+          installer l'app, pour ne la montrer qu'à partir de la deuxième visite
+          et plus jamais une fois fermée.
         </Ligne>
       </dl>
       <p>

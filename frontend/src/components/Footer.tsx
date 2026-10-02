@@ -4,11 +4,13 @@ import Sceau from "@/components/brand/Sceau";
 import { Bande } from "@/components/brand/BrandDefs";
 import { NAV_LINKS } from "@/components/navLinks";
 import { PAGES_LEGALES } from "@/data/legal";
+import { BlocInstallation } from "@/components/installation/Installation";
 
 
 const Footer = () => (
   <>
     <Bande />
+    <BlocInstallation />
     <footer className="bg-encre text-pistache">
       <div className="mx-auto flex max-w-[1220px] flex-wrap justify-between gap-8 px-4 py-14 text-[15px] sm:px-10">
         <div className="flex max-w-[520px] items-center gap-6">
