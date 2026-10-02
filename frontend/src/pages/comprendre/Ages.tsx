@@ -3,6 +3,13 @@ import { Deva, Frontispice, Ornement, PageComprendre, PiedSuite } from "@/compon
 import { COULEUR_DOSHA, fr } from "@/components/quiz/conseils";
 import { AGES, CYCLES } from "@/data/agesDesequilibre";
 import { NOM_DOSHA } from "@/lib/doshaLogic";
+import { DApres, Renvoi, Sources } from "@/components/comprendre/Sources";
+import type { Ref } from "@/data/sources";
+
+const REFS: Ref[] = [
+  { texte: "charaka", passage: "Vimānasthāna 8.122", sujet: "Les trois âges et leur dosha" },
+  { texte: "vagbhata", passage: "Sūtrasthāna 1.8", sujet: "Kapha, Pitta et Vata au fil du jour et de la vie" },
+];
 
 const Ages = () => (
   <PageComprendre>
@@ -15,6 +22,7 @@ const Ages = () => (
       </div>
     </Frontispice>
     <Bande />
+    <DApres>Charaka, Vimānasthāna 8</DApres>
 
     <section aria-labelledby="ag-trois" className="mx-auto flex max-w-[1100px] flex-col gap-10 px-4 pb-20 pt-16 sm:px-10 md:pt-20">
       <div className="grid items-end gap-4 md:grid-cols-2 md:gap-14">
@@ -22,7 +30,7 @@ const Ages = () => (
           Trois âges, trois doshas
         </h2>
         <p className="m-0 text-lg text-doux">
-          Les âges sont ceux de Charaka (<i>Vimānasthāna</i> 8.122). Ce sont des repères, pas des frontières.
+          Les âges sont ceux de Charaka (<i>Vimānasthāna</i> 8.122).<Renvoi n={1} /> Ce sont des repères, pas des frontières.
         </p>
       </div>
 
@@ -76,7 +84,7 @@ const Ages = () => (
             Le même cycle
           </h2>
           <p className="m-0 text-lg text-[#D3E3DE]">
-            Kapha, Pitta puis Vata se succèdent dans la journée et dans la vie. Pour l'année, les textes indiens suivent les saisons de l'Inde, avec Vata à la saison des pluies et Pitta à la fin de celle-ci. Sous nos climats, on associe plutôt l'été à Pitta et l'automne à Vata.
+            Kapha, Pitta puis Vata se succèdent dans la journée et dans la vie.<Renvoi n={2} clair /> Pour l'année, les textes indiens suivent les saisons de l'Inde, avec Vata à la saison des pluies et Pitta à la fin de celle-ci. Sous nos climats, on associe plutôt l'été à Pitta et l'automne à Vata.
           </p>
         </div>
         <table className="w-full border-collapse text-left text-[15px] sm:text-lg">
@@ -113,6 +121,7 @@ const Ages = () => (
       </div>
     </section>
 
+    <Sources refs={REFS} />
     <PiedSuite />
   </PageComprendre>
 );

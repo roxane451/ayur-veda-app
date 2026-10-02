@@ -2,6 +2,10 @@ import { Bande, Motif } from "@/components/brand/BrandDefs";
 import { Deva, Frontispice, Ornement, PageComprendre, PiedSuite } from "@/components/comprendre/Commun";
 import { fr } from "@/components/quiz/conseils";
 import { ETAPES, EXEMPLE_VATA } from "@/data/agesDesequilibre";
+import { DApres, Renvoi, Sources } from "@/components/comprendre/Sources";
+import type { Ref } from "@/data/sources";
+
+const REFS: Ref[] = [{ texte: "sushruta", passage: "Sūtrasthāna 21.18 à 21.36", sujet: "Les six moments pour agir (kriyākāla)" }];
 
 /* Les arches montent et s'assombrissent avec les étapes */
 const ARCHES = [
@@ -42,6 +46,7 @@ const Desequilibre = () => (
       </div>
     </Frontispice>
     <Bande />
+    <DApres>Suśruta, Sūtrasthāna 21</DApres>
 
     <section aria-labelledby="de-etapes" className="mx-auto flex max-w-[1180px] flex-col gap-9 px-4 pb-20 pt-16 sm:px-10 md:pt-20">
       <div className="grid items-end gap-4 md:grid-cols-2 md:gap-14">
@@ -49,7 +54,8 @@ const Desequilibre = () => (
           Les six étapes
         </h2>
         <p className="m-0 text-lg text-doux">
-          D'après Sushruta, <i>Sūtrasthāna</i>, chapitre 21.
+          D'après Suśruta, <i>Sūtrasthāna</i>, chapitre 21.
+          <Renvoi n={1} />
         </p>
       </div>
       <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] lg:gap-[18px]">
@@ -111,6 +117,7 @@ const Desequilibre = () => (
       </div>
     </section>
 
+    <Sources refs={REFS} />
     <PiedSuite />
   </PageComprendre>
 );

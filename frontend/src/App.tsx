@@ -17,6 +17,9 @@ import Qualites from "./pages/comprendre/Qualites";
 import Constitution from "./pages/comprendre/Constitution";
 import Tissus from "./pages/comprendre/Tissus";
 import Action from "./pages/comprendre/Action";
+import SaisonsTextes from "./pages/comprendre/SaisonsTextes";
+import Sommeil from "./pages/comprendre/Sommeil";
+import Besoins from "./pages/comprendre/Besoins";
 import Esprit from "./pages/comprendre/Esprit";
 import Piliers from "./pages/comprendre/Piliers";
 import Ages from "./pages/comprendre/Ages";
@@ -67,6 +70,9 @@ const App = () => (
             <Route path="/comprendre/agni" element={<Agni />} />
             <Route path="/comprendre/regles-du-repas" element={<BienManger rubrique="comprendre" />} />
             <Route path="/comprendre/journee" element={<Journee />} />
+            <Route path="/comprendre/saisons" element={<SaisonsTextes />} />
+            <Route path="/comprendre/sommeil" element={<Sommeil />} />
+            <Route path="/comprendre/besoins-naturels" element={<Besoins />} />
             <Route path="/comprendre/ages-de-la-vie" element={<Ages />} />
             <Route path="/comprendre/desequilibre" element={<Desequilibre />} />
             <Route path="/comprendre/lexique" element={<Lexique />} />

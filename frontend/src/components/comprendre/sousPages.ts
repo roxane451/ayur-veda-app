@@ -49,6 +49,9 @@ export const LIVRES: Livre[] = [
     chapitres: [
       { titre: "Les trois piliers", href: "/comprendre/trois-piliers" },
       { titre: "La journée", href: "/comprendre/journee" },
+      { titre: "Les saisons", href: "/comprendre/saisons" },
+      { titre: "Le sommeil", href: "/comprendre/sommeil" },
+      { titre: "Les besoins naturels", href: "/comprendre/besoins-naturels" },
       { titre: "Les âges de la vie", href: "/comprendre/ages-de-la-vie" },
     ],
   },
