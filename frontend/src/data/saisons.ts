@@ -2,6 +2,8 @@
  * La saison du moment, pour l'accueil.
  * Contenus repris de la page « Au quotidien » (ritucharya), en version courte.
  */
+import type { Ref } from "./sources";
+
 export type SaisonId = "automne" | "hiver" | "printemps" | "ete";
 
 export interface SaisonAccueil {
@@ -23,14 +25,20 @@ export const SAISONS: Record<SaisonId, SaisonAccueil> = {
     dosha: "Vata",
     presentation:
       "De septembre à novembre, la lumière baisse et le froid arrive. Vata s'accumule, et cela se remarque à la peau qui sèche, au sommeil plus léger ou aux pensées qui s'éparpillent.",
-    assiette: "Soupes et ragoûts, légumes racines, riz, ghee. Gingembre, cannelle, cardamome, cumin.",
-    onEvite: "les crudités et les boissons glacées.",
+    assiette: "Les saveurs sucrée, acide et salée, qui apaisent Vata. Courges, patates douces, riz, avoine, lentilles corail bien cuites, dattes, amandes trempées, lait chaud, ghee. Gingembre, cumin, fenouil, cardamome, cannelle.",
+    onEvite: "le cru et le glacé, ce qui est sec et croustillant, les repas sautés et le jeûne.",
     matin: [
-      "Gratter la langue, puis une tasse d'eau tiède au gingembre frais",
-      "Se masser à l'huile de sésame tiède avant la douche (abhyanga)",
+      "Se masser à l'huile de sésame tiède, en insistant sur la tête, les oreilles et les pieds",
+      "Une goutte d'huile tiède dans chaque narine (nasya)",
     ],
-    journee: ["Des repas à heures régulières", "Une marche dehors, un yoga doux"],
-    soir: ["Dîner léger avant 19 h", "Une tisane de camomille ou d'ashwagandha, puis lire"],
+    journee: [
+      "Le repas principal à midi, à heures fixes",
+      "Bouger à la moitié de ses forces, et s'arrêter quand le front perle",
+    ],
+    soir: [
+      "Masser la plante des pieds à l'huile, pour mieux dormir",
+      "Ne pas veiller tard",
+    ],
   },
   hiver: {
     id: "hiver",
@@ -38,14 +46,20 @@ export const SAISONS: Record<SaisonId, SaisonAccueil> = {
     dosha: "Kapha",
     presentation:
       "De décembre à février, le froid réveille l'appétit. Les textes anciens conseillent alors une cuisine chaude et nourrissante, et Kapha commence doucement à s'accumuler.",
-    assiette: "Des plats chauds, nourrissants et bien assaisonnés. Riz, blé, orge ou sarrasin. Gingembre, cannelle, cumin, ail, et un peu de poivre.",
-    onEvite: "le cru, le glacé, les repas trop maigres et le sucre en excès.",
+    assiette: "Le feu digestif est à son plus fort. Des plats nourrissants et un peu gras, aux saveurs sucrée, acide et salée. Céréales, lait et ghee, bouillons, sucre complet. Gingembre, poivre, cannelle.",
+    onEvite: "les repas trop légers, le jeûne et les boissons froides. Sans nourriture assez riche, ce feu s'en prend au corps.",
     matin: [
-      "Se lever tôt, avant 6 h si possible",
-      "Bouger franchement, avec des salutations au soleil ou une marche rapide",
+      "Se masser à l'huile, tête comprise",
+      "Prendre le soleil du matin",
     ],
-    journee: ["Chercher la lumière du jour", "Éviter la sieste"],
-    soir: ["Un dîner chaud et nourrissant", "Se coucher à heure régulière"],
+    journee: [
+      "Des repas copieux, à faim franche",
+      "Se couvrir chaudement, pieds compris",
+    ],
+    soir: [
+      "Se laver à l'eau chaude",
+      "Une chambre chaude et une couverture épaisse",
+    ],
   },
   printemps: {
     id: "printemps",
@@ -53,11 +67,20 @@ export const SAISONS: Record<SaisonId, SaisonAccueil> = {
     dosha: "Kapha",
     presentation:
       "De mars à mai, le Kapha accumulé pendant l'hiver fond avec la chaleur. C'est la saison des rhumes, des allergies et des coups de fatigue.",
-    assiette: "Légumes verts et amers, asperges, quinoa, millet. Cumin, coriandre, fenouil, un peu de piquant.",
-    onEvite: "les laitages, le sucre raffiné et les plats gras.",
-    matin: ["Se lever avec le soleil", "Se frictionner à sec avec un gant de soie"],
-    journee: ["Des activités en plein air", "Limiter les grignotages"],
-    soir: ["Dîner léger et tôt", "Une tisane légère, puis une détente active"],
+    assiette: "Le Kapha de l'hiver fond. Des aliments légers et secs, aux saveurs amère, piquante et astringente. Orge, millet, sarrasin, légumes verts, un peu de miel.",
+    onEvite: "le lourd, le gras, le sucré, l'acide, et la sieste.",
+    matin: [
+      "Bouger jusqu'à transpirer un peu",
+      "Frictionner le corps avec une poudre sèche, de la farine de pois chiche par exemple (udvartana)",
+    ],
+    journee: [
+      "De l'eau tiède avec un peu de miel, jamais chaud",
+      "Pas de sieste",
+    ],
+    soir: [
+      "Un dîner léger",
+      "Un moment dans un jardin ou sous les arbres",
+    ],
   },
   ete: {
     id: "ete",
@@ -65,11 +88,20 @@ export const SAISONS: Record<SaisonId, SaisonAccueil> = {
     dosha: "Pitta",
     presentation:
       "De juin à août, la chaleur fait monter Pitta. La peau chauffe, on s'irrite plus vite et les nuits raccourcissent.",
-    assiette: "Fruits juteux, concombre, courgette, riz basmati. Menthe, coriandre, fenouil, cardamome.",
-    onEvite: "le piquant, la friture, l'alcool et les plats très acides.",
-    matin: ["Bouger tôt, avant la chaleur", "Se masser à l'huile de coco"],
-    journee: ["Éviter le soleil entre 11 h et 15 h", "Une courte sieste de 20 minutes"],
-    soir: ["Un dîner frais et léger", "Une promenade au clair de lune"],
+    assiette: "Des aliments doux, frais et liquides. Riz au lait, fruits juteux, lait et ghee, eau fraîche gardée dans une cruche en terre.",
+    onEvite: "le salé, l'acide, le piquant, l'alcool et l'effort aux heures chaudes.",
+    matin: [
+      "Bouger tôt, et seulement un peu",
+      "Se rafraîchir à l'eau fraîche",
+    ],
+    journee: [
+      "Une sieste au frais, permise en cette seule saison",
+      "Des vêtements légers et clairs",
+    ],
+    soir: [
+      "Un dîner doux et frais",
+      "Profiter de la fraîcheur du soir et du clair de lune",
+    ],
   },
 };
 
@@ -98,6 +130,8 @@ export interface SaisonDetail {
   journee: string[];
   soir: string[];
   plantes: { nom: string; texte: string }[];
+  /** Les passages des textes d'où viennent les conseils. */
+  refs: Ref[];
 }
 
 /** [À VALIDER] par une praticienne (en particulier les plantes). */
@@ -109,25 +143,49 @@ export const SAISONS_DETAIL: SaisonDetail[] = [
     dosha: "vata",
     qualites: ["Sec", "Froid", "Mobile"],
     intro:
-      "En Europe, l'automne est venteux, sec puis pluvieux. Ces qualités rappellent celles de Vata, et beaucoup ressentent alors de la sécheresse, de l'anxiété ou du mal à se concentrer. Dans le calendrier indien, ces mois correspondent à sharad, où les textes situent plutôt l'aggravation de Pitta.",
+      "En Europe, l'automne est venteux, sec puis pluvieux. Ces qualités rappellent celles de Vata, et beaucoup ressentent alors de la sécheresse, de l'anxiété ou du mal à se concentrer. Dans le calendrier indien, ces mois correspondent à śarad, où les textes situent plutôt l'aggravation de Pitta.",
     photo: "feuilles d'automne et tasse fumante sur un tissu block print",
     assiette: [
-      "Des plats chauds, humides et nourrissants",
-      "Soupes, ragoûts et bouillons",
-      "Des céréales complètes comme le riz ou le quinoa",
-      "Des légumes racines, carottes, patates douces ou betteraves",
-      "Gingembre, cannelle, cardamome, cumin",
-      "Du ghee, de l'huile de sésame",
+      "Les saveurs sucrée, acide et salée, qui apaisent Vata",
+      "Des plats chauds et onctueux, soupes, ragoûts, porridges",
+      "Courges, patates douces, carottes, riz, avoine",
+      "Des lentilles corail bien cuites, des amandes trempées, des dattes",
+      "Du lait chaud, du ghee, de l'huile de sésame",
+      "Gingembre, cumin, fenouil, cardamome, cannelle",
     ],
-    limiter: ["Le cru et le froid", "Les salades et crudités", "Les aliments secs comme les crackers", "Les boissons glacées"],
+    limiter: [
+      "Le cru et le glacé",
+      "Ce qui est sec et croustillant, biscottes ou galettes de riz soufflé",
+      "Les repas sautés et le jeûne",
+      "Le vent froid sur la tête et le cou",
+    ],
     matin: [
-      "Se réveiller doucement, sans alarme stridente",
-      "Gratter la langue",
-      "Une tasse d'eau tiède au gingembre frais",
-      "Un massage de 15 minutes à l'huile de sésame tiède avant la douche (abhyanga)",
+      "Se masser à l'huile de sésame tiède, en insistant sur la tête, les oreilles et les pieds (abhyanga)",
+      "Une goutte d'huile tiède dans chaque narine (nasya), que Charaka conseille justement en automne",
+      "Garder une gorgée d'huile de sésame en bouche quelques minutes (gaṇḍūṣa)",
+      "Une tasse d'eau chaude",
     ],
-    journee: ["Manger à heures régulières", "Un yoga doux, yin ou hatha", "Marcher dehors", "Limiter les écrans et le bruit"],
-    soir: ["Dîner léger avant 19 h", "Une tisane de camomille ou d'ashwagandha", "Se coucher à heure fixe", "Lire ou méditer"],
+    journee: [
+      "Le repas principal à midi, à heures fixes",
+      "Bouger à la moitié de ses forces, et s'arrêter quand le front perle",
+      "Se couvrir le cou et la tête contre le vent",
+      "Une chose à la fois, sans se disperser",
+    ],
+    soir: [
+      "Un dîner chaud, à heure fixe",
+      "Masser la plante des pieds à l'huile, pour mieux dormir",
+      "Un lait chaud à la cardamome et à la muscade",
+      "Ne pas veiller tard, car la veille fait monter Vata",
+    ],
+    refs: [
+      { texte: "vagbhata", passage: "Sūtrasthāna 2.8 et 2.9", sujet: "Le massage à l'huile, sur la tête, les oreilles et les pieds" },
+      { texte: "charaka", passage: "Sūtrasthāna 5.56 à 5.62", sujet: "L'huile dans les narines, conseillée à la saison des pluies, en automne et au printemps" },
+      { texte: "charaka", passage: "Sūtrasthāna 5.78 à 5.80", sujet: "L'huile gardée en bouche" },
+      { texte: "charaka", passage: "Sūtrasthāna 5.90 à 5.92", sujet: "Le massage des pieds et le sommeil" },
+      { texte: "vagbhata", passage: "Sūtrasthāna 2.10 à 2.13", sujet: "L'exercice à la moitié de ses forces" },
+      { texte: "charaka", passage: "Sūtrasthāna 1.66", sujet: "Les saveurs qui apaisent Vata" },
+      { texte: "charaka", passage: "Cikitsāsthāna 28", sujet: "Ce qui aggrave Vata, dont la veille" },
+    ],
     plantes: [
       { nom: "Ashwagandha", texte: "tonique nerveux, contre le stress" },
       { nom: "Tulsi", texte: "le basilic sacré, pour l'immunité" },
@@ -145,21 +203,36 @@ export const SAISONS_DETAIL: SaisonDetail[] = [
       "De décembre à février, le froid réveille l'appétit. Les textes anciens conseillent alors une cuisine chaude et nourrissante, et Kapha commence doucement à s'accumuler.",
     photo: "bol de soupe épicée et écharpe en laine près d'une fenêtre",
     assiette: [
-      "Des plats chauds, nourrissants et bien assaisonnés",
-      "Soupes, ragoûts et légumes mijotés",
-      "Des céréales complètes, riz, blé, orge ou sarrasin",
-      "Gingembre, cannelle, cumin, ail, et un peu de poivre",
-      "Du ghee et de l'huile de sésame",
+      "Des plats nourrissants et un peu gras, le feu digestif est à son plus fort",
+      "Les saveurs sucrée, acide et salée",
+      "Céréales, blé ou riz, bouillons et plats mijotés",
+      "Lait, ghee, sucre complet",
+      "Gingembre, poivre, cannelle",
     ],
-    limiter: ["Le cru et le glacé", "Les repas trop maigres ou sautés", "Le sucre en excès", "Les boissons froides"],
+    limiter: [
+      "Les repas trop légers ou sautés, et le jeûne",
+      "Les boissons froides",
+      "Les aliments secs qui font monter Vata",
+      "Le froid et le vent sans protection",
+    ],
     matin: [
-      "Se lever tôt, avant 6 h si possible",
-      "Un bain de bouche à l'huile",
-      "Bouger franchement, avec des salutations au soleil ou une marche rapide",
-      "Une douche chaude, terminée par un peu d'eau fraîche",
+      "Se masser à l'huile, tête comprise",
+      "Prendre le soleil du matin",
+      "Bouger franchement, jusqu'à se réchauffer",
     ],
-    journee: ["Bouger régulièrement", "Chercher la lumière du jour", "Éviter la sieste", "Apprendre ou créer quelque chose"],
-    soir: ["Un dîner chaud et nourrissant", "Une tisane de gingembre et de fenouil", "Se coucher à heure régulière"],
+    journee: [
+      "Des repas copieux, à faim franche",
+      "Se couvrir chaudement, pieds compris",
+      "Chercher la lumière du jour",
+    ],
+    soir: [
+      "Se laver à l'eau chaude",
+      "Une chambre chaude et une couverture épaisse",
+      "Un dîner chaud, sans traîner",
+    ],
+    refs: [
+      { texte: "charaka", passage: "Sūtrasthāna 6.9 à 6.21", sujet: "La conduite du début et de la fin de l'hiver" },
+    ],
     plantes: [
       { nom: "Trikatu", texte: "poivre, gingembre et poivre long, à petites doses en fin d'hiver, quand Kapha s'alourdit" },
       { nom: "Curcuma", texte: "l'épice dorée de l'hiver" },
@@ -177,22 +250,37 @@ export const SAISONS_DETAIL: SaisonDetail[] = [
       "Avec le réchauffement, le Kapha accumulé pendant l'hiver fond. Rhumes et allergies arrivent souvent à ce moment-là.",
     photo: "asperges et herbes fraîches sur une planche, lumière du matin",
     assiette: [
-      "Des aliments légers, amers et astringents",
-      "Des légumes verts à feuilles, épinards ou roquette",
-      "Asperges, brocolis, haricots verts",
-      "Des céréales anciennes comme le quinoa ou le millet",
-      "Un peu de piquant, poivre ou moutarde",
-      "Cumin, coriandre, fenouil",
+      "Des aliments légers et secs",
+      "Les saveurs amère, piquante et astringente",
+      "Orge, millet, sarrasin, céréales de l'an passé",
+      "Légumes verts, asperges, radis",
+      "Un peu de miel, dans l'eau tiède, jamais chauffé",
     ],
-    limiter: ["Les laitages", "Les plats lourds et huileux", "Le sucre raffiné", "L'excès de sel"],
+    limiter: [
+      "Le lourd et le gras",
+      "Le sucré et l'acide",
+      "Les laitages en quantité",
+      "La sieste, qui alourdit Kapha",
+    ],
     matin: [
       "Se lever avec le soleil",
-      "Un exercice qui fait transpirer un peu",
-      "Une respiration dynamique",
-      "Se frictionner à sec avec un gant de soie",
+      "Bouger jusqu'à transpirer un peu",
+      "Frictionner le corps avec une poudre sèche, de la farine de pois chiche par exemple (udvartana)",
     ],
-    journee: ["Des activités en plein air", "Limiter les grignotages", "Rester en mouvement"],
-    soir: ["Dîner léger et tôt", "Une tisane légère", "Une détente active, sans somnoler"],
+    journee: [
+      "De l'eau tiède avec un peu de miel, ou de l'eau bouillie au gingembre",
+      "Pas de sieste",
+      "Rester en mouvement",
+    ],
+    soir: [
+      "Un dîner léger",
+      "Un moment dans un jardin ou sous les arbres",
+      "Se coucher sans s'attarder à table",
+    ],
+    refs: [
+      { texte: "charaka", passage: "Sūtrasthāna 6.22 à 6.26", sujet: "La conduite du printemps" },
+      { texte: "charaka", passage: "Sūtrasthāna 21", sujet: "La sieste, permise seulement en été" },
+    ],
     plantes: [
       { nom: "Guduchi", texte: "la plante du renouveau, au printemps" },
       { nom: "Neem", texte: "une plante amère traditionnelle" },
@@ -210,22 +298,37 @@ export const SAISONS_DETAIL: SaisonDetail[] = [
       "La chaleur échauffe le corps et l'esprit, ce que l'on rattache à Pitta. Les textes anciens recommandent alors des aliments doux, frais et liquides, et le repos aux heures chaudes.",
     photo: "pastèque et menthe fraîche sur un tissu clair, à l'ombre",
     assiette: [
-      "Des aliments frais, mais pas glacés",
-      "Des fruits juteux, pastèque, melon, raisin ou mangue",
-      "Concombre, courgette, fenouil",
-      "Riz basmati, orge",
-      "Lait de coco, lait d'amande",
-      "Menthe et coriandre fraîches",
+      "Des aliments doux, frais et liquides",
+      "Riz au lait, lait et ghee",
+      "Fruits juteux, pastèque, melon, raisin",
+      "Une boisson à la farine d'orge et au sucre complet (mantha)",
+      "De l'eau fraîche gardée dans une cruche en terre",
     ],
-    limiter: ["Le piquant", "Les aliments acides comme la tomate ou le yaourt fermenté", "L'alcool", "La friture"],
+    limiter: [
+      "Le salé, l'acide et le piquant",
+      "L'alcool, ou alors très coupé d'eau",
+      "L'effort aux heures chaudes",
+      "Le soleil de midi",
+    ],
     matin: [
-      "Bouger tôt, avant la chaleur",
-      "Un yoga doux",
-      "Une méditation au frais",
-      "Se masser à l'huile de coco",
+      "Bouger tôt, et seulement un peu",
+      "Se rafraîchir à l'eau fraîche",
+      "Une pâte de santal ou une eau de rose sur la peau",
     ],
-    journee: ["Éviter le soleil entre 11 h et 15 h", "Une courte sieste de 20 minutes", "Marcher au bord de l'eau", "Des vêtements légers et clairs"],
-    soir: ["Un dîner frais et léger", "Une promenade au clair de lune", "Un bain tiède, pas chaud"],
+    journee: [
+      "Une sieste au frais, permise en cette seule saison",
+      "Des vêtements légers et clairs",
+      "Rester à l'ombre aux heures chaudes",
+    ],
+    soir: [
+      "Un dîner doux et frais",
+      "Profiter de la fraîcheur du soir et du clair de lune",
+      "Dormir dans une pièce aérée",
+    ],
+    refs: [
+      { texte: "charaka", passage: "Sūtrasthāna 6.27 à 6.32", sujet: "La conduite de l'été" },
+      { texte: "charaka", passage: "Sūtrasthāna 21", sujet: "La sieste, permise seulement en été" },
+    ],
     plantes: [
       { nom: "Amalaki", texte: "le fruit rafraîchissant de Pitta" },
       { nom: "Brahmi", texte: "pour un esprit au calme" },
