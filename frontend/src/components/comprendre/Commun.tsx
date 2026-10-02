@@ -69,20 +69,20 @@ export const Sommaire = () => {
           {ouvert.chapitres.map((c) => {
             const actif = c.href === pathname;
             return (
-              <li key={c.href} className="w-[104px] shrink-0 sm:w-[136px]">
+              <li key={c.href} className="w-[96px] shrink-0 sm:w-[140px]">
                 {/* Chaque chapitre est une petite porte en arche ; celle du chapitre ouvert est pleine. */}
                 <Link
                   to={c.href}
                   aria-current={actif ? "page" : undefined}
-                  className="group flex flex-col items-center gap-2 text-center no-underline"
+                  className="group flex flex-col items-center gap-1.5 text-center no-underline"
                 >
                   <span
-                    className={`relative flex h-[56px] w-[44px] items-end justify-center overflow-hidden rounded-b-[4px] rounded-t-full pb-2 shadow-[inset_0_0_0_1.5px_hsl(var(--encre))] ${
+                    className={`relative flex h-[40px] w-[32px] items-end justify-center overflow-hidden rounded-b-[3px] rounded-t-full pb-1.5 shadow-[inset_0_0_0_1.5px_hsl(var(--encre))] ${
                       actif ? "bg-paon" : "bg-carte group-hover:bg-surface"
                     }`}
                   >
                     {actif && <Motif id="dabu" />}
-                    <span className={`relative font-body text-lg italic leading-none ${actif ? "text-citron" : "text-aubergine"}`}>
+                    <span className={`relative font-body text-[15px] font-bold italic leading-none ${actif ? "text-citron" : "text-aubergine"}`}>
                       {numeroChapitre(c.href)}
                     </span>
                   </span>
