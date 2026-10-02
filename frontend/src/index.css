@@ -6,7 +6,7 @@
 @layer base {
   :root {
     /* Identité finale : vert paon, aubergine, citron vert sur fond pistache */
-    --pistache: 68 43% 93%; /* fond */
+    --pistache: 72 48% 91.8%; /* fond, #F0F4E0 */
     --surface: 69 34% 88%; /* surfaces secondaires */
     --carte: 68 57% 97%; /* cartes */
     --encre: 171 25% 10%; /* texte */

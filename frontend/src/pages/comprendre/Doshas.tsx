@@ -88,7 +88,7 @@ const Detail = ({ d }: { d: DoshaDetail }) => {
             <div className="relative">
               <Illu
                 size={240}
-                stroke="#F3F5E6"
+                stroke="#F0F4E0"
                 decorative
                 className="h-auto w-[180px] md:w-[240px]"
               />
@@ -179,7 +179,7 @@ const Sieges = () => (
     <path d="M30 200 H330 M30 320 H330" stroke="#13201E" strokeWidth="2" strokeDasharray="6 6" />
     {SIEGES_DOSHAS.map((s, i) => {
       const y = [120, 266, 394][i];
-      const c = s.dosha === "vata" ? "#13201E" : "#F3F5E6";
+      const c = s.dosha === "vata" ? "#13201E" : "#F0F4E0";
       return (
         <g key={s.dosha} textAnchor="middle">
           <text x="180" y={y} className="font-display" fontSize="30" fill={c}>
@@ -210,7 +210,7 @@ const Resume = ({
     >
       <Illu
         size={110}
-        stroke="#F3F5E6"
+        stroke="#F0F4E0"
         decorative
         className="h-auto w-[72px] sm:w-[110px]"
       />

@@ -34,7 +34,7 @@ const RencontreElements = ({ gauche, droite, couleur, Illu, label }: RencontrePr
           </clipPath>
         </defs>
         <circle cx={CX2} cy={CY} r={R} fill={couleur} clipPath={`url(#lentille-${id})`} />
-        <g fill="none" stroke="#F3F5E6" strokeWidth="2.2">
+        <g fill="none" stroke="#F0F4E0" strokeWidth="2.2">
           <circle cx={CX1} cy={CY} r={R} />
           <circle cx={CX2} cy={CY} r={R} />
         </g>
@@ -43,7 +43,7 @@ const RencontreElements = ({ gauche, droite, couleur, Illu, label }: RencontrePr
           { e: droite, x: CX2 + 34 },
         ].map(({ e, x }) => (
           <g key={e.nom} textAnchor="middle">
-            <text x={x} y={CY + 2} className="font-devanagari" fontSize="24" fill="#F3F5E6">
+            <text x={x} y={CY + 2} className="font-devanagari" fontSize="24" fill="#F0F4E0">
               {e.deva}
             </text>
             <text x={x} y={CY + 26} fontStyle="italic" fontSize="14" fill="#C4DCD5">
