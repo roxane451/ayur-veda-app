@@ -1,8 +1,8 @@
 import { Bande, Motif } from "@/components/brand/BrandDefs";
 import { Chai, Vent } from "@/components/brand/Illustrations";
 import { Deva, Frontispice, Ornement, PageComprendre, PiedSuite } from "@/components/comprendre/Commun";
-import { COULEUR_DOSHA, fr } from "@/components/quiz/conseils";
-import { PAIRES_QUALITES, REFS_QUALITES, VIPAKA } from "@/data/corpsEsprit";
+import { COULEUR_DOSHA } from "@/components/quiz/conseils";
+import { PAIRES_QUALITES, REFS_QUALITES } from "@/data/corpsEsprit";
 import { DApres, Renvoi, Sources } from "@/components/comprendre/Sources";
 import { DOSHAS, NOM_DOSHA, type DoshaKey } from "@/lib/doshaLogic";
 
@@ -24,46 +24,6 @@ const Balance = () => (
     <circle cx="150" cy="10" r="3" fill="#5B2A4E" />
   </svg>
 );
-
-/* Schéma du vipāka : les six saveurs reliées à leurs trois effets */
-const Vipaka = () => {
-  const saveurs = VIPAKA.flatMap((v, j) => v.saveurs.map((s) => ({ s, j })));
-  return (
-    <svg viewBox="0 0 600 400" className="h-auto w-full" role="img" aria-label="Le doux et le salé donnent un vipāka doux, l'acide un vipāka acide, le piquant, l'amer et l'astringent un vipāka piquant.">
-      {saveurs.map(({ s, j }, i) => {
-        const y = 30 + i * 66;
-        const ty = 66 + j * 134;
-        return (
-          <g key={s}>
-            <path d={`M150 ${y} C 250 ${y}, 270 ${ty}, 360 ${ty}`} fill="none" stroke="#13201E" strokeWidth="1.5" />
-            <rect x="0" y={y - 20} width="150" height="40" rx="20" fill="#FBFCF4" stroke="#13201E" strokeWidth="1.5" />
-            <text x="75" y={y + 6} textAnchor="middle" fontSize="18" fill="#13201E">
-              {s}
-            </text>
-          </g>
-        );
-      })}
-      {VIPAKA.map((v, j) => {
-        const ty = 66 + j * 134;
-        const clair = v.nourrit === "vata";
-        return (
-          <g key={v.nom}>
-            <circle cx="400" cy={ty} r="44" fill={COULEUR_DOSHA[v.nourrit]} stroke="#13201E" strokeWidth="2" />
-            <text x="400" y={ty + 6} textAnchor="middle" fontSize="18" fontStyle="italic" fill={clair ? "#13201E" : "#F3F5E6"}>
-              {v.sanskrit}
-            </text>
-            <text x="460" y={ty - 4} fontSize="20" fill="#13201E" className="font-display">
-              {v.nom.toUpperCase()}
-            </text>
-            <text x="460" y={ty + 20} fontSize="15" fill="#4C5A57">
-              augmente {NOM_DOSHA[v.nourrit]}
-            </text>
-          </g>
-        );
-      })}
-    </svg>
-  );
-};
 
 const Qualites = () => (
   <PageComprendre>
@@ -155,52 +115,6 @@ const Qualites = () => (
           </div>
         </div>
       </div>
-    </section>
-
-    <section className="mx-auto grid max-w-[1220px] items-start gap-12 px-4 py-16 sm:px-10 md:grid-cols-[minmax(0,1fr)_minmax(0,1.25fr)] md:gap-16 md:py-[88px]">
-      <div className="flex flex-col gap-10">
-        <div className="flex flex-col gap-3">
-          <h2 className="m-0 text-[clamp(2rem,4vw,2.75rem)] leading-none">Chaud ou froid</h2>
-          <p className="m-0 flex items-baseline gap-2.5">
-            <Deva className="text-[26px] text-aubergine">वीर्य</Deva>
-            <span className="italic text-doux">vīrya</span>
-          </p>
-          <p className="m-0 text-lg">
-            {fr("Un aliment ou une plante réchauffe le corps ou le rafraîchit. Le gingembre chauffe, le lait rafraîchit. Le chaud apaise Vata et Kapha, le froid apaise Pitta.")}
-            <Renvoi n={3} />
-          </p>
-        </div>
-        <div className="flex flex-col gap-3">
-          <h2 className="m-0 text-[clamp(2rem,4vw,2.75rem)] leading-none">Après la digestion</h2>
-          <p className="m-0 flex items-baseline gap-2.5">
-            <Deva className="text-[26px] text-aubergine">विपाक</Deva>
-            <span className="italic text-doux">vipāka</span>
-          </p>
-          <p className="m-0 text-lg">
-            Une fois digérées, les six saveurs se ramènent à trois effets, qui agissent longtemps après le repas. Le schéma montre lesquels.<Renvoi n={4} /> Suśruta, lui, n'en retient que deux, lourd et léger.
-            <Renvoi n={5} />
-          </p>
-        </div>
-      </div>
-      <div className="hidden sm:block md:pt-4">
-        <Vipaka />
-      </div>
-      <ul className="m-0 flex list-none flex-col gap-3 p-0 sm:hidden">
-        {VIPAKA.map((v) => (
-          <li key={v.nom} className="flex items-center gap-4 border-t border-encre/20 pt-3">
-            <span
-              className={`flex h-16 w-16 shrink-0 items-center justify-center rounded-full text-[15px] italic shadow-[0_0_0_2px_hsl(var(--encre))] ${v.nourrit === "vata" ? "text-encre" : "text-pistache"}`}
-              style={{ background: COULEUR_DOSHA[v.nourrit] }}
-            >
-              {v.sanskrit}
-            </span>
-            <span className="flex flex-col">
-              <span className="font-display text-lg">{v.nom}, augmente {NOM_DOSHA[v.nourrit]}</span>
-              <span className="text-doux">Vient {v.saveurs.length > 1 ? "des saveurs" : "de la saveur"} {v.saveurs.join(", ").toLowerCase()}</span>
-            </span>
-          </li>
-        ))}
-      </ul>
     </section>
 
     <Sources refs={REFS_QUALITES} />

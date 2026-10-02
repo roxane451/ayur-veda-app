@@ -38,7 +38,9 @@ export const LIVRES: Livre[] = [
     titre: "La nourriture",
     chapitres: [
       { titre: "Les six saveurs", href: "/comprendre/saveurs" },
+      { titre: "L'action des aliments", href: "/comprendre/action-des-aliments" },
       { titre: "Agni, le feu digestif", href: "/comprendre/agni" },
+      { titre: "Les règles du repas", href: "/comprendre/regles-du-repas" },
     ],
   },
   {

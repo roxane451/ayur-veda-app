@@ -1,7 +1,9 @@
 import { Bande, Motif } from "@/components/brand/BrandDefs";
-import { Deva } from "@/components/comprendre/Commun";
+import type { ReactNode } from "react";
+import { Deva, PageComprendre, PiedSuite } from "@/components/comprendre/Commun";
+import { Renvoi, Sources } from "@/components/comprendre/Sources";
 import { FilCuisine, PageCuisine } from "@/components/cuisine/Commun";
-import { ASSOCIATIONS, REGLES_REPAS } from "@/data/bienManger";
+import { ASSOCIATIONS, REFS_BIEN_MANGER, REGLES_REPAS } from "@/data/bienManger";
 
 /* L'estomac en trois tiers : nourriture, liquides, vide */
 const C = 170;
@@ -34,16 +36,22 @@ const TroisTiers = () => (
   </svg>
 );
 
-const BienManger = () => (
-  <PageCuisine>
+const Cadre = ({ comprendre, children }: { comprendre: boolean; children: ReactNode }) =>
+  comprendre ? <PageComprendre>{children}</PageComprendre> : <PageCuisine>{children}</PageCuisine>;
+
+/** La page vit dans La cuisine, et dans Comprendre sous le titre « Les règles du repas ». */
+const BienManger = ({ rubrique = "cuisine" }: { rubrique?: "cuisine" | "comprendre" }) => {
+  const comprendre = rubrique === "comprendre";
+  return (
+  <Cadre comprendre={comprendre}>
     <section className="mx-auto grid max-w-[1220px] items-center gap-10 px-4 pb-14 pt-6 sm:px-10 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] md:gap-14">
       <div className="flex flex-col gap-4">
-        <FilCuisine page="Bien manger" />
+        {!comprendre && <FilCuisine page="Bien manger" />}
         <p className="m-0 flex flex-wrap items-baseline gap-x-3.5">
           <Deva className="text-[clamp(2rem,4vw,2.5rem)] text-aubergine">आहार विधि</Deva>
           <span className="italic text-doux">āhāra vidhi</span>
         </p>
-        <h1 className="m-0 text-[clamp(2.6rem,6.4vw,4.75rem)] leading-[0.95]">Bien manger</h1>
+        <h1 className="m-0 text-[clamp(2.6rem,6.4vw,4.75rem)] leading-[0.95]">{comprendre ? "Les règles du repas" : "Bien manger"}</h1>
         <p className="m-0 max-w-[40ch] text-xl text-doux">
           Pour l'Ayurveda, la façon de manger compte autant que ce qu'on mange. Le traité de Charaka, rédigé il y a près de deux mille ans, en fixe les
           règles, et elles tiennent toujours.
@@ -53,6 +61,7 @@ const BienManger = () => (
         <TroisTiers />
         <figcaption className="max-w-[34ch] text-center">
           Un tiers de l'estomac pour la nourriture, un tiers pour les liquides, et le dernier tiers laissé libre pour Vata, Pitta et Kapha, qui font le travail de la digestion.
+          <Renvoi n={2} />
         </figcaption>
       </figure>
     </section>
@@ -65,6 +74,7 @@ const BienManger = () => (
         </h2>
         <p className="m-0 text-lg text-doux">
           D'après Charaka, <i>Vimānasthāna</i>, chapitre 1.
+          <Renvoi n={1} />
         </p>
       </div>
       <ol className="m-0 grid list-none p-0 md:grid-cols-2 md:gap-x-16">
@@ -94,7 +104,8 @@ const BienManger = () => (
             </h2>
           </div>
           <p className="m-0 text-lg text-[#D3E3DE]">
-            Certains aliments, bons séparément, deviennent indigestes ensemble. Charaka en consacre un long passage au <i>Sūtrasthāna</i>, chapitre 26. La règle sur le yaourt vient du chapitre 7.
+            Certains aliments, bons séparément, deviennent indigestes ensemble. Charaka en consacre un long passage au <i>Sūtrasthāna</i>, chapitre 26.<Renvoi n={3} clair /> La règle sur le yaourt vient du chapitre 7.
+            <Renvoi n={4} clair />
           </p>
         </div>
         <ul className="m-0 grid list-none gap-5 p-0 sm:grid-cols-2 lg:grid-cols-3">
@@ -114,7 +125,10 @@ const BienManger = () => (
         </ul>
       </div>
     </section>
-  </PageCuisine>
-);
+    <Sources refs={REFS_BIEN_MANGER} />
+    {comprendre ? <PiedSuite /> : <div className="h-10" />}
+  </Cadre>
+  );
+};
 
 export default BienManger;

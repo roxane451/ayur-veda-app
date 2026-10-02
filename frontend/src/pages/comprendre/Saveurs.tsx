@@ -1,6 +1,14 @@
 import { Link } from "react-router-dom";
 import { Bande } from "@/components/brand/BrandDefs";
 import { Deva, EffetDosha, PageComprendre, PiedSuite, TitrePage } from "@/components/comprendre/Commun";
+import { DApres, Renvoi, Sources } from "@/components/comprendre/Sources";
+import type { Ref } from "@/data/sources";
+
+const REFS: Ref[] = [
+  { texte: "charaka", passage: "Sūtrasthāna 26.40", sujet: "Les éléments de chaque saveur" },
+  { texte: "charaka", passage: "Sūtrasthāna 26.42 et 26.43", sujet: "Ce que fait chaque saveur, et ce qu'elle fait en excès" },
+  { texte: "charaka", passage: "Sūtrasthāna 1.66", sujet: "Les saveurs qui apaisent chaque dosha" },
+];
 import { lienSouligne } from "@/components/comprendre/sousPages";
 import { COULEUR_DOSHA, fr } from "@/components/quiz/conseils";
 import { SAVEURS, SAVEURS_PAR_DOSHA } from "@/data/comprendre";
@@ -56,8 +64,13 @@ const Saveurs = () => (
       </div>
     </div>
     <Bande />
+    <DApres>Charaka, Sūtrasthāna 26</DApres>
 
     <section aria-label="Les six saveurs" className="mx-auto flex max-w-[1220px] flex-col gap-6 px-4 py-16 sm:px-10 md:py-[72px]">
+      <p className="m-0 text-lg text-doux">
+        Chaque saveur naît de deux éléments,<Renvoi n={1} /> et chacune a ses bienfaits et ses excès.
+        <Renvoi n={2} />
+      </p>
       <p className="m-0 flex flex-wrap gap-x-5 gap-y-2 text-[15px] text-doux">
         <span className="inline-flex items-center gap-2">
           <EffetDosha nom="Vata" sens="-" couleur={COULEUR_DOSHA.vata} /> apaise ce dosha
@@ -99,6 +112,7 @@ const Saveurs = () => (
           </h2>
           <p className="m-0 text-doux">
             Un repas complet contient les six saveurs. Selon son dosha, on force un peu sur celles qui l'apaisent, surtout quand il est en excès.
+            <Renvoi n={3} />
           </p>
           <Link to="/profil" className={`${lienSouligne} self-start`}>
             Faire le quiz pour connaître mon dosha
@@ -119,6 +133,7 @@ const Saveurs = () => (
       </div>
     </section>
     <div className="h-16" />
+    <Sources refs={REFS} />
     <PiedSuite />
   </PageComprendre>
 );

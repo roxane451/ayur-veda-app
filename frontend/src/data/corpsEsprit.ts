@@ -83,9 +83,6 @@ export const GUNAS_ESPRIT = [
 export const REFS_QUALITES: Ref[] = [
   { texte: "charaka", passage: "Sūtrasthāna 1.59 à 1.61", sujet: "Les qualités de chaque dosha" },
   { texte: "charaka", passage: "Sūtrasthāna 1.44", sujet: "Le semblable augmente le semblable, le contraire le diminue" },
-  { texte: "charaka", passage: "Sūtrasthāna 26.64", sujet: "Vīrya, chauffant ou rafraîchissant" },
-  { texte: "charaka", passage: "Sūtrasthāna 26.57 et 26.58", sujet: "Les trois vipāka" },
-  { texte: "sushruta", passage: "Sūtrasthāna 40", sujet: "Deux vipāka seulement, lourd et léger" },
 ];
 
 export const REFS_TISSUS: Ref[] = [

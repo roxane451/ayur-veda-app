@@ -3,6 +3,7 @@
  * D'après Charaka : Vimānasthāna 1 (règles du repas), Vimānasthāna 2 (quantité),
  * Sūtrasthāna 26 (aliments incompatibles), Sūtrasthāna 7 (lait caillé). [À VALIDER] par une praticienne.
  */
+import type { Ref } from "./sources";
 
 export const REGLES_REPAS = [
   { titre: "Manger chaud", sanskrit: "uṣṇam", texte: "Un plat chaud réveille le feu digestif et se digère vite." },
@@ -24,4 +25,11 @@ export const ASSOCIATIONS = [
   { a: "Miel", b: "Ghee à parts égales", texte: "Chacun est bon seul, mais mêlés à poids égal, ils deviennent nocifs." },
   { a: "Lait", b: "Radis", texte: "Charaka déconseille le lait après le radis, l'ail et d'autres légumes verts, qui exposent aux maladies de peau." },
   { a: "Yaourt", b: "Le soir", texte: "Charaka déconseille le lait caillé le soir, comme pris chaud ou sans accompagnement. Mal consommé, il échauffe le sang et la peau." },
+];
+
+export const REFS_BIEN_MANGER: Ref[] = [
+  { texte: "charaka", passage: "Vimānasthāna 1.24 et 1.25", sujet: "Les règles du repas" },
+  { texte: "charaka", passage: "Vimānasthāna 2.3", sujet: "Les trois parts de l'estomac" },
+  { texte: "charaka", passage: "Sūtrasthāna 26.81 à 26.101", sujet: "Les aliments incompatibles" },
+  { texte: "charaka", passage: "Sūtrasthāna 7.61 et 7.62", sujet: "Le lait caillé" },
 ];

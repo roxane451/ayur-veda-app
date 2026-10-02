@@ -2,6 +2,14 @@ import { Bande } from "@/components/brand/BrandDefs";
 import { Flamme } from "@/components/brand/Illustrations";
 import Photo from "@/components/brand/PhotoPlaceholder";
 import { Deva, PageComprendre, PiedSuite, TitrePage } from "@/components/comprendre/Commun";
+import { DApres, Renvoi, Sources } from "@/components/comprendre/Sources";
+import type { Ref } from "@/data/sources";
+
+const REFS: Ref[] = [
+  { texte: "charaka", passage: "Vimānasthāna 6.12", sujet: "Les quatre états du feu digestif" },
+  { texte: "charaka", passage: "Cikitsāsthāna 15.42 à 15.44", sujet: "Āma, ce que laisse une digestion faible" },
+  { texte: "charaka", passage: "Cikitsāsthāna 15.3 et 15.4", sujet: "Le feu digestif, racine de la santé" },
+];
 import { fr } from "@/components/quiz/conseils";
 import { ETATS_AGNI, GESTES_AGNI, SIGNES_AMA } from "@/data/comprendre";
 
@@ -23,6 +31,7 @@ const Agni = () => (
       </div>
     </div>
     <Bande />
+    <DApres>Charaka, Vimānasthāna 6 ; Cikitsāsthāna 15</DApres>
 
     <section aria-labelledby="a-etats" className="mx-auto flex max-w-[1220px] flex-col gap-6 px-4 py-16 sm:px-10 md:py-[72px]">
       <div className="grid items-end gap-8 md:grid-cols-2">
@@ -31,6 +40,7 @@ const Agni = () => (
         </h2>
         <p className="m-0 text-doux">
           Chaque dosha en excès dérègle le feu d'une façon qui lui est propre.
+          <Renvoi n={1} />
         </p>
       </div>
       <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
@@ -70,6 +80,7 @@ const Agni = () => (
           <p className="m-0 text-[#D3E3DE]">
             Ce qui n'est pas bien digéré laisse un résidu lourd et collant, āma. Pour l'Ayurveda, c'est le point de
             départ de nombreux déséquilibres.
+            <Renvoi n={2} clair />
           </p>
         </div>
         <div className="flex flex-col gap-1">
@@ -88,6 +99,7 @@ const Agni = () => (
     <section aria-labelledby="a-gestes" className="mx-auto grid max-w-[1220px] gap-10 px-4 py-16 sm:px-10 md:grid-cols-2 md:gap-12 md:py-[72px]">
       <h2 id="a-gestes" className="m-0 text-[clamp(2.2rem,4.4vw,3.25rem)] leading-[1.05]">
         Entretenir le feu digestif
+        <Renvoi n={3} />
       </h2>
       <ol className="m-0 list-none p-0">
         {GESTES_AGNI.map((t, i) => (
@@ -98,6 +110,7 @@ const Agni = () => (
         ))}
       </ol>
     </section>
+    <Sources refs={REFS} />
     <PiedSuite />
   </PageComprendre>
 );
