@@ -7,7 +7,7 @@ import type { Ref } from "@/data/sources";
 
 const REFS: Ref[] = [
   { texte: "charaka", passage: "Vimānasthāna 6.12", sujet: "Les quatre états du feu digestif" },
-  { texte: "charaka", passage: "Cikitsāsthāna 15.42 à 15.44", sujet: "Āma, ce que laisse une digestion faible" },
+  { texte: "charaka", passage: "Cikitsāsthāna 15.42 à 15.46", sujet: "Āma, ce que laisse une digestion faible, et ses signes" },
   { texte: "charaka", passage: "Cikitsāsthāna 15.3 et 15.4", sujet: "Le feu digestif, racine de la santé" },
 ];
 import { fr } from "@/components/quiz/conseils";
@@ -21,7 +21,7 @@ const Agni = () => (
         titre="Agni, le feu digestif"
         deva="अग्नि"
         translit="agni"
-        intro="Agni est le feu qui transforme la nourriture. Pour l'Ayurveda, il digère aussi les émotions et les expériences, et la santé dépend de sa vigueur."
+        intro="Agni est le feu qui transforme la nourriture. Pour Charaka, la vie, la force, le teint et la santé dépendent de sa vigueur."
       />
       <div className="relative mx-4 mb-8 h-[300px] md:mx-10 md:mb-0 md:h-[380px]">
         <Photo description="casserole qui frémit sur le feu, épices autour" arche />

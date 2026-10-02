@@ -1,7 +1,7 @@
 /**
  * Les textes anciens cités sur le site, et la forme des références.
- * Les numéros de versets suivent les éditions courantes et peuvent varier d'une édition à l'autre.
- * [À VALIDER] par une praticienne, sur une édition de référence.
+ * Les numéros de versets suivent les éditions courantes de Chaukhambha (Yadavji Trikamji) et peuvent varier d'une édition à l'autre.
+ * Vérifiés en octobre 2026 sur carakasamhitaonline.com, siva.sh, wisdomlib.org et easyayurveda.com.
  */
 
 export type TexteId = "charaka" | "sushruta" | "vagbhata" | "bhavaprakasha";

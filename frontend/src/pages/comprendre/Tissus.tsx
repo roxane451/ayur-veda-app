@@ -24,7 +24,7 @@ const Tissus = () => (
           </h2>
           <p className="m-0 text-lg text-[#D3E3DE]">
             La nourriture digérée devient d'abord du plasma, qui nourrit le sang, qui nourrit les muscles, et ainsi de suite jusqu'au septième tissu. Selon
-            Sushruta, il faut environ un mois pour parcourir la chaîne, à peu près cinq jours par tissu.<Renvoi n={1} clair />
+            Suśruta, il faut environ un mois pour parcourir la chaîne, à peu près cinq jours par tissu.<Renvoi n={1} clair />
           </p>
         </div>
         <div className="relative">
@@ -50,7 +50,7 @@ const Tissus = () => (
             </span>
             <span className="flex flex-col gap-1">
               <h3 className="m-0 text-2xl">Ojas</h3>
-              <span>L'essence de tous les tissus. Elle donne la force de résister à la maladie, l'éclat et l'endurance. Une bonne digestion la nourrit, la colère, le chagrin, les soucis et l'épuisement l'usent.<Renvoi n={2} /></span>
+              <span>L'essence de tous les tissus. Elle siège au cœur et donne la force de résister à la maladie, l'éclat et l'endurance. La peur, le chagrin, les soucis, les veilles et l'épuisement l'usent.<Renvoi n={2} /></span>
             </span>
           </div>
           <div className="flex flex-col gap-2 border-t-2 border-pistache pt-4">

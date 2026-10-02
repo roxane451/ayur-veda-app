@@ -1,6 +1,6 @@
 /**
  * Livre III, chapitre « L'action des aliments ».
- * [À VALIDER] par une praticienne, en particulier les numéros de versets.
+ * Versets vérifiés en octobre 2026, voir data/sources.ts.
  */
 import type { Ref } from "./sources";
 
@@ -20,16 +20,15 @@ export const QUI_L_EMPORTE = [
 ];
 
 export const EXEMPLES_CUISINE: [string, string][] = [
-  ["Le miel", "Saveur douce, mais il allège et assèche."],
-  ["Le gingembre sec", "Saveur piquante, effet doux après digestion."],
+  ["Le miel", "Saveur douce, mais il est sec et fait baisser Kapha."],
   ["Le ghee", "Comme le lait, il est doux et onctueux, mais lui réveille le feu digestif."],
 ];
 
 export const REFS_ACTION: Ref[] = [
-  { texte: "vagbhata", passage: "Sūtrasthāna 9.26", sujet: "Ce qui l'emporte, de la saveur à l'action propre" },
+  { texte: "vagbhata", passage: "Sūtrasthāna 9.23 à 9.25", sujet: "Ce qui l'emporte, de la saveur à l'action propre, à force égale" },
   { texte: "charaka", passage: "Sūtrasthāna 26.64 et 26.65", sujet: "Vīrya, chauffant ou rafraîchissant" },
   { texte: "charaka", passage: "Sūtrasthāna 26.57 et 26.58", sujet: "Les trois vipāka" },
-  { texte: "sushruta", passage: "Sūtrasthāna 40", sujet: "Deux vipāka seulement, lourd et léger" },
+  { texte: "sushruta", passage: "Sūtrasthāna 40.10 à 40.12", sujet: "Deux vipāka seulement, le doux et le piquant" },
   { texte: "charaka", passage: "Sūtrasthāna 26.67 à 26.69", sujet: "L'action propre, citraka et dantī" },
-  { texte: "charaka", passage: "Sūtrasthāna 27", sujet: "Le miel, le gingembre, le ghee" },
+  { texte: "charaka", passage: "Sūtrasthāna 27", sujet: "Le miel et le ghee" },
 ];

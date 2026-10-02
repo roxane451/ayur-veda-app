@@ -60,7 +60,7 @@ const BienManger = ({ rubrique = "cuisine" }: { rubrique?: "cuisine" | "comprend
       <figure className="m-0 flex flex-col items-center gap-3.5">
         <TroisTiers />
         <figcaption className="max-w-[34ch] text-center">
-          Un tiers de l'estomac pour la nourriture, un tiers pour les liquides, et le dernier tiers laissé libre pour Vata, Pitta et Kapha, qui font le travail de la digestion.
+          Un tiers de l'estomac pour la nourriture, un tiers pour les liquides, et le dernier tiers laissé libre pour que Vata, Pitta et Kapha puissent agir.
           <Renvoi n={2} />
         </figcaption>
       </figure>
@@ -104,8 +104,8 @@ const BienManger = ({ rubrique = "cuisine" }: { rubrique?: "cuisine" | "comprend
             </h2>
           </div>
           <p className="m-0 text-lg text-[#D3E3DE]">
-            Certains aliments, bons séparément, deviennent indigestes ensemble. Charaka en consacre un long passage au <i>Sūtrasthāna</i>, chapitre 26.<Renvoi n={3} clair /> La règle sur le yaourt vient du chapitre 7.
-            <Renvoi n={4} clair />
+            Certains aliments, bons séparément, deviennent indigestes ensemble. Charaka en consacre un long passage au <i>Sūtrasthāna</i>, chapitre 26.<Renvoi n={3} clair /> La règle sur le yaourt vient du chapitre 7,<Renvoi n={4} clair /> celle du miel chauffé du chapitre 27.
+            <Renvoi n={5} clair />
           </p>
         </div>
         <ul className="m-0 grid list-none gap-5 p-0 sm:grid-cols-2 lg:grid-cols-3">

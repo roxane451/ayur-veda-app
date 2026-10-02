@@ -54,7 +54,10 @@ const ScienceVie = () => (
           </Fragment>
         ))}
       </ul>
-      <p className="m-0 text-center text-[1.2rem] italic text-aubergine">L'Ayurveda est la connaissance de ce qui est bon ou mauvais pour cette vie.</p>
+      <p className="m-0 text-center text-[1.2rem] italic text-aubergine">
+        L'Ayurveda est la connaissance de ce qui est bon ou mauvais pour cette vie.
+        <Renvoi n={2} />
+      </p>
     </section>
 
     {/* Quatre sortes de vie */}
@@ -67,7 +70,7 @@ const ScienceVie = () => (
           </H2>
           <p className="m-0 text-lg text-[#D3E3DE]">
             Charaka distingue la vie bonne et la vie néfaste, la vie heureuse et la vie malheureuse. L'Ayurveda dit ce qui mène aux unes ou aux autres.
-            <Renvoi n={2} />
+            <Renvoi n={3} />
           </p>
         </div>
         <ul className="m-0 grid list-none gap-4 p-0 sm:grid-cols-2">
@@ -99,7 +102,7 @@ const ScienceVie = () => (
         <H2 id="sv-sante">Ce qu'est la santé</H2>
         <p className="m-0 text-lg text-doux">
           Suśruta donne la définition la plus citée. Est en bonne santé celui dont ces quatre choses vont bien.
-          <Renvoi n={3} />
+          <Renvoi n={4} />
         </p>
         <div className="mt-3 flex min-h-[260px] flex-col items-center justify-end gap-1.5 rounded-b-[14px] rounded-t-full bg-surface px-6 pb-7 text-center shadow-[inset_0_0_0_2px_hsl(var(--encre))] sm:min-h-[300px]">
           <Deva className="text-[34px] text-paon">स्वस्थ</Deva>
@@ -125,7 +128,7 @@ const ScienceVie = () => (
         <h3 className="m-0 text-2xl">Garder la santé</h3>
         <p className="m-0 text-lg">
           Le premier but de l'Ayurveda, et celui de ce site.
-          <Renvoi n={4} />
+          <Renvoi n={5} />
         </p>
       </div>
       <div className="flex flex-col gap-2.5 border-t-4 border-aubergine pt-5">

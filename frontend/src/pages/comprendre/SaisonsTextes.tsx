@@ -65,7 +65,7 @@ const SaisonsTextes = () => (
       </div>
     </Frontispice>
     <Bande />
-    <DApres>Charaka, Sūtrasthāna 6 ; Suśruta, Sūtrasthāna 6</DApres>
+    <DApres>Charaka, Sūtrasthāna 6 ; Vāgbhaṭa, Sūtrasthāna 3</DApres>
 
     <section aria-labelledby="st-six" className="mx-auto grid max-w-[1100px] items-center gap-10 px-4 pb-20 pt-14 sm:px-10 md:pt-16 lg:grid-cols-[minmax(0,440px)_minmax(0,1fr)] lg:gap-16">
       <Roue />
@@ -123,7 +123,7 @@ const SaisonsTextes = () => (
           Changer peu à peu
         </h2>
         <p className="m-0 text-lg text-doux">
-          Entre deux saisons, les textes conseillent quinze jours de transition. On quitte les habitudes de la saison qui finit petit à petit, en prenant
+          Entre deux saisons, les textes conseillent deux semaines de transition, la dernière de l'une et la première de l'autre. On quitte les habitudes de la saison qui finit petit à petit, en prenant
           peu à peu celles de la suivante.
           <Renvoi n={3} />
         </p>

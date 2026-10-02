@@ -55,7 +55,7 @@ const Qualites = () => (
             {NOM_DOSHA[d]}
           </span>
         ))}
-        <span>Le point indique le côté où se range chaque dosha. Les paires sans point ne sont rattachées à aucun dosha dans les textes.</span>
+        <span>Le point indique le côté où se range chaque dosha. Les paires sans point ne sont rattachées à aucun dosha dans les textes. Trois points viennent de Vāgbhaṭa plutôt que de Charaka.<Renvoi n={2} /></span>
       </p>
       <ul className="m-0 list-none border-b border-encre/20 p-0">
         {PAIRES_QUALITES.map(({ gauche, droite }) => (
@@ -98,7 +98,7 @@ const Qualites = () => (
             Le semblable augmente le semblable, le contraire le diminue.
           </h2>
           <p className="m-0 max-w-[46ch] text-lg text-[#D3E3DE]">
-            C'est la règle qui guide tous les conseils de l'Ayurveda. Charaka l'énonce dès le premier chapitre de son traité.<Renvoi n={2} /> Ce qui partage les qualités
+            C'est la règle qui guide tous les conseils de l'Ayurveda. Charaka l'énonce dès le premier chapitre de son traité.<Renvoi n={3} /> Ce qui partage les qualités
             d'un dosha le fait monter, ce qui s'y oppose le ramène à l'équilibre.
           </p>
         </div>

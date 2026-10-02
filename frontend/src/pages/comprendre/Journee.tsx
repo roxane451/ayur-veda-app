@@ -7,7 +7,7 @@ import type { Ref } from "@/data/sources";
 
 const REFS: Ref[] = [
   { texte: "vagbhata", passage: "Sūtrasthāna 1.8", sujet: "Le dosha de chaque moment du jour" },
-  { texte: "charaka", passage: "Sūtrasthāna 5.71 à 5.103", sujet: "Les gestes du matin, de la toilette au massage" },
+  { texte: "charaka", passage: "Sūtrasthāna 5.71 à 5.103", sujet: "Les gestes du matin, de la toilette à la tenue du jour" },
   { texte: "vagbhata", passage: "Sūtrasthāna 2", sujet: "La routine du jour" },
 ];
 import { Fil, PageRubrique } from "@/components/Rubrique";

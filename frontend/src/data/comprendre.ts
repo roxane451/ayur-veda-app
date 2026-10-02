@@ -49,11 +49,11 @@ export const DOSHAS_DETAIL: DoshaDetail[] = [
       "Le bon fonctionnement des sens",
     ],
     formes: [
-      { nom: "Prāṇa", deva: "प्राण", siege: "La tête et la poitrine", role: "Respirer, avaler, garder l'esprit et les sens en éveil." },
-      { nom: "Udāna", deva: "उदान", siege: "La gorge et la poitrine", role: "La parole, l'effort, la mémoire." },
-      { nom: "Samāna", deva: "समान", siege: "Près du feu digestif", role: "Recevoir la nourriture, la digérer, trier ce qui sert." },
-      { nom: "Vyāna", deva: "व्यान", siege: "Le cœur, puis tout le corps", role: "Faire circuler, ouvrir et fermer, bouger." },
-      { nom: "Apāna", deva: "अपान", siege: "Le bas-ventre", role: "Éliminer les selles et l'urine, les règles, la naissance." },
+      { nom: "Prāṇa", deva: "प्राण", siege: "La tête, la poitrine et la gorge", role: "Respirer, avaler, éternuer, roter." },
+      { nom: "Udāna", deva: "उदान", siege: "Le nombril, la poitrine et la gorge", role: "La parole, l'effort, l'énergie, la force et le teint." },
+      { nom: "Samāna", deva: "समान", siege: "Près du feu digestif", role: "Attiser le feu digestif." },
+      { nom: "Vyāna", deva: "व्यान", siege: "Tout le corps", role: "Marcher, plier et tendre les membres, cligner des yeux." },
+      { nom: "Apāna", deva: "अपान", siege: "Le bas-ventre", role: "Éliminer les selles et l'urine, le sperme, les règles, la naissance." },
     ],
     corps: [
       ["Morphologie", "Mince, prend difficilement du poids"],
@@ -102,7 +102,7 @@ export const DOSHAS_DETAIL: DoshaDetail[] = [
     ],
     formes: [
       { nom: "Pācaka", deva: "पाचक", siege: "Entre l'estomac et l'intestin", role: "Digérer la nourriture et soutenir les autres formes." },
-      { nom: "Rañjaka", deva: "रञ्जक", siege: "Le foie et la rate", role: "Donner sa couleur au sang." },
+      { nom: "Rañjaka", deva: "रञ्जक", siege: "Le foie et la rate selon Suśruta, l'estomac selon Vāgbhaṭa", role: "Donner sa couleur au sang." },
       { nom: "Sādhaka", deva: "साधक", siege: "Le cœur", role: "L'intelligence, la mémoire, l'ambition." },
       { nom: "Ālocaka", deva: "आलोचक", siege: "Les yeux", role: "La vue." },
       { nom: "Bhrājaka", deva: "भ्राजक", siege: "La peau", role: "L'éclat du teint." },
@@ -143,7 +143,7 @@ export const DOSHAS_DETAIL: DoshaDetail[] = [
     essence: "La structure",
     presentation:
       "Kapha donne au corps sa structure, des os aux articulations, et soutient l'immunité. Équilibré, il apporte la force et le calme. En excès, il alourdit et ralentit.",
-    qualites: ["Lourd", "Froid", "Doux", "Huileux", "Sucré", "Stable", "Gluant"],
+    qualites: ["Lourd", "Froid", "Mou", "Huileux", "Sucré", "Stable", "Gluant"],
     fonctions: [
       "L'onctuosité du corps",
       "La cohésion des articulations",
@@ -230,16 +230,16 @@ export const SAVEURS_PAR_DOSHA = [
 
 export const ETATS_AGNI = [
   { translit: "Sama agni", deva: "समाग्नि", adjectif: "Équilibré", dosha: null, echelle: 1, texte: "Faim nette aux heures des repas, digestion légère, énergie stable après manger. C'est l'état à retrouver." },
-  { translit: "Viṣama agni", deva: "विषमाग्नि", adjectif: "Irrégulier", dosha: "Vata", echelle: 0.8, texte: "Faim tantôt forte, tantôt absente. Ballonnements, gaz, transit capricieux." },
-  { translit: "Tīkṣṇa agni", deva: "तीक्ष्णाग्नि", adjectif: "Trop vif", dosha: "Pitta", echelle: 1.2, texte: "Faim pressante, digestion très rapide, chaleur et sécheresse de la gorge." },
-  { translit: "Manda agni", deva: "मन्दाग्नि", adjectif: "Trop lent", dosha: "Kapha", echelle: 0.6, texte: "Peu d'appétit, lourdeur et somnolence après manger, digestion longue." },
+  { translit: "Viṣama agni", deva: "विषमाग्नि", adjectif: "Irrégulier", dosha: "Vata", echelle: 0.8, texte: "Digère tantôt bien, tantôt mal, sans raison apparente." },
+  { translit: "Tīkṣṇa agni", deva: "तीक्ष्णाग्नि", adjectif: "Trop vif", dosha: "Pitta", echelle: 1.2, texte: "Digère vite, même les écarts, et à la longue épuise les tissus." },
+  { translit: "Manda agni", deva: "मन्दाग्नि", adjectif: "Trop lent", dosha: "Kapha", echelle: 0.6, texte: "Digère mal, même un repas léger et bien pris." },
 ];
 
 export const SIGNES_AMA = [
-  "Souvent, une langue chargée",
-  "Une lourdeur ou une fatigue après les repas",
-  "Peu d'appétit, l'esprit embrumé",
-  "Une haleine ou des selles plus fortes que d'habitude",
+  "Une perte d'appétit, des nausées",
+  "Des ballonnements, de la soif",
+  "Des maux de tête, des vertiges",
+  "Des courbatures, le dos raide",
 ];
 
 export const GESTES_AGNI = [
@@ -312,15 +312,15 @@ export const initiale = (mot: string) => mot.normalize("NFD").replace(/[̀-ͯ]/g
 
 export const SIEGES_DOSHAS: { dosha: DoshaKey; region: string; lieux: string; image: string }[] = [
   { dosha: "kapha", region: "Au-dessus du cœur", lieux: "La poitrine, la gorge, la tête, les articulations, l'estomac.", image: "comme la lune" },
-  { dosha: "pitta", region: "Entre le cœur et le nombril", lieux: "L'intestin grêle et l'estomac, le sang, les yeux, la peau.", image: "comme le soleil" },
+  { dosha: "pitta", region: "Entre le cœur et le nombril", lieux: "Le nombril, l'estomac et l'intestin grêle, la sueur, le sang, les yeux, la peau.", image: "comme le soleil" },
   { dosha: "vata", region: "Sous le nombril", lieux: "Le gros intestin, le bassin, les cuisses, les os, les oreilles.", image: "comme le vent" },
 ];
 
 export const REFS_DOSHAS: Ref[] = [
   { texte: "charaka", passage: "Sūtrasthāna 1.59 à 1.61", sujet: "Les qualités des trois doshas" },
-  { texte: "charaka", passage: "Sūtrasthāna 18.49 à 18.51", sujet: "Ce que fait chaque dosha quand il est équilibré" },
+  { texte: "charaka", passage: "Sūtrasthāna 18.49 à 18.51 et 12.8", sujet: "Ce que fait chaque dosha quand il est équilibré" },
   { texte: "charaka", passage: "Cikitsāsthāna 28.5 à 28.11", sujet: "Les cinq formes de Vata" },
-  { texte: "sushruta", passage: "Sūtrasthāna 21.10 à 21.14", sujet: "Les cinq formes de Pitta et de Kapha" },
-  { texte: "vagbhata", passage: "Sūtrasthāna 12", sujet: "Les quinze formes, rangées comme on les cite aujourd'hui" },
-  { texte: "sushruta", passage: "Sūtrasthāna 21.6", sujet: "Les sièges des doshas" },
+  { texte: "sushruta", passage: "Sūtrasthāna 21.10 à 21.14", sujet: "Les cinq formes de Pitta, et les sièges de Kapha" },
+  { texte: "vagbhata", passage: "Sūtrasthāna 12.4 à 12.18", sujet: "Les quinze formes et leurs noms, dont ceux de Kapha" },
+  { texte: "vagbhata", passage: "Sūtrasthāna 1.7 et 12.1 à 12.3", sujet: "Les trois régions du corps et les sièges de chaque dosha" },
 ];

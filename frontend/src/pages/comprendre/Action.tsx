@@ -75,7 +75,7 @@ const Action = () => (
           Qui l'emporte
         </h2>
         <p className="m-0 text-lg text-doux">
-          Quand ces quatre forces tirent en sens contraire, la plus haute décide.
+          Quand ces quatre forces tirent en sens contraire avec la même puissance, la plus haute décide. Sinon, c'est la plus forte qui l'emporte.
           <Renvoi n={1} />
         </p>
       </div>
@@ -119,7 +119,7 @@ const Action = () => (
             <span className="italic text-doux">vipāka</span>
           </p>
           <p className="m-0 text-lg">
-            Une fois digérées, les six saveurs se ramènent à trois effets, qui agissent longtemps après le repas. Le schéma montre lesquels.<Renvoi n={3} /> Suśruta, lui, n'en retient que deux, lourd et léger.
+            Une fois digérées, les six saveurs se ramènent à trois effets, qui agissent longtemps après le repas. Le schéma montre lesquels.<Renvoi n={3} /> Suśruta, lui, n'en retient que deux, le doux, qui est lourd, et le piquant, qui est léger.
             <Renvoi n={4} />
           </p>
         </div>
@@ -181,8 +181,7 @@ const Action = () => (
           Dans la cuisine
         </h2>
         <p className="m-0 text-lg text-doux">
-          Le miel est doux, et pourtant il allège et assèche. Le gingembre sec est piquant, et pourtant sa digestion le rend doux. C'est pour cela qu'on
-          ne juge pas un aliment à son seul goût.
+          Le miel est doux, et pourtant il est sec et fait baisser Kapha. C'est pour cela qu'on ne juge pas un aliment à son seul goût.
           <Renvoi n={6} />
         </p>
       </div>

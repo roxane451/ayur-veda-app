@@ -1,6 +1,6 @@
 /**
  * Livre I, « Les principes » : la science de la vie et les cinq éléments.
- * [À VALIDER] par une praticienne, en particulier les numéros de versets.
+ * Versets vérifiés en octobre 2026, voir data/sources.ts.
  */
 import type { DoshaKey } from "@/lib/doshaLogic";
 import type { Ref } from "./sources";
@@ -31,13 +31,14 @@ export const SORTES_DE_VIE = [
 /** La santé selon Suśruta (Sū 15.41). */
 export const SANTE: [string, string][] = [
   ["Les doshas", "en équilibre"],
-  ["Le feu digestif", "régulier"],
+  ["Le feu digestif", "équilibré"],
   ["Les tissus et les déchets", "qui fonctionnent bien"],
   ["Le soi, les sens et l'esprit", "sereins"],
 ];
 
 export const REFS_SCIENCE_VIE: Ref[] = [
   { texte: "charaka", passage: "Sūtrasthāna 1.42", sujet: "La vie, union du corps, des sens, de l'esprit et du soi" },
+  { texte: "charaka", passage: "Sūtrasthāna 1.41", sujet: "L'Ayurveda, connaissance de ce qui est bon ou mauvais pour la vie" },
   { texte: "charaka", passage: "Sūtrasthāna 30.24", sujet: "Les quatre sortes de vie" },
   { texte: "sushruta", passage: "Sūtrasthāna 15.41", sujet: "La définition de la santé" },
   { texte: "charaka", passage: "Sūtrasthāna 30.26", sujet: "Les deux buts de l'Ayurveda" },
@@ -66,7 +67,7 @@ export const CINQ_ELEMENTS: {
 
 /** Les éléments qui dominent dans chaque saveur (Charaka, Sū 26.40). */
 export const SAVEURS_ELEMENTS: [string, string][] = [
-  ["Doux", "terre et eau"],
+  ["Sucré", "terre et eau"],
   ["Acide", "terre et feu"],
   ["Salé", "eau et feu"],
   ["Piquant", "air et feu"],
@@ -77,12 +78,13 @@ export const SAVEURS_ELEMENTS: [string, string][] = [
 /** Les doshas comparés à trois forces du monde (Suśruta, Sū 21.8). */
 export const TROIS_FORCES: { dosha: DoshaKey; image: string; texte: string; element: ElementId }[] = [
   { dosha: "vata", image: "comme le vent", texte: "Il disperse et met en mouvement.", element: "air" },
-  { dosha: "pitta", image: "comme le soleil", texte: "Il absorbe et transforme.", element: "feu" },
+  { dosha: "pitta", image: "comme le soleil", texte: "Il prend et absorbe.", element: "feu" },
   { dosha: "kapha", image: "comme la lune", texte: "Il donne et nourrit.", element: "eau" },
 ];
 
 export const REFS_ELEMENTS: Ref[] = [
-  { texte: "charaka", passage: "Śārīrasthāna 1.27 et 1.28", sujet: "Les éléments et les sens qui les perçoivent" },
-  { texte: "charaka", passage: "Sūtrasthāna 26.40", sujet: "Les saveurs et leurs éléments" },
+  { texte: "charaka", passage: "Śārīrasthāna 1.27 et 1.28", sujet: "Les éléments et leurs qualités, du son à l'odeur" },
+  { texte: "sushruta", passage: "Sūtrasthāna 42.3", sujet: "Les saveurs et leurs éléments" },
+  { texte: "charaka", passage: "Sūtrasthāna 26.40", sujet: "Le sucré, né de l'eau seule selon Charaka" },
   { texte: "sushruta", passage: "Sūtrasthāna 21.8", sujet: "Le vent, le soleil et la lune" },
 ];

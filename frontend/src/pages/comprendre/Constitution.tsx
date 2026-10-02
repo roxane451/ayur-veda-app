@@ -95,8 +95,8 @@ const Constitution = () => (
             Sept natures
           </h2>
           <p className="m-0 text-lg text-[#D3E3DE]">
-            Les textes en comptent sept.
-            <Renvoi n={2} clair />
+            Les textes en comptent sept.<Renvoi n={2} clair /> Pour Charaka, la nature équilibrée réunit toutes les qualités.
+            <Renvoi n={3} clair />
           </p>
           <ul className="m-0 list-none p-0">
             {SEPT_NATURES.map((s) => (
@@ -125,7 +125,7 @@ const Constitution = () => (
         </h2>
         <p className="m-0 text-lg text-doux">
           Charaka décrit chaque nature simple, en commençant par Kapha. On s'y reconnaît rarement en entier.
-          <Renvoi n={3} />
+          <Renvoi n={4} />
         </p>
       </div>
       <div className="grid gap-12 md:grid-cols-3 md:gap-9">

@@ -35,7 +35,7 @@ export const AGES = [
     dosha: "vata" as DoshaKey,
     periode: "après 60 ans",
     part: 40,
-    texte: "Le corps s'allège et s'assèche. L'esprit gagne en recul, le sommeil devient plus léger.",
+    texte: "Le corps s'allège et s'assèche. Les sens, la force et la mémoire déclinent peu à peu, le sommeil devient plus léger.",
     exces: "Peau sèche, articulations raides, constipation, oublis, inquiétude.",
     aide: "Chaleur, régularité, huiles en cuisine et en massage, repas cuits et onctueux.",
   },
@@ -49,9 +49,9 @@ export const CYCLES: { echelle: string; kapha: string; pitta: string; vata: stri
 
 export const ETAPES = [
   { nom: "Accumulation", sanskrit: "sañcaya", deva: "सञ्चय", texte: "Le dosha s'amasse à sa place. Les signes sont discrets, ventre tendu pour Vata, teint jaune pour Pitta, lourdeur pour Kapha, et l'on se détourne de ce qui l'a fait monter." },
-  { nom: "Aggravation", sanskrit: "prakopa", deva: "प्रकोप", texte: "Il s'échauffe dans son siège sans encore en sortir. Ballonnements, aigreurs ou dégoût des aliments apparaissent." },
-  { nom: "Diffusion", sanskrit: "prasara", deva: "प्रसर", texte: "Il quitte sa place et circule dans le corps. Les signes deviennent diffus et changeants." },
-  { nom: "Localisation", sanskrit: "sthāna-saṃśraya", deva: "स्थानसंश्रय", texte: "Il se fixe dans un point faible, une articulation, la peau ou un organe déjà fragile." },
+  { nom: "Aggravation", sanskrit: "prakopa", deva: "प्रकोप", texte: "Il s'échauffe dans son siège sans encore en sortir. Douleurs et gaz qui bougent dans le ventre, renvois acides et brûlures, ou dégoût des aliments et nausées." },
+  { nom: "Diffusion", sanskrit: "prasara", deva: "प्रसर", texte: "Il quitte sa place et circule dans le corps. Gaz et gargouillements, brûlures, ou perte d'appétit et nausées." },
+  { nom: "Localisation", sanskrit: "sthāna-saṃśraya", deva: "स्थानसंश्रय", texte: "Il se fixe dans un point faible, une articulation, la peau ou un organe déjà fragile. Les premiers signes de la maladie apparaissent." },
   { nom: "Manifestation", sanskrit: "vyakti", deva: "व्यक्ति", texte: "Le trouble apparaît clairement, avec ses signes propres. C'est là qu'on lui donne un nom." },
   { nom: "Complication", sanskrit: "bheda", deva: "भेद", texte: "Le trouble prend sa forme propre, se complique ou devient chronique." },
 ];

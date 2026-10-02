@@ -8,8 +8,8 @@ import type { Ref } from "./sources";
 export const REGLES_REPAS = [
   { titre: "Manger chaud", sanskrit: "uṣṇam", texte: "Un plat chaud réveille le feu digestif et se digère vite." },
   { titre: "Un peu de gras", sanskrit: "snigdham", texte: "Un filet de ghee ou d'huile rend le repas plus digeste et nourrit." },
-  { titre: "En juste quantité", sanskrit: "mātrāvat", texte: "Assez pour être rassasié, jamais au point d'être lourd." },
-  { titre: "Quand le repas précédent est digéré", sanskrit: "jīrṇe", texte: "Attendre d'avoir vraiment faim avant de manger à nouveau." },
+  { titre: "En juste quantité", sanskrit: "mātrāvat", texte: "Assez pour être rassasié, sans lourdeur. Pris en juste quantité, le repas ne dérange pas les doshas." },
+  { titre: "Quand le repas précédent est digéré", sanskrit: "jīrṇe", texte: "Attendre d'avoir faim. Un repas pris trop tôt se mêle au précédent, encore mal digéré, et dérange les doshas." },
   { titre: "Des aliments qui vont ensemble", sanskrit: "vīrya-aviruddham", texte: "Éviter les associations incompatibles, détaillées plus bas." },
   { titre: "Dans un lieu agréable", sanskrit: "iṣṭe deśe, iṣṭasarvopakaraṇam", texte: "Un endroit agréable, avec tout ce qu'il faut sous la main, pour manger l'esprit tranquille." },
   { titre: "Ni trop vite", sanskrit: "nātidrutam", texte: "Avalé trop vite, le repas peut passer de travers, et l'on ne sent ni son goût ni ses défauts." },
@@ -24,7 +24,7 @@ export const ASSOCIATIONS = [
   { a: "Miel", b: "Chaleur", texte: "Chauffé, ou mêlé à des aliments brûlants, le miel devient toxique. Les textes le comparent à un poison." },
   { a: "Miel", b: "Ghee à parts égales", texte: "Chacun est bon seul, mais mêlés à poids égal, ils deviennent nocifs." },
   { a: "Lait", b: "Radis", texte: "Charaka déconseille le lait après le radis, l'ail et d'autres légumes verts, qui exposent aux maladies de peau." },
-  { a: "Yaourt", b: "Le soir", texte: "Charaka déconseille le lait caillé le soir, comme pris chaud ou sans accompagnement. Mal consommé, il échauffe le sang et la peau." },
+  { a: "Yaourt", b: "Le soir", texte: "Charaka déconseille le lait caillé le soir, comme pris chaud ou sans accompagnement. Mal consommé, il expose à la fièvre, aux troubles du sang et aux maladies de peau." },
 ];
 
 export const REFS_BIEN_MANGER: Ref[] = [
@@ -32,4 +32,5 @@ export const REFS_BIEN_MANGER: Ref[] = [
   { texte: "charaka", passage: "Vimānasthāna 2.3", sujet: "Les trois parts de l'estomac" },
   { texte: "charaka", passage: "Sūtrasthāna 26.81 à 26.101", sujet: "Les aliments incompatibles" },
   { texte: "charaka", passage: "Sūtrasthāna 7.61 et 7.62", sujet: "Le lait caillé" },
+  { texte: "charaka", passage: "Sūtrasthāna 27", sujet: "Le miel chauffé, comparé à un poison" },
 ];

@@ -63,8 +63,8 @@ const Elements = () => (
             Dans l'assiette
           </h2>
           <p className="m-0 text-lg text-[#D3E3DE]">
-            Chaque saveur naît de deux éléments qui dominent. C'est pour cela qu'une saveur agit sur le corps comme ses éléments.
-            <Renvoi n={2} />
+            Selon Suśruta, chaque saveur naît de deux éléments qui dominent, et agit sur le corps comme eux.<Renvoi n={2} /> Charaka, lui, attribue le sucré à l'eau seule.
+            <Renvoi n={3} />
           </p>
         </div>
         <ul className="m-0 grid list-none grid-cols-2 gap-x-8 p-0">
@@ -86,7 +86,7 @@ const Elements = () => (
         <p className="m-0 text-lg text-doux">
           Suśruta compare les trois doshas à trois forces du monde. Le vent disperse, le soleil absorbe, la lune nourrit. Le corps fonctionne de la même
           façon.
-          <Renvoi n={3} />
+          <Renvoi n={4} />
         </p>
         <p className="m-0 text-doux">
           Plus tard, les auteurs ont précisé leurs éléments. Vata tient de l'air et de l'éther, Pitta surtout du feu, Kapha de l'eau et de la terre.

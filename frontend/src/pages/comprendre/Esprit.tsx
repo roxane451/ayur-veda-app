@@ -21,7 +21,7 @@ const Esprit = () => (
           Sattva, rajas et tamas
         </h2>
         <p className="m-0 text-lg text-doux">
-          Les doshas décrivent le corps. L'esprit, lui, se lit à travers trois qualités. On les a toutes les trois, et l'Ayurveda cherche à faire grandir
+          Les doshas décrivent le corps. L'esprit, lui, se lit à travers trois qualités, et Charaka en décrit seize types. On les a toutes les trois, et l'Ayurveda cherche à faire grandir
           la première.
           <Renvoi n={2} />
         </p>

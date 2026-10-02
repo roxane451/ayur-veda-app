@@ -1,6 +1,6 @@
 /**
  * Livre V, chapitre « Les trois causes » (trividha hetu).
- * D'après Charaka, Sūtrasthāna 11 et Śārīrasthāna 1. [À VALIDER] par une praticienne, en particulier les versets.
+ * D'après Charaka, Sūtrasthāna 11 et Śārīrasthāna 1. Versets vérifiés en octobre 2026, voir data/sources.ts.
  */
 import type { Ref } from "./sources";
 
@@ -34,6 +34,6 @@ export const TEMPS = [
 export const REFS_CAUSES: Ref[] = [
   { texte: "charaka", passage: "Sūtrasthāna 11.37 à 11.43", sujet: "Les trois causes des maladies" },
   { texte: "charaka", passage: "Sūtrasthāna 11.37", sujet: "Les sens mal employés" },
-  { texte: "charaka", passage: "Śārīrasthāna 1.102 à 1.108", sujet: "L'erreur de jugement" },
+  { texte: "charaka", passage: "Śārīrasthāna 1.98 à 1.109", sujet: "Le discernement, la maîtrise, la mémoire, et l'erreur de jugement" },
   { texte: "charaka", passage: "Sūtrasthāna 11.42", sujet: "Le temps" },
 ];

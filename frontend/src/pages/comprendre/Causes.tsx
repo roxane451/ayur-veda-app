@@ -113,7 +113,7 @@ const Causes = () => (
             L'erreur de jugement
           </h2>
           <p className="m-0 text-lg text-[#D3E3DE]">
-            Charaka y voit la racine de bien des maladies. On sait, et l'on fait quand même. Elle naît quand l'une de ces trois facultés se trouble.
+            On sait, et l'on fait quand même. Pour Charaka, cette erreur dérègle tous les doshas. Elle naît quand l'une de ces trois facultés se trouble.
             <Renvoi n={3} clair />
           </p>
         </div>

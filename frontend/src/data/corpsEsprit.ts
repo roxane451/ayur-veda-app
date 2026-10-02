@@ -61,39 +61,40 @@ export const GUNAS_ESPRIT = [
     nom: "Sattva",
     deva: "सत्त्व",
     essence: "La clarté",
-    texte: "L'esprit calme, attentif, bienveillant. L'étude, la patience et une nourriture fraîche et simple le soutiennent.",
+    texte: "Un esprit pur et bienveillant, maître de lui, attaché à ce qui est vrai et juste.",
     fond: "bg-carte text-encre",
   },
   {
     nom: "Rajas",
     deva: "रजस्",
     essence: "Le mouvement",
-    texte: "L'élan, le désir, l'agitation. Utile pour agir, il épuise quand il domine, avec les excitants, les écrans ou la précipitation.",
+    texte: "Un esprit actif mais agité, prompt à la colère, à l'orgueil et au désir.",
     fond: "bg-aubergine text-pistache",
   },
   {
     nom: "Tamas",
     deva: "तमस्",
     essence: "L'inertie",
-    texte: "Le repos, la lourdeur, la torpeur. Nécessaire au sommeil, il alourdit quand les restes, les excès ou la sédentarité s'installent.",
+    texte: "Un esprit lourd et confus, porté à la paresse et au sommeil.",
     fond: "bg-encre text-pistache",
   },
 ];
 
 export const REFS_QUALITES: Ref[] = [
   { texte: "charaka", passage: "Sūtrasthāna 1.59 à 1.61", sujet: "Les qualités de chaque dosha" },
+  { texte: "vagbhata", passage: "Sūtrasthāna 1.11 et 1.12", sujet: "Pitta léger, Kapha lent et lisse, qualités ajoutées par Vāgbhaṭa" },
   { texte: "charaka", passage: "Sūtrasthāna 1.44", sujet: "Le semblable augmente le semblable, le contraire le diminue" },
 ];
 
 export const REFS_TISSUS: Ref[] = [
   { texte: "sushruta", passage: "Sūtrasthāna 14.10 à 14.14", sujet: "La chaîne des sept tissus, et le mois qu'il faut pour la parcourir" },
-  { texte: "charaka", passage: "Sūtrasthāna 17.74 à 17.76", sujet: "L'ojas, et ce qui l'use" },
+  { texte: "charaka", passage: "Sūtrasthāna 17.73 à 17.77", sujet: "L'ojas, son siège au cœur, et ce qui l'use" },
   { texte: "sushruta", passage: "Sūtrasthāna 15.3 à 15.5", sujet: "Les doshas, les tissus et les déchets" },
 ];
 
 export const REFS_ESPRIT: Ref[] = [
   { texte: "charaka", passage: "Sūtrasthāna 1.57", sujet: "Rajas et tamas, les deux doshas de l'esprit" },
-  { texte: "charaka", passage: "Śārīrasthāna 4.36 à 4.40", sujet: "Sattva, rajas et tamas" },
+  { texte: "charaka", passage: "Śārīrasthāna 4.36 à 4.39", sujet: "Les trois sortes d'esprit, et leurs seize types" },
 ];
 
-export const REFS_PILIERS: Ref[] = [{ texte: "charaka", passage: "Sūtrasthāna 11.35", sujet: "Les trois piliers de la vie" }];
+export const REFS_PILIERS: Ref[] = [{ texte: "charaka", passage: "Sūtrasthāna 11.35", sujet: "Les trois soutiens de la vie" }];

@@ -59,8 +59,8 @@ const Textes = () => (
             Lire une référence
           </h2>
           <p className="m-0 text-lg text-[#D3E3DE]">
-            Chaque traité est divisé en livres, eux-mêmes divisés en chapitres et en versets. La Charaka Saṃhitā en compte huit. La numérotation des
-            versets peut varier un peu d'une édition à l'autre.
+            Chaque traité est divisé en livres, eux-mêmes divisés en chapitres et en versets. La Charaka Saṃhitā en compte huit. Nos numéros suivent
+            les éditions courantes. Ils peuvent varier d'un verset d'une édition à l'autre.
           </p>
           <p aria-label="Charaka, Sūtrasthāna, chapitre 26, verset 84" className="m-0 flex flex-wrap items-end gap-x-3.5 gap-y-4">
             {PARTS.map((p) => (

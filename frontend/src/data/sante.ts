@@ -1,6 +1,6 @@
 /**
  * Livre IV, « Rester en bonne santé » : les saisons des textes, le sommeil, les besoins naturels.
- * D'après Charaka, Sūtrasthāna 6, 7 et 21. [À VALIDER] par une praticienne, en particulier les versets.
+ * D'après Charaka, Sūtrasthāna 6, 7 et 21. Versets vérifiés en octobre 2026, voir data/sources.ts.
  */
 import type { Ref } from "./sources";
 
@@ -20,13 +20,13 @@ export const CONSEILS_SAISONS: [string, string][] = [
   ["Le printemps", "Kapha fond. Des repas légers et secs, de l'orge et du miel, de l'exercice, pas de sieste."],
   ["L'été", "La chaleur épuise. Des aliments doux, frais et liquides, du lait et du riz, la sieste permise."],
   ["Les pluies", "Le feu digestif faiblit. Des repas légers et chauds, de l'eau bouillie, un peu de miel."],
-  ["L'automne indien", "Pitta déborde. Des saveurs douces, amères et astringentes, du ghee, la fraîcheur du soir."],
+  ["L'automne indien", "Pitta déborde. Des aliments doux, amers, légers et frais, du ghee, la fraîcheur du soir."],
 ];
 
 export const REFS_SAISONS: Ref[] = [
   { texte: "charaka", passage: "Sūtrasthāna 6.4 à 6.8", sujet: "Les six saisons et les deux moitiés de l'année" },
   { texte: "charaka", passage: "Sūtrasthāna 6.9 à 6.48", sujet: "La conduite de chaque saison" },
-  { texte: "vagbhata", passage: "Sūtrasthāna 3.58", sujet: "La transition entre deux saisons" },
+  { texte: "vagbhata", passage: "Sūtrasthāna 3.58 et 3.59", sujet: "La transition entre deux saisons" },
 ];
 
 /* ───────── Le sommeil (Charaka, Sū 21) ───────── */
@@ -89,9 +89,9 @@ export const TREIZE_BESOINS: [string, string][] = [
 ];
 
 export const ELANS_A_RETENIR: [string, string][] = [
-  ["Dans l'esprit", "L'avidité, le chagrin, la peur, la colère, l'orgueil, l'impudeur, la jalousie, la convoitise, la malveillance."],
-  ["Dans la parole", "Les mots durs, la médisance, le mensonge, les paroles hors de propos."],
-  ["Dans les gestes", "Faire du mal à autrui, prendre ce qui n'est pas à soi, les excès de toute sorte."],
+  ["Dans l'esprit", "L'avidité, le chagrin, la peur, la colère, l'orgueil, l'impudeur, la jalousie, l'attachement excessif, l'envie du bien d'autrui."],
+  ["Dans la parole", "Les mots durs, le bavardage, la médisance, le mensonge, les paroles hors de propos."],
+  ["Dans les gestes", "Faire du mal à autrui, les relations sexuelles illicites, le vol, la violence."],
 ];
 
 export const REFS_BESOINS: Ref[] = [

@@ -7,7 +7,7 @@ import { PILIERS, REFS_PILIERS } from "@/data/corpsEsprit";
 const Piliers = () => (
   <PageComprendre>
     <Frontispice deva="त्रयोपस्तम्भ" translit="trayopastambha, les trois soutiens" titre="Les trois piliers">
-      <p className="m-0 mt-1 max-w-[44ch] text-xl text-doux">La nourriture, le sommeil et la maîtrise de soi. Charaka les compare aux piliers d'une maison.</p>
+      <p className="m-0 mt-1 max-w-[44ch] text-xl text-doux">La nourriture, le sommeil et la maîtrise de soi. Charaka les appelle les trois soutiens du corps.</p>
       <div className="mt-5">
         <Ornement />
       </div>

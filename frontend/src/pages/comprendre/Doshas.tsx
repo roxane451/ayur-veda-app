@@ -306,7 +306,7 @@ const Doshas = () => {
         </a>
       </Frontispice>
       <Bande />
-      <DApres>Charaka, Sūtrasthāna 1, 12 et 18 ; Suśruta, Sūtrasthāna 21</DApres>
+      <DApres>Charaka, Sūtrasthāna 1, 12 et 18 ; Vāgbhaṭa, Sūtrasthāna 1 et 12</DApres>
 
       <div
         id="detail-dosha"
@@ -333,7 +333,7 @@ const Doshas = () => {
             Où ils siègent
           </h2>
           <p className="m-0 text-lg text-doux">
-            Chaque dosha est présent partout, mais il a sa région. Suśruta les situe de haut en bas, du cœur au nombril.
+            Chaque dosha est présent partout, mais il a sa région. Vāgbhaṭa les situe de haut en bas, autour du cœur et du nombril.
             <Renvoi n={6} />
           </p>
           <ul className="m-0 mt-2 list-none p-0">
