@@ -62,9 +62,9 @@ const Constitution = () => (
       <div className="mt-5">
         <Ornement />
       </div>
+      <DApres>Charaka, Vimānasthāna 8 ; Suśruta, Śārīrasthāna 4</DApres>
     </Frontispice>
     <Bande />
-    <DApres>Charaka, Vimānasthāna 8 ; Suśruta, Śārīrasthāna 4</DApres>
 
     <section aria-labelledby="co-conception" className="mx-auto flex max-w-[1100px] flex-col gap-8 px-4 pb-20 pt-14 sm:px-10 md:pt-16">
       <div className="grid items-end gap-4 md:grid-cols-2 md:gap-14">
@@ -128,7 +128,7 @@ const Constitution = () => (
           <Renvoi n={4} />
         </p>
       </div>
-      <div className="grid gap-12 md:grid-cols-3 md:gap-9">
+      <div className="carrousel-mobile grid gap-12 md:grid-cols-3 md:gap-9">
         {PORTRAITS.map((p) => (
           <article key={p.dosha} className="flex flex-col gap-4">
             <div
@@ -155,7 +155,7 @@ const Constitution = () => (
         <h2 className="m-0 text-2xl">Votre état du moment</h2>
         <p className="m-0 text-lg text-[#E7D9E3]">Ce que la saison, l'âge et la vie y ont changé. C'est lui qu'on rééquilibre.</p>
         <Link to="/profil" className="mt-2 inline-flex min-h-[48px] items-center rounded-buta bg-citron px-6 font-bold text-encre no-underline hover:opacity-90">
-          Faire le quiz
+          Faire le test
         </Link>
       </div>
     </section>

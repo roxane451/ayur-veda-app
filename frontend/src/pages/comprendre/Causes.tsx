@@ -18,9 +18,9 @@ const Causes = () => (
       <div className="mt-5">
         <Ornement />
       </div>
+      <DApres>Charaka, Sūtrasthāna 11 ; Śārīrasthāna 1</DApres>
     </Frontispice>
     <Bande />
-    <DApres>Charaka, Sūtrasthāna 11 ; Śārīrasthāna 1</DApres>
 
     <section aria-labelledby="ca-trois" className="mx-auto flex max-w-[1100px] flex-col gap-8 px-4 pb-16 pt-14 sm:px-10 md:pt-16">
       <div className="grid items-end gap-4 md:grid-cols-2 md:gap-14">

@@ -63,8 +63,8 @@ const Saveurs = () => (
         <Anneau />
       </div>
     </div>
+    <DApres seul>Charaka, Sūtrasthāna 26</DApres>
     <Bande />
-    <DApres>Charaka, Sūtrasthāna 26</DApres>
 
     <section aria-label="Les six saveurs" className="mx-auto flex max-w-[1220px] flex-col gap-6 px-4 py-16 sm:px-10 md:py-[72px]">
       <p className="m-0 text-lg text-doux">
@@ -115,7 +115,7 @@ const Saveurs = () => (
             <Renvoi n={3} />
           </p>
           <Link to="/profil" className={`${lienSouligne} self-start`}>
-            Faire le quiz pour connaître mon dosha
+            Faire le test pour connaître mon dosha
           </Link>
         </div>
         <div className="flex flex-col">

@@ -60,7 +60,6 @@ const Recettes = () => {
   return (
     <PageCuisine>
       <TeteCuisine
-        page="Les recettes"
         titre="Les recettes"
         intro={`${RECETTES_VISIBLES.length} plats de la cuisine ayurvédique, du petit-déjeuner au dessert, avec pour chacun le dosha qu'il apaise et sa saison. ${CONTENU_PAYANT ? `${gratuites} sont en accès libre.` : ""}`.trim()}
       >
@@ -102,7 +101,7 @@ const Recettes = () => {
       {!filtre && (
         <section aria-labelledby="r-kitchari" className="mx-auto grid max-w-[1220px] items-center gap-10 px-4 pb-2 pt-12 sm:px-10 md:grid-cols-2">
           <div className="h-[260px] md:h-[320px]">
-            <Photo description="kitchari dans un bol, ghee et coriandre fraîche" />
+            <Photo description="kitchari dans un bol, ghee et coriandre fraîche" aVenir />
           </div>
           <div className="flex flex-col gap-3">
             <span className="font-bold text-aubergine">Pour commencer</span>

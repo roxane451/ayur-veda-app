@@ -30,8 +30,8 @@ const Agni = () => (
         </div>
       </div>
     </div>
+    <DApres seul>Charaka, Vimānasthāna 6 ; Cikitsāsthāna 15</DApres>
     <Bande />
-    <DApres>Charaka, Vimānasthāna 6 ; Cikitsāsthāna 15</DApres>
 
     <section aria-labelledby="a-etats" className="mx-auto flex max-w-[1220px] flex-col gap-6 px-4 py-16 sm:px-10 md:py-[72px]">
       <div className="grid items-end gap-8 md:grid-cols-2">

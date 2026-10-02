@@ -42,7 +42,7 @@ const Hero = () => (
           to="/profil"
           className="inline-flex min-h-14 items-center gap-2.5 rounded-buta bg-paon px-[30px] font-bold text-pistache hover:opacity-90"
         >
-          Faire le quiz dosha
+          Faire le test dosha
         </Link>
         <Link to="/cuisine" className={lienSouligne}>
           Explorer la cuisine
@@ -169,7 +169,7 @@ const TroisDoshas = () => (
           Les cinq éléments se combinent en nous de trois façons, que l'on appelle les doshas. Tout le monde a les trois, en proportions différentes.
         </p>
       </div>
-      <div className="grid gap-14 md:grid-cols-3 md:gap-10">
+      <div className="carrousel-mobile grid gap-14 [--carte:78%] md:grid-cols-3 md:gap-10">
         {DOSHAS.map(({ nom, deva, elements, texte, Illu }) => (
           <article key={nom} className="flex flex-col items-center gap-5 text-center">
             <h3 className="m-0 flex items-baseline gap-2.5 text-[2.1rem] leading-none">
@@ -201,9 +201,9 @@ const TroisDoshas = () => (
 /* ───────────── Sur l'étagère ───────────── */
 
 const EPICES = [
-  { nom: "Curcuma", skt: "haridra", Illu: Curcuma, taille: 118, rot: -4, chute: 6 },
-  { nom: "Gingembre", skt: "shunti", Illu: Gingembre, taille: 108, rot: 3, chute: 30 },
-  { nom: "Cardamome", skt: "ela", Illu: Cardamome, taille: 104, rot: -2, chute: 12 },
+  { nom: "Curcuma", skt: "haridrā", Illu: Curcuma, taille: 118, rot: -4, chute: 6 },
+  { nom: "Gingembre", skt: "śuṇṭhī", Illu: Gingembre, taille: 108, rot: 3, chute: 30 },
+  { nom: "Cardamome", skt: "elā", Illu: Cardamome, taille: 104, rot: -2, chute: 12 },
   { nom: "Cannelle", skt: "tvak", Illu: Cannelle, taille: 116, rot: 5, chute: 38 },
   { nom: "Poivre noir", skt: "maricha", Illu: Poivre, taille: 96, rot: -3, chute: 18 },
 ];

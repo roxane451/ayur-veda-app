@@ -2,7 +2,7 @@ import { Bande, Motif } from "@/components/brand/BrandDefs";
 import type { ReactNode } from "react";
 import { Deva, PageComprendre, PiedSuite } from "@/components/comprendre/Commun";
 import { Renvoi, Sources } from "@/components/comprendre/Sources";
-import { FilCuisine, PageCuisine } from "@/components/cuisine/Commun";
+import { PageCuisine } from "@/components/cuisine/Commun";
 import { ASSOCIATIONS, REFS_BIEN_MANGER, REGLES_REPAS } from "@/data/bienManger";
 
 /* L'estomac en trois tiers : nourriture, liquides, vide */
@@ -44,9 +44,8 @@ const BienManger = ({ rubrique = "cuisine" }: { rubrique?: "cuisine" | "comprend
   const comprendre = rubrique === "comprendre";
   return (
   <Cadre comprendre={comprendre}>
-    <section className="mx-auto grid max-w-[1220px] items-center gap-10 px-4 pb-14 pt-6 sm:px-10 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] md:gap-14">
+    <section className="mx-auto grid max-w-[1220px] items-center gap-10 px-4 pb-14 pt-10 sm:px-10 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] md:gap-14">
       <div className="flex flex-col gap-4">
-        {!comprendre && <FilCuisine page="Bien manger" />}
         <p className="m-0 flex flex-wrap items-baseline gap-x-3.5">
           <Deva className="text-[clamp(2rem,4vw,2.5rem)] text-aubergine">आहार विधि</Deva>
           <span className="italic text-doux">āhāra vidhi</span>

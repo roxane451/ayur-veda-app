@@ -13,11 +13,11 @@ const Sommeil = () => (
       <div className="mt-5">
         <Ornement />
       </div>
+      <DApres>Charaka, Sūtrasthāna 21</DApres>
     </Frontispice>
     <Bande />
-    <DApres>Charaka, Sūtrasthāna 21</DApres>
 
-    <section aria-labelledby="so-depend" className="relative mt-10 overflow-hidden bg-paon text-pistache">
+    <section aria-labelledby="so-depend" className="relative overflow-hidden bg-paon text-pistache">
       <Motif id="dabu" />
       <div className="relative mx-auto grid max-w-[1100px] items-center gap-10 px-4 py-16 sm:px-10 md:grid-cols-2 md:gap-16 md:py-[72px]">
         <div className="flex flex-col gap-4">

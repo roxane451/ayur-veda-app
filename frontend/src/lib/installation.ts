@@ -77,21 +77,28 @@ export function estInstallee(): boolean {
   );
 }
 
-/** iPhone ou iPad dans Safari : l'installation passe par le menu Partager. */
-export function estIosSafari(): boolean {
+export type NavigateurIos = "safari" | "chrome" | "autre";
+
+/**
+ * Sur iPhone et iPad, l'installation passe par le menu Partager, dans Safari
+ * comme dans Chrome et les autres navigateurs (depuis iOS 16.4). Renvoie null hors iOS.
+ */
+export function navigateurIos(): NavigateurIos | null {
   const ua = window.navigator.userAgent;
   const ios =
     /iPad|iPhone|iPod/.test(ua) ||
     (ua.includes("Macintosh") && window.navigator.maxTouchPoints > 1);
-  const autreNavigateur = /CriOS|FxiOS|EdgiOS|OPiOS/.test(ua);
-  return ios && !autreNavigateur;
+  if (!ios) return null;
+  if (/CriOS/.test(ua)) return "chrome";
+  if (/FxiOS|EdgiOS|OPiOS/.test(ua)) return "autre";
+  return "safari";
 }
 
 export interface Installation {
   /** L'app peut être proposée sur cet appareil. */
   possible: boolean;
-  /** Il faut montrer les gestes de Safari plutôt qu'un bouton. */
-  ios: boolean;
+  /** Sur iOS, le navigateur dont il faut montrer les gestes (sinon null). */
+  ios: NavigateurIos | null;
   /** Le bandeau peut s'afficher (deuxième visite, pas encore fermé). */
   bandeau: boolean;
   installer: () => Promise<void>;
@@ -110,8 +117,8 @@ export function useInstallation(): Installation {
     };
   }, []);
 
-  const ios = estIosSafari();
-  const possible = !estInstallee() && (invitation !== null || ios);
+  const ios = navigateurIos();
+  const possible = !estInstallee() && (invitation !== null || ios !== null);
 
   const fermer = () => {
     const e = { ...lire(), ferme: true };

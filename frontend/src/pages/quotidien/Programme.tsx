@@ -75,7 +75,7 @@ const Programme = () => (
       <p className="m-0 mt-2 text-[15px] text-doux">
         Il s'adresse aux personnes Vata, ou dont Vata est en excès à l'automne.{" "}
         <Link to="/profil" className="font-bold text-encre underline underline-offset-4">
-          Le quiz vous le dit.
+          Le test vous le dit.
         </Link>
       </p>
     </section>

@@ -217,3 +217,25 @@
     transform: translateY(0);
   }
 }
+
+/* Sur téléphone, une liste qui défile de gauche à droite au lieu de s'empiler.
+   La carte suivante dépasse un peu pour montrer qu'il y a la suite. */
+@media (max-width: 767px) {
+  .carrousel-mobile {
+    display: flex !important;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 16px !important;
+    margin-inline: -16px;
+    padding: 6px 16px 10px;
+    scroll-padding-inline: 16px;
+    scrollbar-width: none;
+  }
+  .carrousel-mobile::-webkit-scrollbar {
+    display: none;
+  }
+  .carrousel-mobile > * {
+    flex: 0 0 var(--carte, 80%);
+    scroll-snap-align: start;
+  }
+}

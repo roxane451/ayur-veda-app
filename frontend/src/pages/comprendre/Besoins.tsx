@@ -12,9 +12,9 @@ const Besoins = () => (
       <div className="mt-5">
         <Ornement />
       </div>
+      <DApres>Charaka, Sūtrasthāna 7</DApres>
     </Frontispice>
     <Bande />
-    <DApres>Charaka, Sūtrasthāna 7</DApres>
 
     <section aria-labelledby="be-treize" className="mx-auto flex max-w-[1180px] flex-col gap-9 px-4 pb-20 pt-14 sm:px-10 md:pt-16">
       <div className="grid items-end gap-4 md:grid-cols-2 md:gap-14">

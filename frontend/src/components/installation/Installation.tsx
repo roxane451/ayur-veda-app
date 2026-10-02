@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { useInstallation } from "@/lib/installation";
+import { createPortal } from "react-dom";
+import { useInstallation, type NavigateurIos } from "@/lib/installation";
 
 const BOUTON =
   "inline-flex min-h-11 items-center rounded-buta px-5 font-bold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-encre";
@@ -31,7 +32,13 @@ const Partager = () => (
 );
 
 /** Les deux gestes de Safari, dans une fiche qui monte du bas de l'écran. */
-const FicheIos = ({ onFermer }: { onFermer: () => void }) => {
+const FicheIos = ({
+  navigateur,
+  onFermer,
+}: {
+  navigateur: NavigateurIos;
+  onFermer: () => void;
+}) => {
   const bouton = useRef<HTMLButtonElement>(null);
   useEffect(() => {
     bouton.current?.focus();
@@ -39,7 +46,8 @@ const FicheIos = ({ onFermer }: { onFermer: () => void }) => {
     window.addEventListener("keydown", touche);
     return () => window.removeEventListener("keydown", touche);
   }, [onFermer]);
-  return (
+  // Rendue dans <body> : elle n'hérite jamais des couleurs du bloc qui l'ouvre.
+  return createPortal(
     <div
       className="fixed inset-0 z-[60] flex items-end bg-encre/35"
       onClick={onFermer}
@@ -49,7 +57,7 @@ const FicheIos = ({ onFermer }: { onFermer: () => void }) => {
         aria-modal="true"
         aria-labelledby="fiche-ios-titre"
         onClick={(e) => e.stopPropagation()}
-        className="mx-auto flex w-full max-w-[520px] flex-col gap-3.5 rounded-t-[22px] bg-carte px-5 pb-[calc(1.75rem+env(safe-area-inset-bottom))] pt-6 shadow-[0_-1.5px_0_hsl(var(--encre))]"
+        className="mx-auto flex w-full max-w-[520px] flex-col text-encre gap-3.5 rounded-t-[22px] bg-carte px-5 pb-[calc(1.75rem+env(safe-area-inset-bottom))] pt-6 shadow-[0_-1.5px_0_hsl(var(--encre))]"
       >
         <div className="flex items-center gap-3">
           <img
@@ -64,15 +72,29 @@ const FicheIos = ({ onFermer }: { onFermer: () => void }) => {
           </h2>
         </div>
         <p className="m-0 text-doux">
-          Sur iPhone, l'installation se fait depuis Safari, en deux gestes.
+          Sur iPhone et iPad, l'app s'ajoute depuis le menu Partager, en deux
+          gestes.
         </p>
         <ol className="m-0 flex flex-col gap-2 pl-5">
+          {navigateur === "chrome" ? (
+            <li>
+              Dans Chrome, touchez <b>Partager</b>
+              <Partager /> en haut à droite, dans la barre d'adresse.
+            </li>
+          ) : navigateur === "safari" ? (
+            <li>
+              Dans Safari, touchez <b>Partager</b>
+              <Partager /> dans la barre du navigateur.
+            </li>
+          ) : (
+            <li>
+              Ouvrez le menu <b>Partager</b>
+              <Partager /> de votre navigateur.
+            </li>
+          )}
           <li>
-            Touchez le bouton <b>Partager</b>
-            <Partager /> en bas de l'écran.
-          </li>
-          <li>
-            Choisissez <b>Sur l'écran d'accueil</b>.
+            Choisissez <b>Sur l'écran d'accueil</b> ou{" "}
+            <b>Ajouter à l'écran d'accueil</b>.
           </li>
         </ol>
         <button
@@ -84,7 +106,8 @@ const FicheIos = ({ onFermer }: { onFermer: () => void }) => {
           J'ai compris
         </button>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 };
 
@@ -93,9 +116,19 @@ export const InviteInstallation = () => {
   const { bandeau, ios, installer, fermer } = useInstallation();
   const [fiche, setFiche] = useState(false);
 
-  if (fiche) {
+  // Signale le bandeau à la page, pour que le bouton « haut de page » passe au-dessus.
+  useEffect(() => {
+    if (bandeau && !fiche) document.body.dataset.bandeau = "1";
+    else delete document.body.dataset.bandeau;
+    return () => {
+      delete document.body.dataset.bandeau;
+    };
+  }, [bandeau, fiche]);
+
+  if (fiche && ios) {
     return (
       <FicheIos
+        navigateur={ios}
         onFermer={() => {
           setFiche(false);
           fermer();
@@ -170,7 +203,9 @@ export const BlocInstallation = () => {
           Installer l'app
         </button>
       </div>
-      {fiche && <FicheIos onFermer={() => setFiche(false)} />}
+      {fiche && ios && (
+        <FicheIos navigateur={ios} onFermer={() => setFiche(false)} />
+      )}
     </section>
   );
 };

@@ -4,7 +4,7 @@ import { Link, Navigate, useParams } from "react-router-dom";
 import { ArrowLeft, Check } from "lucide-react";
 import { Bande } from "@/components/brand/BrandDefs";
 import Photo from "@/components/brand/PhotoPlaceholder";
-import { FilCuisine, PageCuisine } from "@/components/cuisine/Commun";
+import { PageCuisine } from "@/components/cuisine/Commun";
 import { fr } from "@/components/quiz/conseils";
 import { RECETTES, RECETTES_COMPLETES } from "@/data/cuisine";
 import { doshasTexte, saisonsTexte } from "./recettesTexte";
@@ -20,9 +20,8 @@ const Recette = () => {
 
   return (
     <PageCuisine>
-      <section className="mx-auto grid max-w-[1220px] items-center gap-10 px-4 pb-12 pt-6 sm:px-10 md:grid-cols-2 md:gap-14">
+      <section className="mx-auto grid max-w-[1220px] items-center gap-10 px-4 pb-12 pt-10 sm:px-10 md:grid-cols-2 md:gap-14">
         <div className="flex flex-col gap-4">
-          <FilCuisine page={r.nom} />
           <h1 className="m-0 text-[clamp(3rem,7vw,5.5rem)] leading-[0.95]">{r.nom}</h1>
           <p className="m-0 max-w-[46ch] text-xl">{fr(c.intro)}</p>
           <dl className="m-0 mt-2 grid grid-cols-2 border-y-2 border-encre sm:grid-cols-4">
@@ -40,7 +39,7 @@ const Recette = () => {
           </dl>
         </div>
         <div className="h-[280px] md:h-[400px]">
-          <Photo description={`${r.nom.toLowerCase()} dans un bol, vu d'en haut`} arche />
+          <Photo description={`${r.nom.toLowerCase()} dans un bol, vu d'en haut`} arche aVenir />
         </div>
       </section>
       <Bande />

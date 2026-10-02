@@ -8,7 +8,7 @@ import type { Ref } from "./sources";
 
 /** Ce qui fixe la nature au moment de la conception (Charaka, Vi 8.95). */
 export const FACTEURS_PRAKRITI = [
-  { deva: "शुक्रशोणित", titre: "La semence des parents", texte: "Ce que chacun des deux transmet.", trait: "border-citron" },
+  { deva: "शुक्रशोणित", titre: "L'héritage des parents", texte: "Ce que chacun des deux transmet à la conception.", trait: "border-citron" },
   { deva: "काल गर्भाशय", titre: "Le moment et la matrice", texte: "Le moment de la conception, ou la durée de la grossesse selon les lectures, et l'état de l'utérus.", trait: "border-[#8DB9B0]" },
   { deva: "आहार विहार", titre: "La vie de la mère", texte: "Ce qu'elle mange et la façon dont elle vit.", trait: "border-[#DCBFD5]" },
   { deva: "महाभूत", titre: "Les éléments", texte: "Ceux qui dominent au moment de la conception.", trait: "border-aubergine" },

@@ -4,6 +4,7 @@ import { Bande, Motif } from "@/components/brand/BrandDefs";
 import { Chai } from "@/components/brand/Illustrations";
 import Photo from "@/components/brand/PhotoPlaceholder";
 import { Deva } from "@/components/comprendre/Commun";
+import { Sources } from "@/components/comprendre/Sources";
 import { Fil, PageRubrique } from "@/components/Rubrique";
 import { PAGES_QUOTIDIEN } from "@/components/quotidien/pages";
 import Roue from "@/components/quotidien/Roue";
@@ -187,6 +188,7 @@ const Saisons = () => {
             </Link>
           </div>
         </section>
+        <Sources refs={s.refs} />
         {/* [À FAIRE] lier aux fiches plantes quand elles existeront */}
         <BandePlantes
           titre="Les plantes de la saison"

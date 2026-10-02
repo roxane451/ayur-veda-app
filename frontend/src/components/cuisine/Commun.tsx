@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Fil, PageRubrique } from "@/components/Rubrique";
+import { PageRubrique } from "@/components/Rubrique";
 import {
   Cannelle,
   Cardamome,
@@ -23,7 +23,6 @@ export const PageCuisine = ({ children }: { children: ReactNode }) => (
   </PageRubrique>
 );
 
-export const FilCuisine = ({ page }: { page?: string }) => <Fil rubrique="La cuisine" href="/cuisine" page={page} />;
 
 /** L'illustration d'une épice (ou du chaï), par son identifiant. */
 const ILLUS = {
@@ -81,17 +80,15 @@ export const EffetsEpice = ({ effets }: { effets: Record<DoshaKey, EffetEpice> }
 );
 
 interface TeteProps {
-  page?: string;
   titre: ReactNode;
   intro: string;
   children: ReactNode;
 }
 
 /** En-tête d'une page de la cuisine : titre à gauche, illustrations à droite. */
-export const TeteCuisine = ({ page, titre, intro, children }: TeteProps) => (
-  <div className="mx-auto grid max-w-[1220px] items-center gap-8 px-4 pb-10 pt-6 sm:px-10 md:grid-cols-2 md:gap-10">
+export const TeteCuisine = ({ titre, intro, children }: TeteProps) => (
+  <div className="mx-auto grid max-w-[1220px] items-center gap-8 px-4 pb-10 pt-10 sm:px-10 md:grid-cols-2 md:gap-10">
     <div className="flex flex-col gap-4">
-      <FilCuisine page={page} />
       <h1 className="m-0 text-[clamp(2.6rem,6.4vw,5.25rem)] leading-none">{titre}</h1>
       <p className="m-0 max-w-[48ch] text-xl text-doux">{fr(intro)}</p>
     </div>

@@ -6,7 +6,6 @@ import { MELANGES } from "@/data/cuisine";
 const Melanges = () => (
   <PageCuisine>
     <TeteCuisine
-      page="Les mélanges"
       titre="Les mélanges"
       intro="Trois boissons et trois mélanges d'épices, un par dosha, à préparer chez soi. Les proportions sont à ajuster à votre goût."
     >

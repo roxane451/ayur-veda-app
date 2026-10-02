@@ -304,9 +304,9 @@ const Doshas = () => {
         >
           Comparer les trois
         </a>
+        <DApres>Charaka, Sūtrasthāna 1, 12 et 18 ; Vāgbhaṭa, Sūtrasthāna 1 et 12</DApres>
       </Frontispice>
       <Bande />
-      <DApres>Charaka, Sūtrasthāna 1, 12 et 18 ; Vāgbhaṭa, Sūtrasthāna 1 et 12</DApres>
 
       <div
         id="detail-dosha"
@@ -406,7 +406,7 @@ const Doshas = () => {
               to="/profil"
               className="font-bold underline underline-offset-4"
             >
-              faites le quiz
+              faites le test
             </Link>
             . Il mesure votre nature, puis votre état du moment.
           </p>

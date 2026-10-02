@@ -41,7 +41,7 @@ export const EPICES: Epice[] = [
   {
     id: "curcuma",
     nom: "Curcuma",
-    translit: "haridra",
+    translit: "haridrā",
     deva: "हरिद्रा",
     latin: "Curcuma longa",
     nature: "Réchauffant",
