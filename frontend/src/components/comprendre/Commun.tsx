@@ -1,38 +1,86 @@
 import type { ReactNode } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Fil, PageRubrique } from "@/components/Rubrique";
 import { fr } from "@/components/quiz/conseils";
 import type { Effet } from "@/data/comprendre";
-import { SOUS_PAGES } from "./sousPages";
+import { ANNEXES, LIVRES, SOUS_PAGES, livreDe, numeroChapitre } from "./sousPages";
 
 
 
-const ROMAINS = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"];
-
-/** Le sommaire de la rubrique, comme la table d'un livre : chapitres numérotés entre deux filets. */
-export const Sommaire = () => (
-  <nav aria-label="Sommaire de Comprendre" className="mx-auto max-w-[1220px] px-4 sm:px-10">
-    <ol className="m-0 flex list-none gap-x-7 overflow-x-auto border-y border-b-[3px] border-double border-encre px-1 py-2.5 [scrollbar-width:none] lg:flex-wrap lg:justify-center lg:gap-x-5 lg:overflow-visible lg:text-[15px]">
-      {SOUS_PAGES.map((p, i) => (
-        <li key={p.href} className="shrink-0">
-          <NavLink
-            to={p.href}
-            end
-            className={({ isActive }) =>
-              `inline-flex min-h-10 items-baseline gap-2 whitespace-nowrap border-b-2 pt-2 text-base no-underline lg:text-[15px] ${
-                isActive ? "border-aubergine font-bold" : "border-transparent hover:border-trait"
-              }`
-            }
-          >
-            <span className="font-normal italic text-aubergine">{ROMAINS[i]}</span>
-            {p.titre}
-          </NavLink>
-        </li>
-      ))}
-    </ol>
-  </nav>
-);
+/** Le sommaire de la rubrique, en deux niveaux : les livres, puis les chapitres du livre ouvert. */
+export const Sommaire = () => {
+  const { pathname } = useLocation();
+  const ouvert = livreDe(pathname);
+  return (
+    <nav aria-label="Sommaire de Comprendre" className="mx-auto max-w-[1220px] px-4 sm:px-10">
+      <ul className="m-0 flex list-none gap-x-6 overflow-x-auto border-y border-b-[3px] border-double border-encre px-1 [scrollbar-width:none] lg:flex-wrap lg:justify-center lg:overflow-visible">
+        {LIVRES.map((l) => {
+          const actif = l === ouvert;
+          return (
+            <li key={l.num} className="shrink-0">
+              <Link
+                to={l.chapitres[0].href}
+                aria-current={actif ? "true" : undefined}
+                className={`inline-flex min-h-11 items-baseline gap-2 whitespace-nowrap border-b-2 pt-3 text-[15px] no-underline ${
+                  actif ? "border-aubergine font-bold" : "border-transparent hover:border-trait"
+                }`}
+              >
+                <span className="font-normal italic text-aubergine">Livre {l.num}</span>
+                {l.titre}
+              </Link>
+            </li>
+          );
+        })}
+        <li aria-hidden="true" className="my-2.5 w-px shrink-0 bg-trait" />
+        {ANNEXES.map((a) => (
+          <li key={a.href} className="shrink-0">
+            <NavLink
+              to={a.href}
+              className={({ isActive }) =>
+                `inline-flex min-h-11 items-baseline whitespace-nowrap border-b-2 pt-3 text-[15px] no-underline ${
+                  isActive ? "border-aubergine font-bold" : "border-transparent hover:border-trait"
+                }`
+              }
+            >
+              {a.titre}
+            </NavLink>
+          </li>
+        ))}
+      </ul>
+      {ouvert && (
+        <ol
+          aria-label={`Les chapitres du livre ${ouvert.num}`}
+          className="-mx-4 m-0 flex list-none gap-2.5 overflow-x-auto px-4 pb-1 pt-3.5 [scrollbar-width:none] sm:mx-0 sm:flex-wrap sm:justify-center sm:px-0"
+        >
+          {ouvert.chapitres.map((c) => {
+            const actif = c.href === pathname;
+            return (
+              <li key={c.href} className="shrink-0">
+                <Link
+                  to={c.href}
+                  aria-current={actif ? "page" : undefined}
+                  className={`inline-flex min-h-10 items-center gap-2 whitespace-nowrap rounded-full py-1 pl-1.5 pr-4 text-[15px] no-underline ${
+                    actif ? "bg-encre text-pistache" : "shadow-[inset_0_0_0_1.5px_hsl(var(--trait))] hover:bg-surface"
+                  }`}
+                >
+                  <span
+                    className={`inline-flex h-7 w-7 items-center justify-center rounded-full text-sm italic ${
+                      actif ? "bg-citron text-encre" : "text-aubergine"
+                    }`}
+                  >
+                    {numeroChapitre(c.href)}
+                  </span>
+                  {c.titre}
+                </Link>
+              </li>
+            );
+          })}
+        </ol>
+      )}
+    </nav>
+  );
+};
 
 /** Gabarit commun des pages « Comprendre ». */
 export const PageComprendre = ({ children }: { children: ReactNode }) => (
@@ -116,10 +164,12 @@ export const EffetDosha = ({ nom, sens, couleur }: { nom: string; sens: Effet; c
     </span>
   );
 
-export const PiedSuite = ({ precedent, suivant }: { precedent?: string; suivant?: string }) => {
-  const i = (t?: string) => SOUS_PAGES.find((p) => p.titre === t);
-  const prec = i(precedent);
-  const suiv = i(suivant);
+/** Les pages précédente et suivante, d'après l'ordre de lecture de la rubrique. */
+export const PiedSuite = () => {
+  const { pathname } = useLocation();
+  const i = SOUS_PAGES.findIndex((p) => p.href === pathname);
+  const prec = i > 0 ? SOUS_PAGES[i - 1] : undefined;
+  const suiv = i >= 0 ? SOUS_PAGES[i + 1] : undefined;
   return (
     <nav
       aria-label="Pages voisines"

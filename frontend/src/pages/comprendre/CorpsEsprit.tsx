@@ -122,7 +122,7 @@ const CorpsEsprit = () => (
       </ul>
     </section>
 
-    <PiedSuite precedent="Agni, le feu digestif" suivant="La journée" />
+    <PiedSuite />
   </PageComprendre>
 );
 

@@ -1,16 +1,71 @@
-/** Les pages de la rubrique « Comprendre », dans l'ordre de lecture. */
-export const SOUS_PAGES = [
-  { titre: "L'essentiel", href: "/comprendre" },
-  { titre: "Les doshas", href: "/comprendre/doshas" },
-  { titre: "Les qualités", href: "/comprendre/qualites" },
-  { titre: "Les six saveurs", href: "/comprendre/saveurs" },
-  { titre: "Agni, le feu digestif", href: "/comprendre/agni" },
-  { titre: "Le corps et l'esprit", href: "/comprendre/corps-et-esprit" },
-  { titre: "La journée", href: "/comprendre/journee" },
-  { titre: "Les âges de la vie", href: "/comprendre/ages-de-la-vie" },
-  { titre: "Le déséquilibre", href: "/comprendre/desequilibre" },
-  { titre: "Lexique", href: "/comprendre/lexique" },
+/**
+ * La rubrique « Comprendre », rangée en livres comme les traités anciens.
+ * Les chapitres sont numérotés à la suite d'un livre à l'autre.
+ */
+export interface Chapitre {
+  titre: string;
+  href: string;
+}
+
+export interface Livre {
+  num: string;
+  titre: string;
+  chapitres: Chapitre[];
+}
+
+export const LIVRES: Livre[] = [
+  {
+    num: "I",
+    titre: "Les principes",
+    chapitres: [
+      { titre: "La science de la vie", href: "/comprendre" },
+      { titre: "Les cinq éléments", href: "/comprendre/elements" },
+      { titre: "Les vingt qualités", href: "/comprendre/qualites" },
+      { titre: "Les trois doshas", href: "/comprendre/doshas" },
+    ],
+  },
+  {
+    num: "II",
+    titre: "Le corps",
+    chapitres: [{ titre: "Le corps et l'esprit", href: "/comprendre/corps-et-esprit" }],
+  },
+  {
+    num: "III",
+    titre: "La nourriture",
+    chapitres: [
+      { titre: "Les six saveurs", href: "/comprendre/saveurs" },
+      { titre: "Agni, le feu digestif", href: "/comprendre/agni" },
+    ],
+  },
+  {
+    num: "IV",
+    titre: "Rester en bonne santé",
+    chapitres: [
+      { titre: "La journée", href: "/comprendre/journee" },
+      { titre: "Les âges de la vie", href: "/comprendre/ages-de-la-vie" },
+    ],
+  },
+  {
+    num: "V",
+    titre: "Le déséquilibre",
+    chapitres: [{ titre: "Les six étapes", href: "/comprendre/desequilibre" }],
+  },
 ];
+
+/** Les pages de fin de rubrique, hors livres. */
+export const ANNEXES: Chapitre[] = [
+  { titre: "Lexique", href: "/comprendre/lexique" },
+  { titre: "Les textes", href: "/comprendre/textes" },
+];
+
+/** Toutes les pages de la rubrique, dans l'ordre de lecture. */
+export const SOUS_PAGES: Chapitre[] = [...LIVRES.flatMap((l) => l.chapitres), ...ANNEXES];
+
+/** Le livre auquel appartient une adresse, s'il y en a un. */
+export const livreDe = (href: string) => LIVRES.find((l) => l.chapitres.some((c) => c.href === href));
+
+/** Le numéro d'un chapitre, compté sur l'ensemble des livres (1 pour le premier). */
+export const numeroChapitre = (href: string) => LIVRES.flatMap((l) => l.chapitres).findIndex((c) => c.href === href) + 1;
 
 export const lienSouligne =
   "inline-flex items-center gap-2 font-bold underline decoration-citron decoration-[3px] underline-offset-[6px]";

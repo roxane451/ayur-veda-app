@@ -76,7 +76,7 @@ const Lexique = () => {
           <p className="m-0 text-doux">Aucun mot ne correspond à «&nbsp;{recherche}&nbsp;».</p>
         )}
       </section>
-      <PiedSuite precedent="Le déséquilibre" />
+      <PiedSuite />
     </PageComprendre>
   );
 };

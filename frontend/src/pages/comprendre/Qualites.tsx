@@ -2,7 +2,8 @@ import { Bande, Motif } from "@/components/brand/BrandDefs";
 import { Chai, Vent } from "@/components/brand/Illustrations";
 import { Deva, Frontispice, Ornement, PageComprendre, PiedSuite } from "@/components/comprendre/Commun";
 import { COULEUR_DOSHA, fr } from "@/components/quiz/conseils";
-import { PAIRES_QUALITES, VIPAKA } from "@/data/corpsEsprit";
+import { PAIRES_QUALITES, REFS_QUALITES, VIPAKA } from "@/data/corpsEsprit";
+import { DApres, Renvoi, Sources } from "@/components/comprendre/Sources";
 import { DOSHAS, NOM_DOSHA, type DoshaKey } from "@/lib/doshaLogic";
 
 const Points = ({ doshas, align }: { doshas: DoshaKey[]; align: "debut" | "fin" }) => (
@@ -66,7 +67,7 @@ const Vipaka = () => {
 
 const Qualites = () => (
   <PageComprendre>
-    <Frontispice deva="गुण" translit="guṇa, les vingt qualités" titre="Les qualités">
+    <Frontispice deva="गुण" translit="guṇa, les vingt qualités" titre="Les vingt qualités">
       <p className="m-0 mt-1 max-w-[46ch] text-xl text-doux">
         Chaque substance, aliment, plante ou climat, peut se décrire par vingt qualités, rangées en dix paires de contraires. Elles disent comment une chose agit sur nous.
       </p>
@@ -75,6 +76,7 @@ const Qualites = () => (
       </div>
     </Frontispice>
     <Bande />
+    <DApres>Charaka, Sūtrasthāna 1 et 26</DApres>
 
     <section aria-labelledby="q-paires" className="mx-auto flex max-w-[1100px] flex-col gap-7 px-4 pb-20 pt-16 sm:px-10 md:pt-20">
       <div className="grid items-end gap-5 md:grid-cols-2 md:gap-14">
@@ -83,6 +85,7 @@ const Qualites = () => (
         </h2>
         <p className="m-0 text-lg text-doux">
           Chaque dosha se reconnaît à ses qualités. Vata est léger, froid, sec et mobile, Pitta chaud, vif et fluide, Kapha lourd, stable et onctueux.
+          <Renvoi n={1} />
         </p>
       </div>
       <p className="m-0 flex flex-wrap items-center gap-x-5 gap-y-2 text-[15px] text-doux">
@@ -135,7 +138,7 @@ const Qualites = () => (
             Le semblable augmente le semblable, le contraire le diminue.
           </h2>
           <p className="m-0 max-w-[46ch] text-lg text-[#D3E3DE]">
-            C'est la règle qui guide tous les conseils de l'Ayurveda. Charaka l'énonce dès le premier chapitre de son traité. Ce qui partage les qualités
+            C'est la règle qui guide tous les conseils de l'Ayurveda. Charaka l'énonce dès le premier chapitre de son traité.<Renvoi n={2} /> Ce qui partage les qualités
             d'un dosha le fait monter, ce qui s'y oppose le ramène à l'équilibre.
           </p>
         </div>
@@ -164,6 +167,7 @@ const Qualites = () => (
           </p>
           <p className="m-0 text-lg">
             {fr("Un aliment ou une plante réchauffe le corps ou le rafraîchit. Le gingembre chauffe, le lait rafraîchit. Le chaud apaise Vata et Kapha, le froid apaise Pitta.")}
+            <Renvoi n={3} />
           </p>
         </div>
         <div className="flex flex-col gap-3">
@@ -173,7 +177,8 @@ const Qualites = () => (
             <span className="italic text-doux">vipāka</span>
           </p>
           <p className="m-0 text-lg">
-            Une fois digérées, les six saveurs se ramènent à trois effets, qui agissent longtemps après le repas. Le schéma montre lesquels. Sushruta, lui, n'en retient que deux, lourd et léger.
+            Une fois digérées, les six saveurs se ramènent à trois effets, qui agissent longtemps après le repas. Le schéma montre lesquels.<Renvoi n={4} /> Suśruta, lui, n'en retient que deux, lourd et léger.
+            <Renvoi n={5} />
           </p>
         </div>
       </div>
@@ -198,7 +203,8 @@ const Qualites = () => (
       </ul>
     </section>
 
-    <PiedSuite precedent="Les doshas" suivant="Les six saveurs" />
+    <Sources refs={REFS_QUALITES} />
+    <PiedSuite />
   </PageComprendre>
 );
 

@@ -113,7 +113,7 @@ const Ages = () => (
       </div>
     </section>
 
-    <PiedSuite precedent="La journée" suivant="Le déséquilibre" />
+    <PiedSuite />
   </PageComprendre>
 );
 

@@ -111,7 +111,7 @@ const Desequilibre = () => (
       </div>
     </section>
 
-    <PiedSuite precedent="Les âges de la vie" suivant="Lexique" />
+    <PiedSuite />
   </PageComprendre>
 );
 

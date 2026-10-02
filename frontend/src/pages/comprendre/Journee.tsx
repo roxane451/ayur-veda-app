@@ -126,7 +126,7 @@ const Journee = ({ rubrique = "comprendre" }: { rubrique?: "comprendre" | "quoti
           </Link>
         </div>
       </section>
-      {!quotidien && <PiedSuite precedent="Le corps et l'esprit" suivant="Les âges de la vie" />}
+      {!quotidien && <PiedSuite />}
     </Cadre>
   );
 };

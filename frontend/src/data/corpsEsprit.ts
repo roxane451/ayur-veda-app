@@ -4,6 +4,7 @@
  * [À VALIDER] par une praticienne.
  */
 import type { DoshaKey } from "@/lib/doshaLogic";
+import type { Ref } from "./sources";
 
 /* ───────── Les vingt qualités, en dix paires ───────── */
 
@@ -77,4 +78,12 @@ export const GUNAS_ESPRIT = [
     texte: "Le repos, la lourdeur, la torpeur. Nécessaire au sommeil, il alourdit quand les restes, les excès ou la sédentarité s'installent.",
     fond: "bg-encre text-pistache",
   },
+];
+
+export const REFS_QUALITES: Ref[] = [
+  { texte: "charaka", passage: "Sūtrasthāna 1.59 à 1.61", sujet: "Les qualités de chaque dosha" },
+  { texte: "charaka", passage: "Sūtrasthāna 1.44", sujet: "Le semblable augmente le semblable, le contraire le diminue" },
+  { texte: "charaka", passage: "Sūtrasthāna 26.64", sujet: "Vīrya, chauffant ou rafraîchissant" },
+  { texte: "charaka", passage: "Sūtrasthāna 26.57 et 26.58", sujet: "Les trois vipāka" },
+  { texte: "sushruta", passage: "Sūtrasthāna 40", sujet: "Deux vipāka seulement, lourd et léger" },
 ];

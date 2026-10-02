@@ -3,16 +3,10 @@
  * [À VALIDER] par une praticienne avant la mise en ligne.
  */
 import type { DoshaKey } from "@/lib/doshaLogic";
+import type { Ref } from "./sources";
 
 export type Effet = "+" | "-";
 
-export const ELEMENTS = [
-  { nom: "Éther", translit: "Ākāśa", deva: "आकाश", texte: "L'espace dans lequel tout le reste prend place." },
-  { nom: "Air", translit: "Vāyu", deva: "वायु", texte: "Il anime le souffle et tous les mouvements du corps." },
-  { nom: "Feu", translit: "Agni", deva: "अग्नि", texte: "Il digère et il réchauffe." },
-  { nom: "Eau", translit: "Jala", deva: "जल", texte: "Elle forme les liquides du corps." },
-  { nom: "Terre", translit: "Pṛthvī", deva: "पृथ्वी", texte: "Elle donne les os et les muscles." },
-];
 
 /* ───────── Les doshas ───────── */
 
@@ -26,6 +20,10 @@ export interface DoshaDetail {
   qualites: string[];
   corps: [string, string][];
   esprit: [string, string][];
+  /** Ce qu'il fait quand il est équilibré (Charaka, Sū 18 et Sū 12) */
+  fonctions: string[];
+  /** Ses cinq formes, chacune avec sa place et son rôle */
+  formes: { nom: string; deva: string; siege: string; role: string }[];
   signes: string[];
   conseils: string[];
   /** [À VALIDER] par une praticienne */
@@ -41,7 +39,22 @@ export const DOSHAS_DETAIL: DoshaDetail[] = [
     essence: "Le mouvement",
     presentation:
       "Vata gouverne ce qui bouge en nous, de la respiration à la circulation des idées. Équilibré, il donne de l'élan et de l'imagination. En excès, il disperse et dessèche.",
-    qualites: ["Léger", "Froid", "Sec", "Rugueux", "Mobile", "Subtil"],
+    qualites: ["Sec", "Froid", "Léger", "Subtil", "Mobile", "Clair", "Rugueux"],
+    fonctions: [
+      "L'élan et l'enthousiasme",
+      "Le souffle, qui entre et qui sort",
+      "Tous les mouvements du corps",
+      "La circulation dans les tissus",
+      "L'expulsion des selles, de l'urine et des autres besoins naturels",
+      "Le bon fonctionnement des sens",
+    ],
+    formes: [
+      { nom: "Prāṇa", deva: "प्राण", siege: "La tête et la poitrine", role: "Respirer, avaler, garder l'esprit et les sens en éveil." },
+      { nom: "Udāna", deva: "उदान", siege: "La gorge et la poitrine", role: "La parole, l'effort, la mémoire." },
+      { nom: "Samāna", deva: "समान", siege: "Près du feu digestif", role: "Recevoir la nourriture, la digérer, trier ce qui sert." },
+      { nom: "Vyāna", deva: "व्यान", siege: "Le cœur, puis tout le corps", role: "Faire circuler, ouvrir et fermer, bouger." },
+      { nom: "Apāna", deva: "अपान", siege: "Le bas-ventre", role: "Éliminer les selles et l'urine, les règles, la naissance." },
+    ],
     corps: [
       ["Morphologie", "Mince, prend difficilement du poids"],
       ["Peau", "Fine et sèche"],
@@ -78,7 +91,22 @@ export const DOSHAS_DETAIL: DoshaDetail[] = [
     essence: "La transformation",
     presentation:
       "Pitta gouverne ce qui transforme, à commencer par la digestion et la chaleur du corps. Équilibré, il rend l'esprit clair et décidé. En excès, il irrite et échauffe.",
-    qualites: ["Chaud", "Pénétrant", "Liquide", "Légèrement huileux", "Acide"],
+    qualites: ["Légèrement huileux", "Chaud", "Pénétrant", "Liquide", "Acide", "Fluide", "Piquant"],
+    fonctions: [
+      "La digestion",
+      "La vue",
+      "La chaleur du corps",
+      "La faim et la soif",
+      "La souplesse du corps et l'éclat du teint",
+      "La gaieté et l'intelligence",
+    ],
+    formes: [
+      { nom: "Pācaka", deva: "पाचक", siege: "Entre l'estomac et l'intestin", role: "Digérer la nourriture et soutenir les autres formes." },
+      { nom: "Rañjaka", deva: "रञ्जक", siege: "Le foie et la rate", role: "Donner sa couleur au sang." },
+      { nom: "Sādhaka", deva: "साधक", siege: "Le cœur", role: "L'intelligence, la mémoire, l'ambition." },
+      { nom: "Ālocaka", deva: "आलोचक", siege: "Les yeux", role: "La vue." },
+      { nom: "Bhrājaka", deva: "भ्राजक", siege: "La peau", role: "L'éclat du teint." },
+    ],
     corps: [
       ["Morphologie", "Moyenne, musclée"],
       ["Peau", "Claire, sensible, rougit facilement"],
@@ -115,7 +143,22 @@ export const DOSHAS_DETAIL: DoshaDetail[] = [
     essence: "La structure",
     presentation:
       "Kapha donne au corps sa structure, des os aux articulations, et soutient l'immunité. Équilibré, il apporte la force et le calme. En excès, il alourdit et ralentit.",
-    qualites: ["Lourd", "Froid", "Huileux", "Stable", "Doux", "Sucré"],
+    qualites: ["Lourd", "Froid", "Doux", "Huileux", "Sucré", "Stable", "Gluant"],
+    fonctions: [
+      "L'onctuosité du corps",
+      "La cohésion des articulations",
+      "La stabilité et la fermeté",
+      "La force et la vigueur",
+      "La patience et la constance",
+      "Le contentement, sans avidité",
+    ],
+    formes: [
+      { nom: "Avalambaka", deva: "अवलम्बक", siege: "La poitrine", role: "Soutenir le cœur et les autres formes de Kapha." },
+      { nom: "Kledaka", deva: "क्लेदक", siege: "L'estomac", role: "Humecter et amollir la nourriture." },
+      { nom: "Bodhaka", deva: "बोधक", siege: "La langue", role: "Percevoir le goût." },
+      { nom: "Tarpaka", deva: "तर्पक", siege: "La tête", role: "Nourrir les sens." },
+      { nom: "Śleṣaka", deva: "श्लेषक", siege: "Les articulations", role: "Les lubrifier et les tenir ensemble." },
+    ],
     corps: [
       ["Morphologie", "Robuste, prend du poids facilement"],
       ["Peau", "Épaisse, douce, plutôt grasse"],
@@ -258,3 +301,20 @@ export const LEXIQUE = [
 
 /** Première lettre sans accent ni macron, pour l'index du lexique. */
 export const initiale = (mot: string) => mot.normalize("NFD").replace(/[̀-ͯ]/g, "")[0].toUpperCase();
+
+/* ───────── Où siègent les doshas (Suśruta, Sū 21) ───────── */
+
+export const SIEGES_DOSHAS: { dosha: DoshaKey; region: string; lieux: string; image: string }[] = [
+  { dosha: "kapha", region: "Au-dessus du cœur", lieux: "La poitrine, la gorge, la tête, les articulations, l'estomac.", image: "comme la lune" },
+  { dosha: "pitta", region: "Entre le cœur et le nombril", lieux: "L'intestin grêle et l'estomac, le sang, les yeux, la peau.", image: "comme le soleil" },
+  { dosha: "vata", region: "Sous le nombril", lieux: "Le gros intestin, le bassin, les cuisses, les os, les oreilles.", image: "comme le vent" },
+];
+
+export const REFS_DOSHAS: Ref[] = [
+  { texte: "charaka", passage: "Sūtrasthāna 1.59 à 1.61", sujet: "Les qualités des trois doshas" },
+  { texte: "charaka", passage: "Sūtrasthāna 18.49 à 18.51", sujet: "Ce que fait chaque dosha quand il est équilibré" },
+  { texte: "charaka", passage: "Cikitsāsthāna 28.5 à 28.11", sujet: "Les cinq formes de Vata" },
+  { texte: "sushruta", passage: "Sūtrasthāna 21.10 à 21.14", sujet: "Les cinq formes de Pitta et de Kapha" },
+  { texte: "vagbhata", passage: "Sūtrasthāna 12", sujet: "Les quinze formes, rangées comme on les cite aujourd'hui" },
+  { texte: "sushruta", passage: "Sūtrasthāna 21.6", sujet: "Les sièges des doshas" },
+];
