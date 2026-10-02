@@ -155,7 +155,7 @@ const Constitution = () => (
         <h2 className="m-0 text-2xl">Votre état du moment</h2>
         <p className="m-0 text-lg text-[#E7D9E3]">Ce que la saison, l'âge et la vie y ont changé. C'est lui qu'on rééquilibre.</p>
         <Link to="/profil" className="mt-2 inline-flex min-h-[48px] items-center rounded-buta bg-citron px-6 font-bold text-encre no-underline hover:opacity-90">
-          Faire le quiz
+          Faire le test
         </Link>
       </div>
     </section>

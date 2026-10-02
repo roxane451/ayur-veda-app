@@ -48,7 +48,7 @@ const Offre = () => (
             Suivre son état <em>d'une saison à l'autre</em>
           </h1>
           <p className="m-0 max-w-[52ch] text-xl text-doux">
-            Le quiz, la cuisine et les saisons restent gratuits. Avec un compte, vos bilans sont gardés et vous voyez votre état changer au long de l'année.{CONTENU_PAYANT && " Les programmes et les guides seront aussi vendus à l'unité."}
+            Le test, la cuisine et les saisons restent gratuits. Avec un compte, vos bilans sont gardés et vous voyez votre état changer au long de l'année.{CONTENU_PAYANT && " Les programmes et les guides seront aussi vendus à l'unité."}
           </p>
           <p className="m-0 text-[15px]">
             Déjà un compte ?{" "}
@@ -63,13 +63,13 @@ const Offre = () => (
         <div className="flex flex-col gap-5 md:pl-2">
           <h2 className="m-0 text-[clamp(2rem,3.6vw,2.6rem)] leading-none">Sans compte</h2>
           <p className="m-0 text-lg">
-            Le quiz et son résultat, la boîte à épices, les mélanges, six recettes et les conseils des quatre saisons restent en accès libre.
+            Le test et son résultat, la boîte à épices, les mélanges, six recettes et les conseils des quatre saisons restent en accès libre.
           </p>
           <Link
             to="/profil"
             className="mt-2 inline-flex min-h-[52px] self-start items-center rounded-buta border-2 border-encre px-6 font-bold no-underline hover:bg-encre hover:text-pistache"
           >
-            Faire le quiz
+            Faire le test
           </Link>
         </div>
 

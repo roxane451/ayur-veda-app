@@ -229,7 +229,7 @@ const Accueil = ({ onNature, onEtat }: { onNature: () => void; onEtat: () => voi
     <div className="relative mx-auto flex max-w-[1220px] flex-col gap-12 px-4 pb-24 pt-8 sm:px-10 md:pt-10">
     <div className="flex max-w-[760px] flex-col gap-4">
       <h1 className="m-0 text-[clamp(2.1rem,6vw,3.6rem)] leading-[1.02]">
-        Le quiz se fait <em>en deux temps</em>.
+        Le test se fait <em>en deux temps</em>.
       </h1>
       <p className="m-0 text-xl text-doux">
         {fr(

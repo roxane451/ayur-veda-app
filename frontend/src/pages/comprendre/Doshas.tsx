@@ -406,7 +406,7 @@ const Doshas = () => {
               to="/profil"
               className="font-bold underline underline-offset-4"
             >
-              faites le quiz
+              faites le test
             </Link>
             . Il mesure votre nature, puis votre état du moment.
           </p>
