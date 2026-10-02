@@ -83,7 +83,7 @@ export default BrandDefs;
 /** Fond à motif (buta sur coton, dabu sur indigo), posé en absolu derrière une section. */
 export const Motif = ({ id }: { id: "buta" | "dabu" }) => (
   <svg width="100%" height="100%" aria-hidden="true" className="pointer-events-none absolute inset-0">
-    <rect width="100%" height="100%" fill={`url(#${id})`} filter={id === "dabu" ? "url(#stamp)" : undefined} />
+    <rect width="100%" height="100%" fill={`url(#${id})`} />
   </svg>
 );
 
@@ -94,7 +94,7 @@ export const Bande = ({ variante = "aubergine" }: { variante?: "aubergine" | "pa
       width="100%"
       height="44"
       fill={variante === "paon" ? "url(#bandeIndigo)" : "url(#bande)"}
-      filter="url(#stamp)"
+     
     />
   </svg>
 );
