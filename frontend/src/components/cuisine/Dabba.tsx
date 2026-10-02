@@ -81,7 +81,7 @@ const Dabba = ({ actives }: { actives?: Set<string> }) => (
       </ul>
     </div>
     <p className="m-0 hidden text-[15px] italic text-doux sm:block">
-      Au centre, le curcuma (<i>haridra</i>)
+      Au centre, le curcuma (<i>haridrā</i>)
     </p>
     {/* Sur téléphone, les noms passent sous la boîte */}
     <ul className="m-0 grid w-full list-none grid-cols-2 gap-x-6 p-0 sm:hidden">
