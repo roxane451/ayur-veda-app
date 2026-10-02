@@ -62,9 +62,9 @@ const Constitution = () => (
       <div className="mt-5">
         <Ornement />
       </div>
+      <DApres>Charaka, Vimānasthāna 8 ; Suśruta, Śārīrasthāna 4</DApres>
     </Frontispice>
     <Bande />
-    <DApres>Charaka, Vimānasthāna 8 ; Suśruta, Śārīrasthāna 4</DApres>
 
     <section aria-labelledby="co-conception" className="mx-auto flex max-w-[1100px] flex-col gap-8 px-4 pb-20 pt-14 sm:px-10 md:pt-16">
       <div className="grid items-end gap-4 md:grid-cols-2 md:gap-14">

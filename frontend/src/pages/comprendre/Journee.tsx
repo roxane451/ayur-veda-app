@@ -90,8 +90,8 @@ const Journee = ({ rubrique = "comprendre" }: { rubrique?: "comprendre" | "quoti
           <Horloge actuel={actuel} />
         </div>
       </div>
+      <DApres seul>Vāgbhaṭa, Sūtrasthāna 1 et 2 ; Charaka, Sūtrasthāna 5</DApres>
       <Bande />
-      <DApres>Vāgbhaṭa, Sūtrasthāna 1 et 2 ; Charaka, Sūtrasthāna 5</DApres>
 
       <section aria-label="Les moments de la journée" className="mx-auto flex max-w-[1000px] flex-col px-4 pb-12 pt-14 sm:px-10 md:pt-16">
         <p className="m-0 mb-6 text-lg text-doux">
