@@ -201,9 +201,9 @@ const TroisDoshas = () => (
 /* ───────────── Sur l'étagère ───────────── */
 
 const EPICES = [
-  { nom: "Curcuma", skt: "haridra", Illu: Curcuma, taille: 118, rot: -4, chute: 6 },
-  { nom: "Gingembre", skt: "shunti", Illu: Gingembre, taille: 108, rot: 3, chute: 30 },
-  { nom: "Cardamome", skt: "ela", Illu: Cardamome, taille: 104, rot: -2, chute: 12 },
+  { nom: "Curcuma", skt: "haridrā", Illu: Curcuma, taille: 118, rot: -4, chute: 6 },
+  { nom: "Gingembre", skt: "śuṇṭhī", Illu: Gingembre, taille: 108, rot: 3, chute: 30 },
+  { nom: "Cardamome", skt: "elā", Illu: Cardamome, taille: 104, rot: -2, chute: 12 },
   { nom: "Cannelle", skt: "tvak", Illu: Cannelle, taille: 116, rot: 5, chute: 38 },
   { nom: "Poivre noir", skt: "maricha", Illu: Poivre, taille: 96, rot: -3, chute: 18 },
 ];
