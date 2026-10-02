@@ -5,12 +5,26 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Navigate, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 
-import Essentiel from "./pages/comprendre/Essentiel";
+import { CONTENU_PAYANT } from "./lib/offre";
+import ScienceVie from "./pages/comprendre/ScienceVie";
+import Elements from "./pages/comprendre/Elements";
+import Textes from "./pages/comprendre/Textes";
 import Doshas from "./pages/comprendre/Doshas";
 import Saveurs from "./pages/comprendre/Saveurs";
 import Agni from "./pages/comprendre/Agni";
 import Journee from "./pages/comprendre/Journee";
-import Lexique from "./pages/comprendre/Lexique";
+import Qualites from "./pages/comprendre/Qualites";
+import Constitution from "./pages/comprendre/Constitution";
+import Tissus from "./pages/comprendre/Tissus";
+import Action from "./pages/comprendre/Action";
+import SaisonsTextes from "./pages/comprendre/SaisonsTextes";
+import Sommeil from "./pages/comprendre/Sommeil";
+import Besoins from "./pages/comprendre/Besoins";
+import Causes from "./pages/comprendre/Causes";
+import Esprit from "./pages/comprendre/Esprit";
+import Piliers from "./pages/comprendre/Piliers";
+import Ages from "./pages/comprendre/Ages";
+import Desequilibre from "./pages/comprendre/Desequilibre";
 import RetourEnHaut from "./components/RetourEnHaut";
 import Profil from "./pages/Profil";
 import EspaceMembre from "./pages/EspaceMembre";
@@ -23,6 +37,8 @@ import Melanges from "./pages/cuisine/Melanges";
 import FicheEpice from "./pages/cuisine/Fiche";
 import Recettes from "./pages/cuisine/Recettes";
 import Recette from "./pages/cuisine/Recette";
+import PageIngredients from "./pages/cuisine/Ingredients";
+import BienManger from "./pages/cuisine/BienManger";
 import NotFound from "./pages/NotFound";
 import BrandDefs from "./components/brand/BrandDefs";
 
@@ -40,24 +56,42 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
 
-            <Route path="/comprendre" element={<Essentiel />} />
+            <Route path="/comprendre" element={<ScienceVie />} />
+            <Route path="/comprendre/elements" element={<Elements />} />
+            <Route path="/comprendre/textes" element={<Textes />} />
             <Route path="/comprendre/doshas" element={<Doshas />} />
+            <Route path="/comprendre/qualites" element={<Qualites />} />
             <Route path="/comprendre/saveurs" element={<Saveurs />} />
+            <Route path="/comprendre/constitution" element={<Constitution />} />
+            <Route path="/comprendre/tissus" element={<Tissus />} />
+            <Route path="/comprendre/esprit" element={<Esprit />} />
+            <Route path="/comprendre/trois-piliers" element={CONTENU_PAYANT ? <Piliers /> : <Navigate to="/comprendre" replace />} />
+            <Route path="/comprendre/corps-et-esprit" element={<Navigate to="/comprendre/tissus" replace />} />
+            <Route path="/comprendre/action-des-aliments" element={<Action />} />
             <Route path="/comprendre/agni" element={<Agni />} />
-            <Route path="/comprendre/journee" element={<Journee />} />
-            <Route path="/comprendre/lexique" element={<Lexique />} />
+            <Route path="/comprendre/regles-du-repas" element={<BienManger rubrique="comprendre" />} />
+            <Route path="/comprendre/journee" element={CONTENU_PAYANT ? <Journee /> : <Navigate to="/comprendre" replace />} />
+            <Route path="/comprendre/saisons" element={CONTENU_PAYANT ? <SaisonsTextes /> : <Navigate to="/comprendre" replace />} />
+            <Route path="/comprendre/sommeil" element={CONTENU_PAYANT ? <Sommeil /> : <Navigate to="/comprendre" replace />} />
+            <Route path="/comprendre/besoins-naturels" element={CONTENU_PAYANT ? <Besoins /> : <Navigate to="/comprendre" replace />} />
+            <Route path="/comprendre/ages-de-la-vie" element={CONTENU_PAYANT ? <Ages /> : <Navigate to="/comprendre" replace />} />
+            <Route path="/comprendre/trois-causes" element={CONTENU_PAYANT ? <Causes /> : <Navigate to="/comprendre" replace />} />
+            <Route path="/comprendre/desequilibre" element={CONTENU_PAYANT ? <Desequilibre /> : <Navigate to="/comprendre" replace />} />
+            <Route path="/comprendre/lexique" element={<Navigate to="/comprendre/textes" replace />} />
             <Route path="/profil" element={<Profil />} />
             <Route path="/au-quotidien" element={<Saisons />} />
             <Route
               path="/au-quotidien/journee"
               element={<Journee rubrique="quotidien" />}
             />
-            <Route path="/au-quotidien/programme" element={<Programme />} />
+            <Route path="/au-quotidien/programme" element={CONTENU_PAYANT ? <Programme /> : <Navigate to="/au-quotidien" replace />} />
             <Route path="/cuisine" element={<Boite />} />
             <Route path="/cuisine/melanges" element={<Melanges />} />
             <Route path="/cuisine/epices/:id" element={<FicheEpice />} />
             <Route path="/cuisine/recettes" element={<Recettes />} />
             <Route path="/cuisine/recettes/:id" element={<Recette />} />
+            <Route path="/cuisine/ingredients" element={<PageIngredients />} />
+            <Route path="/cuisine/bien-manger" element={<BienManger />} />
             <Route path="/espace-membre" element={<EspaceMembre />} />
             <Route path="/connexion" element={<Acces mode="connexion" />} />
             <Route path="/inscription" element={<Acces mode="inscription" />} />

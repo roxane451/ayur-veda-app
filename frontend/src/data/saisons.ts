@@ -37,15 +37,15 @@ export const SAISONS: Record<SaisonId, SaisonAccueil> = {
     nom: "L'hiver",
     dosha: "Kapha",
     presentation:
-      "De décembre à février, le froid humide fait monter Kapha. On a envie de rester sous la couette, le nez se prend et la digestion ralentit.",
-    assiette: "Soupes épicées, légumes verts, millet, orge, sarrasin. Poivre noir, gingembre, ail, un peu de miel cru.",
-    onEvite: "les plats lourds, le sucre et les laitages en excès.",
+      "De décembre à février, le froid réveille l'appétit. Les textes anciens conseillent alors une cuisine chaude et nourrissante, et Kapha commence doucement à s'accumuler.",
+    assiette: "Des plats chauds, nourrissants et bien assaisonnés. Riz, blé, orge ou sarrasin. Gingembre, cannelle, cumin, ail, et un peu de poivre.",
+    onEvite: "le cru, le glacé, les repas trop maigres et le sucre en excès.",
     matin: [
       "Se lever tôt, avant 6 h si possible",
       "Bouger franchement, avec des salutations au soleil ou une marche rapide",
     ],
     journee: ["Chercher la lumière du jour", "Éviter la sieste"],
-    soir: ["Un dîner très léger", "Une tisane de gingembre et de fenouil"],
+    soir: ["Un dîner chaud et nourrissant", "Se coucher à heure régulière"],
   },
   printemps: {
     id: "printemps",
@@ -109,7 +109,7 @@ export const SAISONS_DETAIL: SaisonDetail[] = [
     dosha: "vata",
     qualites: ["Sec", "Froid", "Mobile"],
     intro:
-      "Avec la lumière qui baisse et le froid, Vata s'accumule. Beaucoup ressentent alors de la sécheresse, de l'anxiété ou du mal à se concentrer.",
+      "En Europe, l'automne est venteux, sec puis pluvieux. Ces qualités rappellent celles de Vata, et beaucoup ressentent alors de la sécheresse, de l'anxiété ou du mal à se concentrer. Dans le calendrier indien, ces mois correspondent à sharad, où les textes situent plutôt l'aggravation de Pitta.",
     photo: "feuilles d'automne et tasse fumante sur un tissu block print",
     assiette: [
       "Des plats chauds, humides et nourrissants",
@@ -142,17 +142,16 @@ export const SAISONS_DETAIL: SaisonDetail[] = [
     dosha: "kapha",
     qualites: ["Lourd", "Froid", "Humide"],
     intro:
-      "Le froid humide fait monter Kapha. On se sent plus lourd, le nez se prend et la digestion ralentit.",
+      "De décembre à février, le froid réveille l'appétit. Les textes anciens conseillent alors une cuisine chaude et nourrissante, et Kapha commence doucement à s'accumuler.",
     photo: "bol de soupe épicée et écharpe en laine près d'une fenêtre",
     assiette: [
-      "Des plats chauds, légers et épicés",
-      "Soupes épicées et bouillons clairs",
-      "Légumes verts et crucifères",
-      "Des céréales légères comme le millet, l'orge ou le sarrasin",
-      "Poivre noir, gingembre, ail, moutarde",
-      "Un peu de miel cru, jamais chauffé",
+      "Des plats chauds, nourrissants et bien assaisonnés",
+      "Soupes, ragoûts et légumes mijotés",
+      "Des céréales complètes, riz, blé, orge ou sarrasin",
+      "Gingembre, cannelle, cumin, ail, et un peu de poivre",
+      "Du ghee et de l'huile de sésame",
     ],
-    limiter: ["Les laitages en excès", "Les plats lourds et gras", "Le sucre", "Les viandes rouges"],
+    limiter: ["Le cru et le glacé", "Les repas trop maigres ou sautés", "Le sucre en excès", "Les boissons froides"],
     matin: [
       "Se lever tôt, avant 6 h si possible",
       "Un bain de bouche à l'huile",
@@ -160,9 +159,9 @@ export const SAISONS_DETAIL: SaisonDetail[] = [
       "Une douche chaude, terminée par un peu d'eau fraîche",
     ],
     journee: ["Bouger régulièrement", "Chercher la lumière du jour", "Éviter la sieste", "Apprendre ou créer quelque chose"],
-    soir: ["Un dîner très léger", "Une tisane de gingembre et de fenouil", "Ne pas se coucher trop tôt"],
+    soir: ["Un dîner chaud et nourrissant", "Une tisane de gingembre et de fenouil", "Se coucher à heure régulière"],
     plantes: [
-      { nom: "Trikatu", texte: "poivre, gingembre et poivre long, pour réveiller le feu" },
+      { nom: "Trikatu", texte: "poivre, gingembre et poivre long, à petites doses en fin d'hiver, quand Kapha s'alourdit" },
       { nom: "Curcuma", texte: "l'épice dorée de l'hiver" },
       { nom: "Cannelle", texte: "pour réchauffer" },
       { nom: "Guggul", texte: "une résine traditionnelle de Kapha" },
@@ -208,7 +207,7 @@ export const SAISONS_DETAIL: SaisonDetail[] = [
     dosha: "pitta",
     qualites: ["Chaud", "Intense", "Léger"],
     intro:
-      "La chaleur fait monter Pitta. On devient plus irritable, la peau réagit au soleil et l'acidité gagne l'estomac.",
+      "La chaleur échauffe le corps et l'esprit, ce que l'on rattache à Pitta. Les textes anciens recommandent alors des aliments doux, frais et liquides, et le repos aux heures chaudes.",
     photo: "pastèque et menthe fraîche sur un tissu clair, à l'ombre",
     assiette: [
       "Des aliments frais, mais pas glacés",

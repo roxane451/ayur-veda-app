@@ -1,3 +1,4 @@
+import { CONTENU_PAYANT } from "@/lib/offre";
 import { Link, useSearchParams } from "react-router-dom";
 import { Bande, Motif } from "@/components/brand/BrandDefs";
 import { Chai } from "@/components/brand/Illustrations";
@@ -91,6 +92,13 @@ const Saisons = () => {
             , la saison de{" "}
             {NOM_DOSHA[SAISONS_DETAIL.find((x) => x.id === actuelle)!.dosha]}.
             Touchez une autre saison sur la roue pour lire ses conseils.
+          </p>
+          <p className="m-0 max-w-[46ch] text-[15px] text-doux">
+            Les textes anciens de l'Ayurveda, la Charaka Samhita et la Sushruta
+            Samhita, décrivent six saisons propres au climat de l'Inde du Nord.
+            Nous les ramenons ici aux quatre saisons européennes, comme le font
+            la plupart des praticiens en Occident. Cette correspondance est une
+            adaptation, pas une règle des textes.
           </p>
         </div>
         <Roue
@@ -209,6 +217,7 @@ const Saisons = () => {
         </div>
       </section>
 
+      {CONTENU_PAYANT && (
       <section className="mx-auto grid max-w-[1220px] items-center gap-10 px-4 py-16 sm:px-10 md:grid-cols-2 md:py-[72px]">
         <div className="flex flex-col gap-2.5">
           <h2 className="m-0 text-[clamp(2rem,4vw,2.5rem)] leading-[1.05]">
@@ -233,6 +242,7 @@ const Saisons = () => {
           </Link>
         </div>
       </section>
+      )}
     </PageRubrique>
   );
 };

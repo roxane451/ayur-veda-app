@@ -1,38 +1,103 @@
-import type { ReactNode } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { useEffect, useRef, type ReactNode } from "react";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Fil, PageRubrique } from "@/components/Rubrique";
+import { Motif } from "@/components/brand/BrandDefs";
 import { fr } from "@/components/quiz/conseils";
 import type { Effet } from "@/data/comprendre";
-import { SOUS_PAGES } from "./sousPages";
+import { ANNEXES, LIVRES, SOUS_PAGES, livreDe, numeroChapitre } from "./sousPages";
 
 
 
-const ROMAINS = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII"];
-
-/** Le sommaire de la rubrique, comme la table d'un livre : chapitres numérotés entre deux filets. */
-export const Sommaire = () => (
-  <nav aria-label="Sommaire de Comprendre" className="mx-auto max-w-[1220px] px-4 sm:px-10">
-    <ol className="m-0 flex list-none gap-x-8 overflow-x-auto border-y border-b-[3px] border-double border-encre px-1 py-2.5 [scrollbar-width:none] lg:justify-center">
-      {SOUS_PAGES.map((p, i) => (
-        <li key={p.href} className="shrink-0">
-          <NavLink
-            to={p.href}
-            end
-            className={({ isActive }) =>
-              `inline-flex min-h-10 items-baseline gap-2 whitespace-nowrap border-b-2 pt-2 text-base no-underline ${
-                isActive ? "border-aubergine font-bold" : "border-transparent hover:border-trait"
-              }`
-            }
-          >
-            <span className="font-normal italic text-aubergine">{ROMAINS[i]}</span>
-            {p.titre}
-          </NavLink>
-        </li>
-      ))}
-    </ol>
-  </nav>
-);
+/** Le sommaire de la rubrique, en deux niveaux : les livres, puis les chapitres du livre ouvert. */
+export const Sommaire = () => {
+  const { pathname } = useLocation();
+  const ouvert = livreDe(pathname);
+  const livres = useRef<HTMLUListElement>(null);
+  const chapitres = useRef<HTMLOListElement>(null);
+  // Sur téléphone, les rangées défilent : on centre le livre et le chapitre ouverts.
+  useEffect(() => {
+    for (const rangee of [livres.current, chapitres.current]) {
+      const actif = rangee?.querySelector<HTMLElement>("[aria-current]")?.closest("li");
+      if (rangee && actif && rangee.scrollWidth > rangee.clientWidth) {
+        rangee.scrollLeft = actif.offsetLeft - (rangee.clientWidth - actif.clientWidth) / 2;
+      }
+    }
+  }, [pathname]);
+  return (
+    <nav aria-label="Sommaire de Comprendre" className="mx-auto max-w-[1220px] px-4 sm:px-10">
+      <ul ref={livres} className="m-0 flex list-none gap-x-6 overflow-x-auto border-y border-b-[3px] border-double border-encre px-1 [scrollbar-width:none] lg:flex-wrap lg:justify-center lg:overflow-visible">
+        {LIVRES.map((l) => {
+          const actif = l === ouvert;
+          return (
+            <li key={l.num} className="shrink-0">
+              <Link
+                to={l.chapitres[0].href}
+                aria-current={actif ? "true" : undefined}
+                className={`inline-flex min-h-11 items-baseline gap-2 whitespace-nowrap border-b-2 pt-3 text-[15px] no-underline ${
+                  actif ? "border-aubergine font-bold" : "border-transparent hover:border-trait"
+                }`}
+              >
+                <span className="font-normal italic text-aubergine">Livre {l.num}</span>
+                {l.titre}
+              </Link>
+            </li>
+          );
+        })}
+        <li aria-hidden="true" className="my-2.5 w-px shrink-0 bg-trait" />
+        {ANNEXES.map((a) => (
+          <li key={a.href} className="shrink-0">
+            <NavLink
+              to={a.href}
+              className={({ isActive }) =>
+                `inline-flex min-h-11 items-baseline whitespace-nowrap border-b-2 pt-3 text-[15px] no-underline ${
+                  isActive ? "border-aubergine font-bold" : "border-transparent hover:border-trait"
+                }`
+              }
+            >
+              {a.titre}
+            </NavLink>
+          </li>
+        ))}
+      </ul>
+      {ouvert && (
+        <ol
+          ref={chapitres}
+          aria-label={`Les chapitres du livre ${ouvert.num}`}
+          className="-mx-4 m-0 flex list-none gap-1 overflow-x-auto px-4 pb-1 pt-4 [scrollbar-width:none] sm:mx-0 sm:justify-center sm:px-0"
+        >
+          {ouvert.chapitres.map((c) => {
+            const actif = c.href === pathname;
+            return (
+              <li key={c.href} className="w-[96px] shrink-0 sm:w-[140px]">
+                {/* Chaque chapitre est une petite porte en arche ; celle du chapitre ouvert est pleine. */}
+                <Link
+                  to={c.href}
+                  aria-current={actif ? "page" : undefined}
+                  className="group flex flex-col items-center gap-1.5 text-center no-underline"
+                >
+                  <span
+                    className={`relative flex h-[40px] w-[32px] items-end justify-center overflow-hidden rounded-b-[3px] rounded-t-full pb-1.5 shadow-[inset_0_0_0_1.5px_hsl(var(--encre))] ${
+                      actif ? "bg-paon" : "bg-carte group-hover:bg-surface"
+                    }`}
+                  >
+                    {actif && <Motif id="dabu" />}
+                    <span className={`relative font-body text-[15px] font-bold italic leading-none ${actif ? "text-citron" : "text-aubergine"}`}>
+                      {numeroChapitre(c.href)}
+                    </span>
+                  </span>
+                  <span className={`text-[14px] leading-tight sm:text-[15px] ${actif ? "font-bold text-encre" : "text-doux group-hover:text-encre"}`}>
+                    {c.titre}
+                  </span>
+                </Link>
+              </li>
+            );
+          })}
+        </ol>
+      )}
+    </nav>
+  );
+};
 
 /** Gabarit commun des pages « Comprendre ». */
 export const PageComprendre = ({ children }: { children: ReactNode }) => (
@@ -116,10 +181,12 @@ export const EffetDosha = ({ nom, sens, couleur }: { nom: string; sens: Effet; c
     </span>
   );
 
-export const PiedSuite = ({ precedent, suivant }: { precedent?: string; suivant?: string }) => {
-  const i = (t?: string) => SOUS_PAGES.find((p) => p.titre === t);
-  const prec = i(precedent);
-  const suiv = i(suivant);
+/** Les pages précédente et suivante, d'après l'ordre de lecture de la rubrique. */
+export const PiedSuite = () => {
+  const { pathname } = useLocation();
+  const i = SOUS_PAGES.findIndex((p) => p.href === pathname);
+  const prec = i > 0 ? SOUS_PAGES[i - 1] : undefined;
+  const suiv = i >= 0 ? SOUS_PAGES[i + 1] : undefined;
   return (
     <nav
       aria-label="Pages voisines"

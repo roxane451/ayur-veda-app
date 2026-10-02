@@ -1,10 +1,11 @@
+import { CONTENU_PAYANT } from "@/lib/offre";
 import { Link, useSearchParams } from "react-router-dom";
 import { Lock } from "lucide-react";
 import Photo from "@/components/brand/PhotoPlaceholder";
 import { IlluEpice, PageCuisine, Pastille, TeteCuisine } from "@/components/cuisine/Commun";
 import { Poudre } from "@/components/brand/Illustrations";
 import { COULEUR_DOSHA } from "@/components/quiz/conseils";
-import { RECETTES, RECETTES_COMPLETES, RUBRIQUES, filtrerRecettes, type Recette, type Saison } from "@/data/cuisine";
+import { RECETTES, RECETTES_VISIBLES, RECETTES_COMPLETES, RUBRIQUES, filtrerRecettes, type Recette, type Saison } from "@/data/cuisine";
 import { DOSHAS, NOM_DOSHA } from "@/lib/doshaLogic";
 import { doshasTexte, saisonsTexte } from "./recettesTexte";
 
@@ -20,7 +21,7 @@ const Fiche = ({ r }: { r: Recette }) => {
         <span className="text-sm text-doux">
           {doshasTexte(r)} · {saisonsTexte(r)} · {r.minutes} min
         </span>
-        {r.membres ? (
+        {!CONTENU_PAYANT ? null : r.membres ? (
           <span className="inline-flex items-center gap-1 text-[13px] font-bold text-paon">
             <Lock className="h-3 w-3" strokeWidth={2.5} aria-hidden="true" /> Membres
           </span>
@@ -52,7 +53,7 @@ const Recettes = () => {
     setParams(p, { replace: true });
   };
 
-  const liste = filtrerRecettes(RECETTES, { dosha, saison, rapide });
+  const liste = filtrerRecettes(RECETTES_VISIBLES, { dosha, saison, rapide });
   const gratuites = RECETTES.filter((r) => !r.membres).length;
   const filtre = Boolean(dosha || saison || rapide);
 
@@ -61,7 +62,7 @@ const Recettes = () => {
       <TeteCuisine
         page="Les recettes"
         titre="Les recettes"
-        intro={`${RECETTES.length} plats de la cuisine ayurvédique, du petit-déjeuner au dessert, avec pour chacun le dosha qu'il apaise et sa saison. ${gratuites} sont en accès libre.`}
+        intro={`${RECETTES_VISIBLES.length} plats de la cuisine ayurvédique, du petit-déjeuner au dessert, avec pour chacun le dosha qu'il apaise et sa saison. ${CONTENU_PAYANT ? `${gratuites} sont en accès libre.` : ""}`.trim()}
       >
         <Poudre size={150} decorative className="h-auto w-[38%] max-w-[150px]" />
         <IlluEpice id="gingembre" size={120} className="h-auto w-[30%] max-w-[120px]" />
@@ -151,6 +152,7 @@ const Recettes = () => {
         {liste.length === 0 && <p className="m-0 pt-10 text-doux">Aucune recette ne correspond à ces filtres pour l'instant.</p>}
       </div>
 
+      {CONTENU_PAYANT && (
       <section className="mx-auto max-w-[1220px] px-4 pb-[88px] sm:px-10">
         <div className="flex flex-wrap items-center justify-between gap-5 rounded-2xl bg-paon px-6 py-7 text-pistache sm:px-8">
           <span className="max-w-[640px]">
@@ -164,6 +166,7 @@ const Recettes = () => {
           </Link>
         </div>
       </section>
+      )}
     </PageCuisine>
   );
 };

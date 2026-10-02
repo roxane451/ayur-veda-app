@@ -1,3 +1,4 @@
+import { CONTENU_PAYANT } from "@/lib/offre";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -29,8 +30,10 @@ const A_VENIR = [
 
 const FAQ = [
   ["À quoi sert le compte ?", "Il garde votre nature et vos bilans de saison sur tous vos appareils, et montre comment votre état change d'une saison à l'autre."],
-  ["Le compte est-il payant ?", "Non, pas pour l'instant. L'abonnement ajoutera les programmes et les recettes de la semaine. Vous serez prévenu avant tout paiement."],
-  ["Les contenus achetés à l'unité resteront-ils accessibles ?", "Oui, à vie, même sans abonnement."],
+  CONTENU_PAYANT
+    ? ["Le compte est-il payant ?", "Non, pas pour l'instant. L'abonnement ajoutera les programmes et les recettes de la semaine. Vous serez prévenu avant tout paiement."]
+    : ["Le compte est-il payant ?", "Non. Il est gratuit et sans carte bancaire."],
+  ...(CONTENU_PAYANT ? [["Les contenus achetés à l'unité resteront-ils accessibles ?", "Oui, à vie, même sans abonnement."]] : []),
   ["Le site remplace-t-il une consultation ?", "Non. Il donne des repères pour le quotidien. Pour un trouble qui dure, consultez un professionnel de santé."],
 ];
 
@@ -45,7 +48,7 @@ const Offre = () => (
             Suivre son état <em>d'une saison à l'autre</em>
           </h1>
           <p className="m-0 max-w-[52ch] text-xl text-doux">
-            Le quiz, la cuisine et les saisons restent gratuits. Avec un compte, vos bilans sont gardés et vous voyez votre état changer au long de l'année. Les programmes et les guides seront aussi vendus à l'unité.
+            Le quiz, la cuisine et les saisons restent gratuits. Avec un compte, vos bilans sont gardés et vous voyez votre état changer au long de l'année.{CONTENU_PAYANT && " Les programmes et les guides seront aussi vendus à l'unité."}
           </p>
           <p className="m-0 text-[15px]">
             Déjà un compte ?{" "}
@@ -78,8 +81,8 @@ const Offre = () => (
           <div className="relative flex flex-col gap-5">
             <h2 className="m-0 text-[clamp(2rem,3.6vw,2.6rem)] leading-none">Avec un compte</h2>
             <p className="m-0 text-lg">
-              Votre nature reste enregistrée et vous faites le point à chaque saison, avec l'historique de vos états. Le programme de 21 jours et les
-              recettes de la semaine s'y ajouteront avec l'abonnement.
+              Votre nature reste enregistrée et vous faites le point à chaque saison, avec l'historique de vos états.
+              {CONTENU_PAYANT && " Le programme de 21 jours et les recettes de la semaine s'y ajouteront avec l'abonnement."}
             </p>
             <div className="flex flex-wrap items-center gap-x-6 gap-y-3 pt-2">
               <Link
@@ -88,12 +91,13 @@ const Offre = () => (
               >
                 Créer mon compte
               </Link>
-              <p className="m-0 max-w-[30ch] text-[15px] text-[#D3E3DE]">Gratuit, sans carte bancaire. Vous serez prévenu avant tout abonnement.</p>
+              <p className="m-0 max-w-[30ch] text-[15px] text-[#D3E3DE]">Gratuit, sans carte bancaire.{CONTENU_PAYANT && " Vous serez prévenu avant tout abonnement."}</p>
             </div>
           </div>
         </article>
       </section>
 
+      {CONTENU_PAYANT && (
       <section id="contenus" aria-labelledby="o-catalogue" className="mx-auto flex max-w-[1220px] scroll-mt-24 flex-col gap-8 px-4 py-16 sm:px-10 md:py-[88px]">
         <div className="flex flex-col gap-3">
           <h2 id="o-catalogue" className="m-0 text-[clamp(2.2rem,4.4vw,3.25rem)]">
@@ -144,6 +148,7 @@ const Offre = () => (
           </div>
         </div>
       </section>
+      )}
 
       <section aria-labelledby="o-faq" className="bg-surface">
         <div className="mx-auto flex max-w-[900px] flex-col gap-2 px-4 py-16 sm:px-10 md:py-20">

@@ -55,7 +55,7 @@ const Boite = () => {
                 style={{ transform: `rotate(${INCLINAISON[EPICES.indexOf(e)]}deg)` }}
               >
                 <span className="flex items-baseline justify-between">
-                  <span className={`text-[13px] font-bold ${e.nature.startsWith("Ré") ? "text-aubergine" : "text-paon"}`}>{e.nature}</span>
+                  <span className={`text-[13px] font-bold ${e.nature === "Neutre" ? "text-doux" : e.nature.startsWith("Ré") ? "text-aubergine" : "text-paon"}`}>{e.nature}</span>
                   <Deva className="text-xl text-aubergine">{e.deva}</Deva>
                 </span>
                 <span className="flex h-[110px] items-center justify-center">

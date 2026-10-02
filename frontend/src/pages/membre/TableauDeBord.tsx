@@ -1,3 +1,4 @@
+import { CONTENU_PAYANT } from "@/lib/offre";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Lock } from "lucide-react";
@@ -8,7 +9,7 @@ import { Chai } from "@/components/brand/Illustrations";
 import Sceau from "@/components/brand/Sceau";
 import { useCompte } from "@/components/compte/CompteContext";
 import { COULEUR_DOSHA, fr } from "@/components/quiz/conseils";
-import { RECETTES, RECETTES_COMPLETES, filtrerRecettes, type Saison } from "@/data/cuisine";
+import { RECETTES_VISIBLES, RECETTES_COMPLETES, filtrerRecettes, type Saison } from "@/data/cuisine";
 import { PROGRAMME_AUTOMNE, saisonDuMoment } from "@/data/saisons";
 import type { BilanServeur } from "@/lib/api";
 import { DOSHAS, NOM_DOSHA, comparerEtat, doshaDominant, libelleProfil, partsEntieres, type DoshaKey } from "@/lib/doshaLogic";
@@ -75,13 +76,13 @@ const TableauDeBord = () => {
   const comparaison = dernier ? comparerEtat(dernier.scores, nature ?? undefined) : null;
   const cible: DoshaKey | null = comparaison?.type === "exces" ? comparaison.dosha : nature ? doshaDominant(nature) : null;
   const saison = NOM_SAISON[saisonDuMoment().id];
-  const recettes = filtrerRecettes(RECETTES, { dosha: cible, saison })
+  const recettes = filtrerRecettes(RECETTES_VISIBLES, { dosha: cible, saison })
     .sort((a, b) => Number(a.membres) - Number(b.membres))
     .slice(0, 4);
 
   const onglets = [
     ["Mon suivi", "#suivi"],
-    ["Mon programme", "#programme"],
+    ...(CONTENU_PAYANT ? [["Mon programme", "#programme"]] : []),
     ["Recettes", "#recettes"],
     ["Mon compte", "#compte"],
   ];
@@ -199,6 +200,7 @@ const TableauDeBord = () => {
             )}
           </div>
 
+          {CONTENU_PAYANT && (
           <div id="programme" className="flex scroll-mt-24 flex-col gap-4 rounded-[18px] bg-surface p-7 sm:p-8">
             <p className="m-0 font-bold text-aubergine">Bientôt dans votre espace</p>
             <h2 className="m-0 text-[clamp(1.7rem,3vw,2.1rem)] leading-[1.1]">{PROGRAMME_AUTOMNE.titre}</h2>
@@ -219,6 +221,7 @@ const TableauDeBord = () => {
               Voir le programme
             </Link>
           </div>
+          )}
         </section>
 
         <section id="recettes" aria-labelledby="m-recettes" className="mx-auto flex max-w-[1220px] scroll-mt-24 flex-col gap-6 px-4 pb-16 pt-6 sm:px-10">
@@ -238,7 +241,7 @@ const TableauDeBord = () => {
                   <span className="font-display text-[1.3rem] leading-tight">{r.nom}</span>
                   <span className="flex items-center gap-2 text-[15px] text-doux">
                     {r.minutes} min ·
-                    {r.membres ? (
+                    {!CONTENU_PAYANT ? null : r.membres ? (
                       <span className="inline-flex items-center gap-1 font-bold text-paon">
                         <Lock className="h-3 w-3" strokeWidth={2.5} aria-hidden="true" /> Membres
                       </span>

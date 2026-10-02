@@ -1,7 +1,16 @@
+import { CONTENU_PAYANT } from "@/lib/offre";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Bande } from "@/components/brand/BrandDefs";
 import { PageComprendre, PiedSuite, TitrePage } from "@/components/comprendre/Commun";
+import { DApres, Renvoi, Sources } from "@/components/comprendre/Sources";
+import type { Ref } from "@/data/sources";
+
+const REFS: Ref[] = [
+  { texte: "vagbhata", passage: "Sūtrasthāna 1.8", sujet: "Le dosha de chaque moment du jour" },
+  { texte: "charaka", passage: "Sūtrasthāna 5.71 à 5.103", sujet: "Les gestes du matin, de la toilette à la tenue du jour" },
+  { texte: "vagbhata", passage: "Sūtrasthāna 2", sujet: "La routine du jour" },
+];
 import { Fil, PageRubrique } from "@/components/Rubrique";
 import { PAGES_QUOTIDIEN } from "@/components/quotidien/pages";
 import { COULEUR_DOSHA, fr } from "@/components/quiz/conseils";
@@ -75,15 +84,22 @@ const Journee = ({ rubrique = "comprendre" }: { rubrique?: "comprendre" | "quoti
           titre="La journée idéale"
           deva="दिनचर्या"
           translit="dinacharya"
-          intro="La journée suit le même cycle que l'année. Chaque dosha y domine deux fois, quatre heures à chaque fois, et l'on cale ses gestes sur ce rythme."
+          intro="Chaque dosha domine deux fois dans la journée, et l'on cale ses gestes sur ce rythme. Les textes parlent du matin, du milieu du jour et de la fin du jour. Les horaires ci-dessous supposent un lever du soleil vers 6 h et un coucher vers 18 h, et le dîner avant 19 h comme les heures de la nuit sont une lecture moderne."
         />
         <div className="flex justify-center pb-8 md:py-6">
           <Horloge actuel={actuel} />
         </div>
       </div>
       <Bande />
+      <DApres>Vāgbhaṭa, Sūtrasthāna 1 et 2 ; Charaka, Sūtrasthāna 5</DApres>
 
-      <section aria-label="Les moments de la journée" className="mx-auto flex max-w-[1000px] flex-col px-4 pb-12 pt-16 sm:px-10 md:pt-[72px]">
+      <section aria-label="Les moments de la journée" className="mx-auto flex max-w-[1000px] flex-col px-4 pb-12 pt-14 sm:px-10 md:pt-16">
+        <p className="m-0 mb-6 text-lg text-doux">
+          Le rythme des doshas dans la journée vient de Vāgbhaṭa,
+          <Renvoi n={1} /> les gestes du matin de Charaka,
+          <Renvoi n={2} /> et l'ensemble de la routine de Vāgbhaṭa encore.
+          <Renvoi n={3} />
+        </p>
         {MOMENTS_JOURNEE.map((m, i) => (
           <div
             key={m.debut}
@@ -115,18 +131,22 @@ const Journee = ({ rubrique = "comprendre" }: { rubrique?: "comprendre" | "quoti
           <div className="flex max-w-[620px] flex-col gap-1.5">
             <span className="font-display text-[1.75rem]">Par où commencer</span>
             <span className="text-doux">
-              Choisissez le geste qui vous semble le plus facile et tenez-le trois semaines avant d'en ajouter un autre. Le programme de saison de l'espace membre en propose un par jour.
+              Choisissez le geste qui vous semble le plus facile et tenez-le trois semaines avant d'en ajouter un autre.
+              {CONTENU_PAYANT && " Le programme de saison de l'espace membre en propose un par jour."}
             </span>
           </div>
+          {CONTENU_PAYANT && (
           <Link
             to="/espace-membre"
             className="inline-flex min-h-[52px] items-center rounded-buta bg-aubergine px-6 font-bold text-pistache no-underline hover:opacity-90"
           >
             Voir les programmes
           </Link>
+          )}
         </div>
       </section>
-      {!quotidien && <PiedSuite precedent="Agni, le feu digestif" suivant="Lexique" />}
+      <Sources refs={REFS} />
+      {!quotidien && <PiedSuite />}
     </Cadre>
   );
 };

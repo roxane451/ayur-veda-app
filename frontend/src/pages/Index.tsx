@@ -18,6 +18,7 @@ import {
 import { PRAKRITI } from "@/data/quiz";
 import { saisonDuMoment } from "@/data/saisons";
 import { fr } from "@/components/quiz/conseils";
+import RencontreElements from "@/components/accueil/RencontreElements";
 
 const lienSouligne =
   "inline-flex items-center gap-2 font-bold underline decoration-citron decoration-[3px] underline-offset-[6px]";
@@ -156,45 +157,61 @@ const DOSHAS = [
   },
 ];
 
+const COULEUR_ARC: Record<string, string> = { Vata: "#8DB9B0", Pitta: "#DCBFD5", Kapha: "#BBD439" };
+const PAIRES: Record<string, [{ nom: string; deva: string }, { nom: string; deva: string }]> = {
+  Vata: [
+    { nom: "Éther", deva: "आकाश" },
+    { nom: "Air", deva: "वायु" },
+  ],
+  Pitta: [
+    { nom: "Feu", deva: "अग्नि" },
+    { nom: "Eau", deva: "जल" },
+  ],
+  Kapha: [
+    { nom: "Eau", deva: "जल" },
+    { nom: "Terre", deva: "पृथ्वी" },
+  ],
+};
+
 const TroisDoshas = () => (
-  <>
-    <section aria-labelledby="accueil-doshas" className="relative overflow-hidden bg-paon text-pistache">
-      <Motif id="dabu" />
-      <div className="relative mx-auto flex max-w-[1220px] flex-col gap-11 px-4 py-20 sm:px-10 md:pb-28 md:pt-24">
-        <div className="flex max-w-[560px] flex-col gap-4">
-          <h2 id="accueil-doshas" className="m-0 text-[clamp(2.3rem,4.6vw,3.6rem)]">
-            Les trois doshas
-          </h2>
-          <p className="m-0 text-[#D3E3DE]">
-            Les cinq éléments se combinent en nous de trois façons, que l'on appelle les doshas. Tout le monde a les trois, en proportions différentes.
-          </p>
-        </div>
-        {DOSHAS.map(({ nom, deva, elements, texte, Illu, decal }) => (
-          <div
-            key={nom}
-            className={`grid max-w-[640px] grid-cols-[88px_minmax(0,1fr)] items-center gap-5 sm:grid-cols-[170px_minmax(0,1fr)] sm:gap-8 ${decal}`}
-          >
-            <div className="flex justify-center">
-              <Illu size={150} decorative className="h-auto w-[88px] sm:w-[150px]" />
-            </div>
-            <div className="flex flex-col gap-1.5">
-              <p className="m-0 flex items-baseline gap-3.5">
-                <span className="font-display text-[clamp(2rem,5vw,2.9rem)] leading-none">{nom}</span>
-                <span lang="sa" className="font-devanagari text-[28px] text-citron">
-                  {deva}
-                </span>
-              </p>
-              <p className="m-0 italic text-[#C4DCD5]">{elements}</p>
-              <p className="m-0 text-[#D3E3DE]">{fr(texte)}</p>
-            </div>
-          </div>
-        ))}
-        <Link to="/comprendre/doshas" className={`${lienSouligne} self-start text-pistache`}>
-          Comprendre les doshas
-        </Link>
+  <section aria-labelledby="accueil-doshas" className="relative overflow-hidden bg-paon text-pistache">
+    <Motif id="dabu" />
+    <div className="relative mx-auto flex max-w-[1220px] flex-col gap-12 px-4 py-20 sm:px-10 md:pb-28 md:pt-24">
+      <div className="grid items-end gap-5 md:grid-cols-2 md:gap-14">
+        <h2 id="accueil-doshas" className="m-0 text-[clamp(2.3rem,4.6vw,3.6rem)] leading-none">
+          Les trois doshas
+        </h2>
+        <p className="m-0 text-lg text-[#D3E3DE]">
+          Les cinq éléments se combinent en nous de trois façons, que l'on appelle les doshas. Tout le monde a les trois, en proportions différentes.
+        </p>
       </div>
-    </section>
-  </>
+      <div className="grid gap-14 md:grid-cols-3 md:gap-10">
+        {DOSHAS.map(({ nom, deva, elements, texte, Illu }) => (
+          <article key={nom} className="flex flex-col items-center gap-5 text-center">
+            <h3 className="m-0 flex items-baseline gap-2.5 text-[2.1rem] leading-none">
+              {nom}
+              <span lang="sa" className="font-devanagari text-2xl normal-case" style={{ color: COULEUR_ARC[nom] }}>
+                {deva}
+              </span>
+            </h3>
+            <RencontreElements
+              gauche={PAIRES[nom][0]}
+              droite={PAIRES[nom][1]}
+              couleur={COULEUR_ARC[nom]}
+              Illu={Illu}
+              label={`${nom} naît de la rencontre de ${elements}.`}
+            />
+            <p className="m-0 w-full max-w-[34ch] border-t-[3px] pt-4 text-[#D3E3DE]" style={{ borderColor: COULEUR_ARC[nom] }}>
+              {fr(texte)}
+            </p>
+          </article>
+        ))}
+      </div>
+      <Link to="/comprendre/doshas" className={`${lienSouligne} self-center text-pistache`}>
+        Comprendre les doshas
+      </Link>
+    </div>
+  </section>
 );
 
 /* ───────────── Sur l'étagère ───────────── */
@@ -220,7 +237,7 @@ const Etagere = () => (
     <div className="-mx-4 overflow-x-auto px-4 pb-4 [scrollbar-width:none] sm:mx-0 sm:px-0">
       <ul className="relative m-0 grid min-w-[920px] list-none grid-cols-5 md:min-w-0 gap-3 p-0 pt-6">
         <svg width="100%" height="18" aria-hidden="true" className="absolute left-0 top-[184px] block overflow-visible">
-          <g filter="url(#ink)">
+          <g>
             <rect x="0" y="2" width="100%" height="12" rx="3" fill="#A8823A" stroke="#13201E" strokeWidth="2" />
           </g>
         </svg>

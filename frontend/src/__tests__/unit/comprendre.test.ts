@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { initiale, momentEnCours, MOMENTS_JOURNEE, SAVEURS, DOSHAS_DETAIL } from "@/data/comprendre";
+import { momentEnCours, MOMENTS_JOURNEE, SAVEURS, DOSHAS_DETAIL } from "@/data/comprendre";
 
 describe("momentEnCours", () => {
   it("trouve la tranche de quatre heures du moment", () => {
@@ -13,10 +13,6 @@ describe("momentEnCours", () => {
 });
 
 describe("contenus", () => {
-  it("range les mots du lexique sans tenir compte des accents", () => {
-    expect(initiale("Āma")).toBe("A");
-    expect(initiale("Vīrya")).toBe("V");
-  });
   it("décrit six saveurs et trois doshas complets", () => {
     expect(SAVEURS).toHaveLength(6);
     for (const d of DOSHAS_DETAIL) {

@@ -1,8 +1,7 @@
 /**
  * Définitions SVG partagées par tout le site, rendues une seule fois (dans App).
- *  - #ink   : léger tremblé, pour un trait dessiné à la main
- *  - #stamp : tremblé + grain, pour un aplat imprimé au tampon
- *  - #soft  : grain plus léger, pour le logo et l'empreinte en grand
+ *  - #stamp : grain fin, pour un aplat imprimé au tampon
+ *  - #soft  : grain plus léger encore, pour le logo et l'empreinte en grand
  *  - motifs : buta (cachemire), dabu (fleurs sur vert paon), bordures à arches
  */
 const AUBERGINE = "#5B2A4E";
@@ -31,19 +30,16 @@ const BrandDefs = () => (
         <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves={2} seed={4} result="w" />
         <feDisplacementMap in="SourceGraphic" in2="w" scale={3.2} xChannelSelector="R" yChannelSelector="G" />
       </filter>
-      <filter id="stamp" x="-5%" y="-5%" width="110%" height="110%">
-        <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves={2} seed={9} result="w" />
-        <feDisplacementMap in="SourceGraphic" in2="w" scale={2.4} xChannelSelector="R" yChannelSelector="G" result="d" />
-        <feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves={1} seed={2} result="g" />
-        <feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.5 1.5" result="m" />
-        <feComposite in="d" in2="m" operator="in" />
+      {/* Grain d'impression fin : quelques points de réserve dans l'aplat, sans déformer les contours. */}
+      <filter id="stamp" x="0" y="0" width="100%" height="100%" colorInterpolationFilters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency="1.8" numOctaves={1} seed={2} result="g" />
+        <feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -0.9 1.38" result="m" />
+        <feComposite in="SourceGraphic" in2="m" operator="in" />
       </filter>
-      <filter id="soft" x="-5%" y="-5%" width="110%" height="110%">
-        <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves={2} seed={9} result="w" />
-        <feDisplacementMap in="SourceGraphic" in2="w" scale={2} xChannelSelector="R" yChannelSelector="G" result="d" />
-        <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves={1} seed={2} result="g" />
-        <feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -0.9 1.28" result="m" />
-        <feComposite in="d" in2="m" operator="in" />
+      <filter id="soft" x="0" y="0" width="100%" height="100%" colorInterpolationFilters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency="2.2" numOctaves={1} seed={2} result="g" />
+        <feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -0.6 1.3" result="m" />
+        <feComposite in="SourceGraphic" in2="m" operator="in" />
       </filter>
 
       <pattern id="buta" width="64" height="64" patternUnits="userSpaceOnUse">
