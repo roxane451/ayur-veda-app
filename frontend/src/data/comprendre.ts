@@ -297,6 +297,12 @@ export const LEXIQUE = [
   { mot: "Kriyākāla", deva: "क्रियाकाल", sens: "Les six moments où l'on peut agir sur un déséquilibre, de l'accumulation à la complication." },
   { mot: "Vayas", deva: "वयस्", sens: "L'âge. Kapha domine l'enfance, Pitta l'âge adulte, Vata la vieillesse." },
   { mot: "Tamas", deva: "तमस्", sens: "La qualité de l'esprit liée à l'inertie et à la lourdeur." },
+  { mot: "Mahābhūta", deva: "महाभूत", sens: "Les cinq grands éléments, de l'éther à la terre." },
+  { mot: "Prabhāva", deva: "प्रभाव", sens: "L'action propre d'un aliment ou d'une plante, qui ne s'explique pas par ses qualités." },
+  { mot: "Prajñāparādha", deva: "प्रज्ञापराध", sens: "L'erreur de jugement, quand on fait ce que l'on sait nuisible." },
+  { mot: "Svastha", deva: "स्वस्थ", sens: "En bonne santé, littéralement établi en soi-même." },
+  { mot: "Trayopastambha", deva: "त्रयोपस्तम्भ", sens: "Les trois piliers de la vie, la nourriture, le sommeil et la maîtrise de soi." },
+  { mot: "Vega", deva: "वेग", sens: "Un besoin naturel du corps, qu'il ne faut pas retenir." },
 ].sort((x, y) => x.mot.localeCompare(y.mot, "fr", { sensitivity: "base" }));
 
 /** Première lettre sans accent ni macron, pour l'index du lexique. */

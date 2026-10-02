@@ -58,7 +58,10 @@ export const LIVRES: Livre[] = [
   {
     num: "V",
     titre: "Le déséquilibre",
-    chapitres: [{ titre: "Les six étapes", href: "/comprendre/desequilibre" }],
+    chapitres: [
+      { titre: "Les trois causes", href: "/comprendre/trois-causes" },
+      { titre: "Les six étapes", href: "/comprendre/desequilibre" },
+    ],
   },
 ];
 

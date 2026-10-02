@@ -20,6 +20,7 @@ import Action from "./pages/comprendre/Action";
 import SaisonsTextes from "./pages/comprendre/SaisonsTextes";
 import Sommeil from "./pages/comprendre/Sommeil";
 import Besoins from "./pages/comprendre/Besoins";
+import Causes from "./pages/comprendre/Causes";
 import Esprit from "./pages/comprendre/Esprit";
 import Piliers from "./pages/comprendre/Piliers";
 import Ages from "./pages/comprendre/Ages";
@@ -74,6 +75,7 @@ const App = () => (
             <Route path="/comprendre/sommeil" element={<Sommeil />} />
             <Route path="/comprendre/besoins-naturels" element={<Besoins />} />
             <Route path="/comprendre/ages-de-la-vie" element={<Ages />} />
+            <Route path="/comprendre/trois-causes" element={<Causes />} />
             <Route path="/comprendre/desequilibre" element={<Desequilibre />} />
             <Route path="/comprendre/lexique" element={<Lexique />} />
             <Route path="/profil" element={<Profil />} />
