@@ -67,7 +67,6 @@ export const LIVRES: Livre[] = [
 
 /** Les pages de fin de rubrique, hors livres. */
 export const ANNEXES: Chapitre[] = [
-  { titre: "Lexique", href: "/comprendre/lexique" },
   { titre: "Les textes", href: "/comprendre/textes" },
 ];
 

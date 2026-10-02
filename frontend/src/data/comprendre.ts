@@ -268,46 +268,6 @@ export function momentEnCours(heure: number): number {
   return Math.floor(h / 4);
 }
 
-/* ───────── Lexique ───────── */
-
-export const LEXIQUE = [
-  { mot: "Abhyanga", deva: "अभ्यङ्ग", sens: "Le massage à l'huile tiède, de préférence le matin avant la douche." },
-  { mot: "Agni", deva: "अग्नि", sens: "Le feu digestif, qui transforme ce que l'on mange." },
-  { mot: "Āma", deva: "आम", sens: "Le résidu de ce qui a été mal digéré, lourd et collant." },
-  { mot: "Āyurveda", deva: "आयुर्वेद", sens: "La science de la vie, de āyus (la vie) et veda (la connaissance)." },
-  { mot: "Dinacharya", deva: "दिनचर्या", sens: "La routine du jour, du lever au coucher." },
-  { mot: "Dosha", deva: "दोष", sens: "L'une des trois forces, Vata, Pitta et Kapha, qui font vivre le corps et qui, déréglées, le dérangent." },
-  { mot: "Kapha", deva: "कफ", sens: "Le dosha de l'eau et de la terre, qui donne la structure et la stabilité." },
-  { mot: "Pitta", deva: "पित्त", sens: "Le dosha du feu, avec une part d'eau, qui gouverne la digestion." },
-  { mot: "Prakriti", deva: "प्रकृति", sens: "Votre constitution, fixée dès la conception, le dosage qui vous est propre." },
-  { mot: "Rasa", deva: "रस", sens: "La saveur. Il y en a six." },
-  { mot: "Ritucharya", deva: "ऋतुचर्या", sens: "La façon d'adapter sa vie aux saisons." },
-  { mot: "Vata", deva: "वात", sens: "Le dosha de l'air et de l'éther, qui gouverne le mouvement." },
-  { mot: "Vikriti", deva: "विकृति", sens: "Votre état du moment, quand l'équilibre s'est déplacé." },
-  { mot: "Vipāka", deva: "विपाक", sens: "La saveur que prend un aliment au terme de la digestion, et son effet." },
-  { mot: "Vīrya", deva: "वीर्य", sens: "La puissance d'action d'un aliment, avant tout chauffante ou rafraîchissante." },
-  { mot: "Āhāra", deva: "आहार", sens: "L'alimentation, premier des trois piliers de la santé." },
-  { mot: "Dhātu", deva: "धातु", sens: "Les sept tissus du corps, du plasma aux tissus reproducteurs, chacun nourrissant le suivant." },
-  { mot: "Guṇa", deva: "गुण", sens: "Une qualité. Vingt qualités décrivent la matière, et trois décrivent l'esprit." },
-  { mot: "Mala", deva: "मल", sens: "Les déchets du corps, c'est-à-dire les selles, l'urine et la sueur." },
-  { mot: "Nidrā", deva: "निद्रा", sens: "Le sommeil, deuxième pilier de la santé." },
-  { mot: "Ojas", deva: "ओजस्", sens: "L'essence de tous les tissus, qui donne l'immunité et l'endurance." },
-  { mot: "Rajas", deva: "रजस्", sens: "La qualité de l'esprit liée au mouvement et à l'agitation." },
-  { mot: "Sattva", deva: "सत्त्व", sens: "La qualité de l'esprit liée à la clarté et au calme." },
-  { mot: "Kriyākāla", deva: "क्रियाकाल", sens: "Les six moments où l'on peut agir sur un déséquilibre, de l'accumulation à la complication." },
-  { mot: "Vayas", deva: "वयस्", sens: "L'âge. Kapha domine l'enfance, Pitta l'âge adulte, Vata la vieillesse." },
-  { mot: "Tamas", deva: "तमस्", sens: "La qualité de l'esprit liée à l'inertie et à la lourdeur." },
-  { mot: "Mahābhūta", deva: "महाभूत", sens: "Les cinq grands éléments, de l'éther à la terre." },
-  { mot: "Prabhāva", deva: "प्रभाव", sens: "L'action propre d'un aliment ou d'une plante, qui ne s'explique pas par ses qualités." },
-  { mot: "Prajñāparādha", deva: "प्रज्ञापराध", sens: "L'erreur de jugement, quand on fait ce que l'on sait nuisible." },
-  { mot: "Svastha", deva: "स्वस्थ", sens: "En bonne santé, littéralement établi en soi-même." },
-  { mot: "Trayopastambha", deva: "त्रयोपस्तम्भ", sens: "Les trois piliers de la vie, la nourriture, le sommeil et la maîtrise de soi." },
-  { mot: "Vega", deva: "वेग", sens: "Un besoin naturel du corps, qu'il ne faut pas retenir." },
-].sort((x, y) => x.mot.localeCompare(y.mot, "fr", { sensitivity: "base" }));
-
-/** Première lettre sans accent ni macron, pour l'index du lexique. */
-export const initiale = (mot: string) => mot.normalize("NFD").replace(/[̀-ͯ]/g, "")[0].toUpperCase();
-
 /* ───────── Où siègent les doshas (Suśruta, Sū 21) ───────── */
 
 export const SIEGES_DOSHAS: { dosha: DoshaKey; region: string; lieux: string; image: string }[] = [

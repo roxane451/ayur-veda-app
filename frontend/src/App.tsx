@@ -12,7 +12,6 @@ import Doshas from "./pages/comprendre/Doshas";
 import Saveurs from "./pages/comprendre/Saveurs";
 import Agni from "./pages/comprendre/Agni";
 import Journee from "./pages/comprendre/Journee";
-import Lexique from "./pages/comprendre/Lexique";
 import Qualites from "./pages/comprendre/Qualites";
 import Constitution from "./pages/comprendre/Constitution";
 import Tissus from "./pages/comprendre/Tissus";
@@ -77,7 +76,7 @@ const App = () => (
             <Route path="/comprendre/ages-de-la-vie" element={<Ages />} />
             <Route path="/comprendre/trois-causes" element={<Causes />} />
             <Route path="/comprendre/desequilibre" element={<Desequilibre />} />
-            <Route path="/comprendre/lexique" element={<Lexique />} />
+            <Route path="/comprendre/lexique" element={<Navigate to="/comprendre/textes" replace />} />
             <Route path="/profil" element={<Profil />} />
             <Route path="/au-quotidien" element={<Saisons />} />
             <Route

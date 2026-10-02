@@ -10,7 +10,7 @@ describe("Comprendre rangé en livres", () => {
     expect(numeroChapitre("/comprendre")).toBe(1);
     expect(numeroChapitre("/comprendre/doshas")).toBe(4);
     expect(numeroChapitre(LIVRES[1].chapitres[0].href)).toBe(5);
-    expect(numeroChapitre("/comprendre/lexique")).toBe(0);
+    expect(numeroChapitre("/comprendre/textes")).toBe(0);
   });
 
   it("retrouve le livre d'une page, et aucun pour les annexes", () => {
