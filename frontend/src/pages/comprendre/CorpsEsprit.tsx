@@ -1,4 +1,5 @@
 import { Bande, Motif } from "@/components/brand/BrandDefs";
+import { Lotus, Poudre, SoleilLune } from "@/components/brand/Illustrations";
 import { Deva, Frontispice, Ornement, PageComprendre, PiedSuite } from "@/components/comprendre/Commun";
 import { DHATUS, GUNAS_ESPRIT, PILIERS } from "@/data/corpsEsprit";
 
@@ -24,17 +25,25 @@ const CorpsEsprit = () => (
         <Motif id="dabu" />
         <span className="relative block text-center font-display text-[15px] leading-[30px] tracking-[0.2em] text-pistache">La santé</span>
       </div>
-      <ul className="m-0 grid list-none gap-10 p-0 md:-mt-4 md:grid-cols-3">
-        {PILIERS.map((p) => (
-          <li key={p.nom} className="flex flex-col items-center gap-3.5 text-center">
-            <div className="flex h-[240px] w-full flex-col items-center justify-center gap-1.5 rounded-t-full bg-carte px-6 pt-8 shadow-[inset_0_0_0_2px_hsl(var(--encre))] md:h-[300px]">
-              <Deva className="text-[40px] text-paon">{p.deva}</Deva>
+      <ul className="m-0 grid list-none gap-8 p-0 md:-mt-4 md:grid-cols-3 md:gap-10">
+        {PILIERS.map((p, i) => {
+          const Illu = [Poudre, SoleilLune, Lotus][i];
+          return (
+            <li
+              key={p.nom}
+              className="relative flex flex-col items-center gap-2 overflow-hidden rounded-t-full bg-carte px-7 pb-0 pt-12 text-center shadow-[inset_0_0_0_2px_hsl(var(--encre))] md:pt-14"
+            >
+              <Illu size={96} decorative className="h-auto w-20 md:w-24" />
+              <Deva className="mt-2 text-[36px] text-paon">{p.deva}</Deva>
               <span className="italic text-doux">{p.sanskrit}</span>
-              <h3 className="m-0 mt-1.5 text-[1.6rem] leading-tight">{p.nom}</h3>
-            </div>
-            <p className="m-0 max-w-[30ch]">{p.texte}</p>
-          </li>
-        ))}
+              <h3 className="m-0 mt-1 text-[1.5rem] leading-tight">{p.nom}</h3>
+              <p className="m-0 mb-7 mt-1 max-w-[28ch]">{p.texte}</p>
+              <div aria-hidden="true" className="relative -mx-7 mt-auto h-6 self-stretch overflow-hidden border-t-2 border-encre bg-paon">
+                <Motif id="dabu" />
+              </div>
+            </li>
+          );
+        })}
       </ul>
     </section>
 
