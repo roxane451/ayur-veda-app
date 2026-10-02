@@ -24,17 +24,16 @@ export default defineConfig(({ mode }) => ({
       includeAssets: ["favicon.svg", "favicon.ico", "icons/apple-touch-icon.png"],
       manifest: {
         id: "/",
-        name: "Ayur-Veda · la science de la vie",
+        name: "Ayur-Veda, la science de la vie",
         short_name: "Ayurveda",
         description:
-          "Connaître sa nature et son état du moment, vivre avec les saisons, cuisiner avec les épices.",
+          "L'Ayurveda d'après les textes anciens. Connaître sa nature, vivre avec les saisons, cuisiner avec les épices.",
         lang: "fr",
         start_url: "/",
         scope: "/",
         display: "standalone",
-        orientation: "portrait",
-        background_color: "#F3F5E6",
-        theme_color: "#F3F5E6",
+        background_color: "#F0F4E0",
+        theme_color: "#F0F4E0",
         categories: ["health", "lifestyle", "food"],
         icons: [
           { src: "/icons/icon-192.png", sizes: "192x192", type: "image/png" },
@@ -45,10 +44,15 @@ export default defineConfig(({ mode }) => ({
           { name: "Mon profil", url: "/profil", icons: [{ src: "/icons/icon-192.png", sizes: "192x192" }] },
           { name: "La cuisine", url: "/cuisine", icons: [{ src: "/icons/icon-192.png", sizes: "192x192" }] },
         ],
+        screenshots: [
+          { src: "/screenshots/telephone.png", sizes: "780x1688", type: "image/png", form_factor: "narrow", label: "L'accueil sur téléphone" },
+          { src: "/screenshots/ordinateur.png", sizes: "1440x900", type: "image/png", form_factor: "wide", label: "L'accueil sur ordinateur" },
+        ],
       },
       workbox: {
         // Toutes les pages et polices sont gardées pour un usage hors ligne.
-        globPatterns: ["**/*.{js,css,html,svg,png,ico,woff2}"],
+        globPatterns: ["**/*.{js,css,html,svg,png,webp,ico,woff2}"],
+        globIgnores: ["screenshots/**"],
         navigateFallback: "/index.html",
         navigateFallbackDenylist: [/^\/api\//, /^\/metrics/],
         runtimeCaching: [
