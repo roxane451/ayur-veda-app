@@ -87,3 +87,16 @@ export const REFS_QUALITES: Ref[] = [
   { texte: "charaka", passage: "Sūtrasthāna 26.57 et 26.58", sujet: "Les trois vipāka" },
   { texte: "sushruta", passage: "Sūtrasthāna 40", sujet: "Deux vipāka seulement, lourd et léger" },
 ];
+
+export const REFS_TISSUS: Ref[] = [
+  { texte: "sushruta", passage: "Sūtrasthāna 14.10 à 14.14", sujet: "La chaîne des sept tissus, et le mois qu'il faut pour la parcourir" },
+  { texte: "charaka", passage: "Sūtrasthāna 17.74 à 17.76", sujet: "L'ojas, et ce qui l'use" },
+  { texte: "sushruta", passage: "Sūtrasthāna 15.3 à 15.5", sujet: "Les doshas, les tissus et les déchets" },
+];
+
+export const REFS_ESPRIT: Ref[] = [
+  { texte: "charaka", passage: "Sūtrasthāna 1.57", sujet: "Rajas et tamas, les deux doshas de l'esprit" },
+  { texte: "charaka", passage: "Śārīrasthāna 4.36 à 4.40", sujet: "Sattva, rajas et tamas" },
+];
+
+export const REFS_PILIERS: Ref[] = [{ texte: "charaka", passage: "Sūtrasthāna 11.35", sujet: "Les trois piliers de la vie" }];

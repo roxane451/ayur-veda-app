@@ -27,7 +27,10 @@ export const LIVRES: Livre[] = [
   {
     num: "II",
     titre: "Le corps",
-    chapitres: [{ titre: "Le corps et l'esprit", href: "/comprendre/corps-et-esprit" }],
+    chapitres: [
+      { titre: "Les tissus", href: "/comprendre/tissus" },
+      { titre: "L'esprit", href: "/comprendre/esprit" },
+    ],
   },
   {
     num: "III",
@@ -41,6 +44,7 @@ export const LIVRES: Livre[] = [
     num: "IV",
     titre: "Rester en bonne santé",
     chapitres: [
+      { titre: "Les trois piliers", href: "/comprendre/trois-piliers" },
       { titre: "La journée", href: "/comprendre/journee" },
       { titre: "Les âges de la vie", href: "/comprendre/ages-de-la-vie" },
     ],

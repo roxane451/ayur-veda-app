@@ -3,9 +3,14 @@ import { nomTexte, type Ref } from "@/data/sources";
 import { Deva } from "./Commun";
 
 /** Renvoi numéroté vers la liste des sources en bas de page. */
-export const Renvoi = ({ n }: { n: number }) => (
+export const Renvoi = ({ n, clair }: { n: number; clair?: boolean }) => (
   <sup className="ml-0.5 text-[0.7em] font-bold leading-none">
-    <a href={`#source-${n}`} id={`renvoi-${n}`} aria-label={`Source ${n}`} className="text-aubergine no-underline hover:underline">
+    <a
+      href={`#source-${n}`}
+      id={`renvoi-${n}`}
+      aria-label={`Source ${n}`}
+      className={`no-underline hover:underline ${clair ? "text-citron" : "text-aubergine"}`}
+    >
       {n}
     </a>
   </sup>
