@@ -28,6 +28,7 @@ export const LIVRES: Livre[] = [
     num: "II",
     titre: "Le corps",
     chapitres: [
+      { titre: "La constitution", href: "/comprendre/constitution" },
       { titre: "Les tissus", href: "/comprendre/tissus" },
       { titre: "L'esprit", href: "/comprendre/esprit" },
     ],
