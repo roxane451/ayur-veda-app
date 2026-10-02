@@ -44,6 +44,7 @@ import MentionsLegales from "./pages/legal/MentionsLegales";
 import Confidentialite from "./pages/legal/Confidentialite";
 import Cgu from "./pages/legal/Cgu";
 import BrandDefs from "./components/brand/BrandDefs";
+import { InviteInstallation } from "./components/installation/Installation";
 
 const queryClient = new QueryClient();
 
@@ -56,6 +57,7 @@ const App = () => (
       <CompteProvider>
         <BrowserRouter>
           <RetourEnHaut />
+          <InviteInstallation />
           <Routes>
             <Route path="/" element={<Index />} />
 
