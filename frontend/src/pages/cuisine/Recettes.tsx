@@ -101,7 +101,7 @@ const Recettes = () => {
       {!filtre && (
         <section aria-labelledby="r-kitchari" className="mx-auto grid max-w-[1220px] items-center gap-10 px-4 pb-2 pt-12 sm:px-10 md:grid-cols-2">
           <div className="h-[260px] md:h-[320px]">
-            <Photo description="kitchari dans un bol, ghee et coriandre fraîche" />
+            <Photo description="kitchari dans un bol, ghee et coriandre fraîche" aVenir />
           </div>
           <div className="flex flex-col gap-3">
             <span className="font-bold text-aubergine">Pour commencer</span>

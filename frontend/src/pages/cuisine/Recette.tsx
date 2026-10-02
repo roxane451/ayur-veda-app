@@ -39,7 +39,7 @@ const Recette = () => {
           </dl>
         </div>
         <div className="h-[280px] md:h-[400px]">
-          <Photo description={`${r.nom.toLowerCase()} dans un bol, vu d'en haut`} arche />
+          <Photo description={`${r.nom.toLowerCase()} dans un bol, vu d'en haut`} arche aVenir />
         </div>
       </section>
       <Bande />
