@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { useInstallation } from "@/lib/installation";
 
 const BOUTON =
@@ -39,7 +40,8 @@ const FicheIos = ({ onFermer }: { onFermer: () => void }) => {
     window.addEventListener("keydown", touche);
     return () => window.removeEventListener("keydown", touche);
   }, [onFermer]);
-  return (
+  // Rendue dans <body> : elle n'hérite jamais des couleurs du bloc qui l'ouvre.
+  return createPortal(
     <div
       className="fixed inset-0 z-[60] flex items-end bg-encre/35"
       onClick={onFermer}
@@ -49,7 +51,7 @@ const FicheIos = ({ onFermer }: { onFermer: () => void }) => {
         aria-modal="true"
         aria-labelledby="fiche-ios-titre"
         onClick={(e) => e.stopPropagation()}
-        className="mx-auto flex w-full max-w-[520px] flex-col gap-3.5 rounded-t-[22px] bg-carte px-5 pb-[calc(1.75rem+env(safe-area-inset-bottom))] pt-6 shadow-[0_-1.5px_0_hsl(var(--encre))]"
+        className="mx-auto flex w-full max-w-[520px] flex-col text-encre gap-3.5 rounded-t-[22px] bg-carte px-5 pb-[calc(1.75rem+env(safe-area-inset-bottom))] pt-6 shadow-[0_-1.5px_0_hsl(var(--encre))]"
       >
         <div className="flex items-center gap-3">
           <img
@@ -84,7 +86,8 @@ const FicheIos = ({ onFermer }: { onFermer: () => void }) => {
           J'ai compris
         </button>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 };
 
